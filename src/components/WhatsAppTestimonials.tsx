@@ -44,7 +44,7 @@ const WhatsAppTestimonials = () => {
 
           {/* Right Column: Screenshot Slider */}
           <div className="order-1 lg:order-2 flex flex-col items-center">
-            <div className="relative w-full max-w-sm aspect-[9/16] bg-muted/10 rounded-[2rem] border-8 border-card shadow-2xl overflow-hidden mb-8">
+            <div className="relative w-full max-w-[400px] aspect-[9/16] bg-black rounded-3xl border-8 border-card shadow-2xl overflow-hidden mb-8">
               <AnimatePresence mode="wait">
                 <motion.img
                   key={currentIndex}
@@ -53,7 +53,7 @@ const WhatsAppTestimonials = () => {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -50 }}
                   transition={{ duration: 0.4, ease: "easeInOut" }}
-                  className="absolute inset-0 w-full h-full object-contain bg-muted/10 drop-shadow-xl"
+                  className="absolute inset-0 w-full h-full object-cover shadow-[inset_0_0_50px_rgba(0,0,0,0.5)]"
                   alt={`Proof ${currentIndex + 1}`}
                 />
               </AnimatePresence>

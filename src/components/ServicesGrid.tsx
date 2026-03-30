@@ -46,9 +46,8 @@ const services = [
   {
     icon: Mic,
     title: "Podcast Branding",
-    desc: "In-video brand placements with India's absolute top-tier podcasters.",
+    desc: "In-video brand placements with top-tier podcasters.",
     price: "Custom",
-    span: "col-span-1 md:col-span-1 lg:col-span-1",
     color: "bg-indigo-50 border-indigo-100 text-indigo-700",
   },
 ];
@@ -67,7 +66,7 @@ const ServicesGrid = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 auto-rows-[280px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
           {services.map((service, index) => (
             <motion.div
               key={index}
@@ -75,30 +74,36 @@ const ServicesGrid = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
-              className={`group relative flex flex-col justify-between bg-card rounded-3xl p-8 border border-border shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden ${service.span}`}
+              className={`group flex flex-col bg-card rounded-2xl p-6 border border-border shadow-sm hover:shadow-card-hover transition-all duration-300 relative overflow-hidden`}
             >
-              {/* Decorative Subtle Background */}
-              <div className={`absolute -right-10 -top-10 w-40 h-40 rounded-full blur-[60px] opacity-40 transition-opacity group-hover:opacity-70 ${service.color.split(' ')[0]}`}></div>
-
-              <div className="relative z-10">
-                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-sm ${service.color}`}>
-                  <service.icon className="w-7 h-7" />
+              <div className="flex-1 z-10">
+                <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 shadow-sm ${service.color}`}>
+                  <service.icon className="w-6 h-6" />
                 </div>
-                <h3 className="text-2xl font-black text-foreground mb-3 leading-tight tracking-tight">
+                <h3 className="text-xl font-bold text-foreground mb-3 leading-tight tracking-tight">
                   {service.title}
                 </h3>
-                <p className="text-muted-foreground font-medium text-[15px] leading-relaxed max-w-sm">
+                <p className="text-muted-foreground text-sm font-medium leading-relaxed mb-6">
                   {service.desc}
                 </p>
               </div>
 
-              <div className="relative z-10 mt-8 flex items-center justify-between">
-                <span className="bg-background border border-border px-4 py-1.5 rounded-full text-sm font-bold shadow-sm">
-                  {service.price}
-                </span>
-                <a href="/#audit-form" className="text-primary font-bold hover:underline flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity -translate-x-4 group-hover:translate-x-0 transform duration-300">
-                  Schedule Call &rarr;
-                </a>
+              <div className="z-10 mt-auto flex flex-col gap-3">
+                <div className="mb-2">
+                  <span className="bg-background border border-border px-3 py-1 rounded-full text-xs font-black shadow-sm tracking-wide">
+                    {service.price}
+                  </span>
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  <button className="bg-primary/10 hover:bg-primary text-primary hover:text-white py-2 rounded-lg text-xs font-bold transition-colors border border-primary/20 hover:border-primary">
+                    Buy Now
+                  </button>
+                  <a href="https://calendly.com/domsco-tech/30min?month=2026-03" target="_blank" rel="noreferrer" className="block w-full">
+                    <button className="w-full bg-foreground hover:bg-foreground/90 text-background py-2 rounded-lg text-xs font-bold transition-colors">
+                      Schedule
+                    </button>
+                  </a>
+                </div>
               </div>
             </motion.div>
           ))}
