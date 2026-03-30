@@ -1,58 +1,134 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Layers, MousePointerClick, Zap, MessageSquare, Video, Mic } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Layers, MousePointerClick, Zap, MessageSquare, Video, Mic, LayoutGrid } from "lucide-react";
+import Papa from "papaparse";
+import { useRazorpay } from "react-razorpay";
 
-const services = [
+const fallbackServices = [
   {
     icon: MousePointerClick,
     title: "D2C-Performance Marketing (Meta Ads)",
     desc: "Surgical, ROAS-driven Meta & Instagram scaling. We treat your budget like our own.",
-    price: "₹ 45,750/PM",
-    span: "col-span-1 md:col-span-2 lg:col-span-2",
+    price: 45750,
     color: "bg-blue-50 border-blue-100 text-blue-700",
   },
   {
     icon: Zap,
     title: "Google Ads Marketing",
     desc: "Capture high-intent traffic instantly and dominate the top of search.",
-    price: "₹ 32,000/PM",
-    span: "col-span-1 md:col-span-1 lg:col-span-1",
+    price: 32000,
     color: "bg-green-50 border-green-100 text-green-700",
   },
   {
     icon: Layers,
     title: "Website Development",
     desc: "Lightning-fast, strictly CRO-optimized Shopify and custom-built E-com stores.",
-    price: "Custom",
-    span: "col-span-1 md:col-span-1 lg:col-span-1",
+    price: 0,
     color: "bg-purple-50 border-purple-100 text-purple-700",
   },
   {
     icon: MessageSquare,
     title: "Influencer Marketing",
     desc: "Deploy our 20,000+ influencer network. End-to-end execution.",
-    price: "Custom",
-    span: "col-span-1 md:col-span-2 lg:col-span-2",
+    price: 0,
     color: "bg-orange-50 border-orange-100 text-orange-700",
   },
   {
     icon: Video,
     title: "UGC Video Creation",
-    desc: "Top-converting, raw TikTok & Reel style content specifically engineered to sell.",
-    price: "₹ 6,000",
-    span: "col-span-1 md:col-span-2 lg:col-span-2",
+    desc: "Top-converting, raw TikTok & Reel style content. We have more than 200+ exclusive UGC Creators engineered to sell.",
+    price: 6000,
     color: "bg-rose-50 border-rose-100 text-rose-700",
   },
   {
     icon: Mic,
     title: "Podcast Branding",
     desc: "In-video brand placements with top-tier podcasters.",
-    price: "Custom",
+    price: 0,
     color: "bg-indigo-50 border-indigo-100 text-indigo-700",
   },
 ];
 
+const iconMap = [MousePointerClick, Zap, Layers, MessageSquare, Video, Mic, LayoutGrid];
+const colorMap = [
+  "bg-blue-50 border-blue-100 text-blue-700",
+  "bg-green-50 border-green-100 text-green-700",
+  "bg-purple-50 border-purple-100 text-purple-700",
+  "bg-orange-50 border-orange-100 text-orange-700",
+  "bg-rose-50 border-rose-100 text-rose-700",
+  "bg-indigo-50 border-indigo-100 text-indigo-700",
+];
+
 const ServicesGrid = () => {
+  const [products, setProducts] = useState(fallbackServices);
+  const { Razorpay } = useRazorpay();
+
+  useEffect(() => {
+    fetch("/product.csv")
+      .then((response) => {
+        if (!response.ok) throw new Error("No product.csv found");
+        return response.text();
+      })
+      .then((csvText) => {
+        Papa.parse(csvText, {
+          header: true,
+          skipEmptyLines: true,
+          complete: (results) => {
+            const parsed = results.data
+              .filter((row: any) => Object.keys(row).length > 1)
+              .map((row: any, i) => {
+                const title = row.Name || row.name || row.Title || row.title || "Premium Service";
+                const desc = row['Short description'] || row.Description || row.description || "D2C Scaling infrastructure.";
+                const rawPrice = row['Regular price'] || row['Sale price'] || row.Price || row.price || "0";
+                const price = parseFloat(rawPrice.toString().replace(/[^0-9.]/g, '')) || 0;
+                
+                return {
+                  icon: iconMap[i % iconMap.length],
+                  title,
+                  desc: desc.replace(/(<([^>]+)>)/gi, ""),
+                  price,
+                  color: colorMap[i % colorMap.length],
+                };
+              });
+            
+            if (parsed.length > 0) {
+              setProducts(parsed);
+            }
+          },
+        });
+      })
+      .catch((err) => console.log("Using native products arsenal due to missing CSV", err));
+  }, []);
+
+  const handleCheckout = (p: any) => {
+    if (p.price === 0) {
+      window.open("https://calendly.com/domsco-tech/30min?month=2026-03", "_blank");
+      return;
+    }
+
+    const options = {
+      key: "rzp_test_YourKeyGoesHere",
+      amount: (p.price * 100).toString(),
+      currency: "INR",
+      name: "HastagCreator",
+      description: `Purchase of ${p.title}`,
+      handler: function (response: any) {
+        alert("Payment Successful! Mock Ref: " + response.razorpay_payment_id);
+      },
+      prefill: {
+        name: "Acme Corp",
+        email: "customer@example.com",
+        contact: "9999999999",
+      },
+      theme: {
+        color: "#2563EB",
+      },
+    };
+
+    const rzp1 = new Razorpay(options);
+    rzp1.open();
+  };
+
   return (
     <section className="py-24 bg-secondary/50 relative overflow-hidden" id="services">
       <div className="container-main">
@@ -67,7 +143,9 @@ const ServicesGrid = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-          {services.map((service, index) => (
+          {products.map((service, index) => {
+            const Icon = service.icon;
+            return (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
@@ -78,7 +156,7 @@ const ServicesGrid = () => {
             >
               <div className="flex-1 z-10">
                 <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 shadow-sm ${service.color}`}>
-                  <service.icon className="w-6 h-6" />
+                  <Icon className="w-6 h-6" />
                 </div>
                 <h3 className="text-xl font-bold text-foreground mb-3 leading-tight tracking-tight">
                   {service.title}
@@ -91,11 +169,11 @@ const ServicesGrid = () => {
               <div className="z-10 mt-auto flex flex-col gap-3">
                 <div className="mb-2">
                   <span className="bg-background border border-border px-3 py-1 rounded-full text-xs font-black shadow-sm tracking-wide">
-                    {service.price}
+                    {service.price > 0 ? `₹ ${(service.price).toLocaleString("en-IN")}/PM` : "Custom"}
                   </span>
                 </div>
                 <div className="grid grid-cols-2 gap-2">
-                  <button className="bg-primary/10 hover:bg-primary text-primary hover:text-white py-2 rounded-lg text-xs font-bold transition-colors border border-primary/20 hover:border-primary">
+                  <button onClick={() => handleCheckout(service)} className="bg-primary/10 hover:bg-primary text-primary hover:text-white py-2 rounded-lg text-xs font-bold transition-colors border border-primary/20 hover:border-primary">
                     Buy Now
                   </button>
                   <a href="https://calendly.com/domsco-tech/30min?month=2026-03" target="_blank" rel="noreferrer" className="block w-full">
@@ -106,7 +184,7 @@ const ServicesGrid = () => {
                 </div>
               </div>
             </motion.div>
-          ))}
+          )})}
         </div>
       </div>
     </section>
