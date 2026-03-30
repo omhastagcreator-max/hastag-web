@@ -5,9 +5,9 @@ import { motion } from "framer-motion";
 import { Mail, MessageCircle, MapPin } from "lucide-react";
 
 const contactInfo = [
-  { icon: Mail, label: "Email Us", value: "hello@hastagcreator.com" },
-  { icon: MessageCircle, label: "WhatsApp / Phone", value: "+91 9450010826" },
-  { icon: MapPin, label: "Location", value: "Greater Noida, UP" },
+  { icon: Mail, label: "Email Us", value: "contact@hastagcreator.com" },
+  { icon: MessageCircle, label: "WhatsApp / Phone", value: "+91 80599 57479" },
+  { icon: MapPin, label: "Location", value: "Oshiwara, Mumbai 400102" },
 ];
 
 const Contact = () => (

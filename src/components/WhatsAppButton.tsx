@@ -10,7 +10,7 @@ const WhatsAppButton = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const whatsappNumber = "9450010826";
+  const whatsappNumber = "918059957479";
   const text = "Hi HastagCreator, I would like to know more about your services!";
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
 

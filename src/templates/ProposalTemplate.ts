@@ -90,7 +90,7 @@ export const generateProposalHtml = (data: ProposalData): string => {
     <div class="flex justify-between items-start mb-2">
       <!-- Logo Side -->
       <div class="flex flex-col">
-        <div class="header-logo pt-1 tracking-tight">DIZIGROWW<span style="color:red; font-size:1.2rem">↑</span></div>
+        <div class="header-logo pt-1 tracking-tight">HASTAGCREATOR</div>
         <div class="text-[9px] tracking-[0.25em] font-extrabold mb-1.5 text-gray-800">DESIGN • DEVELOP • SELL</div>
         <div class="font-bold text-[11px] mb-4">GSTIN: 092500425588TRN</div>
         
@@ -113,15 +113,15 @@ export const generateProposalHtml = (data: ProposalData): string => {
         </div>
         <div class="flex items-start gap-2">
           <div class="text-[#d63864] mt-px">📞</div>
-          <div class="font-medium text-gray-900">+91-9450010826</div>
+          <div class="font-medium text-gray-900">+91-8059957479</div>
         </div>
         <div class="flex items-start gap-2">
           <div class="text-[#d63864] mt-px">✉️</div>
-          <div class="font-medium text-gray-900">dizigrowwofficial@gmail.com</div>
+          <div class="font-medium text-gray-900">contact@hastagcreator.com</div>
         </div>
         <div class="flex items-start gap-2">
           <div class="text-[#d63864] mt-px">🌐</div>
-          <div class="font-medium text-gray-900">www.dizigroww.com</div>
+          <div class="font-medium text-gray-900">www.hastagcreator.com</div>
         </div>
       </div>
     </div>

@@ -1,272 +1,142 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { TrendingUp, ShoppingBag, ArrowRight, ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react";
-
-const metaImages = ["/meta-r1.jpg", "/meta-r2.jpg", "/meta-r3.jpg", "/meta-r4.jpg"];
-const shopifyImages = ["/shopify-r1.jpg", "/shopify-r2.jpg", "/shopify-r3.jpg", "/shopify-r4.jpg"];
-
-// Shared Lightbox Image Carousel Component
-const ImageCarousel = ({ images, type, url, onImageClick }: { images: string[], type: string, url: string, onImageClick: (src: string) => void }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const next = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setCurrentIndex((prev) => (prev + 1) % images.length);
-  }
-  
-  const prev = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
-  }
-
-  return (
-    <div className="rounded-2xl overflow-hidden border border-border bg-card shadow-xl relative group">
-      <div className="bg-secondary/50 border-b border-border px-4 py-3 flex items-center justify-between gap-2">
-        <div className="flex items-center gap-3 overflow-hidden">
-          <div className="flex gap-1.5 flex-shrink-0">
-            <div className="w-2.5 h-2.5 rounded-full bg-red-400"></div>
-            <div className="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
-            <div className="w-2.5 h-2.5 rounded-full bg-green-400"></div>
-          </div>
-          <span className="text-xs text-muted-foreground font-medium truncate bg-background px-3 py-0.5 rounded-md border border-border">{url}</span>
-        </div>
-      </div>
-      
-      {/* Carousel Screen */}
-      <div 
-        className="relative aspect-[4/3] w-full bg-muted/30 overflow-hidden flex items-center justify-center cursor-pointer group/image"
-        onClick={() => onImageClick(images[currentIndex])}
-      >
-        <AnimatePresence mode="wait">
-          <motion.img 
-            key={currentIndex}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            src={images[currentIndex]} 
-            alt={`${type} Screenshot ${currentIndex + 1}`} 
-            className="absolute inset-0 w-full h-full object-cover group-hover/image:scale-[1.02] transition-transform duration-700" 
-            onContextMenu={(e) => e.preventDefault()}
-          />
-        </AnimatePresence>
-        
-        {/* Fullscreen Overlay Hint */}
-        <div className="absolute inset-0 bg-black/0 group-hover/image:bg-black/10 transition-colors flex items-center justify-center">
-            <div className="bg-black/50 backdrop-blur-sm text-white p-2 rounded-full opacity-0 group-hover/image:opacity-100 transition-opacity transform translate-y-4 group-hover/image:translate-y-0 shadow-lg">
-                <Maximize2 className="w-5 h-5" />
-            </div>
-        </div>
-        
-        <div className="absolute inset-y-0 left-0 flex items-center pl-3 opacity-0 group-hover:opacity-100 transition-opacity">
-          <button 
-            onClick={prev}
-            className="w-10 h-10 rounded-full bg-black/60 text-white flex items-center justify-center backdrop-blur-sm border border-white/20 hover:bg-black/80 transition-colors shadow-lg"
-          >
-            <ChevronLeft className="w-5 h-5" />
-          </button>
-        </div>
-        
-        <div className="absolute inset-y-0 right-0 flex items-center pr-3 opacity-0 group-hover:opacity-100 transition-opacity">
-          <button 
-            onClick={next}
-            className="w-10 h-10 rounded-full bg-black/60 text-white flex items-center justify-center backdrop-blur-sm border border-white/20 hover:bg-black/80 transition-colors shadow-lg"
-          >
-            <ChevronRight className="w-5 h-5" />
-          </button>
-        </div>
-        
-        <div className="absolute inset-y-0 left-0 w-12 flex items-center justify-center md:hidden" onClick={prev}>
-          <div className="w-8 h-8 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center"><ChevronLeft className="w-4 h-4 text-white" /></div>
-        </div>
-        <div className="absolute inset-y-0 right-0 w-12 flex items-center justify-center md:hidden" onClick={next}>
-           <div className="w-8 h-8 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center"><ChevronRight className="w-4 h-4 text-white" /></div>
-        </div>
-      </div>
-      
-      {/* Dots */}
-      <div className="py-3 bg-secondary/30 flex items-center justify-center gap-1.5 border-t border-border relative z-20 pointer-events-none">
-        {images.map((_, index) => (
-          <div
-            key={index}
-            className={`h-1.5 rounded-full transition-all ${
-              currentIndex === index ? "w-5 bg-primary" : "w-1.5 bg-border hover:bg-muted-foreground/50"
-            }`}
-          />
-        ))}
-      </div>
-    </div>
-  );
-};
-
+import { motion } from "framer-motion";
+import { TrendingUp, ShoppingBag, ArrowRight, Zap, Target } from "lucide-react";
 
 const DashboardResultsSection = () => {
-  const [lightboxImage, setLightboxImage] = useState<string | null>(null);
-
   return (
-    <>
-        <section id="dashboard-results" className="section-padding overflow-hidden bg-background">
-        <div className="container-main">
-            <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-            >
-            <span className="inline-block bg-primary/10 text-primary text-xs font-semibold px-4 py-1.5 rounded-full mb-3 uppercase tracking-wider">
-                Real Proof. Real Dashboards.
-            </span>
-            <h2 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">What Changed After Working With Us</h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                More profit per order. Better conversion rate. Stable growth (not random spikes).
-            </p>
-            </motion.div>
+    <section id="dashboard-results" className="section-padding overflow-hidden bg-background relative">
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
+      
+      <div className="container-main relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16 max-w-3xl mx-auto"
+        >
+          <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 text-primary text-xs font-bold px-4 py-2 rounded-full mb-6 uppercase tracking-widest backdrop-blur-sm">
+            <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+            Real Time Results
+          </div>
+          <h2 className="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight leading-tight">
+            See What Scaling <br className="hidden md:block" /> Looks Like
+          </h2>
+          <p className="text-muted-foreground text-lg md:text-xl leading-relaxed">
+            We don't do meaningless metrics. We do profit margins, conversion mapping, and viral attention that actually translates to pure revenue.
+          </p>
+        </motion.div>
 
-            <div className="mb-16 max-w-4xl mx-auto bg-card p-2 sm:p-4 rounded-3xl border border-border shadow-2xl">
-              <div className="aspect-video bg-black rounded-2xl overflow-hidden relative group cursor-pointer border border-white/10">
-                <video 
-                  className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"
-                  autoPlay 
-                  loop 
-                  muted 
-                  playsInline
-                  poster="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2426&ixlib=rb-4.0.3"
-                >
-                  <source src="https://cdn.pixabay.com/video/2021/08/04/83861-584749216_large.mp4" type="video/mp4" />
-                </video>
-                <div className="absolute top-4 right-4 bg-red-600 animate-pulse text-white text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest flex items-center gap-2 shadow-sm">
-                  <div className="w-2 h-2 rounded-full bg-white"></div>
-                  Live Dashboard
-                </div>
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 bg-primary/90 hover:bg-primary transition-colors rounded-full flex items-center justify-center backdrop-blur-md shadow-[0_0_30px_rgba(0,0,0,0.5)] border border-white/20">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" className="w-8 h-8 sm:w-10 sm:h-10 ml-2"><path d="M8 5v14l11-7z"/></svg>
-                  </div>
+        {/* Epic Main Screen Recording View */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="relative max-w-5xl mx-auto mb-20"
+        >
+          {/* Glassmorphism Glow Behind */}
+          <div className="absolute -inset-4 bg-gradient-to-r from-primary/30 to-blue-600/30 blur-3xl opacity-50 rounded-[40px] -z-10"></div>
+          
+          <div className="bg-card p-3 md:p-5 rounded-[2rem] border border-white/10 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)]">
+            <div className="aspect-video bg-[#0a0a0a] rounded-[1.2rem] overflow-hidden relative group border border-white/5">
+              <video 
+                className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-duration-700"
+                autoPlay 
+                loop 
+                muted 
+                playsInline
+                poster="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2400&ixlib=rb-4.0.3"
+              >
+                <source src="https://cdn.pixabay.com/video/2021/08/04/83861-584749216_large.mp4" type="video/mp4" />
+              </video>
+              
+              {/* Fake UI Overlay for authenticity */}
+              <div className="absolute top-0 inset-x-0 h-12 bg-gradient-to-b from-black/80 to-transparent pointer-events-none"></div>
+              
+              <div className="absolute top-4 right-4 bg-red-500/90 backdrop-blur-md text-white text-[10px] md:text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest flex items-center gap-2 shadow-[0_0_20px_rgba(239,68,68,0.4)]">
+                <div className="w-2 h-2 rounded-full bg-white animate-pulse"></div>
+                Live Dashboard
+              </div>
+              
+              <div className="absolute bottom-6 left-6 text-white text-left pointer-events-none drop-shadow-lg">
+                <h3 className="text-2xl md:text-4xl font-extrabold mb-1 tracking-tight">₹4.2M+</h3>
+                <p className="text-sm md:text-base font-medium text-white/80 uppercase tracking-widest">Revenue Generated Last 30 Days</p>
+              </div>
+
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <div className="w-20 h-20 md:w-24 md:h-24 bg-primary/80 backdrop-blur-xl group-hover:bg-primary group-hover:scale-110 transition-all duration-300 rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(0,0,0,0.6)] border border-white/20">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" className="w-10 h-10 md:w-12 md:h-12 ml-2"><path d="M8 5v14l11-7z"/></svg>
                 </div>
               </div>
             </div>
+          </div>
+        </motion.div>
 
-            <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-start max-w-7xl mx-auto">
-            {/* Column 1: Meta Ads Dashboard */}
-            <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="flex flex-col space-y-6"
-            >
-                <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-2xl bg-blue-50 flex items-center justify-center flex-shrink-0 border border-blue-100 shadow-sm">
-                    <TrendingUp className="text-blue-600 w-7 h-7" />
-                </div>
-                <div>
-                    <h3 className="text-2xl font-bold text-foreground">Lower Cost Per Acquisition</h3>
-                    <p className="text-muted-foreground text-sm flex items-center gap-1.5 mt-1 font-medium">
-                    <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse border border-green-600"></span>
-                    CPA dropped by 42%
-                    </p>
-                </div>
-                </div>
-                
-                <ImageCarousel 
-                    images={metaImages} 
-                    type="Meta Ads Manager" 
-                    url="adsmanager.facebook.com" 
-                    onImageClick={setLightboxImage}
-                  />
-
-                <div className="bg-blue-50/50 p-6 rounded-2xl border border-blue-100">
-                <h4 className="font-semibold text-blue-900 mb-2">The Result</h4>
-                <p className="text-blue-800/80 text-sm leading-relaxed">
-                    Profit increased significantly as we fixed the core foundation of their business, lowering CPAs and focusing purely on the metrics that matter.
-                </p>
-                </div>
-            </motion.div>
-
-            {/* Column 2: Shopify Dashboard */}
-            <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 }}
-                className="flex flex-col space-y-6"
-            >
-                <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-2xl bg-green-50 flex items-center justify-center flex-shrink-0 border border-green-100 shadow-sm">
-                    <ShoppingBag className="text-green-600 w-7 h-7" />
-                </div>
-                <div>
-                    <h3 className="text-2xl font-bold text-foreground">Consistent Revenue Growth</h3>
-                    <p className="text-muted-foreground text-sm flex items-center gap-1.5 mt-1 font-medium">
-                    <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse border border-green-600"></span>
-                    Revenue lifted by 185%
-                    </p>
-                </div>
-                </div>
-                
-                <ImageCarousel 
-                    images={shopifyImages} 
-                    type="Shopify Analytics" 
-                    url="admin.shopify.com" 
-                    onImageClick={setLightboxImage}
-                  />
-
-                <div className="bg-green-50/50 p-6 rounded-2xl border border-green-100">
-                <h4 className="font-semibold text-green-900 mb-2">The Result</h4>
-                <p className="text-green-800/80 text-sm leading-relaxed">
-                    Profit increased systematically. Better landing pages combined with smarter ad strategy translated directly into higher margins.
-                </p>
-                </div>
-            </motion.div>
+        {/* Modern feature breakdown instead of specific screenshots */}
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-card border border-border/50 hover:border-border p-8 rounded-3xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 group"
+          >
+            <div className="w-14 h-14 rounded-2xl bg-blue-500/10 flex items-center justify-center mb-6 group-hover:bg-blue-500/20 transition-colors">
+              <TrendingUp className="text-blue-500 w-8 h-8" />
             </div>
+            <h3 className="text-xl font-extrabold text-foreground mb-3">Hyper-Scale Growth</h3>
+            <p className="text-muted-foreground leading-relaxed">
+              We engineer funnels that drop CPAs dramatically while scaling spend vertically across Meta and Google ecosystems.
+            </p>
+          </motion.div>
 
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="mt-16 text-center"
-            >
-            <a href="/#audit-form" className="inline-block">
-                <button className="bg-foreground text-background px-8 py-4 rounded-full text-base font-bold shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex items-center gap-2 mx-auto">
-                Want These Results for Your Brand? Let's Talk <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform"/>
-                </button>
-            </a>
-            </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="bg-card border border-border/50 hover:border-border p-8 rounded-3xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 group"
+          >
+            <div className="w-14 h-14 rounded-2xl bg-green-500/10 flex items-center justify-center mb-6 group-hover:bg-green-500/20 transition-colors">
+              <ShoppingBag className="text-green-500 w-8 h-8" />
+            </div>
+            <h3 className="text-xl font-extrabold text-foreground mb-3">E-Commerce Mastery</h3>
+            <p className="text-muted-foreground leading-relaxed">
+              From CRO optimizations to AOV boosting strategies, your Shopify/WooCommerce store becomes a revenue-printing machine.
+            </p>
+          </motion.div>
 
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="bg-card border border-border/50 hover:border-border p-8 rounded-3xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 group"
+          >
+            <div className="w-14 h-14 rounded-2xl bg-orange-500/10 flex items-center justify-center mb-6 group-hover:bg-orange-500/20 transition-colors">
+              <Target className="text-orange-500 w-8 h-8" />
+            </div>
+            <h3 className="text-xl font-extrabold text-foreground mb-3">Laser Targeting</h3>
+            <p className="text-muted-foreground leading-relaxed">
+              Precision-driven audience creation utilizing predictive modeling and UGC content loops to acquire your dream buyers.
+            </p>
+          </motion.div>
         </div>
-        </section>
 
-        {/* Lightbox Modal */}
-        <AnimatePresence>
-          {lightboxImage && (
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="fixed inset-0 z-[150] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 md:p-12"
-                onClick={() => setLightboxImage(null)}
-              >
-                  <button 
-                    className="absolute top-6 right-6 w-12 h-12 bg-white/10 hover:bg-white/20 text-white rounded-full flex items-center justify-center transition-colors backdrop-blur-md"
-                    onClick={(e) => { e.stopPropagation(); setLightboxImage(null); }}
-                  >
-                      <X className="w-6 h-6" />
-                  </button>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-20 text-center"
+        >
+          <a href="/#audit-form" className="inline-block group">
+            <button className="bg-primary text-primary-foreground px-10 py-5 rounded-full text-lg font-bold shadow-[0_10px_40px_-10px_rgba(37,99,235,0.6)] group-hover:shadow-[0_20px_50px_-10px_rgba(37,99,235,0.7)] hover:-translate-y-1 transition-all duration-300 flex items-center gap-3 mx-auto">
+              Want These Results? Let's Talk 
+              <span className="bg-white/20 p-1.5 rounded-full"><ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform"/></span>
+            </button>
+          </a>
+        </motion.div>
 
-                  <motion.img 
-                    initial={{ scale: 0.95, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    exit={{ scale: 0.95, opacity: 0 }}
-                    transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                    src={lightboxImage} 
-                    alt="Full Resolution Proof"
-                    className="w-auto h-auto max-w-full max-h-full object-contain rounded-lg shadow-2xl"
-                    onContextMenu={(e) => e.preventDefault()}
-                    onClick={(e) => e.stopPropagation()}
-                  />
-              </motion.div>
-          )}
-      </AnimatePresence>
-    </>
+      </div>
+    </section>
   );
 };
 

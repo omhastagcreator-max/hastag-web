@@ -456,7 +456,7 @@ function Reveal({ children, delay = 0 }) {
 /* ─── TESTIMONIALS DATA ──────────────────────────────────────────────*/
 const testimonials = [
     {
-        text: "I was burning ₹15,000/month on ads with zero results. After DiziGroww's audit, I found out my pixel was tracking the wrong event the whole time. First campaign after the fix — 3 sales in the first week.",
+        text: "I was burning ₹15,000/month on ads with zero results. After HastagCreator's audit, I found out my pixel was tracking the wrong event the whole time. First campaign after the fix — 3 sales in the first week.",
         name: "Rohit Verma",
         meta: "Owner, Craft Candles India",
         color: "#F59E0B",
@@ -580,7 +580,7 @@ const test = () => {
                             <div className="sp-founder-avatar">O</div>
                             <div>
                                 <div className="sp-founder-name">Om Upadhyay</div>
-                                <div className="sp-founder-role">Founder, DiziGroww · Performance Marketer</div>
+                                <div className="sp-founder-role">Founder, HastagCreator · Performance Marketer</div>
                                 <p className="sp-founder-text">
                                     I've personally managed Meta and Google campaigns with strong ROAS results for brands across categories — from apparel to supplements. I've seen exactly how beginner brands get destroyed by wrong ad setups. This plan exists because I wished it existed when I started. ₹999 is what it costs to not waste ₹20,000 on a broken foundation.
                                 </p>

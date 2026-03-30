@@ -10,7 +10,7 @@ const Footer = () => (
           Have questions about our plans, pricing, or need help with a campaign? Our team is available on WhatsApp to assist you immediately.
         </p>
         <a 
-          href="https://wa.me/919450010826?text=Hi%20HastagCreator,%20I%20need%20support!" 
+          href="https://wa.me/918059957479?text=Hi%20HastagCreator,%20I%20need%20support!" 
           target="_blank" 
           rel="noreferrer"
           className="bg-[#25D366] text-white font-bold px-8 py-4 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all flex items-center gap-2"
@@ -71,16 +71,16 @@ const Footer = () => (
           <ul className="space-y-2.5 text-sm text-charcoal-foreground/60">
             <li className="flex items-start gap-2">
               <span className="font-semibold w-20 flex-shrink-0">Email:</span>
-              <a href="mailto:hello@hastagcreator.com" className="hover:text-primary transition-colors word-break-all">hello@hastagcreator.com</a>
+              <a href="mailto:contact@hastagcreator.com" className="hover:text-primary transition-colors word-break-all">contact@hastagcreator.com</a>
             </li>
             <li className="flex items-start gap-2">
               <span className="font-semibold w-20 flex-shrink-0">WhatsApp:</span>
-              <a href="https://wa.me/919450010826" target="_blank" rel="noreferrer" className="hover:text-primary transition-colors">+91 9450010826</a>
+              <a href="https://wa.me/918059957479" target="_blank" rel="noreferrer" className="hover:text-primary transition-colors">+91 8059957479</a>
             </li>
 
             <li className="flex items-start gap-2 pt-2 border-t border-charcoal-foreground/10 mt-2">
               <span className="font-semibold w-20 flex-shrink-0">Address:</span>
-              <span>Plot 19, KP, Greater Noida, Uttar Pradesh</span>
+              <span>Near Oshiwara Police Station, Andheri West, Mumbai, MH 400102</span>
             </li>
             <li className="flex items-start gap-2 pt-1">
               <span className="font-semibold w-20 flex-shrink-0">GSTIN:</span>

@@ -13,14 +13,14 @@ const HeroSection = () => {
           transition={{ duration: 0.7 }}
           className="lg:col-span-3"
         >
-          <span className="inline-block bg-primary/10 text-primary text-xs font-semibold px-4 py-1.5 rounded-full mb-5 uppercase tracking-wider">
-            For Ambitious D2C Brands
+          <span className="inline-block bg-primary/10 text-primary text-xs font-bold px-4 py-1.5 rounded-full mb-5 uppercase tracking-wider">
+            Welcome to the Future of AI Marketing
           </span>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.4rem] leading-[1.1] mb-5">
-            Stop burning ad budget. <span className="text-primary">Start scaling revenue.</span>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.4rem] leading-[1.1] mb-5 font-extrabold">
+            Marketing Asi Karo ki <span className="text-primary">Brand Banjaye</span>
           </h1>
-          <p className="text-muted-foreground text-base sm:text-lg mb-6 max-w-xl">
-            Most agencies run ads. We run ads AND fix your landing pages. Same team. No hand-offs. No excuses. We engineer the exact funnels that turn clicks into profitable customers.
+          <p className="text-muted-foreground text-base sm:text-lg mb-6 max-w-xl font-medium">
+            We Understand Sales Tricks. Marketing | Branding | Sales. The complete guide to build your brand and dominate your market.
           </p>
 
           {/* Trust Badges */}
@@ -55,23 +55,23 @@ const HeroSection = () => {
           </ul>
 
           {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-3">
-            <a href="/#process">
+          <div className="flex flex-col sm:flex-row gap-4 mt-8">
+            <a href="/#audit-form">
               <motion.button
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
-                className="bg-gradient-to-r from-primary to-primary-deep text-primary-foreground px-7 py-3.5 rounded-full text-sm font-semibold shadow-lg flex items-center justify-center gap-2 w-full sm:w-auto text-center"
+                className="bg-primary text-primary-foreground px-8 py-4 rounded-full text-base font-bold shadow-[0_10px_30px_-10px_rgba(37,99,235,0.6)] flex items-center justify-center gap-2 w-full sm:w-auto text-center"
               >
-                See How We Work <ArrowRight size={16} />
+                Schedule a Call <ArrowRight size={18} />
               </motion.button>
             </a>
-            <a href="/#case-studies">
+            <a href="/services">
               <motion.button
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
-                className="border border-border hover:border-primary text-foreground hover:text-primary px-7 py-3.5 rounded-full text-sm font-semibold transition-colors w-full sm:w-auto text-center flex items-center justify-center"
+                className="bg-card border border-border hover:border-primary text-foreground hover:text-primary px-8 py-4 rounded-full text-base font-bold transition-all shadow-sm w-full sm:w-auto text-center flex items-center justify-center"
               >
-                See Our Results
+                Explore Services
               </motion.button>
             </a>
           </div>
