@@ -93,7 +93,7 @@ const ServicesGrid = () => {
        if (!error && data && data.length > 0) {
           const parsed = data.map((row: any, i: number) => {
              let desc = row.description || "D2C Scaling infrastructure.";
-             desc = desc.replace(/(<([^>]+)>)/gi, "").replace(/&nbsp;/g, " ").trim();
+             desc = desc.replace(/(<([^>]+)>)/gi, "").replace(/&nbsp;/g, " ").replace(/\\n/g, " ").replace(/\\r/g, " ").replace(/\n/g, " ").trim();
              if (desc.length > 115) desc = desc.substring(0, 115) + "...";
              
              return {
@@ -133,7 +133,7 @@ const ServicesGrid = () => {
               .map((row: any, i) => {
                 const title = row.Name || row.name || row.Title || row.title || "Premium Service";
                 const descRaw = row['Short description'] || row.Description || row.description || "D2C Scaling infrastructure.";
-                let desc = descRaw.replace(/(<([^>]+)>)/gi, "").replace(/&nbsp;/g, " ").trim();
+                let desc = descRaw.replace(/(<([^>]+)>)/gi, "").replace(/&nbsp;/g, " ").replace(/\\n/g, " ").replace(/\\r/g, " ").replace(/\n/g, " ").trim();
                 if (desc.length > 115) desc = desc.substring(0, 115) + "...";
 
                 const rawPrice = row['Regular price'] || row['Sale price'] || row.Price || row.price || "0";

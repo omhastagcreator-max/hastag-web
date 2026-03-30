@@ -32,7 +32,7 @@ export default function ProductDetail() {
            setProduct({
              id: data.id,
              title: data.title,
-             description: data.description,
+             description: (data.description || "").replace(/\\n/g, " ").replace(/\\r/g, " ").replace(/\n/g, " "),
              price: data.price || 0,
              image: mappedUrl,
              gallery: galleryUrl.length > 0 ? [mappedUrl, ...galleryUrl].filter(Boolean) : (mappedUrl ? [mappedUrl] : []),
@@ -69,7 +69,7 @@ export default function ProductDetail() {
                setProduct({
                  id: id,
                  title,
-                 description: description.trim(),
+                 description: description.replace(/\\n/g, " ").replace(/\\r/g, " ").replace(/\n/g, " ").trim(),
                  price,
                  image: imagesArray[0] || null,
                  gallery: imagesArray,
