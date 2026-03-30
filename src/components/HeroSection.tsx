@@ -69,7 +69,7 @@ const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
             className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto"
           >
-            <a href="https://calendly.com/" target="_blank" rel="noreferrer" className="w-full sm:w-auto">
+            <a href="https://calendly.com/domsco-tech/30min?month=2026-03" target="_blank" rel="noreferrer" className="w-full sm:w-auto">
               <button className="w-full sm:w-auto group relative flex items-center justify-center gap-3 bg-foreground text-background px-10 py-5 rounded-full text-lg font-bold shadow-[0_10px_40px_-10px_rgba(0,0,0,0.3)] hover:-translate-y-1 hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.4)] transition-all duration-300">
                 Schedule a Call
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
