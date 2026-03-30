@@ -159,7 +159,7 @@ const ServicesGrid = () => {
     }
 
     const options = {
-      key: "rzp_test_YourKeyGoesHere",
+      key: import.meta.env.VITE_RAZORPAY_KEY_ID || "rzp_test_YourKeyGoesHere",
       amount: (p.price * 100).toString(),
       currency: "INR",
       name: "HastagCreator",
