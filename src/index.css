@@ -60,7 +60,10 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-body antialiased;
+    @apply bg-secondary/20 text-foreground font-body antialiased flex justify-center;
+  }
+  #root {
+    @apply w-full max-w-[1440px] bg-background min-h-screen shadow-2xl relative overflow-x-hidden border-x border-border/40;
   }
   h1, h2, h3 {
     @apply font-display font-bold tracking-tight;
