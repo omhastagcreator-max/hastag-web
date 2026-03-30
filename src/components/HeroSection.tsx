@@ -1,135 +1,126 @@
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Check, ArrowRight, Star, StarHalf } from "lucide-react";
+import { ArrowRight, Star, TrendingUp, CheckCircle2 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
-    <section className="min-h-[70vh] lg:min-h-[85vh] flex items-center px-4 sm:px-6 lg:px-8 py-10 md:py-20 pt-32 md:pt-36">
-      <div className="container-main grid lg:grid-cols-5 gap-10 lg:gap-16 items-center">
-        {/* Left 60% */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="lg:col-span-3"
-        >
-          <span className="inline-block bg-primary/10 text-primary text-xs font-bold px-4 py-1.5 rounded-full mb-5 uppercase tracking-wider">
-            Welcome to the Future of AI Marketing
-          </span>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.4rem] leading-[1.1] mb-5 font-extrabold">
-            Marketing Asi Karo ki <span className="text-primary">Brand Banjaye</span>
-          </h1>
-          <p className="text-muted-foreground text-base sm:text-lg mb-6 max-w-xl font-medium">
-            We Understand Sales Tricks. Marketing | Branding | Sales. The complete guide to build your brand and dominate your market.
-          </p>
+    <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden bg-background">
+      {/* Background Graphic Architecture */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        {/* Soft Radial Center Glow */}
+        <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[800px] h-[500px] rounded-[100%] bg-primary/10 blur-[100px] opacity-70"></div>
+        {/* Subtle dot pattern over top (using pure css text basically or an svg) */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
+      </div>
 
-          {/* Trust Badges */}
-          <div className="mb-6 flex flex-wrap gap-3 items-center">
-            <a href="https://share.google/5lOHRfK7veGba5vBe" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm font-medium bg-secondary/50 border border-border px-3 py-1.5 rounded-full hover:border-[#FBBC05]/50 transition-colors">
-              <div className="flex text-[#FBBC05]">
-                <Star size={16} className="fill-current" />
-                <Star size={16} className="fill-current" />
-                <Star size={16} className="fill-current" />
-                <Star size={16} className="fill-current" />
-                <StarHalf size={16} className="fill-current" />
+      <div className="container-main relative z-10">
+        <div className="flex flex-col items-center text-center max-w-5xl mx-auto">
+          
+          {/* Floating Top Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-md mb-8"
+          >
+            <span className="flex h-2 w-2 relative">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+            </span>
+            <span className="text-sm font-bold text-primary tracking-wide">
+              Future of AI Marketing
+            </span>
+          </motion.div>
+
+          {/* Core Headline */}
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+            className="text-5xl sm:text-6xl md:text-8xl font-black text-foreground tracking-tight leading-[1.1] mb-6"
+          >
+            Marketing Asi Karo <br className="hidden md:block" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-400">ki Brand Banjaye.</span>
+          </motion.h1>
+
+          {/* Subheading */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+            className="text-lg md:text-2xl text-muted-foreground font-medium max-w-3xl mb-12"
+          >
+            We deploy precision-engineered Meta Ads, Google Ads, and world-class creator networks to scale your D2C brand with surgical exactness.
+          </motion.p>
+
+          {/* CTA & Actions */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+            className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto"
+          >
+            <a href="/#audit-form" className="w-full sm:w-auto">
+              <button className="w-full sm:w-auto group relative flex items-center justify-center gap-3 bg-foreground text-background px-10 py-5 rounded-full text-lg font-bold shadow-[0_10px_40px_-10px_rgba(0,0,0,0.3)] hover:-translate-y-1 hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.4)] transition-all duration-300">
+                Schedule a Call
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </button>
+            </a>
+            
+            <Link to="/portfolio" className="w-full sm:w-auto">
+              <button className="w-full sm:w-auto flex items-center justify-center gap-2 bg-background border-2 border-border hover:border-foreground text-foreground px-10 py-5 rounded-full text-lg font-bold shadow-sm hover:shadow-md transition-all duration-300">
+                Check our Portfolio
+              </button>
+            </Link>
+          </motion.div>
+
+          {/* Social Proof Strip below CTA */}
+          <motion.div
+            initial={{ opacity: 0, blur: 10 }}
+            animate={{ opacity: 1, blur: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="mt-16 flex flex-wrap items-center justify-center gap-x-10 gap-y-6 pt-10 border-t border-border/60 w-full"
+          >
+            <div className="flex items-center gap-3">
+              <div className="flex -space-x-3">
+                <img src="https://api.dicebear.com/7.x/initials/svg?seed=A" className="w-10 h-10 rounded-full border-2 border-background shadow-sm" alt="U" />
+                <img src="https://api.dicebear.com/7.x/initials/svg?seed=B" className="w-10 h-10 rounded-full border-2 border-background shadow-sm" alt="U" />
+                <img src="https://api.dicebear.com/7.x/initials/svg?seed=C" className="w-10 h-10 rounded-full border-2 border-background shadow-sm" alt="U" />
+                <div className="w-10 h-10 rounded-full border-2 border-background bg-muted flex items-center justify-center text-xs font-bold text-muted-foreground shadow-sm">+2k</div>
               </div>
-              <span>4.5 Google Rating</span>
-            </a>
-            <div className="inline-flex items-center gap-2 text-sm font-medium bg-secondary/50 border border-border px-3 py-1.5 rounded-full">
-               <span>💰 ₹2Cr+ Ad Spend Managed</span>
-            </div>
-          </div>
-
-          {/* Value props */}
-          <ul className="space-y-2.5 mb-8">
-            {[
-              "End-to-end Solutions: Funnel Creation, CRO & Ad Management",
-              "Bespoke Landing Pages & Elite E-Commerce Stores",
-              "Results-focused omnichannel approach across Meta & Google",
-            ].map((prop, i) => (
-              <li key={i} className="flex items-start gap-2.5 text-sm text-muted-foreground">
-                <Check size={16} className="text-primary mt-0.5 flex-shrink-0" />
-                <span>{prop}</span>
-              </li>
-            ))}
-          </ul>
-
-          {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-4 mt-8">
-            <a href="/#audit-form">
-              <motion.button
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.97 }}
-                className="bg-primary text-primary-foreground px-8 py-4 rounded-full text-base font-bold shadow-[0_10px_30px_-10px_rgba(37,99,235,0.6)] flex items-center justify-center gap-2 w-full sm:w-auto text-center"
-              >
-                Schedule a Call <ArrowRight size={18} />
-              </motion.button>
-            </a>
-            <a href="/services">
-              <motion.button
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.97 }}
-                className="bg-card border border-border hover:border-primary text-foreground hover:text-primary px-8 py-4 rounded-full text-base font-bold transition-all shadow-sm w-full sm:w-auto text-center flex items-center justify-center"
-              >
-                Explore Services
-              </motion.button>
-            </a>
-          </div>
-          <div className="mt-6 text-sm text-muted-foreground flex items-center gap-1.5">
-             🚀 Looking for a trial run? <Link to="/starter-plan" className="text-primary font-semibold hover:underline inline-flex items-center gap-1">View our ₹1,999 Starter Plan <ArrowRight size={14} /></Link>
-          </div>
-        </motion.div>
-
-        {/* Right 40% — Service highlights */}
-        <motion.div
-          initial={{ opacity: 0, x: 40 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="lg:col-span-2 hidden lg:block"
-        >
-          <div className="bg-card rounded-2xl shadow-card-hover p-6 border border-border space-y-4">
-            <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider">How We Do It</p>
-            {[
-              { title: "Bring the right people", desc: "Ads that target buyers, not just clicks" },
-              { title: "Make them buy", desc: "Websites fixed for maximum conversion" },
-              { title: "Increase order value", desc: "Offers that make people spend more" },
-              { title: "Bring them back", desc: "Retention systems for loyal customers" },
-            ].map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.4 + i * 0.1 }}
-                className="flex items-start gap-3 p-3 rounded-xl bg-secondary border border-border"
-              >
-                <div className="w-2 h-2 rounded-full bg-primary mt-1.5 flex-shrink-0" />
-                <div>
-                  <p className="text-sm font-semibold">{item.title}</p>
-                  <p className="text-xs text-muted-foreground">{item.desc}</p>
+              <div className="text-left flex flex-col">
+                <div className="flex text-yellow-400">
+                  {[1, 2, 3, 4, 5].map((s) => <Star key={s} className="w-4 h-4 fill-current" />)}
                 </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+                <span className="text-sm font-semibold text-foreground">1,782+ Reviews</span>
+              </div>
+            </div>
 
-        {/* Mobile service cards */}
-        <div className="lg:hidden grid grid-cols-2 gap-3">
-          {[
-            { label: "Bring the right people", icon: "🤝" },
-            { label: "Make them buy", icon: "🛒" },
-            { label: "Increase order value", icon: "📈" },
-            { label: "Bring them back", icon: "🔁" },
-          ].map((s) => (
-            <motion.div
-              key={s.label}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="bg-card rounded-xl p-3 text-center shadow-card border border-border"
-            >
-              <p className="text-lg mb-1">{s.icon}</p>
-              <p className="text-xs font-medium text-muted-foreground">{s.label}</p>
-            </motion.div>
-          ))}
+            <div className="w-px h-10 bg-border hidden sm:block"></div>
+
+            <div className="flex items-center gap-3">
+              <div className="bg-primary/10 text-primary p-2.5 rounded-full">
+                <TrendingUp className="w-5 h-5" />
+              </div>
+              <div className="text-left flex flex-col">
+                <span className="text-xl font-black text-foreground">11.5Cr+</span>
+                <span className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Sales Generated</span>
+              </div>
+            </div>
+
+            <div className="w-px h-10 bg-border hidden lg:block"></div>
+
+            <div className="flex items-center gap-3">
+              <div className="bg-primary/10 text-primary p-2.5 rounded-full">
+                <CheckCircle2 className="w-5 h-5" />
+              </div>
+              <div className="text-left flex flex-col">
+                <span className="text-xl font-black text-foreground">511+</span>
+                <span className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Brands Scaled</span>
+              </div>
+            </div>
+          </motion.div>
+
         </div>
       </div>
     </section>

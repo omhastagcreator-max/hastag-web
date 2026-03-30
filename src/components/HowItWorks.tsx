@@ -4,68 +4,83 @@ import { Search, PenTool, Rocket } from "lucide-react";
 const steps = [
   {
     icon: Search,
-    title: "1. Free Ads Audit",
-    desc: "We dive deep into your Meta and Google ad accounts to find exactly where you are bleeding money. No obligations.",
+    title: "1. The Forensic Audit",
+    desc: "We analyze your past ad accounts, competitor footprint, and website checkout drops to find immediate revenue leaks.",
   },
   {
     icon: PenTool,
-    title: "2. Custom Strategy",
-    desc: "We design the fix. Not just new ad creatives, but we also redesign and optimize your landing pages so the traffic actually converts.",
+    title: "2. Creation & Funnel Fixing",
+    desc: "Before we spend a single rupee on ads, we deploy high-converting landing pages and craft UGC content explicitly designed to sell.",
   },
   {
     icon: Rocket,
-    title: "3. Launch & Scale",
-    desc: "We deploy the new funnel and aggressively scale what works, optimizing purely for your profit margin every single day.",
+    title: "3. Precision Scaling",
+    desc: "We launch, test aggressively, and scale winning campaigns across Meta, Google, and Influencer networks using machine learning.",
   },
 ];
 
 const HowItWorks = () => {
   return (
-    <section className="section-padding bg-background">
-      <div className="container-main">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">How We Work (No Fluff)</h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+    <section className="py-24 bg-background relative" id="process">
+      <div className="container-main max-w-4xl">
+        <div className="text-center mb-16">
+          <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">Execution</span>
+          <h2 className="text-4xl md:text-5xl font-black text-foreground mb-6 tracking-tight">
+            How We Actually Work
+          </h2>
+          <p className="text-lg text-muted-foreground font-medium max-w-2xl mx-auto">
             A totally transparent, 3-step process designed to stop the guesswork and start scaling your revenue immediately.
           </p>
-        </motion.div>
+        </div>
 
-        <div className="grid md:grid-cols-3 gap-8 relative px-4">
-          {/* Connecting Line */}
-          <div className="hidden md:block absolute top-[40px] left-[15%] right-[15%] h-[2px] bg-border z-0" />
+        <div className="relative">
+          {/* Vertical Line */}
+          <div className="absolute left-[39px] md:left-1/2 top-0 bottom-0 w-1 bg-border/50 rounded-full hidden md:block" />
 
-          {steps.map((step, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.15 }}
-              className="relative text-center z-10"
-            >
-              <div className="w-20 h-20 mx-auto bg-card border-4 border-background shadow-xl rounded-full flex items-center justify-center mb-6 group hover:scale-110 transition-transform">
-                <step.icon className="text-primary w-8 h-8" />
-              </div>
-              <h3 className="text-xl font-bold mb-3">{step.title}</h3>
-              <p className="text-muted-foreground leading-relaxed px-4">{step.desc}</p>
-            </motion.div>
-          ))}
+          <div className="space-y-12 md:space-y-24">
+            {steps.map((step, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.6 }}
+                className={`flex flex-col md:flex-row items-start md:items-center justify-between gap-8 md:gap-16 relative ${
+                  index % 2 === 1 ? "md:flex-row-reverse" : ""
+                }`}
+              >
+                {/* Center Node (Desktop) */}
+                <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-20 h-20 bg-background border-4 border-primary rounded-full items-center justify-center z-10 shadow-lg" style={{ top: "calc(50% - 40px)"}}>
+                  <step.icon className="w-8 h-8 text-primary" />
+                </div>
+
+                {/* Content Card */}
+                <div className={`w-full md:w-[45%] bg-card border border-border p-8 rounded-3xl shadow-sm hover:shadow-card-hover transition-shadow relative z-0`}>
+                  <div className="md:hidden w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-6">
+                    <step.icon className="w-6 h-6 text-primary" />
+                  </div>
+                  <h3 className="text-2xl font-black text-foreground mb-4">{step.title}</h3>
+                  <p className="text-muted-foreground text-[15px] leading-relaxed">
+                    {step.desc}
+                  </p>
+                </div>
+                
+                {/* Empty Space for layout */}
+                <div className="hidden md:block w-[45%]" />
+              </motion.div>
+            ))}
+          </div>
         </div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mt-16"
+          className="text-center mt-20"
         >
           <a href="/#audit-form">
-            <button className="bg-foreground text-background px-8 py-4 rounded-full text-base font-bold shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-              Get Your Free Custom Strategy
+            <button className="bg-foreground text-background px-10 py-5 rounded-full text-lg font-bold shadow-lg hover:-translate-y-1 transition-transform">
+              Get Started Now
             </button>
           </a>
         </motion.div>
