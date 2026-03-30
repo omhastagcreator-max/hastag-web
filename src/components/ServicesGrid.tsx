@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Layers, MousePointerClick, Zap, MessageSquare, Video, Mic, LayoutGrid } from "lucide-react";
 import Papa from "papaparse";
+import { Link } from "react-router-dom";
 import { useRazorpay } from "react-razorpay";
 import { supabase } from "@/lib/supabase";
 
@@ -61,6 +62,7 @@ const colorMap = [
 ];
 
 type ServiceItem = {
+  id: string;
   icon: any;
   title: string;
   desc: string;
@@ -89,6 +91,7 @@ const ServicesGrid = () => {
              if (desc.length > 115) desc = desc.substring(0, 115) + "...";
              
              return {
+                id: row.id,
                 icon: iconMap[i % iconMap.length],
                 image: row.image_url || null,
                 title: row.title || "Premium Service",
@@ -134,6 +137,7 @@ const ServicesGrid = () => {
                 const image = rawImages.split(',')[0]?.trim();
                 
                 return {
+                  id: row.id || row.ID || row.sku || `fallback-${i}`,
                   icon: iconMap[i % iconMap.length],
                   image: image || null,
                   title,
@@ -185,7 +189,7 @@ const ServicesGrid = () => {
     <section className="py-24 bg-secondary/50 relative overflow-hidden" id="services">
       <div className="container-main">
         <div className="max-w-3xl mb-16">
-          <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">Our Arsenal</span>
+          <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">Our Services</span>
           <h2 className="text-4xl md:text-5xl font-black text-foreground mb-6 tracking-tight">
             Comprehensive Growth Infrastructure.
           </h2>
@@ -231,14 +235,14 @@ const ServicesGrid = () => {
                   </span>
                 </div>
                 <div className="grid grid-cols-2 gap-2">
-                  <button onClick={() => handleCheckout(service)} className="bg-primary/10 hover:bg-primary text-primary hover:text-white py-2 rounded-lg text-xs font-bold transition-colors border border-primary/20 hover:border-primary">
-                    Buy Now
-                  </button>
-                  <a href="https://calendly.com/domsco-tech/30min?month=2026-03" target="_blank" rel="noreferrer" className="block w-full">
-                    <button className="w-full bg-foreground hover:bg-foreground/90 text-background py-2 rounded-lg text-xs font-bold transition-colors">
-                      Schedule
+                  <Link to={`/product/${service.id}`} className="block w-full">
+                    <button className="w-full bg-primary/10 hover:bg-primary text-primary hover:text-white py-2 rounded-lg text-xs font-bold transition-colors border border-primary/20 hover:border-primary">
+                      View Details
                     </button>
-                  </a>
+                  </Link>
+                  <button onClick={() => handleCheckout(service)} className="w-full bg-foreground hover:bg-foreground/90 text-background py-2 rounded-lg text-xs font-bold transition-colors">
+                    Quick Buy
+                  </button>
                 </div>
               </div>
             </motion.div>
