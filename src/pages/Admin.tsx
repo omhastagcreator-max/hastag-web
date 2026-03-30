@@ -18,6 +18,7 @@ export default function Admin() {
   const [isUploading, setIsUploading] = useState(false);
   
   // New Product Form
+  const [editingId, setEditingId] = useState<string | null>(null);
   const [newTitle, setNewTitle] = useState("");
   const [newDesc, setNewDesc] = useState("");
   const [newPrice, setNewPrice] = useState("");
@@ -115,13 +116,18 @@ export default function Admin() {
          payload.image_gallery = gallery_urls;
       }
 
-      const { error } = await supabase.from('products').insert([payload]);
-
-      if (error) throw error;
+      if (editingId) {
+         const { error } = await supabase.from('products').update(payload).eq('id', editingId);
+         if (error) throw error;
+      } else {
+         const { error } = await supabase.from('products').insert([payload]);
+         if (error) throw error;
+      }
       
+      setEditingId(null);
       setNewTitle(""); setNewDesc(""); setNewPrice(""); setNewImage(null); setNewGallery(null);
       fetchProducts();
-      alert("Product published!");
+      alert(editingId ? "Product updated!" : "Product published!");
     } catch (error: any) {
       alert("Error: " + error.message + " (Did you run the SQL script for E-Commerce tables?)");
     } finally {
@@ -289,7 +295,7 @@ export default function Admin() {
           <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
             <div className="bg-card border border-border rounded-3xl p-6 lg:p-8 h-fit shadow-xl xl:sticky xl:top-32">
               <h2 className="text-xl font-black mb-1 flex items-center gap-2 text-foreground">
-                <Plus className="w-5 h-5 text-primary" /> Create Service
+                <Plus className="w-5 h-5 text-primary" /> {editingId ? "Edit Service" : "Create Service"}
               </h2>
               <p className="text-xs text-muted-foreground mb-8 font-semibold">Generates a dynamic `/product/:id` Live Page.</p>
               
@@ -332,9 +338,16 @@ export default function Admin() {
                      </label>
                   </div>
                 </div>
-                <button disabled={isUploading} type="submit" className="w-full bg-foreground text-background font-black tracking-widest uppercase text-xs p-4 mt-6 rounded-xl hover:-translate-y-1 transition-all shadow-xl flex items-center justify-center gap-2 disabled:opacity-50 disabled:hover:translate-y-0">
-                  {isUploading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Publish to Server"}
-                </button>
+                <div className="flex gap-2 mt-6">
+                  {editingId && (
+                    <button type="button" onClick={() => { setEditingId(null); setNewTitle(""); setNewDesc(""); setNewPrice(""); }} className="w-1/3 bg-muted text-foreground font-black tracking-widest uppercase text-xs p-4 rounded-xl hover:-translate-y-1 transition-all shadow-xl flex items-center justify-center gap-2">
+                      Cancel
+                    </button>
+                  )}
+                  <button disabled={isUploading} type="submit" className="flex-1 bg-foreground text-background font-black tracking-widest uppercase text-xs p-4 rounded-xl hover:-translate-y-1 transition-all shadow-xl flex items-center justify-center gap-2 disabled:opacity-50 disabled:hover:translate-y-0">
+                    {isUploading ? <Loader2 className="w-5 h-5 animate-spin" /> : editingId ? "Save Changes" : "Publish"}
+                  </button>
+                </div>
               </form>
             </div>
 
@@ -363,9 +376,14 @@ export default function Admin() {
                          )}
                       </div>
                     </div>
-                    <button onClick={() => handleDelete(p.id)} className="w-full sm:w-16 h-full p-4 mt-2 sm:mt-0 bg-destructive/5 text-destructive rounded-2xl hover:bg-destructive hover:text-white transition-all flex justify-center items-center shrink-0">
-                      <Trash className="w-5 h-5" />
-                    </button>
+                    <div className="flex flex-col gap-2 shrink-0 h-full justify-center mt-4 sm:mt-0">
+                       <button onClick={() => { setEditingId(p.id); setNewTitle(p.title); setNewDesc(p.description); setNewPrice(p.price); window.scrollTo({ top: 0, behavior: "smooth" }); }} className="w-full sm:w-16 h-10 bg-blue-500/10 text-blue-500 rounded-xl hover:bg-blue-500 hover:text-white transition-all flex justify-center items-center font-bold text-xs uppercase tracking-wider">
+                         Edit
+                       </button>
+                       <button onClick={() => handleDelete(p.id)} className="w-full sm:w-16 h-10 bg-destructive/10 text-destructive rounded-xl hover:bg-destructive hover:text-white transition-all flex justify-center items-center">
+                         <Trash className="w-4 h-4" />
+                       </button>
+                    </div>
                   </div>
                 ))
               )}
