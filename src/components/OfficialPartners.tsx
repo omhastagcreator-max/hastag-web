@@ -23,9 +23,9 @@ const OfficialPartners = () => {
         <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-secondary/30 to-transparent z-10"></div>
         <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-secondary/30 to-transparent z-10"></div>
 
-        <div className="flex animate-marquee items-center justify-around gap-16 whitespace-nowrap min-w-full z-0 group-hover:[animation-play-state:paused]">
+        <div className="flex animate-marquee items-center justify-around gap-16 whitespace-nowrap min-w-full z-0">
           {[...partnerLogos, ...partnerLogos, ...partnerLogos].map((src, index) => (
-            <div key={index} className="w-[100px] md:w-[130px] shrink-0 opacity-50 hover:opacity-100 transition-opacity flex items-center justify-center grayscale hover:grayscale-0">
+            <div key={index} className="w-[100px] md:w-[130px] shrink-0 flex items-center justify-center">
               <img src={src} alt="Official Partner" className="w-full h-auto object-contain max-h-16" />
             </div>
           ))}

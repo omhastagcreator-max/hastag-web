@@ -39,7 +39,7 @@ const DashboardResultsSection = () => {
           <div className="bg-card p-3 md:p-5 rounded-[2rem] border border-white/10 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)]">
             <div className="aspect-video bg-[#0a0a0a] rounded-[1.2rem] overflow-hidden relative group border border-white/5">
               <video 
-                className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-duration-700"
+                className="w-full h-full object-cover"
                 autoPlay 
                 loop 
                 muted 
@@ -47,25 +47,6 @@ const DashboardResultsSection = () => {
               >
                 <source src="/screen-recording.mp4" type="video/mp4" />
               </video>
-              
-              {/* Fake UI Overlay for authenticity */}
-              <div className="absolute top-0 inset-x-0 h-12 bg-gradient-to-b from-black/80 to-transparent pointer-events-none"></div>
-              
-              <div className="absolute top-4 right-4 bg-red-500/90 backdrop-blur-md text-white text-[10px] md:text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest flex items-center gap-2 shadow-[0_0_20px_rgba(239,68,68,0.4)]">
-                <div className="w-2 h-2 rounded-full bg-white animate-pulse"></div>
-                Live Dashboard
-              </div>
-              
-              <div className="absolute bottom-6 left-6 text-white text-left pointer-events-none drop-shadow-lg">
-                <h3 className="text-2xl md:text-4xl font-extrabold mb-1 tracking-tight">₹4.2M+</h3>
-                <p className="text-sm md:text-base font-medium text-white/80 uppercase tracking-widest">Revenue Generated Last 30 Days</p>
-              </div>
-
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <div className="w-20 h-20 md:w-24 md:h-24 bg-primary/80 backdrop-blur-xl group-hover:bg-primary group-hover:scale-110 transition-all duration-300 rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(0,0,0,0.6)] border border-white/20">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" className="w-10 h-10 md:w-12 md:h-12 ml-2"><path d="M8 5v14l11-7z"/></svg>
-                </div>
-              </div>
             </div>
           </div>
         </motion.div>

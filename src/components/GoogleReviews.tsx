@@ -122,7 +122,7 @@ const GoogleReviews = () => {
                       </div>
                     </div>
                   </div>
-                  <img src={review.logo} alt="Brand" className="w-10 h-10 object-contain grayscale hover:grayscale-0 transition-opacity opacity-60" />
+                  <img src={review.logo} alt="Brand" className="w-10 h-10 object-contain" />
                 </div>
                 
                 <div className="flex text-yellow-500 mb-4 relative z-10">

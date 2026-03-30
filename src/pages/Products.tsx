@@ -25,11 +25,11 @@ const Products = () => {
   const { Razorpay } = useRazorpay();
 
   useEffect(() => {
-    // Attempt to load CSV. If it doesn't exist, handle gracefully
-    fetch("/products.csv")
+    // Attempt to load proper WooCommerce CSV
+    fetch("/product.csv")
       .then((response) => {
         if (!response.ok) {
-          throw new Error("No products.csv found");
+          throw new Error("No product.csv found. Seeking fallback.");
         }
         return response.text();
       })
@@ -38,13 +38,29 @@ const Products = () => {
           header: true,
           skipEmptyLines: true,
           complete: (results) => {
-            const parsed = results.data.map((row: any, i) => ({
-              id: row.id || `prod-${i}`,
-              name: row.name || "Unknown Product",
-              description: row.description || "Incredible digital asset.",
-              price: parseFloat(row.price) || 999,
-              image: row.image || "/placeholder.svg",
-            }));
+            const parsed = results.data
+              .filter((row: any) => Object.keys(row).length > 1) // Filter out malformed empty rows
+              .map((row: any, i) => {
+                // WordPress / WooCommerce Standard Header Mapping
+                const name = row.Name || row.name || row.Title || row.title || "Unknown Product";
+                const description = row['Short description'] || row.Description || row.description || "Premium D2C Asset";
+                
+                // Price cleanup
+                const rawPrice = row['Regular price'] || row['Sale price'] || row.Price || row.price || "0";
+                const price = parseFloat(rawPrice.toString().replace(/[^0-9.]/g, '')) || 0;
+                
+                // Image cleanup (WooCommerce often exports a comma separated list of URLs)
+                const rawImages = row.Images || row.Image || row.images || row.image || "/placeholder.svg";
+                const image = rawImages.split(',')[0].trim();
+
+                return {
+                  id: row.id || row.ID || row.sku || `prod-${i}`,
+                  name,
+                  description: description.replace(/(<([^>]+)>)/gi, ""), // Strip rudimentary HTML tags from WooCommerce text
+                  price,
+                  image,
+                };
+              });
             setProducts(parsed);
             setLoading(false);
           },
@@ -114,9 +130,10 @@ const Products = () => {
               Loading Catalog...
             </div>
           ) : products.length === 0 ? (
-            <div className="text-center py-20 bg-card rounded-2xl border border-border shadow-sm">
+            <div className="text-center py-20 bg-card rounded-2xl border border-border shadow-sm max-w-2xl mx-auto">
               <h3 className="text-2xl font-bold mb-2">Catalog Empty</h3>
-              <p className="text-muted-foreground">Upload a products.csv to the public folder to see products here.</p>
+              <p className="text-muted-foreground mb-4">Export products from your WooCommerce WordPress site to a CSV format and ensure it's loaded as <b>public/product.csv</b>.</p>
+              <p className="text-sm font-code text-muted-foreground p-4 bg-muted/30 rounded-lg">Checking for columns: <br/> 'Name', 'Short description', 'Regular price', 'Images'</p>
             </div>
           ) : (
             <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
