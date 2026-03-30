@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
+import Papa from "papaparse";
 import { Plus, Trash, LogOut, Upload, Loader2, Image as ImageIcon, ShoppingCart, LayoutTemplate, Package, CheckCircle, Clock } from "lucide-react";
 
 export default function Admin() {
@@ -102,8 +103,6 @@ export default function Admin() {
         }
       }
 
-      // We add image_gallery conditionally because if the user hasn't run the SQL
-      // update yet, the column won't exist and the insert will crash.
       const payload: any = {
         title: newTitle || "Untitled Product",
         description: newDesc,
@@ -126,6 +125,74 @@ export default function Admin() {
     } catch (error: any) {
       alert("Error: " + error.message + " (Did you run the SQL script for E-Commerce tables?)");
     } finally {
+      setIsUploading(false);
+    }
+  };
+
+  const handleBulkImport = async () => {
+    if (!confirm("Initialize bulk import? This will parse public/product.csv and permanently write all valid WooCommerce products into the live database.")) return;
+    setIsUploading(true);
+    
+    try {
+      const res = await fetch("/product.csv");
+      if (!res.ok) throw new Error("Could not find product.csv");
+      const csvText = await res.text();
+      
+      Papa.parse(csvText, {
+        header: true,
+        skipEmptyLines: true,
+        complete: async (results) => {
+          const parsed = results.data
+            .filter((row: any) => Object.keys(row).length > 1)
+            .map((row: any) => {
+              const title = row.Name || row.name || row.Title || row.title || "Premium Service";
+              const descRaw = row['Short description'] || row.Description || row.description || "D2C Scaling infrastructure.";
+              let description = descRaw.replace(/(<([^>]+)>)/gi, "").replace(/&nbsp;/g, " ").trim();
+
+              const rawPrice = row['Regular price'] || row['Sale price'] || row.Price || row.price || "0";
+              const price = parseFloat(rawPrice.toString().replace(/[^0-9.]/g, '')) || 0;
+
+              const rawImages = row.Images || row.images || row['Image URL'] || "";
+              const imagesArray = rawImages.split(',').map((img: string) => img.trim()).filter((img: string) => img.length > 0);
+              const mainImg = imagesArray[0] || null;
+              
+              return {
+                title,
+                description,
+                price,
+                image_url: mainImg,
+                image_gallery: imagesArray,
+                icon_name: 'Layers'
+              };
+            });
+            
+          if (parsed.length === 0) {
+              alert("No valid products found in CSV.");
+              setIsUploading(false);
+              return;
+          }
+
+          // Chunk inserts to avoid massive payload rejections from PostgREST
+          const chunks = [];
+          for (let i = 0; i < parsed.length; i += 50) chunks.push(parsed.slice(i, i + 50));
+          
+          for (const chunk of chunks) {
+               const { error } = await supabase.from('products').insert(chunk);
+               if (error) {
+                   console.error(error);
+                   alert("Insertion Error: " + error.message);
+                   setIsUploading(false);
+                   return;
+               }
+          }
+          
+          await fetchProducts();
+          alert(`Successfully synced ${parsed.length} products to the live database!`);
+          setIsUploading(false);
+        }
+      });
+    } catch (e: any) {
+      alert("Bulk Import Failed: " + e.message);
       setIsUploading(false);
     }
   };
@@ -219,6 +286,20 @@ export default function Admin() {
                 <Plus className="w-5 h-5 text-primary" /> Create Service
               </h2>
               <p className="text-xs text-muted-foreground mb-8 font-semibold">Generates a dynamic `/product/:id` Live Page.</p>
+              
+              <button 
+                onClick={handleBulkImport} 
+                disabled={isUploading}
+                className="w-full bg-blue-500/10 text-blue-500 border border-blue-500/20 hover:bg-blue-500 hover:text-white font-black tracking-widest uppercase text-[10px] p-3 mb-6 rounded-xl transition-all shadow-sm flex items-center justify-center gap-2 disabled:opacity-50"
+              >
+                <Upload size={14} /> Auto-Import Master CSV
+              </button>
+
+              <div className="flex items-center gap-4 mb-6">
+                 <div className="flex-1 h-px bg-border/50"></div>
+                 <span className="text-xs text-muted-foreground font-black uppercase tracking-widest">OR Add Single</span>
+                 <div className="flex-1 h-px bg-border/50"></div>
+              </div>
               
               <form onSubmit={handleCreateProduct} className="space-y-4">
                 <div>
