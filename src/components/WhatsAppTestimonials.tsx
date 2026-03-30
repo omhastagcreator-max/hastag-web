@@ -44,7 +44,7 @@ const WhatsAppTestimonials = () => {
 
           {/* Right Column: Screenshot Slider */}
           <div className="order-1 lg:order-2 flex flex-col items-center">
-            <div className="relative w-full max-w-[320px] aspect-[9/16] bg-muted/20 rounded-[2rem] border-8 border-card shadow-2xl overflow-hidden mb-8">
+            <div className="relative w-full max-w-sm aspect-[9/16] bg-muted/10 rounded-[2rem] border-8 border-card shadow-2xl overflow-hidden mb-8">
               <AnimatePresence mode="wait">
                 <motion.img
                   key={currentIndex}

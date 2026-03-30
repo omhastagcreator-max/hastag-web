@@ -149,7 +149,7 @@ const Products = () => {
                   <div className="aspect-[4/3] bg-muted/50 overflow-hidden relative">
                     <img src={p.image} alt={p.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                     <div className="absolute top-3 right-3 bg-background text-foreground font-black px-3 py-1.5 rounded-full text-sm shadow-md border border-border">
-                      ₹{p.price.toLocaleString("en-IN")}
+                      {p.price > 0 ? `₹${p.price.toLocaleString("en-IN")}` : "Custom"}
                     </div>
                   </div>
                   <div className="p-4 md:p-6 flex flex-col justify-between h-full">
