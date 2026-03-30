@@ -1,5 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { useState, useEffect } from "react";
+import { supabase } from "@/lib/supabase";
 import HeroSection from "@/components/HeroSection";
 import ServicesGrid from "@/components/ServicesGrid";
 import WhyChooseUs from "@/components/WhyChooseUs";
@@ -20,9 +22,18 @@ import OfficialPartners from "@/components/OfficialPartners";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const Index = () => (
-  <>
-    <Navbar />
+const Index = () => {
+  const [bannerUrl, setBannerUrl] = useState("/banner.png");
+
+  useEffect(() => {
+    supabase.from('site_media').select('image_url').eq('component_key', 'hero_banner').single()
+      .then(({data}) => { if (data?.image_url) setBannerUrl(data.image_url); })
+      .catch(() => {});
+  }, []);
+
+  return (
+    <>
+      <Navbar />
     <main>
       <HeroSection />
       <TrustedBrands />
@@ -32,7 +43,7 @@ const Index = () => (
       {/* Dynamic Banner Section */}
       <section className="py-12 bg-background border-y border-border/40">
         <div className="container-main">
-          <img src="/banner.png" alt="HashtagCreator Scale Banner" className="w-full h-auto rounded-3xl shadow-2xl border border-border/50 object-cover" />
+          <img src={bannerUrl} alt="HashtagCreator Scale Banner" className="w-full h-auto rounded-3xl shadow-2xl border border-border/50 object-cover" />
         </div>
       </section>
 
@@ -50,8 +61,9 @@ const Index = () => (
       <FAQ />
       <OfficialPartners />
     </main>
-    <Footer />
-  </>
-);
+      <Footer />
+    </>
+  );
+};
 
 export default Index;
