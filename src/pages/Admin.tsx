@@ -129,16 +129,19 @@ export default function Admin() {
     }
   };
 
-  const handleBulkImport = async () => {
-    if (!confirm("Initialize bulk import? This will parse public/product.csv and permanently write all valid WooCommerce products into the live database.")) return;
+  const handleBulkImport = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    
+    if (!confirm(`Initialize bulk import from ${file.name}? This will parse the CSV and permanently write all valid WooCommerce products into the live database.`)) {
+       e.target.value = ''; // Reset
+       return;
+    }
+    
     setIsUploading(true);
     
     try {
-      const res = await fetch("/product.csv");
-      if (!res.ok) throw new Error("Could not find product.csv");
-      const csvText = await res.text();
-      
-      Papa.parse(csvText, {
+      Papa.parse(file, {
         header: true,
         skipEmptyLines: true,
         complete: async (results) => {
@@ -189,11 +192,14 @@ export default function Admin() {
           await fetchProducts();
           alert(`Successfully synced ${parsed.length} products to the live database!`);
           setIsUploading(false);
+          // Reset file input
+          e.target.value = '';
         }
       });
-    } catch (e: any) {
-      alert("Bulk Import Failed: " + e.message);
+    } catch (err: any) {
+      alert("Bulk Import Failed: " + err.message);
       setIsUploading(false);
+      e.target.value = '';
     }
   };
 
@@ -287,13 +293,10 @@ export default function Admin() {
               </h2>
               <p className="text-xs text-muted-foreground mb-8 font-semibold">Generates a dynamic `/product/:id` Live Page.</p>
               
-              <button 
-                onClick={handleBulkImport} 
-                disabled={isUploading}
-                className="w-full bg-blue-500/10 text-blue-500 border border-blue-500/20 hover:bg-blue-500 hover:text-white font-black tracking-widest uppercase text-[10px] p-3 mb-6 rounded-xl transition-all shadow-sm flex items-center justify-center gap-2 disabled:opacity-50"
-              >
-                <Upload size={14} /> Auto-Import Master CSV
-              </button>
+              <label className={`w-full bg-blue-500/10 text-blue-500 border border-blue-500/20 hover:bg-blue-500 hover:text-white font-black tracking-widest uppercase text-[10px] p-3 mb-6 rounded-xl transition-all shadow-sm flex items-center justify-center gap-2 cursor-pointer ${isUploading ? 'opacity-50 pointer-events-none' : ''}`}>
+                <Upload size={14} /> Upload WooCommerce CSV
+                <input type="file" accept=".csv" onChange={handleBulkImport} className="hidden" disabled={isUploading} />
+              </label>
 
               <div className="flex items-center gap-4 mb-6">
                  <div className="flex-1 h-px bg-border/50"></div>
