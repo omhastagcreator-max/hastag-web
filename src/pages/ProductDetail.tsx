@@ -69,7 +69,7 @@ export default function ProductDetail() {
                setProduct({
                  id: id,
                  title,
-                 description: description.replace(/(<([^>]+)>)/gi, "").replace(/&nbsp;/g, " ").trim(), // Keep raw length, just strip basic HTML
+                 description: description.trim(),
                  price,
                  image: imagesArray[0] || null,
                  gallery: imagesArray,
@@ -197,9 +197,10 @@ export default function ProductDetail() {
                     {product.price > 0 && <span className="text-base text-muted-foreground font-medium mb-1">/one-time</span>}
                  </div>
                  
-                 <div className="prose prose-sm md:prose-base dark:prose-invert max-w-none text-muted-foreground mb-10 whitespace-pre-wrap leading-relaxed font-medium">
-                    {product.description}
-                 </div>
+                 <div 
+                    className="prose prose-sm md:prose-base dark:prose-invert max-w-none text-muted-foreground mb-10 whitespace-pre-wrap leading-relaxed font-medium"
+                    dangerouslySetInnerHTML={{ __html: product.description }}
+                 />
                  
                  <div className="space-y-4 mb-10 bg-muted/30 p-6 rounded-2xl border border-border/50">
                     <div className="flex items-center gap-3 text-sm font-semibold text-foreground/80">

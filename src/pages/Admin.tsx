@@ -150,7 +150,7 @@ export default function Admin() {
             .map((row: any) => {
               const title = row.Name || row.name || row.Title || row.title || "Premium Service";
               const descRaw = row['Short description'] || row.Description || row.description || "D2C Scaling infrastructure.";
-              let description = descRaw.replace(/(<([^>]+)>)/gi, "").replace(/&nbsp;/g, " ").trim();
+              let description = descRaw.trim();
 
               const rawPrice = row['Regular price'] || row['Sale price'] || row.Price || row.price || "0";
               const price = parseFloat(rawPrice.toString().replace(/[^0-9.]/g, '')) || 0;
