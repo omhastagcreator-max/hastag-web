@@ -6,9 +6,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import Contact from "./pages/Contact.tsx";
 import NotFound from "./pages/NotFound.tsx";
-import ThankYou from "./pages/ThankYou.tsx";
-import ProposalGenerator from "./pages/ProposalGenerator.tsx";
 import Portfolio from "./pages/Portfolio.tsx";
+import ProductDetail from "./pages/ProductDetail.tsx";
 import Admin from "./pages/Admin.tsx";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
@@ -24,8 +23,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/portfolio" element={<Portfolio />} />
-          <Route path="/thank-you" element={<ThankYou />} />
-          <Route path="/proposal-generator" element={<ProposalGenerator />} />
+          <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
