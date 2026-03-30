@@ -8,6 +8,7 @@ import { supabase } from "@/lib/supabase";
 
 const fallbackServices = [
   {
+    id: "fallback-d2c",
     icon: MousePointerClick,
     title: "D2C-Performance Marketing (Meta Ads)",
     desc: "Surgical, ROAS-driven Meta & Instagram scaling. We treat your budget like our own.",
@@ -15,6 +16,7 @@ const fallbackServices = [
     color: "bg-blue-50 border-blue-100 text-blue-700",
   },
   {
+    id: "fallback-google",
     icon: Zap,
     title: "Google Ads Marketing",
     desc: "Capture high-intent traffic instantly and dominate the top of search.",
@@ -22,6 +24,7 @@ const fallbackServices = [
     color: "bg-green-50 border-green-100 text-green-700",
   },
   {
+    id: "fallback-web",
     icon: Layers,
     title: "Website Development",
     desc: "Lightning-fast, strictly CRO-optimized Shopify and custom-built E-com stores.",
@@ -29,6 +32,7 @@ const fallbackServices = [
     color: "bg-purple-50 border-purple-100 text-purple-700",
   },
   {
+    id: "fallback-influencer",
     icon: MessageSquare,
     title: "Influencer Marketing",
     desc: "Deploy our 20,000+ influencer network. End-to-end execution.",
@@ -36,6 +40,7 @@ const fallbackServices = [
     color: "bg-orange-50 border-orange-100 text-orange-700",
   },
   {
+    id: "fallback-ugc",
     icon: Video,
     title: "UGC Video Creation",
     desc: "Top-converting, raw TikTok & Reel style content. We have more than 200+ exclusive UGC Creators engineered to sell.",
@@ -43,6 +48,7 @@ const fallbackServices = [
     color: "bg-rose-50 border-rose-100 text-rose-700",
   },
   {
+    id: "fallback-podcast",
     icon: Mic,
     title: "Podcast Branding",
     desc: "In-video brand placements with top-tier podcasters.",
