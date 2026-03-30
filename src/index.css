@@ -60,10 +60,10 @@
     @apply border-border;
   }
   body {
-    @apply bg-secondary/20 text-foreground font-body antialiased flex justify-center;
+    @apply bg-secondary/20 text-foreground font-body antialiased flex justify-center p-2 sm:p-4 md:p-8;
   }
   #root {
-    @apply w-full max-w-[1440px] bg-background min-h-screen shadow-2xl relative overflow-x-hidden border-x border-border/40;
+    @apply w-full max-w-[1440px] bg-background min-h-screen shadow-2xl relative overflow-x-hidden border border-border/40 rounded-2xl sm:rounded-3xl;
   }
   h1, h2, h3 {
     @apply font-display font-bold tracking-tight;
