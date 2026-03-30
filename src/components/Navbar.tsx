@@ -139,7 +139,7 @@ const Navbar = () => {
               whileTap={{ scale: 0.95 }}
               className="bg-foreground text-background px-7 py-3 rounded-full text-xs uppercase tracking-widest font-extrabold ml-2"
             >
-              Get Started
+              Schedule a Call
             </motion.button>
           </Link>
         </div>
@@ -221,7 +221,7 @@ const Navbar = () => {
               <div className="mt-8 pt-6 border-t border-border">
                 <a href="/#audit-form" onClick={() => setOpen(false)} className="block">
                   <button className="w-full bg-foreground text-background px-6 py-4 rounded-full text-base font-bold shadow-xl">
-                    Get Started With #Creator Now
+                    Schedule a Call
                   </button>
                 </a>
               </div>

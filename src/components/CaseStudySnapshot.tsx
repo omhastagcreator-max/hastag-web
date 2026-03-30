@@ -197,7 +197,7 @@ const CaseStudySnapshot = () => {
                         whileTap={{ scale: 0.95 }}
                         className="w-full md:w-auto bg-primary hover:bg-primary-deep text-white px-8 py-3.5 rounded-full text-sm font-bold flex items-center justify-center gap-2 shadow-lg transition-all whitespace-nowrap"
                     >
-                        Get The Same Audit They Got <ArrowUpRight className="w-4 h-4" />
+                        Schedule a Call <ArrowUpRight className="w-4 h-4" />
                     </motion.button>
                 </a>
             </div>

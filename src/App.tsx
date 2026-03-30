@@ -6,12 +6,9 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import Services from "./pages/Services.tsx";
 import Contact from "./pages/Contact.tsx";
-import Careers from "./pages/Careers.tsx";
 import NotFound from "./pages/NotFound.tsx";
-import StarterPlan from "./pages/StarterPlan.tsx";
 import ThankYou from "./pages/ThankYou.tsx";
 import ProposalGenerator from "./pages/ProposalGenerator.tsx";
-import Internships from "./pages/Internships.tsx";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
 const queryClient = new QueryClient();
@@ -25,12 +22,8 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/services" element={<Services />} />
-          <Route path="/starter-plan" element={<StarterPlan />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/careers" element={<Careers />} />
           <Route path="/thank-you" element={<ThankYou />} />
           <Route path="/proposal-generator" element={<ProposalGenerator />} />
-          <Route path="/careers/internships" element={<Internships />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <WhatsAppButton />

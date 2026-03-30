@@ -39,7 +39,7 @@ const FounderSection = () => {
 
             <a href="/#audit-form">
               <button className="bg-primary hover:bg-primary-deep text-white px-8 py-3.5 rounded-full text-base font-bold shadow-lg transition-all hover:scale-105">
-                Book a Fast Consultation
+                Schedule a Call
               </button>
             </a>
           </motion.div>

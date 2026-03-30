@@ -18,7 +18,7 @@ const plans = [
     ],
     bestFor: "Focused lead generation",
     popular: false,
-    cta: "Get Started",
+    cta: "Schedule a Call",
   },
   {
     name: "Full E-com Store",
@@ -34,7 +34,7 @@ const plans = [
     ],
     bestFor: "New retail brands",
     popular: false,
-    cta: "Get Started",
+    cta: "Schedule a Call",
   },
   {
     name: "Meta Ads + Web",
@@ -51,7 +51,7 @@ const plans = [
     ],
     bestFor: "Growing local & D2C brands",
     popular: true,
-    cta: "Get Started",
+    cta: "Schedule a Call",
   },
   {
     name: "Omnichannel",
@@ -68,7 +68,7 @@ const plans = [
     ],
     bestFor: "Aggressive scaling",
     popular: false,
-    cta: "Let's Talk",
+    cta: "Schedule a Call",
   },
 ];
 
