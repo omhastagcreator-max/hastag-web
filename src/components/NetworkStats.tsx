@@ -75,18 +75,17 @@ const NetworkStats = () => {
           ))}
         </div>
 
-        {/* Portfolio CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center"
         >
-          <a href="https://hastagcreator.com/?page_id=14415" target="_blank" rel="noreferrer">
+          <Link to="/portfolio" className="inline-block">
             <button className="bg-white text-primary px-10 py-5 rounded-full text-lg font-bold shadow-[0_10px_40px_-5px_rgba(0,0,0,0.3)] hover:scale-105 transition-all duration-300 flex items-center gap-3 mx-auto uppercase tracking-widest border-2 border-transparent hover:border-primary/20">
               Check our Portfolio (Results)
             </button>
-          </a>
+          </Link>
         </motion.div>
 
       </div>

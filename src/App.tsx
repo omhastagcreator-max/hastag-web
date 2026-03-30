@@ -9,6 +9,8 @@ import Contact from "./pages/Contact.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import ThankYou from "./pages/ThankYou.tsx";
 import ProposalGenerator from "./pages/ProposalGenerator.tsx";
+import Portfolio from "./pages/Portfolio.tsx";
+import Products from "./pages/Products.tsx";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
 const queryClient = new QueryClient();
@@ -22,6 +24,9 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/products" element={<Products />} />
           <Route path="/thank-you" element={<ThankYou />} />
           <Route path="/proposal-generator" element={<ProposalGenerator />} />
           <Route path="*" element={<NotFound />} />

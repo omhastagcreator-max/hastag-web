@@ -5,31 +5,12 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
   { label: "Home", to: "/" },
+  { label: "Our Services", to: "/services" },
+  { label: "Portfolio", to: "/portfolio" },
+  { label: "Pro Tech Shop", to: "/products" },
   { 
-    label: "Website Development", to: "/services#web-dev", dropdown: [
-      { label: "Shopify", to: "/services#shopify" },
-      { label: "WordPress", to: "/services#wordpress" }
-    ]
-  },
-  { 
-    label: "Performance Marketing", to: "/services#perf-marketing", dropdown: [
-      { label: "Meta Ads", to: "/services#meta-ads" },
-      { label: "Google Ads", to: "/services#google-ads" }
-    ]
-  },
-  { 
-    label: "Influencer Marketing", to: "/services#influencer", dropdown: [
-      { label: "UGC", to: "/services#ugc" },
-      { label: "Instagram", to: "/services#instagram" },
-      { label: "Youtube", to: "/services#youtube" },
-      { label: "Podcast", to: "/services#podcast" },
-      { label: "Standup Comedians", to: "/services#standup" },
-      { label: "Celebrity Marketing", to: "/services#celebrity" },
-      { label: "IPL Players", to: "/services#ipl" }
-    ]
-  },
-  { 
-    label: "Our Polices", to: "#", dropdown: [
+    label: "Company Base", to: "#", dropdown: [
+      { label: "Contact Us", to: "/contact" },
       { label: "Privacy Policy", to: "/privacy-policy" },
       { label: "Terms & Conditions", to: "/terms" }
     ]
