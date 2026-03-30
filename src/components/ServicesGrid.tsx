@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Layers, MousePointerClick, Zap, MessageSquare, Video, Mic, LayoutGrid } from "lucide-react";
 import Papa from "papaparse";
 import { useRazorpay } from "react-razorpay";
+import { supabase } from "@/lib/supabase";
 
 const fallbackServices = [
   {
@@ -73,6 +74,41 @@ const ServicesGrid = () => {
   const { Razorpay } = useRazorpay();
 
   useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    try {
+       // 1. Fetch real-time from Supabase Headless CMS
+       const { data, error } = await supabase.from('products').select('*').order('created_at', { ascending: false });
+       
+       if (!error && data && data.length > 0) {
+          const parsed = data.map((row: any, i: number) => {
+             let desc = row.description || "D2C Scaling infrastructure.";
+             desc = desc.replace(/(<([^>]+)>)/gi, "").replace(/&nbsp;/g, " ").trim();
+             if (desc.length > 115) desc = desc.substring(0, 115) + "...";
+             
+             return {
+                icon: iconMap[i % iconMap.length],
+                image: row.image_url || null,
+                title: row.title || "Premium Service",
+                desc,
+                price: row.price || 0,
+                color: colorMap[i % colorMap.length],
+             };
+          });
+          setProducts(parsed);
+          return;
+       }
+    } catch (e) {
+       console.log("Supabase fetch failed, executing local csv fallback:", e);
+    }
+    
+    // 2. Fallback to PapaParse CSV if Supabase is totally empty
+    loadCsvFallback();
+  };
+
+  const loadCsvFallback = () => {
     fetch("/product.csv")
       .then((response) => {
         if (!response.ok) throw new Error("No product.csv found");
@@ -114,7 +150,7 @@ const ServicesGrid = () => {
         });
       })
       .catch((err) => console.log("Using native products arsenal due to missing CSV", err));
-  }, []);
+  };
 
   const handleCheckout = (p: any) => {
     if (p.price === 0) {
