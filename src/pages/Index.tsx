@@ -26,9 +26,11 @@ const Index = () => {
   const [bannerUrl, setBannerUrl] = useState("/banner.png");
 
   useEffect(() => {
-    supabase.from('site_media').select('image_url').eq('component_key', 'hero_banner').single()
-      .then(({data}) => { if (data?.image_url) setBannerUrl(data.image_url); })
-      .catch(() => {});
+    const fetchBanner = async () => {
+      const { data } = await supabase.from('site_media').select('image_url').eq('component_key', 'hero_banner').single();
+      if (data?.image_url) setBannerUrl(data.image_url);
+    };
+    fetchBanner();
   }, []);
 
   return (
