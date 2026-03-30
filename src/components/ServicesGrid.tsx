@@ -59,8 +59,17 @@ const colorMap = [
   "bg-indigo-50 border-indigo-100 text-indigo-700",
 ];
 
+type ServiceItem = {
+  icon: any;
+  title: string;
+  desc: string;
+  price: number;
+  color: string;
+  image?: string | null;
+};
+
 const ServicesGrid = () => {
-  const [products, setProducts] = useState(fallbackServices);
+  const [products, setProducts] = useState<ServiceItem[]>(fallbackServices);
   const { Razorpay } = useRazorpay();
 
   useEffect(() => {
@@ -78,14 +87,21 @@ const ServicesGrid = () => {
               .filter((row: any) => Object.keys(row).length > 1)
               .map((row: any, i) => {
                 const title = row.Name || row.name || row.Title || row.title || "Premium Service";
-                const desc = row['Short description'] || row.Description || row.description || "D2C Scaling infrastructure.";
+                const descRaw = row['Short description'] || row.Description || row.description || "D2C Scaling infrastructure.";
+                let desc = descRaw.replace(/(<([^>]+)>)/gi, "").replace(/&nbsp;/g, " ").trim();
+                if (desc.length > 115) desc = desc.substring(0, 115) + "...";
+
                 const rawPrice = row['Regular price'] || row['Sale price'] || row.Price || row.price || "0";
                 const price = parseFloat(rawPrice.toString().replace(/[^0-9.]/g, '')) || 0;
+
+                const rawImages = row.Images || row.images || row['Image URL'] || "";
+                const image = rawImages.split(',')[0]?.trim();
                 
                 return {
                   icon: iconMap[i % iconMap.length],
+                  image: image || null,
                   title,
-                  desc: desc.replace(/(<([^>]+)>)/gi, ""),
+                  desc,
                   price,
                   color: colorMap[i % colorMap.length],
                 };
@@ -125,7 +141,7 @@ const ServicesGrid = () => {
       },
     };
 
-    const rzp1 = new Razorpay(options);
+    const rzp1 = new Razorpay(options as any);
     rzp1.open();
   };
 
@@ -155,9 +171,15 @@ const ServicesGrid = () => {
               className={`group flex flex-col bg-card rounded-2xl p-6 border border-border shadow-sm hover:shadow-card-hover transition-all duration-300 relative overflow-hidden`}
             >
               <div className="flex-1 z-10">
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 shadow-sm ${service.color}`}>
-                  <Icon className="w-6 h-6" />
-                </div>
+                {service.image ? (
+                  <div className="w-full h-40 mb-5 rounded-xl overflow-hidden shadow-sm relative border border-border/50 bg-muted/20">
+                    <img src={service.image} alt={service.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  </div>
+                ) : (
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 shadow-sm ${service.color}`}>
+                    <Icon className="w-6 h-6" />
+                  </div>
+                )}
                 <h3 className="text-xl font-bold text-foreground mb-3 leading-tight tracking-tight">
                   {service.title}
                 </h3>
