@@ -9,6 +9,7 @@ import LeadForm from "@/components/LeadForm";
 import FAQ from "@/components/FAQ";
 import GoogleReviews from "@/components/GoogleReviews";
 import DashboardResultsSection from "@/components/DashboardResultsSection";
+import NetworkStats from "@/components/NetworkStats";
 import CaseStudySnapshot from "@/components/CaseStudySnapshot";
 import HowItWorks from "@/components/HowItWorks";
 import FounderSection from "@/components/FounderSection";
@@ -24,6 +25,7 @@ const Index = () => (
       <HowItWorks />
       <ServicesGrid />
       <DashboardResultsSection />
+      <NetworkStats />
       <WhatsAppTestimonials />
       <WhyChooseUs />
       <GoogleReviews />
