@@ -43,6 +43,15 @@ const HeroSection = () => {
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-400">ki Brand Banjaye.</span>
           </motion.h1>
 
+          <motion.h2
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
+            className="text-xl md:text-3xl font-black text-foreground uppercase tracking-widest mb-6 border border-border/50 bg-foreground/5 py-2 px-6 rounded-full inline-block"
+          >
+            Dhanda ROAS Pay Nahi, ROI Pay Challta Hain
+          </motion.h2>
+
           {/* Subheading */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -60,7 +69,7 @@ const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
             className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto"
           >
-            <a href="/#audit-form" className="w-full sm:w-auto">
+            <a href="https://calendly.com/" target="_blank" rel="noreferrer" className="w-full sm:w-auto">
               <button className="w-full sm:w-auto group relative flex items-center justify-center gap-3 bg-foreground text-background px-10 py-5 rounded-full text-lg font-bold shadow-[0_10px_40px_-10px_rgba(0,0,0,0.3)] hover:-translate-y-1 hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.4)] transition-all duration-300">
                 Schedule a Call
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -74,11 +83,11 @@ const HeroSection = () => {
             </Link>
           </motion.div>
 
-          {/* Social Proof Strip below CTA */}
-          <motion.div
-            initial={{ opacity: 0, blur: 10 }}
-            animate={{ opacity: 1, blur: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+        {/* Social Proof Strip below CTA */}
+        <motion.div
+          initial={{ opacity: 0, filter: "blur(10px)" }}
+          animate={{ opacity: 1, filter: "blur(0px)" }}
+          transition={{ duration: 0.8, delay: 0.6 }}
             className="mt-16 flex flex-wrap items-center justify-center gap-x-10 gap-y-6 pt-10 border-t border-border/60 w-full"
           >
             <div className="flex items-center gap-3">

@@ -1,7 +1,12 @@
 import { motion } from "framer-motion";
-import { Search, PenTool, Rocket } from "lucide-react";
+import { Search, PenTool, Rocket, PhoneCall } from "lucide-react";
 
 const steps = [
+  {
+    icon: PhoneCall,
+    title: "0. 45-Min Growth Counseling",
+    desc: "Before onboarding, we mandate a rigorous session discussing exactly 'How, When & Whom to sell' to validate if we can actually scale you.",
+  },
   {
     icon: Search,
     title: "1. The Forensic Audit",

@@ -3,18 +3,17 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const navLinks = [
+type NavLink = {
+  label: string;
+  to: string;
+  dropdown?: { label: string; to: string }[];
+};
+
+const navLinks: NavLink[] = [
   { label: "Home", to: "/" },
   { label: "Our Services", to: "/services" },
   { label: "Portfolio", to: "/portfolio" },
-  { label: "Pro Tech Shop", to: "/products" },
-  { 
-    label: "Company Base", to: "#", dropdown: [
-      { label: "Contact Us", to: "/contact" },
-      { label: "Privacy Policy", to: "/privacy-policy" },
-      { label: "Terms & Conditions", to: "/terms" }
-    ]
-  }
+  { label: "Pro Tech Shop", to: "/products" }
 ];
 
 const Navbar = () => {
@@ -51,7 +50,7 @@ const Navbar = () => {
       <div className="container-main flex items-center justify-between h-20 px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <Link to="/" className="flex items-center">
-          <img src="/HastagLogo.png" alt="HastagCreator Logo" className="h-12 w-auto drop-shadow-sm" />
+          <img src="/logo.png" alt="HastagCreator Logo" className="h-10 w-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.1)] transition-transform hover:scale-105" />
         </Link>
 
         {/* Desktop Nav */}
@@ -114,15 +113,16 @@ const Navbar = () => {
               )}
             </div>
           ))}
-          <Link to="/#audit-form">
+          {/* Calendly CTA Hook */}
+          <a href="https://calendly.com/" target="_blank" rel="noreferrer" className="hidden lg:block ml-2">
             <motion.button
               whileHover={{ scale: 1.05, boxShadow: "0 10px 30px -10px rgba(0,0,0,0.5)" }}
               whileTap={{ scale: 0.95 }}
-              className="bg-foreground text-background px-7 py-3 rounded-full text-xs uppercase tracking-widest font-extrabold ml-2"
+              className="bg-foreground text-background px-7 py-3 rounded-full text-xs uppercase tracking-widest font-extrabold"
             >
               Schedule a Call
             </motion.button>
-          </Link>
+          </a>
         </div>
 
         {/* Mobile toggle */}
@@ -200,8 +200,8 @@ const Navbar = () => {
                 </div>
               ))}
               <div className="mt-8 pt-6 border-t border-border">
-                <a href="/#audit-form" onClick={() => setOpen(false)} className="block">
-                  <button className="w-full bg-foreground text-background px-6 py-4 rounded-full text-base font-bold shadow-xl">
+                <a href="https://calendly.com/" target="_blank" rel="noreferrer" onClick={() => setOpen(false)} className="block">
+                  <button className="w-full bg-foreground text-background px-6 py-4 rounded-full text-base font-bold shadow-xl active:scale-95 transition-transform">
                     Schedule a Call
                   </button>
                 </a>

@@ -1,10 +1,15 @@
 import { useState, useEffect } from "react";
+// ADMIN NOTE: To sync automatically with your old WooCommerce site without exporting CSVs,
+// simply point a Node script or edge function to: `https://your-old-site.com/wp-json/wc/v3/products`
+// and save the JSON response to `public/products.json`, or fetch it directly here by replacing
+// `fetch("/products.csv")` with your WP REST API URL (assuming CORS allows it).
+
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import Papa from "papaparse";
-import useRazorpay from "react-razorpay";
-import { ShoppingCart } from "lucide-react";
+import { useRazorpay } from "react-razorpay";
+import { ShoppingCart, CalendarRange } from "lucide-react";
 
 interface Product {
   id: string;
@@ -114,7 +119,7 @@ const Products = () => {
               <p className="text-muted-foreground">Upload a products.csv to the public folder to see products here.</p>
             </div>
           ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
               {products.map((p, idx) => (
                 <motion.div
                   key={idx}
@@ -130,17 +135,26 @@ const Products = () => {
                       ₹{p.price.toLocaleString("en-IN")}
                     </div>
                   </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold mb-2 line-clamp-1">{p.name}</h3>
-                    <p className="text-sm text-muted-foreground mb-6 line-clamp-2 leading-relaxed">
-                      {p.description}
-                    </p>
-                    <button 
-                      onClick={() => handleCheckout(p)}
-                      className="w-full bg-primary/10 hover:bg-primary text-primary hover:text-white px-4 py-3 rounded-xl text-sm font-bold flex justify-center items-center gap-2 transition-colors border border-primary/20 hover:border-primary"
-                    >
-                      <ShoppingCart className="w-4 h-4" /> Buy Now
-                    </button>
+                  <div className="p-4 md:p-6 flex flex-col justify-between h-full">
+                    <div>
+                      <h3 className="text-sm md:text-xl font-bold mb-2 line-clamp-1">{p.name}</h3>
+                      <p className="text-xs md:text-sm text-muted-foreground mb-4 md:mb-6 line-clamp-2 leading-relaxed">
+                        {p.description}
+                      </p>
+                    </div>
+                    <div className="flex flex-col gap-2 mt-auto">
+                      <button 
+                        onClick={() => handleCheckout(p)}
+                        className="w-full bg-primary/10 hover:bg-primary text-primary hover:text-white px-3 md:px-4 py-2.5 md:py-3 rounded-lg md:rounded-xl text-xs md:text-sm font-bold flex justify-center items-center gap-2 transition-colors border border-primary/20 hover:border-primary"
+                      >
+                        <ShoppingCart className="w-3 h-3 md:w-4 md:h-4 shrink-0" /> Buy Now
+                      </button>
+                      <a href="https://calendly.com/" target="_blank" rel="noreferrer" className="w-full block">
+                        <button className="w-full bg-foreground hover:bg-foreground/90 text-background px-3 md:px-4 py-2.5 md:py-3 rounded-lg md:rounded-xl text-xs md:text-sm font-bold flex justify-center items-center gap-2 transition-colors">
+                          <CalendarRange className="w-3 h-3 md:w-4 md:h-4 shrink-0" /> Schedule Call
+                        </button>
+                      </a>
+                    </div>
                   </div>
                 </motion.div>
               ))}

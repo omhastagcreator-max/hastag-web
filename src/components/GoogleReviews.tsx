@@ -9,6 +9,7 @@ const reviews = [
     rating: 5,
     date: "1 month ago",
     image: "https://api.dicebear.com/7.x/initials/svg?seed=OU&backgroundColor=2563EB",
+    logo: "/Official Partners/amazon.png"
   },
   {
     name: "Rohan Khanna",
@@ -17,6 +18,7 @@ const reviews = [
     rating: 5,
     date: "2 months ago",
     image: "https://api.dicebear.com/7.x/initials/svg?seed=RK&backgroundColor=2563EB",
+    logo: "/Official Partners/meta.png"
   },
   {
     name: "Sneha Patel",
@@ -25,6 +27,7 @@ const reviews = [
     rating: 5,
     date: "3 weeks ago",
     image: "https://api.dicebear.com/7.x/initials/svg?seed=SP&backgroundColor=2563EB",
+    logo: "/Official Partners/sony.png"
   },
   {
     name: "Vikram Singh",
@@ -33,6 +36,7 @@ const reviews = [
     rating: 5,
     date: "2 months ago",
     image: "https://api.dicebear.com/7.x/initials/svg?seed=VS&backgroundColor=2563EB",
+    logo: "/Official Partners/apple.png"
   },
   {
     name: "Anjali Gupta",
@@ -41,6 +45,7 @@ const reviews = [
     rating: 5,
     date: "1 week ago",
     image: "https://api.dicebear.com/7.x/initials/svg?seed=AG&backgroundColor=2563EB",
+    logo: "/Official Partners/google.png"
   }
 ];
 
@@ -106,14 +111,18 @@ const GoogleReviews = () => {
                     />
                     <div>
                       <h4 className="font-bold text-foreground flex items-center gap-1.5 text-lg">
-                        {review.name} <BadgeCheck className="w-4 h-4 text-primary" />
+                        {review.name}
                       </h4>
                       <div className="flex items-center gap-2 text-xs text-muted-foreground mt-0.5">
+                        <span className="flex items-center gap-1 text-green-600 bg-green-50 px-1.5 py-0.5 rounded-sm font-bold border border-green-200">
+                          <BadgeCheck className="w-3 h-3" /> Verified Client
+                        </span>
+                        <span>•</span>
                         <span>{review.date}</span>
                       </div>
                     </div>
                   </div>
-                  <img src="/google-g.svg" alt="G" className="w-6 h-6 opacity-50 grayscale bg-white/10 rounded-full p-0.5" onError={(e) => (e.currentTarget.style.display = 'none')} />
+                  <img src={review.logo} alt="Brand" className="w-10 h-10 object-contain grayscale hover:grayscale-0 transition-opacity opacity-60" />
                 </div>
                 
                 <div className="flex text-yellow-500 mb-4 relative z-10">

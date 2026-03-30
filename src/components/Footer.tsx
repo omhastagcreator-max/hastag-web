@@ -34,9 +34,10 @@ const Footer = () => (
           <p className="text-sm text-charcoal-foreground/60 leading-relaxed">
             Leading India-based performance marketing agency. We deliver high ROI through Meta Ads, Google Ads, eCommerce store development, and CRO for global brands.
           </p>
-          <p className="mt-3 text-xs text-charcoal-foreground/40 font-semibold uppercase tracking-wider">
-            Registered Business
-          </p>
+          <div className="mt-6 flex items-center gap-4">
+            <img src="/msme-logo.png" alt="MSME Registered" className="h-10 w-auto bg-white rounded p-1 object-contain" />
+            <img src="/digital-india-logo.png" alt="Digital India" className="h-10 w-auto bg-white rounded p-1 object-contain" />
+          </div>
         </div>
 
         {/* Services */}
@@ -57,9 +58,9 @@ const Footer = () => (
           <h4 className="font-display text-sm font-bold mb-4 uppercase tracking-wider text-charcoal-foreground/80">Company</h4>
           <ul className="space-y-2 text-sm text-charcoal-foreground/60">
             <li><Link to="/" className="hover:text-primary transition-colors">Home</Link></li>
-            <li><Link to="/services" className="hover:text-primary transition-colors">Services</Link></li>
-            <li><Link to="/#why-us" className="hover:text-primary transition-colors">About</Link></li>
-            <li><a href="/#audit-form" className="hover:text-primary transition-colors">Contact</a></li>
+            <li><Link to="/portfolio" className="hover:text-primary transition-colors">Portfolio</Link></li>
+            <li><Link to="/privacy-policy" className="hover:text-primary transition-colors">Privacy Policy</Link></li>
+            <li><Link to="/terms" className="hover:text-primary transition-colors">Terms & Conditions</Link></li>
           </ul>
         </div>
 
