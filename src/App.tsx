@@ -12,6 +12,7 @@ import Admin from "./pages/Admin.tsx";
 import PrivacyPolicy from "./pages/PrivacyPolicy.tsx";
 import Terms from "./pages/Terms.tsx";
 import Services from "./pages/Services.tsx";
+import InfluencerUGC from "./pages/InfluencerUGC.tsx";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/services" element={<Services />} />
           <Route path="/product/:id" element={<ProductDetail />} />
+          <Route path="/influencer-ugc" element={<InfluencerUGC />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-and-conditions" element={<Terms />} />
           <Route path="/admin" element={<Admin />} />

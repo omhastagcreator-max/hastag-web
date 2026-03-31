@@ -29,10 +29,10 @@ const navLinks: NavLink[] = [
   },
   { 
     label: "Influencer Marketing", 
-    to: "/services",
+    to: "/influencer-ugc",
     dropdown: [
-      { label: "Creator Network Campaigns", to: "/services" },
-      { label: "Native UGC Production", to: "/services" },
+      { label: "Creator Network Campaigns", to: "/influencer-ugc" },
+      { label: "Native UGC Production", to: "/influencer-ugc" },
     ]
   },
   { 
