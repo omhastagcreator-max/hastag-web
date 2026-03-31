@@ -37,7 +37,7 @@ export default function Careers() {
               </h1>
               
               <p className="text-lg md:text-2xl text-muted-foreground font-medium max-w-3xl mx-auto leading-relaxed mb-12">
-                 We run HastagCreator like a tier-1 Silicon Valley tech company. No arbitrary rules, no office politics. Just infinite upside for elite talent that can generate measurable ROI.
+                 At HastagCreator, your growth trajectory is entirely in your hands. We foster a culture of rapid learning, aggressive skill acquisition, and relentless opportunity for those who deliver results.
               </p>
 
               <div className="flex justify-center gap-4">
@@ -50,34 +50,34 @@ export default function Careers() {
            </div>
         </div>
 
-        {/* Culture & Benefits (MNC Grade) */}
+        {/* Growth & Learning Ecosystem */}
         <div className="py-24 bg-secondary/30">
            <div className="container-main px-4 max-w-6xl">
               <div className="text-center mb-16">
-                 <h2 className="text-3xl md:text-5xl font-black mb-4">Enterprise Culture & Benefits.</h2>
-                 <p className="text-muted-foreground text-lg">We invest heavily into the physical and mental infrastructure required for you to perform.</p>
+                 <h2 className="text-3xl md:text-5xl font-black mb-4">Growth & Learning Ecosystem.</h2>
+                 <p className="text-muted-foreground text-lg">We invest heavily into your professional development. We don't want employees; we want masters of their craft.</p>
               </div>
 
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                 <div className="bg-card p-8 rounded-3xl border border-border shadow-sm">
-                    <Globe2 className="w-10 h-10 text-blue-500 mb-6" />
-                    <h3 className="text-xl font-bold mb-2">Remote First</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">Work from anywhere in the world. As long as your KPIs are hit and ROAS climbs, we do not care what timezone you are in.</p>
+                 <div className="bg-white/40 backdrop-blur-xl p-8 rounded-3xl border border-white/60 shadow-sm relative group hover:shadow-card-hover transition-all">
+                    <Globe2 className="w-10 h-10 text-primary mb-6 group-hover:scale-110 transition-transform" />
+                    <h3 className="text-xl font-bold mb-2">Mastery & Mentorship</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">Work directly alongside senior strategists who manage 8-figure ad spends. We accelerate your learning curve through daily immersion in high-stakes campaigns.</p>
                  </div>
-                 <div className="bg-card p-8 rounded-3xl border border-border shadow-sm">
-                    <Award className="w-10 h-10 text-yellow-500 mb-6" />
-                    <h3 className="text-xl font-bold mb-2">Uncapped Bonuses</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">Base salary is just the start. Our media buyers and strategists unlock massive quarterly profit-sharing based on client revenue milestones.</p>
+                 <div className="bg-white/40 backdrop-blur-xl p-8 rounded-3xl border border-white/60 shadow-sm relative group hover:shadow-card-hover transition-all">
+                    <Award className="w-10 h-10 text-primary mb-6 group-hover:scale-110 transition-transform" />
+                    <h3 className="text-xl font-bold mb-2">Aggressive Skilling</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">We don't do busywork. You will be put on the frontlines of complex projects designed to force rapid professional development and elite technical problem-solving.</p>
                  </div>
-                 <div className="bg-card p-8 rounded-3xl border border-border shadow-sm">
-                    <Heart className="w-10 h-10 text-red-500 mb-6" />
-                    <h3 className="text-xl font-bold mb-2">Deep Healthcare</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">Comprehensive private medical insurance for you and your direct dependents, effective from day 30 of full-time employment.</p>
+                 <div className="bg-white/40 backdrop-blur-xl p-8 rounded-3xl border border-white/60 shadow-sm relative group hover:shadow-card-hover transition-all">
+                    <Heart className="w-10 h-10 text-primary mb-6 group-hover:scale-110 transition-transform" />
+                    <h3 className="text-xl font-bold mb-2">Merit-Based Path</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">Your professional trajectory is purely determined by your performance. We fast-track those who continuously upskill and demonstrate a hunger for executing.</p>
                  </div>
-                 <div className="bg-card p-8 rounded-3xl border border-border shadow-sm">
-                    <Cpu className="w-10 h-10 text-emerald-500 mb-6" />
-                    <h3 className="text-xl font-bold mb-2">Tech Stipend</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">Every team member receives a ₹1.5L annual budget to upgrade their home-office setup, purchase Apple hardware, or buy courses.</p>
+                 <div className="bg-white/40 backdrop-blur-xl p-8 rounded-3xl border border-white/60 shadow-sm relative group hover:shadow-card-hover transition-all">
+                    <Cpu className="w-10 h-10 text-primary mb-6 group-hover:scale-110 transition-transform" />
+                    <h3 className="text-xl font-bold mb-2">Cutting-Edge Stack</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">Access exclusive, proprietary frameworks and the absolute cutting-edge tools defining modern performance marketing. Stay miles ahead of industry standards.</p>
                  </div>
               </div>
            </div>
