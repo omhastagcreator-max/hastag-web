@@ -70,10 +70,10 @@ export default function InfluencerUGC() {
                  Asli Content Engine
               </span>
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight mb-6 max-w-4xl mx-auto leading-tight">
-                Scroll Rokne Wale <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-500">UGC Hooks.</span>
+                Scroll-Stopping <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-500">UGC Hooks.</span>
               </h1>
               <p className="text-muted-foreground font-medium text-lg md:text-xl max-w-2xl mx-auto">
-                 Hum aise 9:16 vertical videos banate hain jo user ko rukne aur khareedne par majboor kar dete hain. Koi bekar ki dancing nahi. Sirf sales.
+                 We create 9:16 vertical videos that force the user to stop scrolling and buy. No useless dancing. Just purely sales-driven content.
               </p>
            </div>
         </div>
@@ -84,20 +84,20 @@ export default function InfluencerUGC() {
               <div className="bg-card border border-border/50 rounded-3xl overflow-hidden shadow-2xl">
                  <div className="grid md:grid-cols-2">
                     <div className="p-10 md:p-16 bg-red-500/5 relative overflow-hidden">
-                       <span className="text-red-500 font-black tracking-widest uppercase text-xs mb-4 block">Problem</span>
-                       <h3 className="text-3xl font-black mb-4">Aap Dancing ke paise de rahe ho.</h3>
+                       <span className="text-red-500 font-black tracking-widest uppercase text-xs mb-4 block">The Problem</span>
+                       <h3 className="text-3xl font-black mb-4">You are paying for Dancing.</h3>
                        <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-                          90% Influencer campaigns fail hote hain kyunki brands sirf "views" aur "reach" wali models ko paise dete hain. 
-                          Trending gaane pe ek sundar reel se aapko 1 lakh views mil jayenge par <strong className="text-foreground">zero sales.</strong> 
-                          Ise bolte hain paisa jalaana.
+                          90% of Influencer campaigns fail because brands pay models just for "reach" and "views". 
+                          A pretty reel on a trending audio gets you 1 lakh views but <strong className="text-foreground">zero sales.</strong> 
+                          This is literally burning money.
                        </p>
                     </div>
                     <div className="p-10 md:p-16 bg-emerald-500/5 relative overflow-hidden border-t md:border-t-0 md:border-l border-border/50">
-                       <span className="text-emerald-500 font-black tracking-widest uppercase text-xs mb-4 block">Solution</span>
-                       <h3 className="text-3xl font-black mb-4">Hum Sales ki script likhte hain.</h3>
+                       <span className="text-emerald-500 font-black tracking-widest uppercase text-xs mb-4 block">The Solution</span>
+                       <h3 className="text-3xl font-black mb-4">We engineer Sales Scripts.</h3>
                        <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-                          Hamare creators dance nahi karte. Wo actual sales-script bolte hain. 
-                          Hum <strong className="text-foreground">Scroll rokne wale Hooks</strong> banate hain, customer ki dikkat batate hain, aur usko seedha "Buy Now" dabane par majboor karte hain Meta aur TikTok Ads par.
+                          Our creators don't dance. They execute actual direct-response sales scripts. 
+                          We write exact <strong className="text-foreground">Scroll-Stopping Hooks</strong>, hit the customer's exact pain point, and force them to click "Buy Now" on your Meta Ads. *Paisa Vasool* marketing.
                        </p>
                     </div>
                  </div>
@@ -105,27 +105,27 @@ export default function InfluencerUGC() {
 
               {/* Hook Anatomy */}
               <div className="mt-16 text-center max-w-4xl mx-auto">
-                 <h3 className="text-2xl font-black mb-8">Ek Million-Dollar Ad ki banawat:</h3>
+                 <h3 className="text-2xl font-black mb-8">Anatomy of a Million-Dollar Ad:</h3>
                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-left">
                     <div className="bg-secondary/40 p-5 rounded-2xl border border-border">
                        <span className="text-primary font-black text-xs mb-1 block">0-3s</span>
-                       <h4 className="font-bold text-[15px] mb-2">Pehla Jhatka (Hook)</h4>
-                       <p className="text-xs text-muted-foreground">Thumb ruk gya. Aisa visual jo user ko scroll karne hi na de.</p>
+                       <h4 className="font-bold text-[15px] mb-2">The Visual Hook</h4>
+                       <p className="text-xs text-muted-foreground">Stop the thumb. A strong visual that doesn't let the user scroll past.</p>
                     </div>
                     <div className="bg-secondary/40 p-5 rounded-2xl border border-border">
                        <span className="text-primary font-black text-xs mb-1 block">3-8s</span>
-                       <h4 className="font-bold text-[15px] mb-2">Uska Dard</h4>
-                       <p className="text-xs text-muted-foreground">Bol ke batana ki customer kis problem se pareshan hai.</p>
+                       <h4 className="font-bold text-[15px] mb-2">Pain Agitation</h4>
+                       <p className="text-xs text-muted-foreground">Verbally hitting the exact problem the customer is facing.</p>
                     </div>
                     <div className="bg-secondary/40 p-5 rounded-2xl border border-border">
                        <span className="text-primary font-black text-xs mb-1 block">8-20s</span>
-                       <h4 className="font-bold text-[15px] mb-2">Samadhan (Solution)</h4>
-                       <p className="text-xs text-muted-foreground">Kyun aapka product is market mein sabse alag aur sasta hai.</p>
+                       <h4 className="font-bold text-[15px] mb-2">The Mechanism</h4>
+                       <p className="text-xs text-muted-foreground">Explaining why your product is the best and cheapest solution.</p>
                     </div>
                     <div className="bg-secondary/40 p-5 rounded-2xl border border-border bg-primary/5 border-primary/20">
                        <span className="text-primary font-black text-xs mb-1 block">20-25s</span>
-                       <h4 className="font-bold text-[15px] mb-2">Action Lo (CTA)</h4>
-                       <p className="text-xs text-muted-foreground">Seedha order ki instruction dena: "Neeche button dabo".</p>
+                       <h4 className="font-bold text-[15px] mb-2">Direct Action (CTA)</h4>
+                       <p className="text-xs text-muted-foreground">Clear instruction telling them to click the link below.</p>
                     </div>
                  </div>
               </div>
