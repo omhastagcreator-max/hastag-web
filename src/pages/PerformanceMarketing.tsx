@@ -30,12 +30,12 @@ export default function PerformanceMarketing() {
               </span>
               
               <h1 className="text-4xl md:text-6xl lg:text-[5rem] font-black tracking-tighter mb-8 leading-[1.05] text-foreground">
-                 Stop paying for followers. <br className="hidden md:block" />
-                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-500">Start paying for Revenue.</span>
+                 Vanity metrics bhool jao. <br className="hidden md:block" />
+                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-500">Hum asli dhandhe ki baat karte hain.</span>
               </h1>
               
               <p className="text-lg md:text-2xl text-muted-foreground font-medium max-w-3xl mx-auto leading-relaxed mb-12">
-                 We are not a traditional marketing agency. We do not care about "vanity metrics" or "brand awareness" if it doesn't print cash. We are ruthless ROAS engineers deploying mathematical precision across <strong className="text-foreground">Meta & Google.</strong>
+                 Hum koi normal "marketing agency" nahi hain. Humein "brand awareness" ya "likes" se koi farq nahi padta agar woh aapke bank account mein paise na laayein. Hum purely math pe khelte hain aur sirf <strong className="text-foreground">Meta & Google</strong> pe ROAS scale karte hain.
               </p>
 
               <div className="flex flex-col sm:flex-row justify-center gap-4">
@@ -56,22 +56,22 @@ export default function PerformanceMarketing() {
                     <div className="w-14 h-14 bg-red-500/10 text-red-500 rounded-2xl flex items-center justify-center mb-6">
                        <Zap className="w-8 h-8" />
                     </div>
-                    <h3 className="text-2xl font-black mb-3">Aggressive Testing</h3>
-                    <p className="text-muted-foreground font-medium leading-relaxed">We launch 50+ creative angles a month. The winners get scaled violently. The losers are killed in 24 hours to protect your capital.</p>
+                    <h3 className="text-2xl font-black mb-3">Roz Nayi Testing</h3>
+                    <p className="text-muted-foreground font-medium leading-relaxed">Hum mahine ke 50 se zyada ads test karte hain. Jo chalte hain, unpe paisa badhate hain. Jo fail hote hain, unhe 24 ghante mein band kar dete hain taaki aapka paisa bache.</p>
                  </motion.div>
                  <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="bg-card p-8 rounded-3xl border border-border">
                     <div className="w-14 h-14 bg-blue-500/10 text-blue-500 rounded-2xl flex items-center justify-center mb-6">
                        <Target className="w-8 h-8" />
                     </div>
-                    <h3 className="text-2xl font-black mb-3">Platform AI Mastery</h3>
-                    <p className="text-muted-foreground font-medium leading-relaxed">We feed Meta and Google's machine learning algorithms exactly the conversion data they need to hunt down your highest LTV buyers.</p>
+                    <h3 className="text-2xl font-black mb-3">AI Ki Taqat</h3>
+                    <p className="text-muted-foreground font-medium leading-relaxed">Hum Meta aur Google ko strictly wahi data bhejte hain jo dikhata hai ki actual sales banne ka pattern kya hai, taaki woh aur buyers automatically dhoondh lein.</p>
                  </motion.div>
                  <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="bg-card p-8 rounded-3xl border border-border">
                     <div className="w-14 h-14 bg-green-500/10 text-green-500 rounded-2xl flex items-center justify-center mb-6">
                        <Activity className="w-8 h-8" />
                     </div>
-                    <h3 className="text-2xl font-black mb-3">Profit-Margin Tracking</h3>
-                    <p className="text-muted-foreground font-medium leading-relaxed">We track everything back to contribution margin. If an ad campaign isn't mathematically profitable post-COGS, it's irrelevant.</p>
+                    <h3 className="text-2xl font-black mb-3">Sirf Profit Pe Nazar</h3>
+                    <p className="text-muted-foreground font-medium leading-relaxed">Paisa lagaane se pehle hum saara margin calculate karte hain. Agar ad net-profitable nahi hone wali, toh usko lauch hi nahi karte.</p>
                  </motion.div>
               </div>
            </div>
@@ -82,29 +82,29 @@ export default function PerformanceMarketing() {
            <div className="container-main px-4 max-w-5xl">
               <div className="flex flex-col md:flex-row-reverse items-center gap-16">
                  <div className="w-full md:w-1/2">
-                    <span className="text-emerald-500 font-bold tracking-widest uppercase text-sm mb-4 block">Unit Economics</span>
-                    <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight">Marketing is dead.  We do Contribution Margin Math.</h2>
+                    <span className="text-emerald-500 font-bold tracking-widest uppercase text-sm mb-4 block">Asli Business Math</span>
+                    <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight">CPA giraao, Repeat Sales badhao. Yahi game hai.</h2>
                     <p className="text-muted-foreground text-lg mb-6 leading-relaxed">
-                       If an agency is reporting on "Clicks", "Reach", or "Engagement", fire them immediately. We only care about two numbers: Customer Acquisition Cost (CAC) and Lifetime Value (LTV).
+                       Agar koi agency aapko "Likes" aur "Reach" ki report dikha rahi hai, toh turant unhe chhod do. Hum sirf do numbers dekhte hain: Customer laane ka kharcha (CAC) aur Lifetime usne kitna diya (LTV).
                     </p>
                     <p className="text-muted-foreground text-lg font-medium leading-relaxed">
-                       We calculate your exact gross margins and COGS before we spend a single rupee. Every ad campaign we launch is mathematically engineered to be net-profitable from day one.
+                       Ek naya gaahak lane ki cost se zyada badi cheez ye hai ki wo gaahak wapis aake khareedega ya nahi. Hum pura equation set karte hain.
                     </p>
                  </div>
                  <div className="w-full md:w-1/2 relative">
                     <div className="absolute inset-0 bg-emerald-500/20 blur-3xl rounded-full"></div>
                     <div className="bg-card p-8 rounded-3xl border border-border/50 shadow-2xl relative z-10 flex flex-col gap-6">
                        <div className="flex items-center justify-between border-b border-border/50 pb-4">
-                          <span className="text-muted-foreground font-bold">Standard Agency Goal</span>
-                          <span className="text-red-400 font-black">"Lower the CPM"</span>
+                          <span className="text-muted-foreground font-bold">Bachon Wali Agencies</span>
+                          <span className="text-red-400 font-black">"Sasti Clicks Lao"</span>
                        </div>
                        <div className="flex items-center justify-between border-b border-border/50 pb-4">
-                          <span className="text-muted-foreground font-bold">HastagCreator Goal</span>
-                          <span className="text-emerald-400 font-black">"Maximum Net Profit"</span>
+                          <span className="text-muted-foreground font-bold">HastagCreator Ki Soch</span>
+                          <span className="text-emerald-400 font-black">"Maximum Net Profit (Paisa)"</span>
                        </div>
                        <div className="bg-primary/5 p-4 rounded-xl border border-primary/20">
-                          <p className="text-sm font-medium mb-2 text-primary">The Winning Formula:</p>
-                          <p className="text-xl font-black tracking-tight">(AOV * Repurchase Rate) &gt; (CAC + COGS)</p>
+                          <p className="text-sm font-medium mb-2 text-primary">Crorepati Formula (Asli Game):</p>
+                          <p className="text-xl font-black tracking-tight">(Order Value * Wapis Aana) &gt; (Ad Kharcha + Product Kharcha)</p>
                        </div>
                     </div>
                  </div>
@@ -115,27 +115,27 @@ export default function PerformanceMarketing() {
         {/* The AI Feedback Loop Section */}
         <div className="py-24 bg-background">
            <div className="container-main px-4 max-w-5xl text-center">
-              <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">Algorithmic Training</span>
-              <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight">We train Meta's AI to hunt for you.</h2>
+              <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">Facebook ko Sikhana</span>
+              <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight">Hum Facebook ke algorithm ko chalate hain, wo humein nahi.</h2>
               <p className="text-muted-foreground text-lg max-w-3xl mx-auto mb-16 leading-relaxed">
-                 We don't "guess" targeting anymore. We implement advanced server-side tracking (CAPI) that feeds strictly High-LTV purchase data directly into the cerebral cortex of Meta and Google's machine learning, forcing them to find clones of your absolute best customers.
+                 Hum aankh band karke ad nahi chalate. Hum 'tuka' nahi maarte. Hume pata hai aapka best, mehenga samaan khareedne wala customer kaisa dikhta hai, aur hum Facebook ko wohi exact data bhejte hain taaki woh aise hi logon ko dhoondhe.
               </p>
 
               <div className="grid md:grid-cols-3 gap-6 text-left">
                  <div className="bg-card border border-border/50 p-6 rounded-2xl relative overflow-hidden group">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl group-hover:bg-blue-500/20 transition-all"></div>
-                    <h4 className="text-xl font-bold mb-2">1. Data Injection</h4>
-                    <p className="text-sm text-muted-foreground relative z-10">We pass robust offline conversion events avoiding iOS14 signal loss entirely.</p>
+                    <h4 className="text-xl font-bold mb-2">1. The "Signal"</h4>
+                    <p className="text-sm text-muted-foreground relative z-10">iOS updates ki wajah se platform track nahi kar pata, isliye hum technically data directly seedha piche se (server-side) bhejte hain.</p>
                  </div>
                  <div className="bg-card border border-border/50 p-6 rounded-2xl relative overflow-hidden group">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 rounded-full blur-2xl group-hover:bg-purple-500/20 transition-all"></div>
-                    <h4 className="text-xl font-bold mb-2">2. Pattern Recognition</h4>
-                    <p className="text-sm text-muted-foreground relative z-10">The platforms analyze 10,000+ data points of your buyers to build a predictive LTV model.</p>
+                    <h4 className="text-xl font-bold mb-2">2. Pattern Pakadna</h4>
+                    <p className="text-sm text-muted-foreground relative z-10">Meta ka system samajh jata hai ki kin logon ne aapki site se actually "Buy Now" kiya hai, na ki sirf dekhne aaye hain.</p>
                  </div>
                  <div className="bg-card border border-border/50 p-6 rounded-2xl relative overflow-hidden group">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition-all"></div>
                     <h4 className="text-xl font-bold mb-2">3. Aggressive Scaling</h4>
-                    <p className="text-sm text-muted-foreground relative z-10">Once the machine learns the pattern, we uncap budgets and scale your revenue vertically.</p>
+                    <p className="text-sm text-muted-foreground relative z-10">Jaise hi Facebook ko recipe samajh aa jaati hai, hum budget heavily badhate hain aur sales ko scale karte hain.</p>
                  </div>
               </div>
            </div>

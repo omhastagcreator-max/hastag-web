@@ -31,12 +31,12 @@ export default function WebDevelopment() {
               </span>
               
               <h1 className="text-4xl md:text-6xl lg:text-[5rem] font-black tracking-tighter mb-8 leading-[1.05] text-foreground">
-                 A 5th grader can build a website. <br className="hidden md:block" />
-                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500">We build Conversion Systems.</span>
+                 Ek 5th class ka bacha bhi <br className="hidden md:block" /> website bana sakta hai. <br className="hidden md:block" />
+                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500">Hum Conversion Machines banate hain.</span>
               </h1>
               
               <p className="text-lg md:text-2xl text-muted-foreground font-medium max-w-3xl mx-auto leading-relaxed mb-12">
-                 Driving traffic is only <strong className="text-foreground">50% of the battle.</strong> If your website isn't engineered around consumer psychology, heatmaps, and frictionless checkouts, you are violently burning your ad budget.
+                 Ads chala ke traffic laana toh sirf <strong className="text-foreground">aadha game hai.</strong> Agar aapki website customer ka bharosa nahi jeet sakti aur unse turant payment nahi nikalva sakti, toh aap literally apna ad budget jalaa rahe ho.
               </p>
 
               <div className="flex flex-col sm:flex-row justify-center gap-4">
@@ -57,22 +57,22 @@ export default function WebDevelopment() {
                     <div className="w-14 h-14 bg-red-500/10 text-red-500 rounded-2xl flex items-center justify-center mb-6">
                        <LineChart className="w-8 h-8 rotate-180" />
                     </div>
-                    <h3 className="text-2xl font-black mb-3">The Bounce Rate Trap</h3>
-                    <p className="text-muted-foreground font-medium leading-relaxed">Cheap websites load in 4 seconds. By second 3, 53% of mobile users have already left. We engineer sub-second load times.</p>
+                    <h3 className="text-2xl font-black mb-3">Slow Speed = No Sales</h3>
+                    <p className="text-muted-foreground font-medium leading-relaxed">Agar 3 second mein website load nahi hui, toh customer back daba ke nikal jayega. Hum itni fast websites banate hain ki customer ko sochne ka mauka hi na mile.</p>
                  </motion.div>
                  <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="bg-card p-8 rounded-3xl border border-border">
                     <div className="w-14 h-14 bg-blue-500/10 text-blue-500 rounded-2xl flex items-center justify-center mb-6">
                        <ShieldCheck className="w-8 h-8" />
                     </div>
-                    <h3 className="text-2xl font-black mb-3">Trust Anchoring</h3>
-                    <p className="text-muted-foreground font-medium leading-relaxed">Lack of social proof and poor payment architecture kills carts. We build subconscious trust from the exact second they land.</p>
+                    <h3 className="text-2xl font-black mb-3">Trust (Bharosa)</h3>
+                    <p className="text-muted-foreground font-medium leading-relaxed">Customer sasta nahi, "safe" dhundta hai. Hum pehle second se usko feel karate hain ki aap ek proper brand ho. Reviews, badging, aur security - sab perfect.</p>
                  </motion.div>
                  <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="bg-card p-8 rounded-3xl border border-border">
                     <div className="w-14 h-14 bg-primary/10 text-primary rounded-2xl flex items-center justify-center mb-6">
                        <Code2 className="w-8 h-8" />
                     </div>
-                    <h3 className="text-2xl font-black mb-3">Conversion UI/UX</h3>
-                    <p className="text-muted-foreground font-medium leading-relaxed">We don't pick pretty colors. We map user journeys using exact heatmaps to guide the mouse directly to the 'Buy Now' button.</p>
+                    <h3 className="text-2xl font-black mb-3">"Buy Now" UI/UX</h3>
+                    <p className="text-muted-foreground font-medium leading-relaxed">Hum sirf sundar colors nahi chunte. Hum website aisi design karte hain ki customer ki ungli automatically 'Buy Now' button par chali jaye.</p>
                  </motion.div>
               </div>
            </div>
@@ -83,35 +83,35 @@ export default function WebDevelopment() {
            <div className="container-main px-4 max-w-5xl">
               <div className="flex flex-col md:flex-row items-center gap-16">
                  <div className="w-full md:w-1/2">
-                    <span className="text-red-500 font-bold tracking-widest uppercase text-sm mb-4 block">The Industry Dirty Secret</span>
-                    <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight">You don't have a traffic problem. You have a bucket problem.</h2>
+                    <span className="text-red-500 font-bold tracking-widest uppercase text-sm mb-4 block">Ek Kadvi Sachai (A Bitter Truth)</span>
+                    <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight">Aapki problem traffic nahi hai. Aapki problem ek "Leak" karti hui balti hai.</h2>
                     <p className="text-muted-foreground text-lg mb-6 leading-relaxed">
-                       Most founders burn 80% of their operational budget on Meta Ads driving hyper-targeted traffic to a generic Shopify template that looks pretty but bleeds conversions at every step of the funnel.
+                       Zyadatar founders Meta Ads pe lakhon rupe kharach karte hain aise logon ko lane ke liye, jo ek sasti bani hui website se bina khareede wapis chale jaate hain. Aap apna mehanga traffic ek tooti hui balti mein daal rahe ho.
                     </p>
                     <p className="text-muted-foreground text-lg font-medium leading-relaxed">
-                       Pouring ad-spend into a website with a 1.2% Conversion Rate is literally setting cash on fire. We fix the leaks first.
+                       Agar aapki website ka Conversion Rate (CVR) 1.2% hai, toh aap ads ka paisa waste kar rahe ho. Hum pehle balti ka har ek leak theek karte hain!
                     </p>
                  </div>
                  <div className="w-full md:w-1/2 relative">
                     <div className="absolute inset-0 bg-red-500/20 blur-3xl rounded-full"></div>
                     <div className="bg-card p-8 rounded-3xl border border-border/50 shadow-2xl relative z-10">
-                       <h3 className="text-xl font-bold mb-6 text-center border-b border-border/50 pb-4">The Mathematics of CRO</h3>
+                       <h3 className="text-xl font-bold mb-6 text-center border-b border-border/50 pb-4">Real Dhanda Math (CRO ki taqat)</h3>
                        <div className="space-y-4 font-mono text-sm">
                           <div className="flex justify-between items-center text-red-400">
-                             <span>Traffic (₹100k Ad Spend)</span>
-                             <span>10,000 Clicks</span>
+                             <span>Kharcha (₹100k Ad Spend)</span>
+                             <span>10,000 Visitors aaye</span>
                           </div>
                           <div className="flex justify-between items-center text-muted-foreground">
-                             <span>Standard CVR (1.2%)</span>
-                             <span>120 Sales</span>
+                             <span>Normal Agency ki Website (1.2%)</span>
+                             <span>Sirf 120 Sales</span>
                           </div>
                           <div className="h-px bg-border my-2"></div>
                           <div className="flex justify-between items-center text-emerald-400 font-bold text-base">
-                             <span>HastagCreator CVR (3.5%)</span>
-                             <span>350 Sales</span>
+                             <span>HastagCreator ki Website (3.5%)</span>
+                             <span>Seedhi 350 Sales</span>
                           </div>
                           <div className="mt-6 text-center text-muted-foreground text-xs italic">
-                             *Exact same ad spend. 290% increase in pure net revenue simply by engineering a better destination.*
+                             *Ad spend bilkul same hai. Magar website sahi hote hi revenue seedha 3 guna zyada!*
                           </div>
                        </div>
                     </div>
@@ -124,39 +124,39 @@ export default function WebDevelopment() {
         <div className="py-24 bg-background">
            <div className="container-main px-4 max-w-5xl">
               <div className="text-center mb-16">
-                 <h2 className="text-3xl md:text-5xl font-black mb-4 tracking-tight">A 5th Grader vs HastagCreator</h2>
-                 <p className="text-muted-foreground text-lg">Why "cheaper" developers actually cost you millions in lost revenue.</p>
+                 <h2 className="text-3xl md:text-5xl font-black mb-4 tracking-tight">"Sasta" vs "HastagCreator"</h2>
+                 <p className="text-muted-foreground text-lg">Kyun saste freelancers aakhri mein aapka lakho ka nuksaan karate hain.</p>
               </div>
 
               <div className="overflow-x-auto">
                  <table className="w-full text-left border-collapse">
                     <thead>
                        <tr>
-                          <th className="p-6 border-b border-border/50 text-muted-foreground font-bold w-1/3 text-xl">The Feature</th>
-                          <th className="p-6 border-b border-border/50 bg-red-500/5 text-red-500 font-black w-1/3 text-center rounded-tl-2xl">A Generic Agency / Freelancer</th>
-                          <th className="p-6 border-b border-border/50 bg-primary/10 text-primary font-black w-1/3 text-center rounded-tr-2xl">HastagCreator Infrastructure</th>
+                          <th className="p-6 border-b border-border/50 text-muted-foreground font-bold w-1/3 text-xl">The Difference</th>
+                          <th className="p-6 border-b border-border/50 bg-red-500/5 text-red-500 font-black w-1/3 text-center rounded-tl-2xl">Generic Bacha / Freelancer</th>
+                          <th className="p-6 border-b border-border/50 bg-primary/10 text-primary font-black w-1/3 text-center rounded-tr-2xl">HastagCreator System</th>
                        </tr>
                     </thead>
                     <tbody className="font-medium">
                        <tr>
-                          <td className="p-6 border-b border-border/50">Speed & Architecture</td>
-                          <td className="p-6 border-b border-border/50 bg-red-500/5 text-center text-muted-foreground">Bloated 4-second load times. Loss of mobile traffic.</td>
-                          <td className="p-6 border-b border-border/50 bg-primary/5 text-center font-bold text-foreground">Pre-fetched routing. Sub 1.2s loading metrics globally.</td>
+                          <td className="p-6 border-b border-border/50">Website Loading Speed</td>
+                          <td className="p-6 border-b border-border/50 bg-red-500/5 text-center text-muted-foreground">Website dhire load hoti hai. Aadha traffic gayab.</td>
+                          <td className="p-6 border-b border-border/50 bg-primary/5 text-center font-bold text-foreground">Aankh jhapakte hi khulti hai. 1 second se bhi fast.</td>
                        </tr>
                        <tr>
-                          <td className="p-6 border-b border-border/50">Design Philosophy</td>
-                          <td className="p-6 border-b border-border/50 bg-red-500/5 text-center text-muted-foreground">"Make it look pretty." Generic layouts based on CEO feelings.</td>
-                          <td className="p-6 border-b border-border/50 bg-primary/5 text-center font-bold text-foreground">A/B Tested Heatmaps. UI elements engineered strictly from buyer psychology.</td>
+                          <td className="p-6 border-b border-border/50">Design Ka Logic</td>
+                          <td className="p-6 border-b border-border/50 bg-red-500/5 text-center text-muted-foreground">"Bhaiya jo sundar lagta hai waisa bana diya."</td>
+                          <td className="p-6 border-b border-border/50 bg-primary/5 text-center font-bold text-foreground">Log kahan click kar rahe hain, is psychology pe design based hoti hai.</td>
                        </tr>
                        <tr>
-                          <td className="p-6 border-b border-border/50">Checkout Friction</td>
-                          <td className="p-6 border-b border-border/50 bg-red-500/5 text-center text-muted-foreground">Standard 4-step Shopify cart causing 60% drop-offs.</td>
-                          <td className="p-6 border-b border-border/50 bg-primary/5 text-center font-bold text-foreground">Frictionless 1-page checkouts with embedded trust anchoring protocols.</td>
+                          <td className="p-6 border-b border-border/50">Checkout Payment Step</td>
+                          <td className="p-6 border-b border-border/50 bg-red-500/5 text-center text-muted-foreground">Har cheez bharne mein lamba time. Adhe log cart chhod dete hain.</td>
+                          <td className="p-6 border-b border-border/50 bg-primary/5 text-center font-bold text-foreground">Smooth, 1-page checkout jisse log bina soche turant pay karein.</td>
                        </tr>
                        <tr>
-                          <td className="p-6 border-b border-border/50">Average Order Value (AOV)</td>
-                          <td className="p-6 border-b border-border/50 bg-red-500/5 text-center text-muted-foreground">None to little. Hoping the customer buys more manually.</td>
-                          <td className="p-6 border-b border-border/50 bg-primary/10 text-center font-black text-primary rounded-br-2xl text-[15px]">Algorithmic Post-Purchase 1-Click Upsells pushing AOV up by 22% instantly.</td>
+                          <td className="p-6 border-b border-border/50">Order Value (AOV) Makkhan</td>
+                          <td className="p-6 border-b border-border/50 bg-red-500/5 text-center text-muted-foreground">Kuch nai. Jo customer ne kharida wahi de diya.</td>
+                          <td className="p-6 border-b border-border/50 bg-primary/10 text-center font-black text-primary rounded-br-2xl text-[15px]">Cart ke neeche aur payment ke baad bhi upsells dikhate hain, taaki customer zyada ₹ de.</td>
                        </tr>
                     </tbody>
                  </table>
