@@ -51,12 +51,11 @@ export const CustomCursor = () => {
       
       {/* Physics Trailing Outline */}
       <motion.div
-        className="fixed top-0 left-0 w-10 h-10 border border-primary/50 bg-primary/10 backdrop-blur-[1px] rounded-full pointer-events-none z-[9998] hidden md:flex items-center justify-center"
+        className="fixed top-0 left-0 w-10 h-10 border border-primary/50 bg-transparent rounded-full pointer-events-none z-[9998] hidden md:flex items-center justify-center transition-colors duration-200"
         animate={{
           x: mousePosition.x - 20,
           y: mousePosition.y - 20,
           scale: isHovering ? 1.4 : 1,
-          backgroundColor: isHovering ? "rgba(var(--primary), 0.3)" : "rgba(var(--primary), 0.05)",
           borderColor: isHovering ? "rgba(var(--primary), 0.8)" : "rgba(var(--primary), 0.4)",
         }}
         transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.6 }}
