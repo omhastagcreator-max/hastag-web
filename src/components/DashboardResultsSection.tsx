@@ -25,29 +25,45 @@ const DashboardResultsSection = () => {
           </p>
         </motion.div>
 
-        {/* Epic Main Screen Recording View */}
+        {/* Epic Main Screen Recording View (Laptop Mockup) */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="relative max-w-5xl mx-auto mb-20"
+          className="relative max-w-5xl mx-auto mb-24 perspective-1000"
         >
           {/* Glassmorphism Glow Behind */}
-          <div className="absolute -inset-4 bg-gradient-to-r from-primary/30 to-blue-600/30 blur-3xl opacity-50 rounded-[40px] -z-10"></div>
+          <div className="absolute -inset-10 bg-gradient-to-r from-primary/30 to-blue-600/30 blur-3xl opacity-60 rounded-full -z-10"></div>
           
-          <div className="bg-card p-3 md:p-5 rounded-[2rem] border border-white/10 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)]">
-            <div className="aspect-video bg-[#0a0a0a] rounded-[1.2rem] overflow-hidden relative group border border-white/5">
-              <video 
-                className="w-full h-full object-cover"
-                autoPlay 
-                loop 
-                muted 
-                playsInline
-              >
-                <source src="/screen-recording.mp4" type="video/mp4" />
-              </video>
-            </div>
+          {/* Laptop Screen Frame */}
+          <div className="relative rounded-t-3xl border-[12px] md:border-[20px] border-[#18181b] bg-[#09090b] shadow-2xl p-0.5 md:p-1 overflow-hidden">
+             {/* Webcam dot */}
+             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-12 h-3.5 bg-[#18181b] rounded-b-xl flex justify-center items-center z-20">
+                <div className="w-1.5 h-1.5 bg-blue-900/60 rounded-full"></div>
+             </div>
+             {/* Screen Content */}
+             <div className="relative aspect-video bg-[#0a0a0a] rounded-t-xl overflow-hidden group">
+               <video 
+                 className="w-full h-full object-cover"
+                 autoPlay 
+                 loop 
+                 muted 
+                 playsInline
+               >
+                 <source src="/screen-recording.mp4" type="video/mp4" />
+               </video>
+             </div>
+             {/* Macbook logo text (subtle) */}
+             <div className="absolute bottom-0 inset-x-0 h-[12px] flex justify-center items-center text-[7px] font-bold text-white/20 tracking-widest hidden md:flex uppercase">
+                 MacBook Pro
+             </div>
+          </div>
+          
+          {/* Laptop Base (Keyboard Deck + Lip) */}
+          <div className="relative w-[114%] -ml-[7%] h-3 md:h-5 bg-gradient-to-b from-[#e4e4e7] to-[#a1a1aa] rounded-b-2xl shadow-[0_20px_40px_rgba(0,0,0,0.6)] flex justify-center items-start border-t border-white/40">
+             {/* Trackpad indentation line */}
+             <div className="w-1/6 h-1 md:h-2 bg-[#d4d4d8] shadow-inner rounded-b-md"></div>
           </div>
         </motion.div>
 
