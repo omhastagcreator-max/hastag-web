@@ -73,7 +73,7 @@ export default function InfluencerUGC() {
                 Scroll-Stopping <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-500">UGC Hooks.</span>
               </h1>
               <p className="text-muted-foreground font-medium text-lg md:text-xl max-w-2xl mx-auto">
-                 We create 9:16 vertical videos that force the user to stop scrolling and buy. No useless dancing. Just purely sales-driven content.
+                 We craft scroll-stopping video content engineered entirely for conversions. No useless dancing or generic trends. Just high-impact, purely sales-driven creatives that compel users to buy.
               </p>
            </div>
         </div>
