@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { motion, useScroll } from "framer-motion";
+import { useRef } from "react";
 import { Search, PenTool, Rocket, PhoneCall } from "lucide-react";
 
 const steps = [
@@ -25,6 +26,12 @@ const steps = [
 ];
 
 const HowItWorks = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start center", "end center"],
+  });
+
   return (
     <section className="py-24 bg-background relative" id="process">
       <div className="container-main max-w-4xl">
@@ -38,11 +45,17 @@ const HowItWorks = () => {
           </p>
         </div>
 
-        <div className="relative">
-          {/* Vertical Line */}
-          <div className="absolute left-[39px] md:left-1/2 top-0 bottom-0 w-1 bg-border/50 rounded-full hidden md:block" />
+        <div className="relative" ref={containerRef}>
+          {/* Vertical Line Background */}
+          <div className="absolute left-[39px] md:left-[calc(50%-2px)] top-0 bottom-0 w-1 bg-border/50 rounded-full hidden md:block" />
+          
+          {/* Animated Scroll Fill Line */}
+          <motion.div 
+            style={{ scaleY: scrollYProgress, originY: 0 }}
+            className="absolute left-[39px] md:left-[calc(50%-2px)] top-0 bottom-0 w-1 bg-primary rounded-full hidden md:block z-0" 
+          />
 
-          <div className="space-y-12 md:space-y-24">
+          <div className="space-y-12 md:space-y-24 perspective-1000">
             {steps.map((step, index) => (
               <motion.div
                 key={index}
@@ -50,17 +63,27 @@ const HowItWorks = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.6 }}
-                className={`flex flex-col md:flex-row items-start md:items-center justify-between gap-8 md:gap-16 relative ${
+                className={`flex flex-col md:flex-row items-start md:items-center justify-between gap-8 md:gap-16 relative transform-style-3d ${
                   index % 2 === 1 ? "md:flex-row-reverse" : ""
                 }`}
               >
                 {/* Center Node (Desktop) */}
-                <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-20 h-20 bg-background border-4 border-primary rounded-full items-center justify-center z-10 shadow-lg" style={{ top: "calc(50% - 40px)"}}>
+                <motion.div 
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  transition={{ delay: 0.2, type: "spring" }}
+                  viewport={{ once: true }}
+                  className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-20 h-20 bg-background border-4 border-primary rounded-full items-center justify-center z-10 shadow-[0_0_20px_rgba(216,0,166,0.3)]" 
+                  style={{ top: "calc(50% - 40px)"}}
+                >
                   <step.icon className="w-8 h-8 text-primary" />
-                </div>
+                </motion.div>
 
                 {/* Content Card */}
-                <div className={`w-full md:w-[45%] bg-card border border-border p-8 rounded-3xl shadow-sm hover:shadow-card-hover transition-shadow relative z-0`}>
+                <motion.div 
+                   whileHover={{ rotateY: index % 2 === 1 ? -5 : 5, scale: 1.02, z: 20 }}
+                   className={`w-full md:w-[45%] bg-card border border-border p-8 rounded-3xl shadow-sm hover:shadow-card-hover transition-shadow relative z-0`}
+                >
                   <div className="md:hidden w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-6">
                     <step.icon className="w-6 h-6 text-primary" />
                   </div>
@@ -68,7 +91,7 @@ const HowItWorks = () => {
                   <p className="text-muted-foreground text-[15px] leading-relaxed">
                     {step.desc}
                   </p>
-                </div>
+                </motion.div>
                 
                 {/* Empty Space for layout */}
                 <div className="hidden md:block w-[45%]" />
@@ -84,7 +107,7 @@ const HowItWorks = () => {
           className="text-center mt-20"
         >
           <a href="/#audit-form">
-            <button className="bg-foreground text-background px-10 py-5 rounded-full text-lg font-bold shadow-lg hover:-translate-y-1 transition-transform">
+            <button className="btn-synthetic mx-auto">
               Get Started Now
             </button>
           </a>

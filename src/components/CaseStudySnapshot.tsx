@@ -154,30 +154,50 @@ const CaseStudySnapshot = () => {
 
             {/* Bottom Stats Carousels (Side-by-side on desktop) */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="grid lg:grid-cols-2 gap-8"
+              variants={{
+                hidden: { opacity: 0 },
+                show: { opacity: 1, transition: { staggerChildren: 0.2 } }
+              }}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-50px" }}
+              className="grid lg:grid-cols-2 gap-8 perspective-1000"
             >
               {/* Meta Carousel Block */}
-              <div className="relative">
+              <motion.div 
+                 variants={{
+                   hidden: { opacity: 0, rotateY: 15, y: 40 },
+                   show: { opacity: 1, rotateY: 0, y: 0, transition: { duration: 0.7, ease: "easeOut" } }
+                 }}
+                 whileHover={{ rotateY: 5, rotateX: 5, z: 30 }}
+                 style={{ transformStyle: "preserve-3d" }}
+                 className="relative transition-transform duration-300"
+              >
                 <ImageCarousel 
                   images={metaImages} 
                   type="Meta Ads Manager" 
                   url="adsmanager.facebook.com" 
                   onImageClick={setLightboxImage}
                 />
-              </div>
+              </motion.div>
 
               {/* Shopify Carousel Block */}
-              <div className="relative">
+              <motion.div 
+                 variants={{
+                   hidden: { opacity: 0, rotateY: 15, y: 40 },
+                   show: { opacity: 1, rotateY: 0, y: 0, transition: { duration: 0.7, ease: "easeOut" } }
+                 }}
+                 whileHover={{ rotateY: -5, rotateX: 5, z: 30 }}
+                 style={{ transformStyle: "preserve-3d" }}
+                 className="relative transition-transform duration-300"
+              >
                 <ImageCarousel 
                   images={shopifyImages} 
                   type="Shopify Analytics" 
                   url="admin.shopify.com" 
                   onImageClick={setLightboxImage}
                 />
-              </div>
+              </motion.div>
             </motion.div>
             
             <div className="flex flex-col md:flex-row items-center justify-between gap-6 bg-secondary/50 border border-border p-6 rounded-2xl shadow-sm mt-4">

@@ -19,9 +19,12 @@ const HeroSection = () => {
           {/* Floating Top Badge */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-md mb-8"
+            animate={{ opacity: 1, y: [0, -8, 0] }}
+            transition={{ 
+              opacity: { duration: 0.6, ease: "easeOut" },
+              y: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+            }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-md mb-8 shadow-lg shadow-primary/5"
           >
             <span className="flex h-2 w-2 relative">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
@@ -70,7 +73,7 @@ const HeroSection = () => {
             className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto"
           >
             <a href="https://calendly.com/domsco-tech/30min?month=2026-03" target="_blank" rel="noreferrer" className="w-full sm:w-auto">
-              <button className="w-full sm:w-auto group relative flex items-center justify-center gap-3 bg-foreground text-background px-10 py-5 rounded-full text-lg font-bold shadow-[0_10px_40px_-10px_rgba(0,0,0,0.3)] hover:-translate-y-1 hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.4)] transition-all duration-300">
+              <button className="btn-synthetic w-full sm:w-auto">
                 Schedule a Call
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>

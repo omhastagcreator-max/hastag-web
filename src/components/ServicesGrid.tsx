@@ -220,17 +220,31 @@ const ServicesGrid = ({ filterKeyword, title, subtitle }: { filterKeyword?: stri
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+        <motion.div 
+           variants={{
+             hidden: { opacity: 0 },
+             show: {
+               opacity: 1,
+               transition: { staggerChildren: 0.1 }
+             }
+           }}
+           initial="hidden"
+           whileInView="show"
+           viewport={{ once: true, margin: "-100px" }}
+           className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 perspective-1000"
+        >
           {products.map((service, index) => {
             const Icon = service.icon;
             return (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
-              className={`group flex flex-col bg-card rounded-2xl p-6 border border-border shadow-sm hover:shadow-card-hover transition-all duration-300 relative overflow-hidden`}
+              variants={{
+                hidden: { opacity: 0, y: 30, rotateX: 10 },
+                show: { opacity: 1, y: 0, rotateX: 0, transition: { duration: 0.5, ease: "easeOut" } }
+              }}
+              whileHover={{ rotateX: 5, rotateY: -5, scale: 1.02, z: 20 }}
+              style={{ transformStyle: "preserve-3d" }}
+              className={`group flex flex-col bg-card rounded-2xl p-6 border border-border shadow-sm hover:shadow-card-hover transition-shadow duration-300 relative overflow-hidden`}
             >
               <div className="flex-1 z-10">
                 {service.image ? (
@@ -269,7 +283,7 @@ const ServicesGrid = ({ filterKeyword, title, subtitle }: { filterKeyword?: stri
               </div>
             </motion.div>
           )})}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
