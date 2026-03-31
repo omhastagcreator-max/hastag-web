@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
-import Papa from "papaparse";
 import { Plus, Trash, LogOut, Upload, Loader2, Image as ImageIcon, ShoppingCart, LayoutTemplate, Package, CheckCircle, Clock } from "lucide-react";
 
 export default function Admin() {
@@ -136,77 +135,8 @@ export default function Admin() {
   };
 
   const handleBulkImport = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    
-    if (!confirm(`Initialize bulk import from ${file.name}? This will parse the CSV and permanently write all valid WooCommerce products into the live database.`)) {
-       e.target.value = ''; // Reset
-       return;
-    }
-    
-    setIsUploading(true);
-    
-    try {
-      Papa.parse(file, {
-        header: true,
-        skipEmptyLines: true,
-        complete: async (results) => {
-          const parsed = results.data
-            .filter((row: any) => Object.keys(row).length > 1)
-            .map((row: any) => {
-              const title = row.Name || row.name || row.Title || row.title || "Premium Service";
-              const descRaw = row['Short description'] || row.Description || row.description || "D2C Scaling infrastructure.";
-              let description = descRaw.replace(/\\n/g, " ").replace(/\\r/g, " ").trim();
-
-              const rawPrice = row['Regular price'] || row['Sale price'] || row.Price || row.price || "0";
-              const price = parseFloat(rawPrice.toString().replace(/[^0-9.]/g, '')) || 0;
-
-              const rawImages = row.Images || row.images || row['Image URL'] || "";
-              const imagesArray = rawImages.split(',').map((img: string) => img.trim()).filter((img: string) => img.length > 0);
-              const mainImg = imagesArray[0] || null;
-              
-              return {
-                title,
-                description,
-                price,
-                image_url: mainImg,
-                image_gallery: imagesArray,
-                icon_name: 'Layers'
-              };
-            });
-            
-          if (parsed.length === 0) {
-              alert("No valid products found in CSV.");
-              setIsUploading(false);
-              return;
-          }
-
-          // Chunk inserts to avoid massive payload rejections from PostgREST
-          const chunks = [];
-          for (let i = 0; i < parsed.length; i += 50) chunks.push(parsed.slice(i, i + 50));
-          
-          for (const chunk of chunks) {
-               const { error } = await supabase.from('products').insert(chunk);
-               if (error) {
-                   console.error(error);
-                   alert("Insertion Error: " + error.message);
-                   setIsUploading(false);
-                   return;
-               }
-          }
-          
-          await fetchProducts();
-          alert(`Successfully synced ${parsed.length} products to the live database!`);
-          setIsUploading(false);
-          // Reset file input
-          e.target.value = '';
-        }
-      });
-    } catch (err: any) {
-      alert("Bulk Import Failed: " + err.message);
-      setIsUploading(false);
-      e.target.value = '';
-    }
+    alert("Bulk CSV Import has been deprecated in favor of native Supabase syncing. Please configure products manually or via direct SQL.");
+    e.target.value = '';
   };
 
   const handleUploadMedia = async (e: React.FormEvent) => {
