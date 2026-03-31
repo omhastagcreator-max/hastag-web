@@ -12,37 +12,20 @@ type NavLink = {
 const navLinks: NavLink[] = [
   { 
     label: "Website Development", 
-    to: "/services",
-    dropdown: [
-      { label: "E-Commerce Stores", to: "/services" },
-      { label: "High-Velocity Landing Pages", to: "/services" },
-    ]
+    to: "/web-development"
   },
   { 
     label: "Performance Marketing", 
-    to: "/services",
-    dropdown: [
-      { label: "Meta Ads Scaling", to: "/services" },
-      { label: "Google Ads Growth", to: "/services" },
-      { label: "Conversion Rate Optimization", to: "/services" }
-    ]
+    to: "/performance-marketing"
   },
   { 
     label: "Influencer Marketing", 
-    to: "/influencer-ugc",
-    dropdown: [
-      { label: "Creator Network Campaigns", to: "/influencer-ugc" },
-      { label: "Native UGC Production", to: "/influencer-ugc" },
-    ]
+    to: "/influencer-ugc"
   },
   { 
-    label: "Our Policies", 
-    to: "#",
-    dropdown: [
-      { label: "Privacy Policy", to: "/privacy-policy" },
-      { label: "Terms & Conditions", to: "/terms-and-conditions" }
-    ]
-  },
+    label: "Careers", 
+    to: "/careers"
+  }
 ];
 
 const Navbar = () => {

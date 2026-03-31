@@ -13,6 +13,9 @@ import PrivacyPolicy from "./pages/PrivacyPolicy.tsx";
 import Terms from "./pages/Terms.tsx";
 import Services from "./pages/Services.tsx";
 import InfluencerUGC from "./pages/InfluencerUGC.tsx";
+import WebDevelopment from "./pages/WebDevelopment.tsx";
+import PerformanceMarketing from "./pages/PerformanceMarketing.tsx";
+import Careers from "./pages/Careers.tsx";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
 const queryClient = new QueryClient();
@@ -28,6 +31,9 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/web-development" element={<WebDevelopment />} />
+          <Route path="/performance-marketing" element={<PerformanceMarketing />} />
+          <Route path="/careers" element={<Careers />} />
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/influencer-ugc" element={<InfluencerUGC />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />

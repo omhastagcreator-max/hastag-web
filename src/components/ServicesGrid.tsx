@@ -77,7 +77,7 @@ type ServiceItem = {
   image?: string | null;
 };
 
-const ServicesGrid = () => {
+const ServicesGrid = ({ filterKeyword, title, subtitle }: { filterKeyword?: string, title?: string, subtitle?: string }) => {
   const [products, setProducts] = useState<ServiceItem[]>(fallbackServices);
   const { Razorpay } = useRazorpay();
 
@@ -106,7 +106,15 @@ const ServicesGrid = () => {
                 color: colorMap[i % colorMap.length],
              };
           });
-          setProducts(parsed);
+          
+          let finalParsed = parsed;
+          if (filterKeyword) {
+             finalParsed = parsed.filter((s: ServiceItem) => 
+               s.title.toLowerCase().includes(filterKeyword.toLowerCase()) || 
+               s.desc.toLowerCase().includes(filterKeyword.toLowerCase())
+             );
+          }
+          setProducts(finalParsed);
           return;
        }
     } catch (e) {
@@ -153,8 +161,16 @@ const ServicesGrid = () => {
                 };
               });
             
-            if (parsed.length > 0) {
-              setProducts(parsed);
+            let finalParsed = parsed;
+            if (filterKeyword) {
+               finalParsed = parsed.filter((s: ServiceItem) => 
+                 s.title.toLowerCase().includes(filterKeyword.toLowerCase()) || 
+                 s.desc.toLowerCase().includes(filterKeyword.toLowerCase())
+               );
+            }
+
+            if (finalParsed.length > 0) {
+              setProducts(finalParsed);
             }
           },
         });
@@ -197,10 +213,10 @@ const ServicesGrid = () => {
         <div className="max-w-3xl mb-16">
           <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">Our Services</span>
           <h2 className="text-4xl md:text-5xl font-black text-foreground mb-6 tracking-tight">
-            Comprehensive Growth Infrastructure.
+            {title || "Comprehensive Growth Infrastructure."}
           </h2>
           <p className="text-lg text-muted-foreground font-medium">
-            We don't offer generic templates. We offer weaponized services engineered to solve exact D2C pain points.
+            {subtitle || "We don't offer generic templates. We offer weaponized services engineered to solve exact D2C pain points."}
           </p>
         </div>
 
