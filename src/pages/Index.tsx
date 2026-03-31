@@ -45,7 +45,14 @@ const Index = () => {
       {/* Dynamic Banner Section */}
       <section className="py-12 bg-background border-y border-border/40">
         <div className="container-main">
-          <img src={bannerUrl} alt="HashtagCreator Scale Banner" className="w-full h-auto rounded-3xl shadow-2xl border border-border/50 object-cover" />
+          <img 
+            src={bannerUrl} 
+            alt="HashtagCreator Scale Banner" 
+            width="1200" 
+            height="600" 
+            loading="lazy" 
+            className="w-full h-auto rounded-3xl shadow-2xl border border-border/50 object-cover" 
+          />
         </div>
       </section>
 

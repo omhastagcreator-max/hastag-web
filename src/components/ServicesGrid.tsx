@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Layers, MousePointerClick, Zap, MessageSquare, Video, Mic, LayoutGrid } from "lucide-react";
 import Papa from "papaparse";
 import { Link } from "react-router-dom";
-import { useRazorpay } from "react-razorpay";
+
 import { supabase } from "@/lib/supabase";
 
 const fallbackServices = [
@@ -79,7 +79,6 @@ type ServiceItem = {
 
 const ServicesGrid = ({ filterKeyword, title, subtitle }: { filterKeyword?: string, title?: string, subtitle?: string }) => {
   const [products, setProducts] = useState<ServiceItem[]>(fallbackServices);
-  const { Razorpay } = useRazorpay();
 
   useEffect(() => {
     fetchProducts();
@@ -178,9 +177,25 @@ const ServicesGrid = ({ filterKeyword, title, subtitle }: { filterKeyword?: stri
       .catch((err) => console.log("Using native products arsenal due to missing CSV", err));
   };
 
-  const handleCheckout = (p: any) => {
+  const loadRazorpay = () => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  };
+
+  const handleCheckout = async (p: any) => {
     if (p.price === 0) {
       window.open("https://calendly.com/domsco-tech/30min?month=2026-03", "_blank");
+      return;
+    }
+
+    const isLoaded = await loadRazorpay();
+    if (!isLoaded) {
+      alert("Razorpay SDK failed to load. Check your connection.");
       return;
     }
 
@@ -203,7 +218,7 @@ const ServicesGrid = ({ filterKeyword, title, subtitle }: { filterKeyword?: stri
       },
     };
 
-    const rzp1 = new Razorpay(options as any);
+    const rzp1 = new (window as any).Razorpay(options as any);
     rzp1.open();
   };
 
@@ -248,7 +263,7 @@ const ServicesGrid = ({ filterKeyword, title, subtitle }: { filterKeyword?: stri
                 <div className="flex-1 z-10">
                   {service.image ? (
                     <div className="w-full h-40 mb-5 rounded-xl overflow-hidden shadow-sm relative border border-white bg-white/50">
-                      <img src={service.image} alt={service.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                      <img src={service.image} alt={service.title} loading="lazy" width="400" height="200" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                     </div>
                   ) : (
                     <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 shadow-sm bg-white/80 border border-white text-primary`}>

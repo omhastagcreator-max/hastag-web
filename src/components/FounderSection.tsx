@@ -12,10 +12,13 @@ const FounderSection = () => {
             className="w-48 h-48 md:w-64 md:h-64 flex-shrink-0 relative"
           >
             <div className="absolute inset-0 bg-primary rounded-2xl rotate-3"></div>
-            {/* Update this src to your actual photo */}
+            {/* Restored businesswoman client asset with CLS protection */}
             <img 
-              src="/placeholder.svg" 
-              alt="Om Upadhyay" 
+              src="https://hastagcreator.com/wp-content/uploads/2023/12/businesswoman-working-laptop-scaled.jpg" 
+              alt="Om Upadhyay Founder" 
+              width="256"
+              height="256"
+              loading="lazy"
               className="w-full h-full object-cover rounded-2xl relative z-10 shadow-lg"
             />
           </motion.div>
@@ -38,7 +41,7 @@ const FounderSection = () => {
             </p>
 
             <a href="/#audit-form">
-              <button className="bg-primary hover:bg-primary-deep text-white px-8 py-3.5 rounded-full text-base font-bold shadow-lg transition-all hover:scale-105">
+              <button className="bg-primary hover:bg-primary-deep text-white px-8 py-3.5 rounded-full text-base font-bold shadow-lg transition-all hover:scale-105 min-w-[48px] min-h-[48px]">
                 Schedule a Call
               </button>
             </a>

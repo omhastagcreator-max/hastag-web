@@ -85,14 +85,14 @@ const HeroSection = () => {
             className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto"
           >
             <a href="https://calendly.com/domsco-tech/30min?month=2026-03" target="_blank" rel="noreferrer" className="w-full sm:w-auto">
-              <button className="btn-synthetic w-full sm:w-auto">
+              <button aria-label="Schedule a Call" className="btn-synthetic w-full sm:w-auto min-w-[48px] min-h-[48px]">
                 Schedule a Call
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
             </a>
             
             <Link to="/portfolio" className="w-full sm:w-auto">
-              <button className="w-full sm:w-auto flex items-center justify-center gap-2 bg-background border-2 border-border hover:border-foreground text-foreground px-10 py-5 rounded-full text-lg font-bold shadow-sm hover:shadow-md transition-all duration-300">
+              <button aria-label="Check our Portfolio" className="w-full sm:w-auto flex items-center justify-center gap-2 bg-background border-2 border-border hover:border-foreground text-foreground px-10 py-5 rounded-full text-lg font-bold shadow-sm hover:shadow-md transition-all duration-300 min-w-[48px] min-h-[48px]">
                 Check our Portfolio
               </button>
             </Link>
@@ -107,9 +107,9 @@ const HeroSection = () => {
           >
             <div className="flex items-center gap-3">
               <div className="flex -space-x-3">
-                <img src="https://api.dicebear.com/7.x/initials/svg?seed=A" className="w-10 h-10 rounded-full border-2 border-background shadow-sm" alt="U" />
-                <img src="https://api.dicebear.com/7.x/initials/svg?seed=B" className="w-10 h-10 rounded-full border-2 border-background shadow-sm" alt="U" />
-                <img src="https://api.dicebear.com/7.x/initials/svg?seed=C" className="w-10 h-10 rounded-full border-2 border-background shadow-sm" alt="U" />
+                <img src="https://api.dicebear.com/7.x/initials/svg?seed=A" className="w-10 h-10 rounded-full border-2 border-background shadow-sm" alt="User 1" width="40" height="40" loading="eager" />
+                <img src="https://api.dicebear.com/7.x/initials/svg?seed=B" className="w-10 h-10 rounded-full border-2 border-background shadow-sm" alt="User 2" width="40" height="40" loading="eager" />
+                <img src="https://api.dicebear.com/7.x/initials/svg?seed=C" className="w-10 h-10 rounded-full border-2 border-background shadow-sm" alt="User 3" width="40" height="40" loading="eager" />
                 <div className="w-10 h-10 rounded-full border-2 border-background bg-muted flex items-center justify-center text-xs font-bold text-muted-foreground shadow-sm">+2k</div>
               </div>
               <div className="text-left flex flex-col">

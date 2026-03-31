@@ -61,8 +61,8 @@ const Navbar = () => {
 
       <div className="container-main flex items-center justify-between h-20 px-4 sm:px-6 lg:px-8">
         {/* Logo */}
-        <Link to="/" className="flex items-center">
-          <img src="/logo.png" alt="HastagCreator Logo" className="h-10 w-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.1)] transition-transform hover:scale-105" />
+        <Link to="/" className="flex items-center min-h-[48px] min-w-[48px]">
+          <img src="/logo.png" alt="HastagCreator Logo" width="160" height="40" className="h-10 w-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.1)] transition-transform hover:scale-105" />
         </Link>
 
         {/* Desktop Nav */}
@@ -138,7 +138,11 @@ const Navbar = () => {
         </div>
 
         {/* Mobile toggle */}
-        <button className="lg:hidden p-2 text-foreground" onClick={() => setOpen(!open)}>
+        <button 
+          aria-label="Toggle Navigation Menu" 
+          className="lg:hidden p-2 text-foreground min-w-[48px] min-h-[48px] flex items-center justify-center" 
+          onClick={() => setOpen(!open)}
+        >
           {open ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
