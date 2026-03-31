@@ -1,7 +1,16 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { TrendingUp, ShoppingBag, ArrowRight, Zap, Target } from "lucide-react";
+import { useRef } from "react";
 
 const DashboardResultsSection = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "center center"],
+  });
+
+  const lidRotateX = useTransform(scrollYProgress, [0, 0.8], [-90, 0]);
+
   return (
     <section id="dashboard-results" className="section-padding overflow-hidden bg-background relative">
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
@@ -27,17 +36,26 @@ const DashboardResultsSection = () => {
 
         {/* Epic Main Screen Recording View (Laptop Mockup) */}
         <motion.div
+          ref={containerRef}
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="relative max-w-5xl mx-auto mb-24 perspective-1000"
+          className="relative max-w-5xl mx-auto mb-24"
+          style={{ perspective: "1500px" }}
         >
           {/* Glassmorphism Glow Behind */}
-          <div className="absolute -inset-10 bg-gradient-to-r from-primary/30 to-blue-600/30 blur-3xl opacity-60 rounded-full -z-10"></div>
+          <div className="absolute -inset-10 bg-gradient-to-r from-[#FF3E00]/30 to-[#D800A6]/30 blur-3xl opacity-60 rounded-full -z-10"></div>
           
-          {/* Laptop Screen Frame */}
-          <div className="relative rounded-t-3xl border-[12px] md:border-[20px] border-[#18181b] bg-[#09090b] shadow-2xl p-0.5 md:p-1 overflow-hidden">
+          {/* Laptop Screen Frame (Lid) */}
+          <motion.div 
+             className="relative rounded-t-3xl border-[12px] md:border-[20px] border-[#18181b] bg-[#09090b] shadow-2xl p-0.5 md:p-1 overflow-hidden"
+             style={{
+               rotateX: lidRotateX,
+               transformOrigin: "bottom center",
+               transformStyle: "preserve-3d"
+             }}
+          >
              {/* Webcam dot */}
              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-12 h-3.5 bg-[#18181b] rounded-b-xl flex justify-center items-center z-20">
                 <div className="w-1.5 h-1.5 bg-blue-900/60 rounded-full"></div>
@@ -58,7 +76,7 @@ const DashboardResultsSection = () => {
              <div className="absolute bottom-0 inset-x-0 h-[12px] flex justify-center items-center text-[7px] font-bold text-white/20 tracking-widest hidden md:flex uppercase">
                  MacBook Pro
              </div>
-          </div>
+          </motion.div>
           
           {/* Laptop Base (Keyboard Deck + Lip) */}
           <div className="relative w-[114%] -ml-[7%] h-3 md:h-5 bg-gradient-to-b from-[#e4e4e7] to-[#a1a1aa] rounded-b-2xl shadow-[0_20px_40px_rgba(0,0,0,0.6)] flex justify-center items-start border-t border-white/40">
@@ -123,8 +141,8 @@ const DashboardResultsSection = () => {
           viewport={{ once: true }}
           className="mt-20 text-center"
         >
-          <a href="https://calendly.com/domsco-tech/30min?month=2026-03" target="_blank" rel="noreferrer" className="inline-block group">
-            <button className="bg-primary text-primary-foreground px-10 py-5 rounded-full text-lg font-bold shadow-[0_10px_40px_-10px_rgba(37,99,235,0.6)] group-hover:shadow-[0_20px_50px_-10px_rgba(37,99,235,0.7)] hover:-translate-y-1 transition-all duration-300 flex items-center gap-3 mx-auto">
+          <a href="https://calendly.com/domsco-tech/30min?month=2026-03" target="_blank" rel="noreferrer" className="inline-block group perspective-1000">
+            <button className="btn-synthetic">
               Schedule a Call 
               <span className="bg-white/20 p-1.5 rounded-full"><ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform"/></span>
             </button>

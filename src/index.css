@@ -4,46 +4,49 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 0%;
+    --background: 300 17% 98%;
+    --foreground: 288 16% 6%;
 
-    --card: 261 100% 96%;
-    --card-foreground: 0 0% 0%;
+    --card: 0 0% 100%;
+    --card-foreground: 288 16% 6%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 0%;
+    --popover-foreground: 288 16% 6%;
 
-    --primary: 266 100% 50%;
+    --primary: 314 100% 42%;
     --primary-foreground: 0 0% 100%;
-    --primary-hover: 266 100% 60%;
-    --primary-active: 266 100% 40%;
-    --primary-deep: 266 100% 40%;
+    --primary-hover: 314 100% 47%;
+    --primary-active: 314 100% 37%;
+    --primary-deep: 314 100% 32%;
 
-    --secondary: 261 100% 96%;
-    --secondary-foreground: 0 0% 0%;
+    --secondary: 300 5% 95%;
+    --secondary-foreground: 288 16% 6%;
 
-    --muted: 261 100% 96%;
-    --muted-foreground: 0 0% 30%;
+    --muted: 300 5% 95%;
+    --muted-foreground: 288 5% 40%;
 
-    --accent: 261 100% 96%;
-    --accent-foreground: 0 0% 0%;
+    --accent: 300 17% 98%;
+    --accent-foreground: 314 100% 42%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 261 100% 92%;
-    --input: 261 100% 92%;
-    --ring: 266 100% 50%;
+    --border: 300 5% 90%;
+    --input: 300 5% 90%;
+    --ring: 314 100% 42%;
 
     --radius: 1.5rem;
 
-    --charcoal: 0 0% 10%;
+    --charcoal: 288 16% 6%;
     --charcoal-foreground: 0 0% 100%;
 
-    --gradient-primary: linear-gradient(135deg, hsl(266, 100%, 50%), hsl(266, 100%, 65%));
+    --gradient-primary: linear-gradient(135deg, #FF3E00 0%, #D800A6 100%);
 
-    --shadow-card: 0 4px 20px -2px rgba(110, 0, 255, 0.05);
-    --shadow-card-hover: 0 12px 30px -4px rgba(110, 0, 255, 0.15);
+    --shadow-synthetic: 0 8px 24px -6px rgba(216, 0, 166, 0.4);
+    --shadow-synthetic-hover: 0 12px 30px -4px rgba(216, 0, 166, 0.6);
+
+    --shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.04);
+    --shadow-card-hover: 0 12px 30px -4px rgba(216, 0, 166, 0.15);
 
     --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 0 0% 0%;
@@ -77,6 +80,22 @@
   }
   .container-main {
     @apply max-w-7xl mx-auto;
+  }
+  .btn-synthetic {
+    background: var(--gradient-primary);
+    color: white;
+    box-shadow: var(--shadow-synthetic);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(0);
+    @apply px-10 py-5 rounded-full text-lg font-bold flex items-center justify-center gap-3 border-none outline-none;
+  }
+  .btn-synthetic:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-synthetic-hover);
+  }
+  .btn-synthetic:active {
+    transform: translateY(1px);
+    box-shadow: var(--shadow-synthetic);
   }
 }
 
