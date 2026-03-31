@@ -56,7 +56,7 @@ const Navbar = () => {
       {/* Trust badge bar */}
       <div className="bg-primary text-primary-foreground text-[10px] sm:text-xs py-1.5 text-center font-bold tracking-widest uppercase shadow-sm">
         <span className="hidden sm:inline">HastagCreator · 11 Years of Experience · India's Largest Marketing Agency</span>
-        <span className="sm:hidden">#Creator · India's Largest Marketing Agency</span>
+        <span className="sm:hidden">#Creator · 11 Yrs of Experience</span>
       </div>
 
       <div className="container-main flex items-center justify-between h-20 px-4 sm:px-6 lg:px-8">
