@@ -166,12 +166,11 @@ const CaseStudySnapshot = () => {
               {/* Meta Carousel Block */}
               <motion.div 
                  variants={{
-                   hidden: { opacity: 0, rotateY: 15, y: 40 },
-                   show: { opacity: 1, rotateY: 0, y: 0, transition: { duration: 0.7, ease: "easeOut" } }
+                   hidden: { opacity: 0, y: 40 },
+                   show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
                  }}
-                 whileHover={{ rotateY: 10, rotateX: 8, z: 60, scale: 1.04 }}
-                 style={{ transformStyle: "preserve-3d" }}
-                 className="relative transition-transform duration-300 drop-shadow-[0_40px_60px_rgba(0,0,0,0.15)]"
+                 whileHover={{ scale: 1.02, y: -5 }}
+                 className="relative transition-all duration-500 drop-shadow-[0_20px_40px_rgba(0,51,255,0.08)]"
               >
                 <ImageCarousel 
                   images={metaImages} 
@@ -184,12 +183,11 @@ const CaseStudySnapshot = () => {
               {/* Shopify Carousel Block */}
               <motion.div 
                  variants={{
-                   hidden: { opacity: 0, rotateY: 15, y: 40 },
-                   show: { opacity: 1, rotateY: 0, y: 0, transition: { duration: 0.7, ease: "easeOut" } }
+                   hidden: { opacity: 0, y: 40 },
+                   show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
                  }}
-                 whileHover={{ rotateY: -10, rotateX: 8, z: 60, scale: 1.04 }}
-                 style={{ transformStyle: "preserve-3d" }}
-                 className="relative transition-transform duration-300 drop-shadow-[0_40px_60px_rgba(0,0,0,0.15)]"
+                 whileHover={{ scale: 1.02, y: -5 }}
+                 className="relative transition-all duration-500 drop-shadow-[0_20px_40px_rgba(0,51,255,0.08)]"
               >
                 <ImageCarousel 
                   images={shopifyImages} 

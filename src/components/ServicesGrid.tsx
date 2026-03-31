@@ -239,14 +239,13 @@ const ServicesGrid = ({ filterKeyword, title, subtitle }: { filterKeyword?: stri
             <div key={index} className="perspective-1000 w-full h-full relative">
               <motion.div
                 variants={{
-                  hidden: { opacity: 0, y: 30, rotateX: 10 },
-                  show: { opacity: 1, y: 0, rotateX: 0, transition: { duration: 0.5, ease: "easeOut" } }
+                  hidden: { opacity: 0, y: 40 },
+                  show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
                 }}
-                whileHover={{ rotateX: 12, rotateY: -12, scale: 1.05, z: 50 }}
-                style={{ transformStyle: "preserve-3d" }}
-                className={`w-full h-full group flex flex-col bg-white/40 backdrop-blur-2xl rounded-2xl p-6 border border-white/60 shadow-lg hover:shadow-[0_40px_80px_rgba(0,0,0,0.12)] transition-all duration-300 relative`}
+                whileHover={{ scale: 1.02, y: -5 }}
+                className={`w-full h-full group flex flex-col bg-white/70 backdrop-blur-2xl rounded-3xl p-6 border border-white/90 shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgba(0,51,255,0.08)] transition-all duration-500 relative`}
               >
-                <div className="flex-1 z-10" style={{ transform: "translateZ(50px)" }}>
+                <div className="flex-1 z-10">
                   {service.image ? (
                     <div className="w-full h-40 mb-5 rounded-xl overflow-hidden shadow-sm relative border border-white bg-white/50">
                       <img src={service.image} alt={service.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
@@ -264,7 +263,7 @@ const ServicesGrid = ({ filterKeyword, title, subtitle }: { filterKeyword?: stri
                   </p>
                 </div>
 
-                <div className="z-10 mt-auto flex flex-col gap-3" style={{ transform: "translateZ(70px)" }}>
+                <div className="z-10 mt-auto flex flex-col gap-3">
                   <div className="mb-2">
                     <span className="bg-white/80 backdrop-blur-sm border border-white px-3 py-1 rounded-full text-xs font-black shadow-sm tracking-wide text-primary">
                       {service.price > 0 ? `₹ ${(service.price).toLocaleString("en-IN")}/PM` : "Custom"}

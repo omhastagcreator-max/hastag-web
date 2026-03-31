@@ -55,7 +55,7 @@ const HeroSection = () => {
             className="text-5xl sm:text-6xl md:text-8xl font-black text-foreground tracking-tighter leading-[1.05] mb-6 drop-shadow-sm"
           >
             Marketing Asi Karo <br className="hidden md:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-br from-primary via-blue-500 to-indigo-600 drop-shadow-sm">ki Brand Banjaye.</span>
+            <span className="text-primary drop-shadow-sm">ki Brand Banjaye.</span>
           </motion.h1>
 
           <motion.h2
