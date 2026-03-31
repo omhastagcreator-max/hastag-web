@@ -4,49 +4,49 @@
 
 @layer base {
   :root {
-    --background: 240 100% 4%;
-    --foreground: 0 0% 100%;
+    --background: 0 0% 100%;
+    --foreground: 240 10% 4%;
 
-    --card: 240 100% 4%;
-    --card-foreground: 0 0% 100%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 4%;
 
-    --popover: 240 100% 4%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 4%;
 
-    --primary: 193 100% 50%;
+    --primary: 221 83% 53%;
     --primary-foreground: 0 0% 100%;
-    --primary-hover: 213 100% 50%;
-    --primary-active: 222 100% 40%;
-    --primary-deep: 232 100% 30%;
+    --primary-hover: 221 83% 45%;
+    --primary-active: 221 83% 35%;
+    --primary-deep: 221 83% 25%;
 
-    --secondary: 240 50% 10%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 240 5% 96%;
+    --secondary-foreground: 240 10% 4%;
 
-    --muted: 240 50% 10%;
-    --muted-foreground: 0 0% 70%;
+    --muted: 240 5% 96%;
+    --muted-foreground: 240 4% 46%;
 
-    --accent: 193 100% 50%;
+    --accent: 221 83% 53%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 100%; /* Overridden via white/10 usually */
-    --input: 0 0% 100%;
-    --ring: 193 100% 50%;
+    --border: 240 6% 90%;
+    --input: 240 6% 90%;
+    --ring: 240 10% 4%;
 
     --radius: 1.5rem;
 
-    --charcoal: 0 0% 100%;
-    --charcoal-foreground: 240 100% 4%;
+    --charcoal: 240 10% 4%;
+    --charcoal-foreground: 0 0% 100%;
 
-    --gradient-primary: linear-gradient(135deg, #020024 0%, #00d4ff 100%);
+    --gradient-primary: linear-gradient(135deg, #0A0A0A 0%, #27272A 100%);
 
-    --shadow-synthetic: 0 10px 30px -10px rgba(0, 198, 255, 0.4);
-    --shadow-synthetic-hover: 0 20px 40px -12px rgba(0, 114, 255, 0.6);
+    --shadow-synthetic: 0 10px 30px -10px rgba(0, 0, 0, 0.2);
+    --shadow-synthetic-hover: 0 20px 40px -12px rgba(0, 0, 0, 0.4);
 
-    --shadow-card: 0 4px 20px -2px rgba(0, 198, 255, 0.05);
-    --shadow-card-hover: 0 20px 40px -8px rgba(0, 198, 255, 0.2), 0 10px 20px -10px rgba(0, 114, 255, 0.2);
+    --shadow-card: 0 4px 14px 0 rgba(0, 0, 0, 0.03);
+    --shadow-card-hover: 0 30px 60px -12px rgba(0, 0, 0, 0.15), 0 18px 36px -18px rgba(0, 0, 0, 0.1);
 
     --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 0 0% 0%;
@@ -65,13 +65,13 @@
     cursor: none !important;
   }
   body {
-    background: linear-gradient(-45deg, #020024, #090979, #00d4ff, #001f3f);
+    background: linear-gradient(-45deg, #FFF1EB, #E0C3FC, #E5E5FF, #fdfbf7);
     background-size: 400% 400%;
     animation: gradientShift 15s ease infinite;
     @apply text-foreground font-body antialiased flex justify-center p-2 sm:p-4 md:p-8;
   }
   #root {
-    @apply w-full max-w-[1440px] bg-black/20 backdrop-blur-3xl min-h-screen shadow-[0_0_50px_rgba(0,198,255,0.15)] relative overflow-x-hidden border border-white/10 rounded-2xl sm:rounded-3xl;
+    @apply w-full max-w-[1440px] bg-white/40 backdrop-blur-3xl min-h-screen shadow-[0_0_50px_rgba(0,0,0,0.05)] relative overflow-x-hidden border border-white/60 rounded-2xl sm:rounded-3xl;
   }
   h1, h2, h3 {
     @apply font-display font-bold tracking-tight;

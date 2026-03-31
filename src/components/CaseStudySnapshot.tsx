@@ -20,8 +20,8 @@ const ImageCarousel = ({ images, type, url, onImageClick }: { images: string[], 
   }
 
   return (
-    <div className="rounded-2xl overflow-hidden border border-border bg-card shadow-sm relative group hover:shadow-md transition-all">
-      <div className="bg-secondary/50 border-b border-border px-4 py-3 flex items-center justify-between gap-2">
+    <div className="rounded-2xl overflow-hidden border border-white/60 bg-white/40 backdrop-blur-2xl shadow-lg relative group hover:shadow-xl transition-all">
+      <div className="bg-white/50 border-b border-white px-4 py-3 flex items-center justify-between gap-2">
         <div className="flex items-center gap-3 overflow-hidden">
           <div className="flex gap-1.5 flex-shrink-0">
             <div className="w-2.5 h-2.5 rounded-full bg-red-400"></div>
@@ -134,7 +134,7 @@ const CaseStudySnapshot = () => {
               </p>
               
               <div className="grid md:grid-cols-2 gap-6 mb-10 text-left">
-                <div className="flex gap-4 p-5 rounded-2xl bg-card border border-border shadow-sm">
+                <div className="flex gap-4 p-5 rounded-2xl bg-white/40 backdrop-blur-xl border border-white/60 shadow-sm">
                   <Target className="text-primary w-6 h-6 flex-shrink-0 mt-0.5" />
                   <div>
                     <h4 className="font-bold text-lg mb-2 text-foreground">The Problem</h4>
@@ -142,7 +142,7 @@ const CaseStudySnapshot = () => {
                   </div>
                 </div>
                 
-                <div className="flex gap-4 p-5 rounded-2xl bg-card border border-border shadow-sm">
+                <div className="flex gap-4 p-5 rounded-2xl bg-white/40 backdrop-blur-xl border border-white/60 shadow-sm">
                   <Activity className="text-primary w-6 h-6 flex-shrink-0 mt-0.5" />
                   <div>
                     <h4 className="font-bold text-lg mb-2 text-foreground">The Fix (Ads + Dev)</h4>
@@ -200,7 +200,7 @@ const CaseStudySnapshot = () => {
               </motion.div>
             </motion.div>
             
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6 bg-secondary/50 border border-border p-6 rounded-2xl shadow-sm mt-4">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6 bg-white/40 backdrop-blur-xl border border-white/60 p-6 rounded-2xl shadow-sm mt-4">
                 <div className="flex items-start gap-4 flex-1">
                     <CheckCircle2 className="text-primary w-6 h-6 flex-shrink-0 mt-0.5" />
                     <div>

@@ -244,39 +244,39 @@ const ServicesGrid = ({ filterKeyword, title, subtitle }: { filterKeyword?: stri
                 }}
                 whileHover={{ rotateX: 8, rotateY: -8, scale: 1.05, z: 30 }}
                 style={{ transformStyle: "preserve-3d" }}
-                className={`w-full h-full group flex flex-col bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10 shadow-sm hover:shadow-card-hover transition-all duration-300 relative`}
+                className={`w-full h-full group flex flex-col bg-white/40 backdrop-blur-2xl rounded-2xl p-6 border border-white/60 shadow-lg hover:shadow-card-hover transition-all duration-300 relative`}
               >
                 <div className="flex-1 z-10" style={{ transform: "translateZ(30px)" }}>
                   {service.image ? (
-                    <div className="w-full h-40 mb-5 rounded-xl overflow-hidden shadow-sm relative border border-white/20 bg-muted/20">
+                    <div className="w-full h-40 mb-5 rounded-xl overflow-hidden shadow-sm relative border border-white bg-white/50">
                       <img src={service.image} alt={service.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                     </div>
                   ) : (
-                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 shadow-[0_0_20px_rgba(255,255,255,0.1)] bg-white/10 border border-white/20 text-white`}>
+                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 shadow-sm bg-white/80 border border-white text-primary`}>
                       <Icon className="w-6 h-6" />
                     </div>
                   )}
-                  <h3 className="text-xl font-bold text-white mb-3 leading-tight tracking-tight">
+                  <h3 className="text-xl font-bold text-foreground mb-3 leading-tight tracking-tight">
                     {service.title}
                   </h3>
-                  <p className="text-white/70 text-sm font-medium leading-relaxed mb-6">
+                  <p className="text-muted-foreground text-sm font-medium leading-relaxed mb-6">
                     {service.desc}
                   </p>
                 </div>
 
                 <div className="z-10 mt-auto flex flex-col gap-3" style={{ transform: "translateZ(40px)" }}>
                   <div className="mb-2">
-                    <span className="bg-white/10 backdrop-blur-sm border border-white/20 px-3 py-1 rounded-full text-xs font-black shadow-sm tracking-wide text-white">
+                    <span className="bg-white/80 backdrop-blur-sm border border-white px-3 py-1 rounded-full text-xs font-black shadow-sm tracking-wide text-primary">
                       {service.price > 0 ? `₹ ${(service.price).toLocaleString("en-IN")}/PM` : "Custom"}
                     </span>
                   </div>
                   <div className="grid grid-cols-2 gap-2">
                     <Link to={`/product/${service.id}`} className="block w-full">
-                      <button className="w-full bg-white/5 hover:bg-white/20 backdrop-blur-md text-white py-2 rounded-lg text-xs font-bold transition-colors border border-white/10 hover:border-white/30">
+                      <button className="w-full bg-white/50 hover:bg-white backdrop-blur-md text-foreground py-2 rounded-lg text-xs font-bold transition-colors border border-white hover:border-primary/20 hover:text-primary hover:shadow-sm">
                         View Details
                       </button>
                     </Link>
-                    <button onClick={() => handleCheckout(service)} className="w-full bg-white hover:bg-white/90 text-black py-2 rounded-lg text-xs font-black transition-colors shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+                    <button onClick={() => handleCheckout(service)} className="w-full bg-primary hover:bg-primary-hover text-white py-2 rounded-lg text-xs font-black transition-colors shadow-md">
                       Quick Buy
                     </button>
                   </div>
