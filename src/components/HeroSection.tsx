@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   const containerRef = useRef<HTMLElement>(null);
-  
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"]
@@ -27,12 +27,12 @@ const HeroSection = () => {
 
       <motion.div style={{ y: textY, opacity: opacityFade }} className="container-main relative z-10">
         <div className="flex flex-col items-center text-center max-w-5xl mx-auto">
-          
+
           {/* Floating Top Badge */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: [0, -8, 0] }}
-            transition={{ 
+            transition={{
               opacity: { duration: 0.6, ease: "easeOut" },
               y: { duration: 4, repeat: Infinity, ease: "easeInOut" }
             }}
@@ -64,7 +64,7 @@ const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
             className="text-xl md:text-3xl font-black text-foreground uppercase tracking-widest mb-6 border border-border/50 bg-foreground/5 py-2 px-6 rounded-full inline-block"
           >
-            Dhanda ROAS Pay Nahi, ROI Pay Challta Hain
+            Dhanda ROAS Pay Nahi, ROI Pay Chalta Hain
           </motion.h2>
 
           {/* Subheading */}
@@ -90,7 +90,7 @@ const HeroSection = () => {
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
             </a>
-            
+
             <Link to="/portfolio" className="w-full sm:w-auto">
               <button aria-label="Check our Portfolio" className="w-full sm:w-auto flex items-center justify-center gap-2 bg-background border-2 border-border hover:border-foreground text-foreground px-10 py-5 rounded-full text-lg font-bold shadow-sm hover:shadow-md transition-all duration-300 min-w-[48px] min-h-[48px]">
                 Check our Portfolio
@@ -98,11 +98,11 @@ const HeroSection = () => {
             </Link>
           </motion.div>
 
-        {/* Social Proof Strip below CTA */}
-        <motion.div
-          initial={{ opacity: 0, filter: "blur(10px)" }}
-          animate={{ opacity: 1, filter: "blur(0px)" }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          {/* Social Proof Strip below CTA */}
+          <motion.div
+            initial={{ opacity: 0, filter: "blur(10px)" }}
+            animate={{ opacity: 1, filter: "blur(0px)" }}
+            transition={{ duration: 0.8, delay: 0.6 }}
             className="mt-16 flex flex-wrap items-center justify-center gap-x-10 gap-y-6 pt-10 border-t border-border/60 w-full"
           >
             <div className="flex items-center gap-3">

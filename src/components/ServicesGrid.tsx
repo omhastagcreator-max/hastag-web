@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Layers, MousePointerClick, Zap, MessageSquare, Video, Mic, LayoutGrid } from "lucide-react";
-import Papa from "papaparse";
+
 import { Link } from "react-router-dom";
 
 import { supabase } from "@/lib/supabase";
@@ -117,64 +117,8 @@ const ServicesGrid = ({ filterKeyword, title, subtitle }: { filterKeyword?: stri
           return;
        }
     } catch (e) {
-       console.log("Supabase fetch failed, executing local csv fallback:", e);
+       console.log("Supabase fetch failed", e);
     }
-    
-    // 2. Fallback to PapaParse CSV if Supabase is totally empty
-    loadCsvFallback();
-  };
-
-  const loadCsvFallback = () => {
-    fetch("/product.csv")
-      .then((response) => {
-        if (!response.ok) throw new Error("No product.csv found");
-        return response.text();
-      })
-      .then((csvText) => {
-        Papa.parse(csvText, {
-          header: true,
-          skipEmptyLines: true,
-          complete: (results) => {
-            const parsed = results.data
-              .filter((row: any) => Object.keys(row).length > 1)
-              .map((row: any, i) => {
-                const title = row.Name || row.name || row.Title || row.title || "Premium Service";
-                const descRaw = row['Short description'] || row.Description || row.description || "D2C Scaling infrastructure.";
-                let desc = descRaw.replace(/(<([^>]+)>)/gi, "").replace(/&nbsp;/g, " ").replace(/\\n/g, " ").replace(/\\r/g, " ").replace(/\n/g, " ").trim();
-                if (desc.length > 115) desc = desc.substring(0, 115) + "...";
-
-                const rawPrice = row['Regular price'] || row['Sale price'] || row.Price || row.price || "0";
-                const price = parseFloat(rawPrice.toString().replace(/[^0-9.]/g, '')) || 0;
-
-                const rawImages = row.Images || row.images || row['Image URL'] || "";
-                const image = rawImages.split(',')[0]?.trim();
-                
-                return {
-                  id: row.id || row.ID || row.sku || `fallback-${i}`,
-                  icon: iconMap[i % iconMap.length],
-                  image: image || null,
-                  title,
-                  desc,
-                  price,
-                  color: colorMap[i % colorMap.length],
-                };
-              });
-            
-            let finalParsed = parsed;
-            if (filterKeyword) {
-               finalParsed = parsed.filter((s: ServiceItem) => 
-                 s.title.toLowerCase().includes(filterKeyword.toLowerCase()) || 
-                 s.desc.toLowerCase().includes(filterKeyword.toLowerCase())
-               );
-            }
-
-            if (finalParsed.length > 0) {
-              setProducts(finalParsed);
-            }
-          },
-        });
-      })
-      .catch((err) => console.log("Using native products arsenal due to missing CSV", err));
   };
 
   const loadRazorpay = () => {

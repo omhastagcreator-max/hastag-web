@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { supabase } from "@/lib/supabase";
 import { useRazorpay } from "react-razorpay";
-import Papa from "papaparse";
+
 import { motion } from "framer-motion";
 import { ArrowLeft, ShoppingCart, CalendarRange, Check, ShieldCheck, Zap } from "lucide-react";
 
@@ -46,41 +46,7 @@ export default function ProductDetail() {
     } catch (e) {
       console.log("Supabase fetch failed", e);
     }
-    
-    // 2. CSV Failsafe
-    fetch("/product.csv")
-      .then((res) => res.text())
-      .then((csvText) => {
-        Papa.parse(csvText, {
-          header: true,
-          complete: (results) => {
-            const rawRow = results.data.find((row: any, i) => (row.id || row.ID || row.sku || `fallback-${i}`) === id);
-            if (rawRow) {
-               const row = rawRow as any;
-               const title = row.Name || row.name || row.Title || row.title || "Premium Service";
-               const description = row['Short description'] || row.Description || row.description || "D2C Scaling infrastructure.";
-               
-               const rawPrice = row['Regular price'] || row['Sale price'] || row.Price || row.price || "0";
-               const price = parseFloat(rawPrice.toString().replace(/[^0-9.]/g, '')) || 0;
-               
-               const rawImages = row.Images || row.images || row['Image URL'] || "";
-               const imagesArray = rawImages.split(',').map((img: string) => img.trim()).filter((img: string) => img.length > 0);
-               
-               setProduct({
-                 id: id,
-                 title,
-                 description: description.replace(/\\n/g, " ").replace(/\\r/g, " ").replace(/\n/g, " ").trim(),
-                 price,
-                 image: imagesArray[0] || null,
-                 gallery: imagesArray,
-               });
-               
-               if (imagesArray[0]) setActiveImage(imagesArray[0]);
-            }
-            setLoading(false);
-          }
-        });
-      });
+    setLoading(false);
   };
 
   const handleCheckout = () => {
