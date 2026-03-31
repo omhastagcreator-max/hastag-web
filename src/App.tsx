@@ -17,6 +17,7 @@ import WebDevelopment from "./pages/WebDevelopment.tsx";
 import PerformanceMarketing from "./pages/PerformanceMarketing.tsx";
 import Careers from "./pages/Careers.tsx";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import CustomCursor from "@/components/CustomCursor";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <CustomCursor />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />

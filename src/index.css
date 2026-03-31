@@ -4,49 +4,49 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 4%;
+    --background: 50 33% 98%;
+    --foreground: 222 47% 11%;
 
-    --card: 0 0% 99%;
-    --card-foreground: 240 10% 4%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 4%;
+    --popover-foreground: 222 47% 11%;
 
-    --primary: 221 83% 53%;
+    --primary: 193 100% 50%;
     --primary-foreground: 0 0% 100%;
-    --primary-hover: 221 83% 40%;
-    --primary-active: 221 83% 30%;
-    --primary-deep: 221 83% 20%;
+    --primary-hover: 213 100% 50%;
+    --primary-active: 222 100% 40%;
+    --primary-deep: 232 100% 30%;
 
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 240 10% 4%;
+    --secondary: 193 20% 96%;
+    --secondary-foreground: 222 47% 11%;
 
-    --muted: 0 0% 96%;
-    --muted-foreground: 240 4% 46%;
+    --muted: 193 20% 96%;
+    --muted-foreground: 215 16% 47%;
 
-    --accent: 221 83% 53%;
+    --accent: 193 100% 50%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 240 6% 90%;
-    --input: 240 6% 90%;
-    --ring: 240 10% 4%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 193 100% 50%;
 
-    --radius: 1rem;
+    --radius: 1.5rem;
 
-    --charcoal: 240 10% 4%;
+    --charcoal: 222 47% 11%;
     --charcoal-foreground: 0 0% 100%;
 
-    --gradient-primary: linear-gradient(135deg, #09090B 0%, #171717 100%);
+    --gradient-primary: linear-gradient(135deg, #00C6FF 0%, #0072FF 100%);
 
-    --shadow-synthetic: 0 10px 30px -10px rgba(0, 0, 0, 0.2);
-    --shadow-synthetic-hover: 0 20px 40px -12px rgba(0, 0, 0, 0.4);
+    --shadow-synthetic: 0 10px 30px -10px rgba(0, 198, 255, 0.4);
+    --shadow-synthetic-hover: 0 20px 40px -12px rgba(0, 114, 255, 0.5);
 
-    --shadow-card: 0 4px 14px 0 rgba(0, 0, 0, 0.03);
-    --shadow-card-hover: 0 30px 60px -12px rgba(0, 0, 0, 0.15), 0 18px 36px -18px rgba(0, 0, 0, 0.1);
+    --shadow-card: 0 4px 20px -2px rgba(0, 198, 255, 0.05);
+    --shadow-card-hover: 0 20px 40px -8px rgba(0, 198, 255, 0.15), 0 10px 20px -10px rgba(0, 114, 255, 0.1);
 
     --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 0 0% 0%;
@@ -62,6 +62,7 @@
 @layer base {
   * {
     @apply border-border;
+    cursor: none !important;
   }
   body {
     @apply bg-secondary/20 text-foreground font-body antialiased flex justify-center p-2 sm:p-4 md:p-8;
