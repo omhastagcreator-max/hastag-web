@@ -28,9 +28,9 @@ const Footer = () => (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div>
-            <Link to="/" className="inline-block mb-4">
-              <img src="/logo.png" alt="HastagCreator Logo" className="h-12 w-auto bg-white/90 p-2 rounded" />
-            </Link>
+            <Link to="/" className="flex items-center min-h-[48px] min-w-[48px]">
+          <img src="/logo.png" alt="HastagCreator Logo" width="160" height="40" className="h-10 w-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.1)] transition-transform hover:scale-105" />
+        </Link>
             <p className="text-sm text-charcoal-foreground/60 leading-relaxed">
               Leading India-based performance marketing agency. We deliver high ROI through Meta Ads, Google Ads, eCommerce store development, and CRO for global brands.
             </p>
