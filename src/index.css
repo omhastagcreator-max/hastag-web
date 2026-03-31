@@ -4,49 +4,49 @@
 
 @layer base {
   :root {
-    --background: 300 17% 98%;
-    --foreground: 288 16% 6%;
+    --background: 0 0% 100%;
+    --foreground: 240 10% 4%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 288 16% 6%;
+    --card: 0 0% 99%;
+    --card-foreground: 240 10% 4%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 288 16% 6%;
+    --popover-foreground: 240 10% 4%;
 
-    --primary: 314 100% 42%;
+    --primary: 221 83% 53%;
     --primary-foreground: 0 0% 100%;
-    --primary-hover: 314 100% 47%;
-    --primary-active: 314 100% 37%;
-    --primary-deep: 314 100% 32%;
+    --primary-hover: 221 83% 40%;
+    --primary-active: 221 83% 30%;
+    --primary-deep: 221 83% 20%;
 
-    --secondary: 300 5% 95%;
-    --secondary-foreground: 288 16% 6%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 240 10% 4%;
 
-    --muted: 300 5% 95%;
-    --muted-foreground: 288 5% 40%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 240 4% 46%;
 
-    --accent: 300 17% 98%;
-    --accent-foreground: 314 100% 42%;
+    --accent: 221 83% 53%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 300 5% 90%;
-    --input: 300 5% 90%;
-    --ring: 314 100% 42%;
+    --border: 240 6% 90%;
+    --input: 240 6% 90%;
+    --ring: 240 10% 4%;
 
-    --radius: 1.5rem;
+    --radius: 1rem;
 
-    --charcoal: 288 16% 6%;
+    --charcoal: 240 10% 4%;
     --charcoal-foreground: 0 0% 100%;
 
-    --gradient-primary: linear-gradient(135deg, #FF3E00 0%, #D800A6 100%);
+    --gradient-primary: linear-gradient(135deg, #09090B 0%, #171717 100%);
 
-    --shadow-synthetic: 0 8px 24px -6px rgba(216, 0, 166, 0.4);
-    --shadow-synthetic-hover: 0 12px 30px -4px rgba(216, 0, 166, 0.6);
+    --shadow-synthetic: 0 10px 30px -10px rgba(0, 0, 0, 0.2);
+    --shadow-synthetic-hover: 0 20px 40px -12px rgba(0, 0, 0, 0.4);
 
-    --shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.04);
-    --shadow-card-hover: 0 12px 30px -4px rgba(216, 0, 166, 0.15);
+    --shadow-card: 0 4px 14px 0 rgba(0, 0, 0, 0.03);
+    --shadow-card-hover: 0 30px 60px -12px rgba(0, 0, 0, 0.15), 0 18px 36px -18px rgba(0, 0, 0, 0.1);
 
     --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 0 0% 0%;
@@ -85,13 +85,14 @@
     background: var(--gradient-primary);
     color: white;
     box-shadow: var(--shadow-synthetic);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     transform: translateY(0);
-    @apply px-10 py-5 rounded-full text-lg font-bold flex items-center justify-center gap-3 border-none outline-none;
+    @apply px-10 py-5 rounded-full text-sm md:text-base font-bold flex items-center justify-center gap-3 border border-white/10 outline-none;
   }
   .btn-synthetic:hover {
-    transform: translateY(-2px);
+    transform: translateY(-4px);
     box-shadow: var(--shadow-synthetic-hover);
+    border-color: rgba(255,255,255,0.2);
   }
   .btn-synthetic:active {
     transform: translateY(1px);

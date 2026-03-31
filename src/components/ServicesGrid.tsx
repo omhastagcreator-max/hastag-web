@@ -208,7 +208,7 @@ const ServicesGrid = ({ filterKeyword, title, subtitle }: { filterKeyword?: stri
   };
 
   return (
-    <section className="py-24 bg-secondary/50 relative overflow-hidden" id="services">
+    <section className="py-24 bg-secondary/50 relative" id="services">
       <div className="container-main">
         <div className="max-w-3xl mb-16">
           <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">Our Services</span>
@@ -244,7 +244,7 @@ const ServicesGrid = ({ filterKeyword, title, subtitle }: { filterKeyword?: stri
               }}
               whileHover={{ rotateX: 5, rotateY: -5, scale: 1.02, z: 20 }}
               style={{ transformStyle: "preserve-3d" }}
-              className={`group flex flex-col bg-card rounded-2xl p-6 border border-border shadow-sm hover:shadow-card-hover transition-shadow duration-300 relative overflow-hidden`}
+              className={`group flex flex-col bg-card rounded-2xl p-6 border border-border shadow-sm hover:shadow-card-hover transition-shadow duration-300 relative`}
             >
               <div className="flex-1 z-10">
                 {service.image ? (

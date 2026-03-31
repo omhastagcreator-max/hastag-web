@@ -56,8 +56,6 @@ const Index = () => {
       <WhyChooseUs />
       <GoogleReviews />
       <Testimonial />
-      <Process />
-      <Process />
 
       <LeadForm />
       <FAQ />

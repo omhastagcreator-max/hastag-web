@@ -110,7 +110,7 @@ const CaseStudySnapshot = () => {
 
   return (
     <>
-      <section className="py-16 md:py-24 bg-muted/10 border-y border-border relative overflow-hidden" id="case-studies">
+      <section className="py-16 md:py-24 bg-muted/10 border-y border-border relative" id="case-studies">
         {/* Decorative */}
         <div className="absolute top-0 right-0 w-full md:w-[60vw] h-[80vh] bg-gradient-to-bl from-primary/5 to-transparent rounded-full blur-3xl pointer-events-none" />
 
