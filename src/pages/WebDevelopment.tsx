@@ -83,13 +83,13 @@ export default function WebDevelopment() {
            <div className="container-main px-4 max-w-5xl">
               <div className="flex flex-col md:flex-row items-center gap-16">
                  <div className="w-full md:w-1/2">
-                    <span className="text-red-500 font-bold tracking-widest uppercase text-sm mb-4 block">The Hard Truth</span>
-                    <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight">You don't have a traffic problem. You have a checkout problem.</h2>
+                    <span className="text-red-500 font-bold tracking-widest uppercase text-sm mb-4 block">The Real Challenge</span>
+                    <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight">Traffic without Conversion is an incomplete system.</h2>
                     <p className="text-muted-foreground text-lg mb-6 leading-relaxed">
-                       Most founders burn lakhs on Meta Ads to drive traffic to a cheap, poorly built website. The visitors come, but they leave without buying. You are literally throwing away expensive traffic.
+                       Many founders invest heavily in Meta Ads to drive traffic to a standard website. The visitors arrive, but they often leave without completing the purchase. This results in highly expensive drops in the funnel.
                     </p>
                     <p className="text-muted-foreground text-lg font-medium leading-relaxed">
-                       If your Conversion Rate is stuck at 1.2%, spending more on ads is useless. We fix the checkout flow first, because that's the *asli game*.
+                       If your Conversion Rate is stuck below 2%, increasing ad spend is inefficient. We optimize the core user experience first, because that's the *asli game*.
                     </p>
                  </div>
                  <div className="w-full md:w-1/2 relative">
@@ -124,8 +124,8 @@ export default function WebDevelopment() {
         <div className="py-24 bg-background">
            <div className="container-main px-4 max-w-5xl">
               <div className="text-center mb-16">
-                 <h2 className="text-3xl md:text-5xl font-black mb-4 tracking-tight">Cheap vs HastagCreator</h2>
-                 <p className="text-muted-foreground text-lg">Why saving money on a freelancer ends up costing you lakhs in lost sales.</p>
+                 <h2 className="text-3xl md:text-5xl font-black mb-4 tracking-tight">Standard vs HastagCreator</h2>
+                 <p className="text-muted-foreground text-lg">See how an optimized infrastructure directly impacts your bottom line.</p>
               </div>
 
               <div className="overflow-x-auto">
@@ -133,30 +133,30 @@ export default function WebDevelopment() {
                     <thead>
                        <tr>
                           <th className="p-6 border-b border-border/50 text-muted-foreground font-bold w-1/3 text-xl">The Difference</th>
-                          <th className="p-6 border-b border-border/50 bg-red-500/5 text-red-500 font-black w-1/3 text-center rounded-tl-2xl">Normal Freelancer</th>
+                          <th className="p-6 border-b border-border/50 bg-red-500/5 text-red-500 font-black w-1/3 text-center rounded-tl-2xl">Standard Templates</th>
                           <th className="p-6 border-b border-border/50 bg-primary/10 text-primary font-black w-1/3 text-center rounded-tr-2xl">HastagCreator System</th>
                        </tr>
                     </thead>
                     <tbody className="font-medium">
                        <tr>
                           <td className="p-6 border-b border-border/50">Website Speed</td>
-                          <td className="p-6 border-b border-border/50 bg-red-500/5 text-center text-muted-foreground">Very slow to load. Half the traffic bounces.</td>
-                          <td className="p-6 border-b border-border/50 bg-primary/5 text-center font-bold text-foreground">Lightning fast. Opens in under 1.2 seconds.</td>
+                          <td className="p-6 border-b border-border/50 bg-red-500/5 text-center text-muted-foreground">Standard loading times. Occasional traffic bounce.</td>
+                          <td className="p-6 border-b border-border/50 bg-primary/5 text-center font-bold text-foreground">Lightning fast code. Opens seamlessly globally.</td>
                        </tr>
                        <tr>
                           <td className="p-6 border-b border-border/50">Design Logic</td>
-                          <td className="p-6 border-b border-border/50 bg-red-500/5 text-center text-muted-foreground">"Whatever looks pretty, sir." No strategy.</td>
-                          <td className="p-6 border-b border-border/50 bg-primary/5 text-center font-bold text-foreground">Designed strictly on buyer psychology and heatmaps.</td>
+                          <td className="p-6 border-b border-border/50 bg-red-500/5 text-center text-muted-foreground">Purely aesthetic decisions based on basic themes.</td>
+                          <td className="p-6 border-b border-border/50 bg-primary/5 text-center font-bold text-foreground">Designed proactively using buyer psychology and heatmaps.</td>
                        </tr>
                        <tr>
                           <td className="p-6 border-b border-border/50">Checkout Flow</td>
-                          <td className="p-6 border-b border-border/50 bg-red-500/5 text-center text-muted-foreground">Long, boring 4-step forms. High drop-off rate.</td>
-                          <td className="p-6 border-b border-border/50 bg-primary/5 text-center font-bold text-foreground">Smooth, 1-page checkout so people pay without thinking twice.</td>
+                          <td className="p-6 border-b border-border/50 bg-red-500/5 text-center text-muted-foreground">Traditional 4-step forms. Higher drop-off risk.</td>
+                          <td className="p-6 border-b border-border/50 bg-primary/5 text-center font-bold text-foreground">Smooth, 1-page checkout so people pay easily and securely.</td>
                        </tr>
                        <tr>
                           <td className="p-6 border-b border-border/50">Average Order Value (AOV)</td>
-                          <td className="p-6 border-b border-border/50 bg-red-500/5 text-center text-muted-foreground">Zero effort. Customer buys just one thing.</td>
-                          <td className="p-6 border-b border-border/50 bg-primary/10 text-center font-black text-primary rounded-br-2xl text-[15px]">Automated 1-click upsells post-purchase. Maximum *Paisa Vasool*.</td>
+                          <td className="p-6 border-b border-border/50 bg-red-500/5 text-center text-muted-foreground">Standard singular purchases.</td>
+                          <td className="p-6 border-b border-border/50 bg-primary/10 text-center font-black text-primary rounded-br-2xl text-[15px]">Automated 1-click upsells post-purchase. Maximum value per order.</td>
                        </tr>
                     </tbody>
                  </table>

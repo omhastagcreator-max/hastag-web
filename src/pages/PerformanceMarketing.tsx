@@ -95,7 +95,7 @@ export default function PerformanceMarketing() {
                     <div className="absolute inset-0 bg-emerald-500/20 blur-3xl rounded-full"></div>
                     <div className="bg-card p-8 rounded-3xl border border-border/50 shadow-2xl relative z-10 flex flex-col gap-6">
                        <div className="flex items-center justify-between border-b border-border/50 pb-4">
-                          <span className="text-muted-foreground font-bold">Standard Agencies</span>
+                          <span className="text-muted-foreground font-bold">Traditional Methods</span>
                           <span className="text-red-400 font-black">"Sirf Clicks Lao"</span>
                        </div>
                        <div className="flex items-center justify-between border-b border-border/50 pb-4">

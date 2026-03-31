@@ -85,19 +85,19 @@ export default function InfluencerUGC() {
                  <div className="grid md:grid-cols-2">
                     <div className="p-10 md:p-16 bg-red-500/5 relative overflow-hidden">
                        <span className="text-red-500 font-black tracking-widest uppercase text-xs mb-4 block">The Problem</span>
-                       <h3 className="text-3xl font-black mb-4">You are paying for Dancing.</h3>
+                       <h3 className="text-3xl font-black mb-4">You are paying for Vanity Metrics.</h3>
                        <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-                          90% of Influencer campaigns fail because brands pay models just for "reach" and "views". 
-                          A pretty reel on a trending audio gets you 1 lakh views but <strong className="text-foreground">zero sales.</strong> 
-                          This is literally burning money.
+                          Many brand campaigns struggle because they prioritize basic "reach" and "views" over targeted consumer action. 
+                          A pretty reel on a trending audio may get you 1 lakh views, but without structure, it yields <strong className="text-foreground">zero sales.</strong> 
+                          This results in an inefficient return on ad spend.
                        </p>
                     </div>
                     <div className="p-10 md:p-16 bg-emerald-500/5 relative overflow-hidden border-t md:border-t-0 md:border-l border-border/50">
                        <span className="text-emerald-500 font-black tracking-widest uppercase text-xs mb-4 block">The Solution</span>
                        <h3 className="text-3xl font-black mb-4">We engineer Sales Scripts.</h3>
                        <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-                          Our creators don't dance. They execute actual direct-response sales scripts. 
-                          We write exact <strong className="text-foreground">Scroll-Stopping Hooks</strong>, hit the customer's exact pain point, and force them to click "Buy Now" on your Meta Ads. *Paisa Vasool* marketing.
+                          Our network of creators execute actual direct-response sales scripts. 
+                          We write exact <strong className="text-foreground">Scroll-Stopping Hooks</strong>, address the customer's exact pain point, and guide them directly to click "Buy Now" on your Meta Ads. *Paisa Vasool* marketing.
                        </p>
                     </div>
                  </div>
