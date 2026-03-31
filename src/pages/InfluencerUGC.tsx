@@ -21,20 +21,20 @@ const brandVideos = [
   { id: 10, title: "Community Spotlight", views: "750K", duration: "0:20" },
 ];
 
-const VideoCard = ({ video }: { video: { id: number, title: string, views: string, duration: string } }) => (
-  <div className="shrink-0 w-[42vw] sm:w-[30vw] md:w-64 aspect-[9/16] bg-muted/30 rounded-2xl overflow-hidden relative group cursor-pointer border border-border/50 snap-center shadow-lg">
-    {/* Placeholder Background (Simulates Video Poster) */}
-    <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a] to-[#0a0a0a] group-hover:scale-105 transition-transform duration-500"></div>
+const VideoCard = ({ video, src }: { video: { id: number, title: string, views: string, duration: string }, src: string }) => (
+  <div className="shrink-0 w-[45vw] sm:w-[30vw] md:w-64 aspect-[9/16] bg-muted/30 rounded-2xl overflow-hidden relative group cursor-pointer border border-border/50 shadow-lg">
+    {/* Live Autoplaying Video */}
+    <video 
+      src={src}
+      autoPlay 
+      muted 
+      loop 
+      playsInline 
+      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+    />
     
     {/* Overlay Gradient for Text */}
-    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-    
-    {/* Center Play Button */}
-    <div className="absolute inset-0 flex items-center justify-center">
-      <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 group-hover:bg-primary/90 group-hover:scale-110 transition-all duration-300">
-        <Play className="w-5 h-5 md:w-6 md:h-6 text-white ml-1" fill="currentColor" />
-      </div>
-    </div>
+    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none"></div>
     
     {/* Bottom Metadata */}
     <div className="absolute bottom-0 inset-x-0 p-3 md:p-4">
@@ -142,15 +142,17 @@ export default function InfluencerUGC() {
                 <p className="text-muted-foreground font-medium text-sm md:text-base">Videos optimized purely for low-CPA conversions and ROAS scaling.</p>
               </div>
             </div>
-            {/* The Horizontal Carousel */}
-            <div className="w-full relative">
-              <div className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar pl-4 md:pl-8 pr-8 gap-3 md:gap-5 pb-8">
-                {salesVideos.map((video) => (
-                  <VideoCard key={`sales-${video.id}`} video={video} />
+            {/* The Infinite Marquee (Left to Right) */}
+            <div className="w-full relative overflow-hidden flex" style={{ maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)" }}>
+              <motion.div 
+                className="flex gap-4 md:gap-5 w-max"
+                animate={{ x: ["0%", "-50%"] }}
+                transition={{ ease: "linear", duration: 30, repeat: Infinity }}
+              >
+                {[...salesVideos, ...salesVideos, ...salesVideos, ...salesVideos].map((video, idx) => (
+                  <VideoCard key={`sales-${idx}`} video={video} src="https://videos.pexels.com/video-files/5305118/5305118-hd_720_1366_25fps.mp4" />
                 ))}
-                {/* Padding element for right edge */}
-                <div className="shrink-0 w-4 md:w-8"></div>
-              </div>
+              </motion.div>
             </div>
           </section>
 
@@ -162,15 +164,17 @@ export default function InfluencerUGC() {
                 <p className="text-muted-foreground font-medium text-sm md:text-base">Top-of-funnel storytelling to build viral organic reach and community trust.</p>
               </div>
             </div>
-            {/* The Horizontal Carousel */}
-            <div className="w-full relative">
-              <div className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar pl-4 md:pl-8 pr-8 gap-3 md:gap-5 pb-8">
-                {brandVideos.map((video) => (
-                  <VideoCard key={`brand-${video.id}`} video={video} />
+            {/* The Infinite Marquee (Right to Left / Reverse) */}
+            <div className="w-full relative overflow-hidden flex" style={{ maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)" }}>
+              <motion.div 
+                className="flex gap-4 md:gap-5 w-max"
+                animate={{ x: ["-50%", "0%"] }}
+                transition={{ ease: "linear", duration: 35, repeat: Infinity }}
+              >
+                {[...brandVideos, ...brandVideos, ...brandVideos, ...brandVideos].map((video, idx) => (
+                  <VideoCard key={`brand-${idx}`} video={video} src="https://videos.pexels.com/video-files/8099307/8099307-hd_720_1280_30fps.mp4" />
                 ))}
-                {/* Padding element for right edge */}
-                <div className="shrink-0 w-4 md:w-8"></div>
-              </div>
+              </motion.div>
             </div>
           </section>
           
