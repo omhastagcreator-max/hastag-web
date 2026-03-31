@@ -78,7 +78,61 @@ export default function InfluencerUGC() {
            </div>
         </div>
 
-        <div className="py-16 md:py-24 space-y-20">
+        {/* Dancing vs Selling Module */}
+        <div className="py-24 bg-background">
+           <div className="container-main px-4 max-w-6xl">
+              <div className="bg-card border border-border/50 rounded-3xl overflow-hidden shadow-2xl">
+                 <div className="grid md:grid-cols-2">
+                    <div className="p-10 md:p-16 bg-red-500/5 relative overflow-hidden">
+                       <span className="text-red-500 font-black tracking-widest uppercase text-xs mb-4 block">The Problem</span>
+                       <h3 className="text-3xl font-black mb-4">You are paying for Dancing.</h3>
+                       <p className="text-muted-foreground text-lg leading-relaxed mb-6">
+                          90% of Influencer campaigns fail because brands pay Instagram models for "reach" instead of Conversion. 
+                          A pretty face holding your product to a trending audio gets you 100,000 views and <strong className="text-foreground">zero checkout events.</strong> 
+                          This is technically known as vanity-metric burning.
+                       </p>
+                    </div>
+                    <div className="p-10 md:p-16 bg-emerald-500/5 relative overflow-hidden border-t md:border-t-0 md:border-l border-border/50">
+                       <span className="text-emerald-500 font-black tracking-widest uppercase text-xs mb-4 block">The Solution</span>
+                       <h3 className="text-3xl font-black mb-4">We engineer Selling.</h3>
+                       <p className="text-muted-foreground text-lg leading-relaxed mb-6">
+                          Our creators don't dance. They execute mathematically proven direct-response scripts. 
+                          We write exact <strong className="text-foreground">Scroll-Stopping Hooks</strong>, agitate your customer's deepest pain points, and transition violently into a frictionless Call-To-Action that drives immediate ROI on Meta and TikTok Ads.
+                       </p>
+                    </div>
+                 </div>
+              </div>
+
+              {/* Hook Anatomy */}
+              <div className="mt-16 text-center max-w-4xl mx-auto">
+                 <h3 className="text-2xl font-black mb-8">The Anatomy of a million-dollar UGC ad:</h3>
+                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-left">
+                    <div className="bg-secondary/40 p-5 rounded-2xl border border-border">
+                       <span className="text-primary font-black text-xs mb-1 block">0-3s</span>
+                       <h4 className="font-bold text-[15px] mb-2">The Visual Hook</h4>
+                       <p className="text-xs text-muted-foreground">Arrest the scroll using high native contrast.</p>
+                    </div>
+                    <div className="bg-secondary/40 p-5 rounded-2xl border border-border">
+                       <span className="text-primary font-black text-xs mb-1 block">3-8s</span>
+                       <h4 className="font-bold text-[15px] mb-2">Pain Agitation</h4>
+                       <p className="text-xs text-muted-foreground">Verbally confirm the exact problem they suffer from.</p>
+                    </div>
+                    <div className="bg-secondary/40 p-5 rounded-2xl border border-border">
+                       <span className="text-primary font-black text-xs mb-1 block">8-20s</span>
+                       <h4 className="font-bold text-[15px] mb-2">The Mechanism</h4>
+                       <p className="text-xs text-muted-foreground">Explain why your product solves it differently.</p>
+                    </div>
+                    <div className="bg-secondary/40 p-5 rounded-2xl border border-border bg-primary/5 border-primary/20">
+                       <span className="text-primary font-black text-xs mb-1 block">20-25s</span>
+                       <h4 className="font-bold text-[15px] mb-2">Direct Response CTA</h4>
+                       <p className="text-xs text-muted-foreground">Clear, urgent directive to exit the app and buy.</p>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+
+        <div className="py-16 md:py-24 space-y-20 bg-secondary/10 border-t border-border/50">
           
           {/* Category 1: Sales Focused */}
           <section>

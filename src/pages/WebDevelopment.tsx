@@ -78,6 +78,92 @@ export default function WebDevelopment() {
            </div>
         </div>
 
+        {/* The Leaky Bucket Presentation Slide */}
+        <div className="py-24 bg-secondary/20 border-y border-border/50">
+           <div className="container-main px-4 max-w-5xl">
+              <div className="flex flex-col md:flex-row items-center gap-16">
+                 <div className="w-full md:w-1/2">
+                    <span className="text-red-500 font-bold tracking-widest uppercase text-sm mb-4 block">The Industry Dirty Secret</span>
+                    <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight">You don't have a traffic problem. You have a bucket problem.</h2>
+                    <p className="text-muted-foreground text-lg mb-6 leading-relaxed">
+                       Most founders burn 80% of their operational budget on Meta Ads driving hyper-targeted traffic to a generic Shopify template that looks pretty but bleeds conversions at every step of the funnel.
+                    </p>
+                    <p className="text-muted-foreground text-lg font-medium leading-relaxed">
+                       Pouring ad-spend into a website with a 1.2% Conversion Rate is literally setting cash on fire. We fix the leaks first.
+                    </p>
+                 </div>
+                 <div className="w-full md:w-1/2 relative">
+                    <div className="absolute inset-0 bg-red-500/20 blur-3xl rounded-full"></div>
+                    <div className="bg-card p-8 rounded-3xl border border-border/50 shadow-2xl relative z-10">
+                       <h3 className="text-xl font-bold mb-6 text-center border-b border-border/50 pb-4">The Mathematics of CRO</h3>
+                       <div className="space-y-4 font-mono text-sm">
+                          <div className="flex justify-between items-center text-red-400">
+                             <span>Traffic (₹100k Ad Spend)</span>
+                             <span>10,000 Clicks</span>
+                          </div>
+                          <div className="flex justify-between items-center text-muted-foreground">
+                             <span>Standard CVR (1.2%)</span>
+                             <span>120 Sales</span>
+                          </div>
+                          <div className="h-px bg-border my-2"></div>
+                          <div className="flex justify-between items-center text-emerald-400 font-bold text-base">
+                             <span>HastagCreator CVR (3.5%)</span>
+                             <span>350 Sales</span>
+                          </div>
+                          <div className="mt-6 text-center text-muted-foreground text-xs italic">
+                             *Exact same ad spend. 290% increase in pure net revenue simply by engineering a better destination.*
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+
+        {/* The Contrast Table */}
+        <div className="py-24 bg-background">
+           <div className="container-main px-4 max-w-5xl">
+              <div className="text-center mb-16">
+                 <h2 className="text-3xl md:text-5xl font-black mb-4 tracking-tight">A 5th Grader vs HastagCreator</h2>
+                 <p className="text-muted-foreground text-lg">Why "cheaper" developers actually cost you millions in lost revenue.</p>
+              </div>
+
+              <div className="overflow-x-auto">
+                 <table className="w-full text-left border-collapse">
+                    <thead>
+                       <tr>
+                          <th className="p-6 border-b border-border/50 text-muted-foreground font-bold w-1/3 text-xl">The Feature</th>
+                          <th className="p-6 border-b border-border/50 bg-red-500/5 text-red-500 font-black w-1/3 text-center rounded-tl-2xl">A Generic Agency / Freelancer</th>
+                          <th className="p-6 border-b border-border/50 bg-primary/10 text-primary font-black w-1/3 text-center rounded-tr-2xl">HastagCreator Infrastructure</th>
+                       </tr>
+                    </thead>
+                    <tbody className="font-medium">
+                       <tr>
+                          <td className="p-6 border-b border-border/50">Speed & Architecture</td>
+                          <td className="p-6 border-b border-border/50 bg-red-500/5 text-center text-muted-foreground">Bloated 4-second load times. Loss of mobile traffic.</td>
+                          <td className="p-6 border-b border-border/50 bg-primary/5 text-center font-bold text-foreground">Pre-fetched routing. Sub 1.2s loading metrics globally.</td>
+                       </tr>
+                       <tr>
+                          <td className="p-6 border-b border-border/50">Design Philosophy</td>
+                          <td className="p-6 border-b border-border/50 bg-red-500/5 text-center text-muted-foreground">"Make it look pretty." Generic layouts based on CEO feelings.</td>
+                          <td className="p-6 border-b border-border/50 bg-primary/5 text-center font-bold text-foreground">A/B Tested Heatmaps. UI elements engineered strictly from buyer psychology.</td>
+                       </tr>
+                       <tr>
+                          <td className="p-6 border-b border-border/50">Checkout Friction</td>
+                          <td className="p-6 border-b border-border/50 bg-red-500/5 text-center text-muted-foreground">Standard 4-step Shopify cart causing 60% drop-offs.</td>
+                          <td className="p-6 border-b border-border/50 bg-primary/5 text-center font-bold text-foreground">Frictionless 1-page checkouts with embedded trust anchoring protocols.</td>
+                       </tr>
+                       <tr>
+                          <td className="p-6 border-b border-border/50">Average Order Value (AOV)</td>
+                          <td className="p-6 border-b border-border/50 bg-red-500/5 text-center text-muted-foreground">None to little. Hoping the customer buys more manually.</td>
+                          <td className="p-6 border-b border-border/50 bg-primary/10 text-center font-black text-primary rounded-br-2xl text-[15px]">Algorithmic Post-Purchase 1-Click Upsells pushing AOV up by 22% instantly.</td>
+                       </tr>
+                    </tbody>
+                 </table>
+              </div>
+           </div>
+        </div>
+
         {/* Attached Services via dynamic Prop */}
         <ServicesGrid 
            filterKeyword="web" 

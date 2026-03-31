@@ -77,6 +77,70 @@ export default function PerformanceMarketing() {
            </div>
         </div>
 
+        {/* The Economics vs Marketing Module */}
+        <div className="py-24 bg-secondary/20 border-y border-border/50">
+           <div className="container-main px-4 max-w-5xl">
+              <div className="flex flex-col md:flex-row-reverse items-center gap-16">
+                 <div className="w-full md:w-1/2">
+                    <span className="text-emerald-500 font-bold tracking-widest uppercase text-sm mb-4 block">Unit Economics</span>
+                    <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight">Marketing is dead.  We do Contribution Margin Math.</h2>
+                    <p className="text-muted-foreground text-lg mb-6 leading-relaxed">
+                       If an agency is reporting on "Clicks", "Reach", or "Engagement", fire them immediately. We only care about two numbers: Customer Acquisition Cost (CAC) and Lifetime Value (LTV).
+                    </p>
+                    <p className="text-muted-foreground text-lg font-medium leading-relaxed">
+                       We calculate your exact gross margins and COGS before we spend a single rupee. Every ad campaign we launch is mathematically engineered to be net-profitable from day one.
+                    </p>
+                 </div>
+                 <div className="w-full md:w-1/2 relative">
+                    <div className="absolute inset-0 bg-emerald-500/20 blur-3xl rounded-full"></div>
+                    <div className="bg-card p-8 rounded-3xl border border-border/50 shadow-2xl relative z-10 flex flex-col gap-6">
+                       <div className="flex items-center justify-between border-b border-border/50 pb-4">
+                          <span className="text-muted-foreground font-bold">Standard Agency Goal</span>
+                          <span className="text-red-400 font-black">"Lower the CPM"</span>
+                       </div>
+                       <div className="flex items-center justify-between border-b border-border/50 pb-4">
+                          <span className="text-muted-foreground font-bold">HastagCreator Goal</span>
+                          <span className="text-emerald-400 font-black">"Maximum Net Profit"</span>
+                       </div>
+                       <div className="bg-primary/5 p-4 rounded-xl border border-primary/20">
+                          <p className="text-sm font-medium mb-2 text-primary">The Winning Formula:</p>
+                          <p className="text-xl font-black tracking-tight">(AOV * Repurchase Rate) &gt; (CAC + COGS)</p>
+                       </div>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+
+        {/* The AI Feedback Loop Section */}
+        <div className="py-24 bg-background">
+           <div className="container-main px-4 max-w-5xl text-center">
+              <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">Algorithmic Training</span>
+              <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight">We train Meta's AI to hunt for you.</h2>
+              <p className="text-muted-foreground text-lg max-w-3xl mx-auto mb-16 leading-relaxed">
+                 We don't "guess" targeting anymore. We implement advanced server-side tracking (CAPI) that feeds strictly High-LTV purchase data directly into the cerebral cortex of Meta and Google's machine learning, forcing them to find clones of your absolute best customers.
+              </p>
+
+              <div className="grid md:grid-cols-3 gap-6 text-left">
+                 <div className="bg-card border border-border/50 p-6 rounded-2xl relative overflow-hidden group">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl group-hover:bg-blue-500/20 transition-all"></div>
+                    <h4 className="text-xl font-bold mb-2">1. Data Injection</h4>
+                    <p className="text-sm text-muted-foreground relative z-10">We pass robust offline conversion events avoiding iOS14 signal loss entirely.</p>
+                 </div>
+                 <div className="bg-card border border-border/50 p-6 rounded-2xl relative overflow-hidden group">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 rounded-full blur-2xl group-hover:bg-purple-500/20 transition-all"></div>
+                    <h4 className="text-xl font-bold mb-2">2. Pattern Recognition</h4>
+                    <p className="text-sm text-muted-foreground relative z-10">The platforms analyze 10,000+ data points of your buyers to build a predictive LTV model.</p>
+                 </div>
+                 <div className="bg-card border border-border/50 p-6 rounded-2xl relative overflow-hidden group">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition-all"></div>
+                    <h4 className="text-xl font-bold mb-2">3. Aggressive Scaling</h4>
+                    <p className="text-sm text-muted-foreground relative z-10">Once the machine learns the pattern, we uncap budgets and scale your revenue vertically.</p>
+                 </div>
+              </div>
+           </div>
+        </div>
+
         {/* Attached Services via dynamic Prop */}
         <ServicesGrid 
            filterKeyword="ad" 
