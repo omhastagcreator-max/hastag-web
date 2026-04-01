@@ -1,53 +1,66 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Play } from "lucide-react";
+import { supabase } from "@/lib/supabase";
 
-// Placeholder data for video assets
-const salesVideos = [
-  { id: 1, title: "Checkout Drop-off Hook", views: "1.2M", duration: "0:15" },
-  { id: 2, title: "Pain-Point Agitator", views: "850K", duration: "0:22" },
-  { id: 3, title: "Urgency Offer Pitch", views: "2.1M", duration: "0:18" },
-  { id: 4, title: "Founder Story UGC", views: "500K", duration: "0:30" },
-  { id: 5, title: "Unboxing Reaction", views: "1.5M", duration: "0:25" },
+const fallbackVideos = [
+  { id: 901, title: "Checkout Drop-off Hook", views: "1.2M", duration: "0:15", category: "sales", video_url: "https://videos.pexels.com/video-files/5305118/5305118-hd_720_1366_25fps.mp4" },
+  { id: 902, title: "Pain-Point Agitator", views: "850K", duration: "0:22", category: "sales", video_url: "https://videos.pexels.com/video-files/5305118/5305118-hd_720_1366_25fps.mp4" },
+  { id: 903, title: "Urgency Offer Pitch", views: "2.1M", duration: "0:18", category: "sales", video_url: "https://videos.pexels.com/video-files/5305118/5305118-hd_720_1366_25fps.mp4" },
+  { id: 906, title: "Viral Aesthetic B-Roll", views: "3.2M", duration: "0:12", category: "brand", video_url: "https://videos.pexels.com/video-files/8099307/8099307-hd_720_1280_30fps.mp4" },
+  { id: 907, title: "Lifestyle Integration", views: "900K", duration: "0:28", category: "brand", video_url: "https://videos.pexels.com/video-files/8099307/8099307-hd_720_1280_30fps.mp4" },
+  { id: 908, title: "Behind The Scenes", views: "1.1M", duration: "0:35", category: "brand", video_url: "https://videos.pexels.com/video-files/8099307/8099307-hd_720_1280_30fps.mp4" },
 ];
 
-const brandVideos = [
-  { id: 6, title: "Viral Aesthetic B-Roll", views: "3.2M", duration: "0:12" },
-  { id: 7, title: "Lifestyle Integration", views: "900K", duration: "0:28" },
-  { id: 8, title: "Behind The Scenes", views: "1.1M", duration: "0:35" },
-  { id: 9, title: "Macro-Influencer Collab", views: "4.5M", duration: "0:45" },
-  { id: 10, title: "Community Spotlight", views: "750K", duration: "0:20" },
-];
+const VideoCard = ({ video }: { video: any }) => {
+  const isIg = video.video_url?.includes('instagram.com');
+  const src = isIg ? `${video.video_url.split('?')[0].replace(/\/$/, '')}/embed/?autoplay=1&muted=1` : (video.video_url || fallbackVideos[0].video_url);
 
-const VideoCard = ({ video, src }: { video: { id: number, title: string, views: string, duration: string }, src: string }) => (
-  <div className="shrink-0 w-[45vw] sm:w-[30vw] md:w-64 aspect-[9/16] bg-muted/30 rounded-2xl overflow-hidden relative group cursor-pointer border border-border/50 shadow-lg">
-    {/* Live Autoplaying Video */}
-    <video 
-      src={src}
-      autoPlay 
-      muted 
-      loop 
-      playsInline 
-      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-    />
-    
-    {/* Overlay Gradient for Text */}
-    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none"></div>
-    
-    {/* Bottom Metadata */}
-    <div className="absolute bottom-0 inset-x-0 p-3 md:p-4">
-      <span className="bg-white/10 backdrop-blur-md text-white/90 text-[9px] md:text-[10px] font-bold px-2 py-1 rounded mb-2 inline-block">
-        {video.duration}
-      </span>
-      <h3 className="text-white font-black text-xs md:text-sm leading-tight mb-1">{video.title}</h3>
-      <p className="text-white/60 text-[10px] md:text-xs font-semibold">{video.views} Views</p>
+  return (
+    <div className="shrink-0 w-[45vw] sm:w-[30vw] md:w-[280px] aspect-[9/16] bg-muted/30 rounded-2xl overflow-hidden relative group cursor-pointer border border-border/50 shadow-lg">
+      {/* Live Autoplaying Video or IG Embed */}
+      {isIg ? (
+         <div className="absolute inset-0 w-full h-[105%] pointer-events-none">
+            <iframe 
+              src={src}
+              className="w-full h-full scale-[1.02] transform origin-center group-hover:scale-[1.05] transition-transform duration-500"
+              frameBorder="0"
+              scrolling="no"
+              allow="autoplay; encrypted-media"
+              allowTransparency
+            />
+         </div>
+      ) : (
+         <video 
+           src={src}
+           autoPlay 
+           muted 
+           loop 
+           playsInline 
+           className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+         />
+      )}
+      
+      {/* Overlay Gradient for Text */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none"></div>
+      
+      {/* Bottom Metadata */}
+      <div className="absolute bottom-0 inset-x-0 p-4 md:p-5 pointer-events-none">
+        <span className="bg-white/10 backdrop-blur-md text-white/90 text-[10px] md:text-xs font-bold px-2.5 py-1 rounded mb-2 inline-block">
+          {video.duration}
+        </span>
+        <h3 className="text-white font-black text-sm md:text-base leading-tight mb-1">{video.title}</h3>
+        <p className="text-white/60 text-[11px] md:text-xs font-semibold">{video.views} Views</p>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default function InfluencerUGC() {
+  const [videos, setVideos] = useState<any[]>([]);
+
   useEffect(() => {
     window.scrollTo(0, 0);
     document.title = "High-Converting UGC & Influencer Ads | HastagCreator";
@@ -55,7 +68,35 @@ export default function InfluencerUGC() {
     if (metaDesc) {
        metaDesc.setAttribute("content", "Explore our gallery of purely sales-focused and brand-awareness UGC videos. Delivered in native 9:16 aspect ratio for maximum TikTok and Reel conversions.");
     }
+
+    const fetchVideos = async () => {
+      try {
+        const { data } = await supabase.from('products').select('*').eq('icon_name', 'InfluencerVideo').order('created_at', { ascending: false });
+        if (data && data.length > 0) {
+          const parsed = data.map((v: any) => {
+             const [cat, vws, dur] = v.description ? v.description.split('||') : ['sales', '1M', '0:15'];
+             return {
+                id: v.id,
+                title: v.title,
+                category: cat || 'sales',
+                views: vws || '1M',
+                duration: dur || '0:15',
+                video_url: v.image_url
+             };
+          });
+          setVideos(parsed);
+        } else {
+          setVideos(fallbackVideos);
+        }
+      } catch(e) {
+        setVideos(fallbackVideos);
+      }
+    };
+    fetchVideos();
   }, []);
+
+  const salesVideosList = videos.filter(v => v.category === 'sales');
+  const brandVideosList = videos.filter(v => v.category === 'brand');
 
   return (
     <div className="min-h-screen flex flex-col pt-20 bg-background">
@@ -149,8 +190,8 @@ export default function InfluencerUGC() {
                 animate={{ x: ["0%", "-50%"] }}
                 transition={{ ease: "linear", duration: 30, repeat: Infinity }}
               >
-                {[...salesVideos, ...salesVideos, ...salesVideos, ...salesVideos].map((video, idx) => (
-                  <VideoCard key={`sales-${idx}`} video={video} src="https://videos.pexels.com/video-files/5305118/5305118-hd_720_1366_25fps.mp4" />
+                {[...salesVideosList, ...salesVideosList, ...salesVideosList, ...salesVideosList].map((video, idx) => (
+                  <VideoCard key={`sales-${idx}`} video={video} />
                 ))}
               </motion.div>
             </div>
@@ -171,8 +212,8 @@ export default function InfluencerUGC() {
                 animate={{ x: ["-50%", "0%"] }}
                 transition={{ ease: "linear", duration: 35, repeat: Infinity }}
               >
-                {[...brandVideos, ...brandVideos, ...brandVideos, ...brandVideos].map((video, idx) => (
-                  <VideoCard key={`brand-${idx}`} video={video} src="https://videos.pexels.com/video-files/8099307/8099307-hd_720_1280_30fps.mp4" />
+                {[...brandVideosList, ...brandVideosList, ...brandVideosList, ...brandVideosList].map((video, idx) => (
+                  <VideoCard key={`brand-${idx}`} video={video} />
                 ))}
               </motion.div>
             </div>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
-import { Plus, Trash, LogOut, Upload, Loader2, Image as ImageIcon, ShoppingCart, LayoutTemplate, Package, CheckCircle, Clock } from "lucide-react";
+import { Plus, Trash, LogOut, Upload, Loader2, Image as ImageIcon, ShoppingCart, LayoutTemplate, Package, CheckCircle, Clock, Video } from "lucide-react";
 
 export default function Admin() {
   const [session, setSession] = useState<any>(null);
@@ -8,11 +8,12 @@ export default function Admin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   
-  const [activeTab, setActiveTab] = useState<'products' | 'orders' | 'media'>('products');
+  const [activeTab, setActiveTab] = useState<'products' | 'orders' | 'media' | 'videos'>('products');
 
   const [products, setProducts] = useState<any[]>([]);
   const [orders, setOrders] = useState<any[]>([]);
   const [media, setMedia] = useState<any[]>([]);
+  const [videos, setVideos] = useState<any[]>([]);
   
   const [isUploading, setIsUploading] = useState(false);
   
@@ -28,6 +29,14 @@ export default function Admin() {
   const [mediaKey, setMediaKey] = useState("hero_banner");
   const [mediaFile, setMediaFile] = useState<File | null>(null);
 
+  // New Video Form
+  const [editingVideoId, setEditingVideoId] = useState<string | null>(null);
+  const [vidTitle, setVidTitle] = useState("");
+  const [vidCategory, setVidCategory] = useState("sales");
+  const [vidViews, setVidViews] = useState("1M");
+  const [vidDuration, setVidDuration] = useState("0:15");
+  const [vidUrl, setVidUrl] = useState("");
+
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
@@ -36,6 +45,7 @@ export default function Admin() {
         fetchProducts();
         fetchOrders();
         fetchMedia();
+        fetchVideos();
       }
     });
 
@@ -45,12 +55,13 @@ export default function Admin() {
         fetchProducts();
         fetchOrders();
         fetchMedia();
+        fetchVideos();
       }
     });
   }, []);
 
   const fetchProducts = async () => {
-    const { data, error } = await supabase.from('products').select('*').order('created_at', { ascending: false });
+    const { data, error } = await supabase.from('products').select('*').neq('icon_name', 'InfluencerVideo').order('created_at', { ascending: false });
     if (!error && data) setProducts(data);
   };
 
@@ -66,6 +77,26 @@ export default function Admin() {
     try {
       const { data } = await supabase.from('site_media').select('*').order('updated_at', { ascending: false });
       if (data) setMedia(data);
+    } catch(e) {}
+  };
+
+  const fetchVideos = async () => {
+    try {
+      const { data } = await supabase.from('products').select('*').eq('icon_name', 'InfluencerVideo').order('created_at', { ascending: false });
+      if (data) {
+         const parsed = data.map((v: any) => {
+            const [cat, vws, dur] = v.description ? v.description.split('||') : ['sales', '1M', '0:15'];
+            return {
+               id: v.id,
+               title: v.title,
+               category: cat || 'sales',
+               views: vws || '1M',
+               duration: dur || '0:15',
+               video_url: v.image_url
+            };
+         });
+         setVideos(parsed);
+      }
     } catch(e) {}
   };
 
@@ -162,6 +193,44 @@ export default function Admin() {
     fetchProducts();
   };
 
+  const handleCreateVideo = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsUploading(true);
+    try {
+      const payload: any = {
+        title: vidTitle || "Untitled",
+        description: `${vidCategory}||${vidViews}||${vidDuration}`,
+        image_url: vidUrl,
+        icon_name: 'InfluencerVideo',
+        price: 0
+      };
+
+      if (editingVideoId) {
+         const { error } = await supabase.from('products').update(payload).eq('id', editingVideoId);
+         if (error) throw error;
+      } else {
+         if (!vidUrl) throw new Error("Instagram URL is required.");
+         const { error } = await supabase.from('products').insert([payload]);
+         if (error) throw error;
+      }
+      
+      setEditingVideoId(null);
+      setVidTitle(""); setVidViews("1M"); setVidDuration("0:15"); setVidUrl("");
+      fetchVideos();
+      alert(editingVideoId ? "Video updated!" : "Video published!");
+    } catch (error: any) {
+      alert("Error: " + error.message);
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  const handleDeleteVideo = async (id: string) => {
+    if (!confirm("Are you sure you want to delete this video?")) return;
+    await supabase.from('products').delete().eq('id', id);
+    fetchVideos();
+  };
+
   if (loading) return <div className="min-h-screen flex items-center justify-center"><Loader2 className="w-8 h-8 animate-spin text-primary" /></div>;
 
   if (!session) {
@@ -205,6 +274,9 @@ export default function Admin() {
              <button onClick={() => setActiveTab('media')} className={`px-5 py-2 rounded-lg transition-all flex items-center gap-2 ${activeTab === 'media' ? 'bg-background shadow-sm text-primary' : 'text-muted-foreground hover:text-foreground'}`}>
                <LayoutTemplate size={16} /> Global Media
              </button>
+             <button onClick={() => setActiveTab('videos')} className={`px-5 py-2 rounded-lg transition-all flex items-center gap-2 ${activeTab === 'videos' ? 'bg-background shadow-sm text-primary' : 'text-muted-foreground hover:text-foreground'}`}>
+               <Video size={16} /> Videos
+             </button>
           </div>
           <button onClick={handleLogout} className="flex items-center gap-2 text-sm font-bold text-muted-foreground hover:text-destructive transition-colors ml-4">
             <LogOut className="w-5 h-5" />
@@ -217,6 +289,7 @@ export default function Admin() {
          <button onClick={() => setActiveTab('products')} className={`shrink-0 px-4 py-2 rounded-lg font-bold text-sm ${activeTab === 'products' ? 'bg-primary/10 text-primary border border-primary/20' : 'bg-secondary text-muted-foreground'}`}>Products</button>
          <button onClick={() => setActiveTab('orders')} className={`shrink-0 px-4 py-2 rounded-lg font-bold text-sm ${activeTab === 'orders' ? 'bg-primary/10 text-primary border border-primary/20' : 'bg-secondary text-muted-foreground'}`}>Orders</button>
          <button onClick={() => setActiveTab('media')} className={`shrink-0 px-4 py-2 rounded-lg font-bold text-sm ${activeTab === 'media' ? 'bg-primary/10 text-primary border border-primary/20' : 'bg-secondary text-muted-foreground'}`}>Global Media</button>
+         <button onClick={() => setActiveTab('videos')} className={`shrink-0 px-4 py-2 rounded-lg font-bold text-sm ${activeTab === 'videos' ? 'bg-primary/10 text-primary border border-primary/20' : 'bg-secondary text-muted-foreground'}`}>Videos</button>
       </div>
 
       <div className="container-main mt-8 md:mt-12">
@@ -414,6 +487,90 @@ export default function Admin() {
                   ))}
                </div>
              </div>
+          </div>
+        )}
+
+        {/* VIDEOS TAB */}
+        {activeTab === 'videos' && (
+          <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
+            <div className="bg-card border border-border rounded-3xl p-6 lg:p-8 h-fit shadow-xl xl:sticky xl:top-32">
+              <h2 className="text-xl font-black mb-1 flex items-center gap-2 text-foreground">
+                <Plus className="w-5 h-5 text-primary" /> {editingVideoId ? "Edit Video" : "Upload Video"}
+              </h2>
+              <p className="text-xs text-muted-foreground mb-8 font-semibold">Will show in Influencer UGC Page.</p>
+              
+              <form onSubmit={handleCreateVideo} className="space-y-4">
+                <div>
+                  <input type="text" value={vidTitle} onChange={e => setVidTitle(e.target.value)} required className="w-full bg-background border border-border p-3.5 rounded-xl text-sm font-medium outline-none focus:border-primary transition-colors" placeholder="Video Title (e.g. Hooks Demo)" />
+                </div>
+                <div>
+                  <select value={vidCategory} onChange={e => setVidCategory(e.target.value)} className="w-full bg-background border border-border p-3.5 rounded-xl text-sm font-medium outline-none focus:border-primary cursor-pointer transition-colors">
+                    <option value="sales">Sales Focused</option>
+                    <option value="brand">Brand Awareness</option>
+                  </select>
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <input type="text" value={vidViews} onChange={e => setVidViews(e.target.value)} required className="w-full bg-background border border-border p-3.5 rounded-xl text-sm font-medium outline-none focus:border-primary transition-colors" placeholder="Views (e.g. 1.2M)" />
+                  <input type="text" value={vidDuration} onChange={e => setVidDuration(e.target.value)} required className="w-full bg-background border border-border p-3.5 rounded-xl text-sm font-medium outline-none focus:border-primary transition-colors" placeholder="Duration (e.g. 0:15)" />
+                </div>
+                <div className="flex flex-col pt-2">
+                   <label className="text-[10px] font-black text-muted-foreground mb-1 uppercase tracking-widest break-words">Instagram Link</label>
+                   <input type="text" value={vidUrl} onChange={e => setVidUrl(e.target.value)} required className="w-full bg-background border border-border p-3.5 rounded-xl text-sm font-medium outline-none focus:border-primary transition-colors" placeholder="https://www.instagram.com/reel/..." />
+                </div>
+                <div className="flex gap-2 mt-6">
+                  {editingVideoId && (
+                    <button type="button" onClick={() => { setEditingVideoId(null); setVidTitle(""); setVidViews("1M"); setVidDuration("0:15"); setVidUrl(""); }} className="w-1/3 bg-muted text-foreground font-black tracking-widest uppercase text-xs p-4 rounded-xl hover:-translate-y-1 transition-all shadow-xl flex items-center justify-center gap-2">
+                      Cancel
+                    </button>
+                  )}
+                  <button disabled={isUploading} type="submit" className="flex-1 bg-foreground text-background font-black tracking-widest uppercase text-xs p-4 rounded-xl hover:-translate-y-1 transition-all shadow-xl flex items-center justify-center gap-2 disabled:opacity-50 disabled:hover:translate-y-0">
+                    {isUploading ? <Loader2 className="w-5 h-5 animate-spin" /> : editingVideoId ? "Save Changes" : "Save Video"}
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <div className="xl:col-span-2 space-y-4 transition-all">
+              {videos.length === 0 && !loading ? (
+                <div className="flex flex-col items-center justify-center py-20 bg-card border border-border border-dashed rounded-3xl">
+                   <Video className="w-12 h-12 text-muted-foreground/30 mb-4" />
+                   <h3 className="text-xl font-bold mb-1">No Videos Added</h3>
+                   <p className="text-sm text-muted-foreground font-medium text-center">Add Instagram links to display on the Influencer page.</p>
+                </div>
+              ) : (
+                videos.map((v: any) => (
+                  <div key={v.id} className="group flex flex-col sm:flex-row gap-5 bg-card border border-border p-4 rounded-3xl shadow-sm hover:shadow-card-hover transition-all items-center">
+                    <div className="w-full sm:w-32 h-24 bg-muted border border-border/50 shrink-0 flex items-center justify-center rounded-2xl overflow-hidden relative">
+                       {v.video_url?.includes('instagram.com') ? (
+                          <iframe src={`${v.video_url.split('?')[0].replace(/\/$/, '')}/embed`} className="w-full h-full pointer-events-none scale-150" frameBorder="0" scrolling="no" />
+                       ) : (
+                          <Video className="w-8 h-8 text-muted-foreground/50" />
+                       )}
+                    </div>
+                    <div className="flex-1 w-full text-center sm:text-left overflow-hidden">
+                      <h3 className="font-bold text-lg truncate">{v.title}</h3>
+                      <p className="text-muted-foreground text-xs line-clamp-1 mt-1 mb-3">Category: <span className="uppercase font-bold">{v.category}</span></p>
+                      <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
+                         <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider">
+                            {v.views} Views
+                         </span>
+                         <span className="bg-secondary text-muted-foreground border border-border px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider">
+                            {v.duration}
+                         </span>
+                      </div>
+                    </div>
+                    <div className="flex flex-col gap-2 shrink-0 h-full justify-center mt-4 sm:mt-0">
+                       <button onClick={() => { setEditingVideoId(v.id); setVidTitle(v.title); setVidCategory(v.category || 'sales'); setVidViews(v.views); setVidDuration(v.duration); setVidUrl(v.video_url || ""); window.scrollTo({ top: 0, behavior: "smooth" }); }} className="w-full sm:w-16 h-10 bg-blue-500/10 text-blue-500 rounded-xl hover:bg-blue-500 hover:text-white transition-all flex justify-center items-center font-bold text-xs uppercase tracking-wider">
+                         Edit
+                       </button>
+                       <button onClick={() => handleDeleteVideo(v.id)} className="w-full sm:w-16 h-10 bg-destructive/10 text-destructive rounded-xl hover:bg-destructive hover:text-white transition-all flex justify-center items-center">
+                         <Trash className="w-4 h-4" />
+                       </button>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
           </div>
         )}
       </div>
