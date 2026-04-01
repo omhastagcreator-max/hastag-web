@@ -190,7 +190,7 @@ export default function InfluencerUGC() {
                 animate={{ x: ["0%", "-50%"] }}
                 transition={{ ease: "linear", duration: 30, repeat: Infinity }}
               >
-                {[...salesVideosList, ...salesVideosList, ...salesVideosList, ...salesVideosList].map((video, idx) => (
+                {Array(20).fill(salesVideosList).flat().map((video: any, idx) => (
                   <VideoCard key={`sales-${idx}`} video={video} />
                 ))}
               </motion.div>
@@ -212,7 +212,7 @@ export default function InfluencerUGC() {
                 animate={{ x: ["-50%", "0%"] }}
                 transition={{ ease: "linear", duration: 35, repeat: Infinity }}
               >
-                {[...brandVideosList, ...brandVideosList, ...brandVideosList, ...brandVideosList].map((video, idx) => (
+                {Array(20).fill(brandVideosList).flat().map((video: any, idx) => (
                   <VideoCard key={`brand-${idx}`} video={video} />
                 ))}
               </motion.div>
