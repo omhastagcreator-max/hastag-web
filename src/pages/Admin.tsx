@@ -36,6 +36,7 @@ export default function Admin() {
   const [vidViews, setVidViews] = useState("1M");
   const [vidDuration, setVidDuration] = useState("0:15");
   const [vidUrl, setVidUrl] = useState("");
+  const [vidFile, setVidFile] = useState<File | null>(null);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -197,10 +198,17 @@ export default function Admin() {
     e.preventDefault();
     setIsUploading(true);
     try {
+      let finalUrl = vidUrl;
+      if (vidFile) {
+         finalUrl = await uploadFile(vidFile);
+      }
+
+      if (!finalUrl) throw new Error("Please provide an Instagram URL or upload a video file.");
+
       const payload: any = {
         title: vidTitle || "Untitled",
         description: `${vidCategory}||${vidViews}||${vidDuration}`,
-        image_url: vidUrl,
+        image_url: finalUrl,
         icon_name: 'InfluencerVideo',
         price: 0
       };
@@ -209,13 +217,12 @@ export default function Admin() {
          const { error } = await supabase.from('products').update(payload).eq('id', editingVideoId);
          if (error) throw error;
       } else {
-         if (!vidUrl) throw new Error("Instagram URL is required.");
          const { error } = await supabase.from('products').insert([payload]);
          if (error) throw error;
       }
       
       setEditingVideoId(null);
-      setVidTitle(""); setVidViews("1M"); setVidDuration("0:15"); setVidUrl("");
+      setVidTitle(""); setVidViews("1M"); setVidDuration("0:15"); setVidUrl(""); setVidFile(null);
       fetchVideos();
       alert(editingVideoId ? "Video updated!" : "Video published!");
     } catch (error: any) {
@@ -513,13 +520,23 @@ export default function Admin() {
                   <input type="text" value={vidViews} onChange={e => setVidViews(e.target.value)} required className="w-full bg-background border border-border p-3.5 rounded-xl text-sm font-medium outline-none focus:border-primary transition-colors" placeholder="Views (e.g. 1.2M)" />
                   <input type="text" value={vidDuration} onChange={e => setVidDuration(e.target.value)} required className="w-full bg-background border border-border p-3.5 rounded-xl text-sm font-medium outline-none focus:border-primary transition-colors" placeholder="Duration (e.g. 0:15)" />
                 </div>
-                <div className="flex flex-col pt-2">
-                   <label className="text-[10px] font-black text-muted-foreground mb-1 uppercase tracking-widest break-words">Instagram Link</label>
-                   <input type="text" value={vidUrl} onChange={e => setVidUrl(e.target.value)} required className="w-full bg-background border border-border p-3.5 rounded-xl text-sm font-medium outline-none focus:border-primary transition-colors" placeholder="https://www.instagram.com/reel/..." />
+                <div className="flex flex-col pt-2 bg-muted/20 border border-border p-4 rounded-xl">
+                   <p className="text-xs font-black mb-3">Video Source (Choose One)</p>
+                   <label className="text-[10px] font-black text-muted-foreground mb-1 uppercase tracking-widest break-words">Option 1: Instagram Link (Won't Autoplay)</label>
+                   <input type="text" value={vidUrl} onChange={e => { setVidUrl(e.target.value); setVidFile(null); }} className="w-full bg-background border border-border p-3.5 rounded-xl text-sm font-medium outline-none focus:border-primary mb-4 transition-colors" placeholder="https://www.instagram.com/reel/..." />
+                   
+                   <label className="text-[10px] font-black text-muted-foreground mb-1 uppercase tracking-widest break-words flex items-center justify-between">
+                     <span>Option 2: Direct MP4 Upload (Auto-Plays!)</span>
+                   </label>
+                   <label className="flex flex-col items-center justify-center bg-background border-2 border-border border-dashed p-4 rounded-xl cursor-pointer hover:bg-primary/5 transition-colors">
+                      <Upload className="w-5 h-5 text-primary mb-2" />
+                      <span className="text-[11px] font-bold text-center w-full truncate px-1">{vidFile ? vidFile.name : "Select .MP4 file"}</span>
+                      <input type="file" accept="video/mp4,video/quicktime" onChange={e => { setVidFile(e.target.files?.[0] || null); setVidUrl(""); }} className="hidden" />
+                   </label>
                 </div>
                 <div className="flex gap-2 mt-6">
                   {editingVideoId && (
-                    <button type="button" onClick={() => { setEditingVideoId(null); setVidTitle(""); setVidViews("1M"); setVidDuration("0:15"); setVidUrl(""); }} className="w-1/3 bg-muted text-foreground font-black tracking-widest uppercase text-xs p-4 rounded-xl hover:-translate-y-1 transition-all shadow-xl flex items-center justify-center gap-2">
+                    <button type="button" onClick={() => { setEditingVideoId(null); setVidTitle(""); setVidViews("1M"); setVidDuration("0:15"); setVidUrl(""); setVidFile(null); }} className="w-1/3 bg-muted text-foreground font-black tracking-widest uppercase text-xs p-4 rounded-xl hover:-translate-y-1 transition-all shadow-xl flex items-center justify-center gap-2">
                       Cancel
                     </button>
                   )}
@@ -560,7 +577,7 @@ export default function Admin() {
                       </div>
                     </div>
                     <div className="flex flex-col gap-2 shrink-0 h-full justify-center mt-4 sm:mt-0">
-                       <button onClick={() => { setEditingVideoId(v.id); setVidTitle(v.title); setVidCategory(v.category || 'sales'); setVidViews(v.views); setVidDuration(v.duration); setVidUrl(v.video_url || ""); window.scrollTo({ top: 0, behavior: "smooth" }); }} className="w-full sm:w-16 h-10 bg-blue-500/10 text-blue-500 rounded-xl hover:bg-blue-500 hover:text-white transition-all flex justify-center items-center font-bold text-xs uppercase tracking-wider">
+                       <button onClick={() => { setEditingVideoId(v.id); setVidTitle(v.title); setVidCategory(v.category || 'sales'); setVidViews(v.views); setVidDuration(v.duration); setVidUrl(v.video_url || ""); setVidFile(null); window.scrollTo({ top: 0, behavior: "smooth" }); }} className="w-full sm:w-16 h-10 bg-blue-500/10 text-blue-500 rounded-xl hover:bg-blue-500 hover:text-white transition-all flex justify-center items-center font-bold text-xs uppercase tracking-wider">
                          Edit
                        </button>
                        <button onClick={() => handleDeleteVideo(v.id)} className="w-full sm:w-16 h-10 bg-destructive/10 text-destructive rounded-xl hover:bg-destructive hover:text-white transition-all flex justify-center items-center">
