@@ -66,6 +66,7 @@ const VideoCard = ({ video }: { video: any }) => {
               style={{ pointerEvents: 'none' }}
               frameBorder="0"
               scrolling="no"
+              loading="lazy"
               allow="autoplay; encrypted-media"
               allowTransparency
             />
@@ -77,6 +78,7 @@ const VideoCard = ({ video }: { video: any }) => {
               className="w-full h-full scale-[1.02] transform origin-center group-hover:scale-[1.05] transition-transform duration-500"
               frameBorder="0"
               scrolling="no"
+              loading="lazy"
               allow="autoplay; encrypted-media"
               allowTransparency
             />
@@ -146,6 +148,13 @@ export default function InfluencerUGC() {
 
   const salesVideosList = videos.filter(v => v.category === 'sales');
   const brandVideosList = videos.filter(v => v.category === 'brand');
+
+  const getRepeatedArray = (arr: any[]) => {
+    if (arr.length === 0) return [];
+    const times = Math.max(2, Math.ceil(12 / arr.length));
+    const evenTimes = times % 2 !== 0 ? times + 1 : times; 
+    return Array(evenTimes).fill(arr).flat();
+  };
 
   return (
     <div className="min-h-screen flex flex-col pt-20 bg-background">
@@ -238,8 +247,9 @@ export default function InfluencerUGC() {
                 className="flex gap-4 md:gap-5 w-max"
                 animate={{ x: ["0%", "-50%"] }}
                 transition={{ ease: "linear", duration: 30, repeat: Infinity }}
+                style={{ willChange: "transform", transform: "translateZ(0)" }}
               >
-                {Array(20).fill(salesVideosList).flat().map((video: any, idx) => (
+                {getRepeatedArray(salesVideosList).map((video: any, idx) => (
                   <VideoCard key={`sales-${idx}`} video={video} />
                 ))}
               </motion.div>
@@ -260,8 +270,9 @@ export default function InfluencerUGC() {
                 className="flex gap-4 md:gap-5 w-max"
                 animate={{ x: ["-50%", "0%"] }}
                 transition={{ ease: "linear", duration: 35, repeat: Infinity }}
+                style={{ willChange: "transform", transform: "translateZ(0)" }}
               >
-                {Array(20).fill(brandVideosList).flat().map((video: any, idx) => (
+                {getRepeatedArray(brandVideosList).map((video: any, idx) => (
                   <VideoCard key={`brand-${idx}`} video={video} />
                 ))}
               </motion.div>
