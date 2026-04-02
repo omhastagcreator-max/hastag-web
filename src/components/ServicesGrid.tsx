@@ -87,7 +87,7 @@ const ServicesGrid = ({ filterKeyword, title, subtitle }: { filterKeyword?: stri
   const fetchProducts = async () => {
     try {
        // 1. Fetch real-time from Supabase Headless CMS
-       const { data, error } = await supabase.from('products').select('*').order('created_at', { ascending: false });
+       const { data, error } = await supabase.from('products').select('*').neq('icon_name', 'InfluencerVideo').order('created_at', { ascending: false });
        
        if (!error && data && data.length > 0) {
           const parsed = data.map((row: any, i: number) => {
