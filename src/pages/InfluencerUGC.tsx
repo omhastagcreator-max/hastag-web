@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { Play } from "lucide-react";
 import { supabase } from "@/lib/supabase";
@@ -16,12 +16,61 @@ const fallbackVideos = [
 
 const VideoCard = ({ video }: { video: any }) => {
   const isIg = video.video_url?.includes('instagram.com');
-  const src = isIg ? `${video.video_url.split('?')[0].replace(/\/$/, '')}/embed/?autoplay=1&muted=1` : (video.video_url || fallbackVideos[0].video_url);
+  const isYt = video.video_url?.includes('youtube.com') || video.video_url?.includes('youtu.be');
+
+  let src = video.video_url || fallbackVideos[0].video_url;
+  
+  if (isIg) {
+    src = `${video.video_url.split('?')[0].replace(/\/$/, '')}/embed/?autoplay=1&muted=1`;
+  }
+
+  const [muted, setMuted] = useState(true);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+
+  const toggleMute = () => {
+    if (!isYt) return;
+    setMuted(!muted);
+    if (iframeRef.current && iframeRef.current.contentWindow) {
+       iframeRef.current.contentWindow.postMessage(JSON.stringify({
+          event: 'command',
+          func: muted ? 'unMute' : 'mute',
+          args: []
+       }), '*');
+    }
+  };
+
+  if (isYt) {
+    let ytId = "";
+    try {
+      const url = new URL(video.video_url);
+      if (video.video_url.includes('youtube.com/shorts/')) {
+         ytId = url.pathname.split('/shorts/')[1].split('?')[0];
+      } else if (video.video_url.includes('youtu.be')) {
+         ytId = url.pathname.slice(1).split('?')[0];
+      } else {
+         ytId = url.searchParams.get('v') || "";
+      }
+    } catch(e) {}
+    src = `https://www.youtube.com/embed/${ytId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${ytId}&playsinline=1&enablejsapi=1&modestbranding=1&rel=0`;
+  }
 
   return (
-    <div className="shrink-0 w-[45vw] sm:w-[30vw] md:w-[280px] aspect-[9/16] bg-muted/30 rounded-2xl overflow-hidden relative group cursor-pointer border border-border/50 shadow-lg">
+    <div className="shrink-0 w-[45vw] sm:w-[30vw] md:w-[280px] aspect-[9/16] bg-muted/30 rounded-2xl overflow-hidden relative group cursor-pointer border border-border/50 shadow-lg" onClick={isYt ? toggleMute : undefined}>
       {/* Live Autoplaying Video or IG Embed */}
-      {isIg ? (
+      {isYt ? (
+         <div className="absolute inset-0 w-full h-[105%] flex items-center justify-center pointer-events-none">
+            <iframe 
+              ref={iframeRef}
+              src={src}
+              className="w-full h-full scale-[1.35] transform origin-center group-hover:scale-[1.4] transition-transform duration-500 pointer-events-auto"
+              style={{ pointerEvents: 'none' }}
+              frameBorder="0"
+              scrolling="no"
+              allow="autoplay; encrypted-media"
+              allowTransparency
+            />
+         </div>
+      ) : isIg ? (
          <div className="absolute inset-0 w-full h-[105%] pointer-events-none">
             <iframe 
               src={src}
@@ -44,7 +93,7 @@ const VideoCard = ({ video }: { video: any }) => {
       )}
       
       {/* Overlay Gradient for Text */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none"></div>
+      <div className={`absolute inset-0 bg-gradient-to-t ${!muted ? 'from-black/60' : 'from-black/90'} via-black/20 to-transparent pointer-events-none transition-colors duration-500`}></div>
       
       {/* Bottom Metadata */}
       <div className="absolute bottom-0 inset-x-0 p-4 md:p-5 pointer-events-none">

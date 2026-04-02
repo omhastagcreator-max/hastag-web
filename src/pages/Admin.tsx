@@ -522,8 +522,11 @@ export default function Admin() {
                 </div>
                 <div className="flex flex-col pt-2 bg-muted/20 border border-border p-4 rounded-xl">
                    <p className="text-xs font-black mb-3">Video Source (Choose One)</p>
-                   <label className="text-[10px] font-black text-muted-foreground mb-1 uppercase tracking-widest break-words">Option 1: Instagram Link (Won't Autoplay)</label>
-                   <input type="text" value={vidUrl} onChange={e => { setVidUrl(e.target.value); setVidFile(null); }} className="w-full bg-background border border-border p-3.5 rounded-xl text-sm font-medium outline-none focus:border-primary mb-4 transition-colors" placeholder="https://www.instagram.com/reel/..." />
+                   <label className="text-[10px] font-black text-muted-foreground mb-1 uppercase tracking-widest break-words flex flex-col gap-1">
+                     <span>Option 1: Social Link (YouTube or Instagram)</span>
+                     <span className="text-blue-500 font-bold lowercase tracking-normal">Note: YouTube auto-plays flawlessly! Instagram won't auto-play.</span>
+                   </label>
+                   <input type="text" value={vidUrl} onChange={e => { setVidUrl(e.target.value); setVidFile(null); }} className="w-full bg-background border border-border p-3.5 rounded-xl text-sm font-medium outline-none focus:border-primary mb-4 transition-colors" placeholder="https://www.youtube.com/shorts/... or instagram.com/reel/..." />
                    
                    <label className="text-[10px] font-black text-muted-foreground mb-1 uppercase tracking-widest break-words flex items-center justify-between">
                      <span>Option 2: Direct MP4 Upload (Auto-Plays!)</span>
