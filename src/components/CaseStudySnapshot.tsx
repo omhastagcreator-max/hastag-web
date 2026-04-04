@@ -199,27 +199,97 @@ const CaseStudySnapshot = () => {
             </motion.div>
             
             {/* Modern 2-Column Review Section */}
-            <div className="grid md:grid-cols-2 gap-8 items-center mt-8">
-              {/* Left Column: Review Marquee Card (40vw width equivalent max, 60vh equivalent height max) */}
-              <div className="relative w-full max-w-[400px] h-[350px] mx-auto md:mx-0 bg-white/20 backdrop-blur-2xl border border-white/50 rounded-[12px] shadow-2xl overflow-hidden flex flex-col justify-center">
-                {/* Fade overlays for smooth scrolling effect */}
-                <div className="absolute top-0 inset-x-0 h-16 bg-gradient-to-b from-[rgba(255,255,255,0.8)] dark:from-[rgba(0,0,0,0.8)] to-transparent z-10 pointer-events-none"></div>
-                <div className="absolute bottom-0 inset-x-0 h-16 bg-gradient-to-t from-[rgba(255,255,255,0.8)] dark:from-[rgba(0,0,0,0.8)] to-transparent z-10 pointer-events-none"></div>
+            <div className="grid md:grid-cols-2 gap-8 items-center mt-12">
+              {/* Left Column: Horizontal Marquee of Promotional-Style Review Cards */}
+              <div className="relative w-full max-w-[450px] mx-auto md:mx-0 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
                 
-                <div className="flex flex-col gap-4 animate-[vertical-marquee_20s_linear_infinite] px-6 py-4 relative z-0 hover:[animation-play-state:paused]">
-                  {[1, 2, 3, 4, 1, 2, 3, 4].map((item, idx) => (
-                    <div key={idx} className="bg-white/60 dark:bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/30 dark:border-white/10 shadow-sm flex flex-col gap-2 shrink-0">
-                      <div className="flex items-center gap-3">
-                         <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-xs">C</div>
-                         <div>
-                            <p className="font-bold text-sm text-foreground">Verified Client</p>
-                            <div className="flex text-yellow-400 gap-0.5">
-                               {[1,2,3,4,5].map(s => <Star key={s} className="w-3 h-3 fill-current" />)}
-                            </div>
-                         </div>
-                      </div>
-                      <p className="text-sm text-foreground/80 leading-snug italic">"Scaling has finally become predictable. The team actually cares about profit margins, not just their ad spend cut."</p>
-                    </div>
+                <div className="flex gap-4 animate-marquee whitespace-nowrap py-4 w-max hover:[animation-play-state:paused]">
+                  {[
+                    {
+                      bg: "bg-gradient-to-b from-purple-800 to-indigo-900",
+                      textTop: "3X ROI IN 30 DAYS",
+                      textBot: "\"Best performance agency we've ever worked with. Scaled our ads predictably.\"",
+                      brandBg: "bg-indigo-950",
+                      brandName: "COLGATE"
+                    },
+                    {
+                      bg: "bg-gradient-to-br from-yellow-400 to-orange-500",
+                      textTop: "UPTO 70% LOWER CAC",
+                      textBot: "\"They fixed our funnel and stacked our profit margins instantly.\"",
+                      brandBg: "bg-orange-600",
+                      brandName: "DOT&KEY"
+                    },
+                    {
+                      bg: "bg-gradient-to-b from-red-800 to-red-950",
+                      textTop: "10M+ REACH",
+                      textBot: "\"The authentic influencer campaigns drove massive high-intent traffic.\"",
+                      brandBg: "bg-red-900",
+                      brandName: "PALMONAS"
+                    },
+                    {
+                      bg: "bg-gradient-to-b from-emerald-600 to-teal-800",
+                      textTop: "SCALED TO ₹2.4M+",
+                      textBot: "\"Their laser-focus on profit margins over vanity metrics is exactly what we needed.\"",
+                      brandBg: "bg-teal-950",
+                      brandName: "LUMINOUS"
+                    }
+                  ].map((card, i) => (
+                      <div key={i} className="w-[180px] h-[260px] md:w-[220px] md:h-[320px] rounded-[12px] flex flex-col overflow-hidden shadow-xl shrink-0 group transform transition-transform hover:scale-105 border border-white/10 dark:border-white/5">
+                        {/* Upper part */}
+                        <div className={`flex-1 flex flex-col items-center justify-center p-5 text-center ${card.bg} relative overflow-hidden`}>
+                           <Star className="w-4 h-4 text-yellow-300 absolute top-3 right-3 opacity-50" />
+                           <Star className="w-2 h-2 text-yellow-300 absolute top-8 left-4 opacity-50" />
+                           <h4 className="text-white font-extrabold text-[15px] md:text-lg leading-tight whitespace-normal tracking-wide drop-shadow-md">{card.textTop}</h4>
+                           <p className="text-white/90 text-xs md:text-[13px] mt-4 font-medium whitespace-normal leading-snug drop-shadow-sm">{card.textBot}</p>
+                        </div>
+                        {/* Bottom brand part */}
+                        <div className={`${card.brandBg} h-14 md:h-16 flex items-center justify-center border-t border-white/10`}>
+                           <span className="text-white font-black tracking-widest text-sm md:text-base uppercase">{card.brandName}</span>
+                        </div>
+                     </div>
+                  ))}
+                  {/* Duplicate array for seamless infinite looping */}
+                  {[
+                    {
+                      bg: "bg-gradient-to-b from-purple-800 to-indigo-900",
+                      textTop: "3X ROI IN 30 DAYS",
+                      textBot: "\"Best performance agency we've ever worked with. Scaled our ads predictably.\"",
+                      brandBg: "bg-indigo-950",
+                      brandName: "COLGATE"
+                    },
+                    {
+                      bg: "bg-gradient-to-br from-yellow-400 to-orange-500",
+                      textTop: "UPTO 70% LOWER CAC",
+                      textBot: "\"They fixed our funnel and stacked our profit margins instantly.\"",
+                      brandBg: "bg-orange-600",
+                      brandName: "DOT&KEY"
+                    },
+                    {
+                      bg: "bg-gradient-to-b from-red-800 to-red-950",
+                      textTop: "10M+ REACH",
+                      textBot: "\"The authentic influencer campaigns drove massive high-intent traffic.\"",
+                      brandBg: "bg-red-900",
+                      brandName: "PALMONAS"
+                    },
+                    {
+                      bg: "bg-gradient-to-b from-emerald-600 to-teal-800",
+                      textTop: "SCALED TO ₹2.4M+",
+                      textBot: "\"Their laser-focus on profit margins over vanity metrics is exactly what we needed.\"",
+                      brandBg: "bg-teal-950",
+                      brandName: "LUMINOUS"
+                    }
+                  ].map((card, i) => (
+                      <div key={i + 4} className="w-[180px] h-[260px] md:w-[220px] md:h-[320px] rounded-[12px] flex flex-col overflow-hidden shadow-xl shrink-0 group transform transition-transform hover:scale-105 border border-white/10 dark:border-white/5">
+                        <div className={`flex-1 flex flex-col items-center justify-center p-5 text-center ${card.bg} relative overflow-hidden`}>
+                           <Star className="w-4 h-4 text-yellow-300 absolute top-3 right-3 opacity-50" />
+                           <Star className="w-2 h-2 text-yellow-300 absolute top-8 left-4 opacity-50" />
+                           <h4 className="text-white font-extrabold text-[15px] md:text-lg leading-tight whitespace-normal tracking-wide drop-shadow-md">{card.textTop}</h4>
+                           <p className="text-white/90 text-xs md:text-[13px] mt-4 font-medium whitespace-normal leading-snug drop-shadow-sm">{card.textBot}</p>
+                        </div>
+                        <div className={`${card.brandBg} h-14 md:h-16 flex items-center justify-center border-t border-white/10`}>
+                           <span className="text-white font-black tracking-widest text-sm md:text-base uppercase">{card.brandName}</span>
+                        </div>
+                     </div>
                   ))}
                 </div>
               </div>
