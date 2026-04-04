@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, Play, Maximize2, X, ChevronLeft, ChevronRight, Video, TrendingUp } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -6,8 +6,26 @@ import { Link } from "react-router-dom";
 // Standard embedded influencer video URL, or paths to your assets
 const sampleVideo = "https://www.youtube.com/embed/9bZkp7q19f0?autoplay=1&mute=1&loop=1&controls=0&playlist=9bZkp7q19f0";
 
+const CAROUSEL_ITEMS = [
+    { id: 1, title: "10M+ Views Formula", type: "Viral Secrets" },
+    { id: 2, title: "How We Scaled an App", type: "Case Study" },
+    { id: 3, title: "The Perfect Brief", type: "Creator Strategy" },
+    { id: 4, title: "Tracking the Untrackable", type: "ROI" },
+    { id: 5, title: "Psychology Triggers", type: "Neuroscience" },
+    { id: 6, title: "Creator Frameworks", type: "Systems" },
+];
+
 const InfluencerMarketingGlimpse = () => {
     const [isVideoOpen, setIsVideoOpen] = useState(false);
+    const [activeIndex, setActiveIndex] = useState(0);
+
+    // Auto-advance carousel
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setActiveIndex((prev) => (prev + 1) % CAROUSEL_ITEMS.length);
+        }, 3000); // 3 seconds per slide
+        return () => clearInterval(interval);
+    }, []);
 
     return (
         <section className="py-24 bg-muted/20 relative overflow-hidden">
@@ -18,46 +36,92 @@ const InfluencerMarketingGlimpse = () => {
             <div className="container-main relative z-10">
                 <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
                     
-                    {/* Video Arch Carousel Side (Left on Desktop) */}
+                    {/* 3D Arch Video Carousel Side (Left on Desktop) */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
-                        className="order-2 lg:order-1 relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] mt-8 lg:mt-0"
+                        className="order-2 lg:order-1 relative w-full h-[450px] md:h-[550px] mt-8 lg:mt-0 [perspective:1200px] flex items-center justify-center overflow-hidden"
                     >
-                        <div className="flex gap-4 animate-[marquee_20s_linear_infinite] w-max hover:[animation-play-state:paused] py-4">
-                            {[
-                                { title: "10M+ Views Formula", type: "Viral Secrets" },
-                                { title: "How We Scaled an App", type: "Case Study" },
-                                { title: "The Perfect Brief", type: "Creator Strategy" },
-                                { title: "Tracking the Untrackable", type: "ROI" },
-                                { title: "10M+ Views Formula", type: "Viral Secrets" },
-                                { title: "How We Scaled an App", type: "Case Study" },
-                                { title: "The Perfect Brief", type: "Creator Strategy" },
-                                { title: "Tracking the Untrackable", type: "ROI" },
-                            ].map((item, idx) => (
-                                <div key={idx} className="w-[180px] md:w-[220px] aspect-[9/16] rounded-3xl bg-white/30 dark:bg-black/40 backdrop-blur-xl border border-white/60 dark:border-white/10 shadow-lg relative overflow-hidden group shrink-0 transform transition-transform hover:scale-105">
-                                    <div className="absolute inset-1 rounded-[1.25rem] bg-black overflow-hidden cursor-pointer" onClick={() => setIsVideoOpen(true)}>
+                        {CAROUSEL_ITEMS.map((item, idx) => {
+                            const total = CAROUSEL_ITEMS.length;
+                            // Calculate minimum circular offset
+                            let offset = (idx - activeIndex) % total;
+                            if (offset > total / 2) offset -= total;
+                            if (offset < -total / 2) offset += total;
+
+                            // 3D Math Logic
+                            const isActive = offset === 0;
+                            // Horizontal spread relative to card width
+                            const xPos = `${offset * 60}%`; 
+                            // Arch curve (higher offset dips lower, forming a frown, but negative Y makes it lift)
+                            const yPos = Math.abs(offset) * 20; 
+                            const zPos = Math.abs(offset) * -80; 
+                            const rotateY = offset * -25;
+                            const scale = 1 - Math.abs(offset) * 0.1;
+                            const zIndex = total - Math.abs(offset);
+                            // Hide elements that wrap around the back to prevent visually crossing the UI
+                            const opacity = Math.abs(offset) >= 3 ? 0 : (1 - Math.abs(offset) * 0.2);
+
+                            return (
+                                <motion.div
+                                    key={item.id}
+                                    className="absolute w-[180px] md:w-[220px] aspect-[9/16] rounded-3xl bg-white/30 dark:bg-black/40 backdrop-blur-xl border border-white/60 dark:border-white/10 shadow-2xl cursor-pointer"
+                                    style={{ transformOrigin: "center center" }}
+                                    animate={{
+                                        x: xPos,
+                                        y: yPos,
+                                        z: zPos,
+                                        rotateY: rotateY,
+                                        scale: scale,
+                                        zIndex: zIndex,
+                                        opacity: opacity
+                                    }}
+                                    transition={{
+                                        type: "spring",
+                                        stiffness: 150,
+                                        damping: 20,
+                                        mass: 0.8
+                                    }}
+                                    onClick={() => {
+                                        if (isActive) setIsVideoOpen(true);
+                                        else setActiveIndex(idx);
+                                    }}
+                                    drag="x"
+                                    dragConstraints={{ left: 0, right: 0 }}
+                                    dragElastic={0.05}
+                                    onDragEnd={(_e, { offset: dragOffset, velocity }) => {
+                                        const swipe = dragOffset.x;
+                                        if (swipe < -50 || velocity.x < -200) setActiveIndex((prev) => (prev + 1) % total);
+                                        else if (swipe > 50 || velocity.x > 200) setActiveIndex((prev) => (prev - 1 + total) % total);
+                                    }}
+                                >
+                                    <div className="absolute inset-1 rounded-[1.25rem] bg-black overflow-hidden group">
                                         <iframe 
-                                            src={sampleVideo}
-                                            title="Influencer Marketing Example"
-                                            className="w-[150%] h-[150%] -top-[25%] -left-[25%] absolute object-cover pointer-events-none opacity-60 group-hover:opacity-90 transition-opacity blur-[2px] group-hover:blur-0"
+                                            src={`${sampleVideo}&start=${idx * 2}`}
+                                            title={item.title}
+                                            className={`w-[150%] h-[150%] -top-[25%] -left-[25%] absolute object-cover pointer-events-none transition-opacity blur-[2px] ${isActive ? 'opacity-70 group-hover:blur-0 group-hover:opacity-100' : 'opacity-40'}`}
                                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            tabIndex={-1}
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/90"></div>
-                                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                                            <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/40 shadow-xl">
-                                                <Play className="w-5 h-5 text-white ml-1" />
+                                        
+                                        {isActive && (
+                                            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                                                <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/40 shadow-xl">
+                                                    <Play className="w-5 h-5 text-white ml-1" />
+                                                </div>
                                             </div>
-                                        </div>
+                                        )}
+
                                         <div className="absolute bottom-5 left-4 right-4 text-left">
-                                            <p className="text-primary text-[10px] font-bold uppercase tracking-wider mb-1">{item.type}</p>
-                                            <p className="text-white font-extrabold text-sm leading-tight group-hover:text-primary-100 transition-colors">{item.title}</p>
+                                            <p className="text-primary text-[10px] font-bold uppercase tracking-wider mb-1 shadow-black">{item.type}</p>
+                                            <p className="text-white font-extrabold text-sm leading-tight shadow-black drop-shadow-md">{item.title}</p>
                                         </div>
                                     </div>
-                                </div>
-                            ))}
-                        </div>
+                                </motion.div>
+                            );
+                        })}
                     </motion.div>
 
                     {/* Text Content (Right on Desktop) */}
