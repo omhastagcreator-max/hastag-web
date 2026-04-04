@@ -26,23 +26,33 @@ const InfluencerMarketingGlimpse = () => {
                         className="order-2 lg:order-1 relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] mt-8 lg:mt-0"
                     >
                         <div className="flex gap-4 animate-[marquee_20s_linear_infinite] w-max hover:[animation-play-state:paused] py-4">
-                            {[1, 2, 3, 4, 1, 2, 3, 4].map((item, idx) => (
-                                <div key={idx} className="w-[180px] md:w-[220px] aspect-[9/16] rounded-t-full rounded-b-3xl bg-white/30 dark:bg-black/40 backdrop-blur-xl border border-white/60 dark:border-white/10 shadow-lg relative overflow-hidden group shrink-0 transform transition-transform hover:scale-105">
-                                    <div className="absolute inset-2 rounded-t-full rounded-b-2xl bg-black overflow-hidden cursor-pointer" onClick={() => setIsVideoOpen(true)}>
+                            {[
+                                { title: "10M+ Views Formula", type: "Viral Secrets" },
+                                { title: "How We Scaled an App", type: "Case Study" },
+                                { title: "The Perfect Brief", type: "Creator Strategy" },
+                                { title: "Tracking the Untrackable", type: "ROI" },
+                                { title: "10M+ Views Formula", type: "Viral Secrets" },
+                                { title: "How We Scaled an App", type: "Case Study" },
+                                { title: "The Perfect Brief", type: "Creator Strategy" },
+                                { title: "Tracking the Untrackable", type: "ROI" },
+                            ].map((item, idx) => (
+                                <div key={idx} className="w-[180px] md:w-[220px] aspect-[9/16] rounded-3xl bg-white/30 dark:bg-black/40 backdrop-blur-xl border border-white/60 dark:border-white/10 shadow-lg relative overflow-hidden group shrink-0 transform transition-transform hover:scale-105">
+                                    <div className="absolute inset-1 rounded-[1.25rem] bg-black overflow-hidden cursor-pointer" onClick={() => setIsVideoOpen(true)}>
                                         <iframe 
                                             src={sampleVideo}
                                             title="Influencer Marketing Example"
-                                            className="w-[150%] h-[150%] -top-[25%] -left-[25%] absolute object-cover pointer-events-none opacity-80 group-hover:opacity-100 transition-opacity"
+                                            className="w-[150%] h-[150%] -top-[25%] -left-[25%] absolute object-cover pointer-events-none opacity-60 group-hover:opacity-90 transition-opacity blur-[2px] group-hover:blur-0"
                                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                         />
-                                        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/80"></div>
+                                        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/90"></div>
                                         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                                            <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/40">
-                                                <Play className="w-4 h-4 text-white ml-1" />
+                                            <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/40 shadow-xl">
+                                                <Play className="w-5 h-5 text-white ml-1" />
                                             </div>
                                         </div>
-                                        <div className="absolute bottom-4 left-0 right-0 text-center">
-                                            <p className="text-white font-bold text-sm">Viral UGC</p>
+                                        <div className="absolute bottom-5 left-4 right-4 text-left">
+                                            <p className="text-primary text-[10px] font-bold uppercase tracking-wider mb-1">{item.type}</p>
+                                            <p className="text-white font-extrabold text-sm leading-tight group-hover:text-primary-100 transition-colors">{item.title}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -57,20 +67,23 @@ const InfluencerMarketingGlimpse = () => {
                         viewport={{ once: true }}
                         className="order-1 lg:order-2 flex flex-col gap-6"
                     >
-                        <span className="inline-block bg-primary/10 text-primary px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest w-max">
-                            Influencer Marketing
+                        <span className="inline-block bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-bold uppercase tracking-widest w-max">
+                            The Secret Backdoor
                         </span>
                         <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-foreground leading-tight tracking-tight">
-                            Build Authentic <br/>
-                            <span className="text-primary">Connections.</span>
+                            Ads are dying.<br/>
+                            <span className="text-primary">Do this instead.</span>
                         </h2>
                         
                         <div className="space-y-4">
-                            <p className="text-lg text-muted-foreground leading-relaxed">
-                                Consumers don't trust ads, they trust people. Our influencer campaigns bypass ad fatigue by putting your brand in the hands of creators your audience already loves and trusts.
+                            <p className="text-lg md:text-xl font-medium text-foreground leading-relaxed">
+                                Why do some brands go incredibly viral while others bleed money trying to force ads down people's throats? 
                             </p>
-                            <p className="text-lg text-muted-foreground leading-relaxed">
-                                We handle everything from talent scouting in our 20,000+ creator network to content strategy, brief creation, and purely performance-driven tracking. We make influencer marketing a predictable revenue channel, not just a PR stunt.
+                            <p className="text-base text-muted-foreground leading-relaxed">
+                                Consumers don't trust ads anymore. They scroll past them. They block them. We found a hidden backdoor into your customer's mind: <strong>The exact creators they already trust.</strong> 
+                            </p>
+                            <p className="text-base text-muted-foreground leading-relaxed">
+                                We've engineered a formula that turns 1 single influencer video into a predictable revenue machine. 
                             </p>
                         </div>
                         
@@ -78,10 +91,10 @@ const InfluencerMarketingGlimpse = () => {
                             <motion.button
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
-                                className="bg-primary hover:bg-primary-deep text-white px-8 py-4 rounded-full font-bold shadow-[0_10px_30px_rgba(37,99,235,0.3)] hover:shadow-[0_15px_40px_rgba(37,99,235,0.4)] transition-all flex items-center gap-2 group"
+                                className="bg-foreground hover:bg-black/80 dark:bg-white dark:hover:bg-white/80 text-background px-8 py-4 rounded-full font-extrabold shadow-xl hover:shadow-2xl transition-all flex items-center gap-3 group border border-border/50 text-base md:text-lg"
                             >
-                                Discover Influencer Strategies
-                                <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                                Reveal The Blueprint
+                                <ArrowUpRight className="w-6 h-6 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                             </motion.button>
                         </Link>
                     </motion.div>
