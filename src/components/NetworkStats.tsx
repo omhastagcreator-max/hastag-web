@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const networkData = [
   { icon: Users, label: "Social Media Influencers", value: "20,000+", desc: "From all over India" },
-  { icon: Star, label: "Celebrities", value: "500+", desc: "Top tier talent" },
+  { icon: Star, label: "Celebrities", value: "511+", desc: "Top tier talent" },
   { icon: Trophy, label: "IPL Players", value: "75", desc: "Sports icons" },
   { icon: Mic, label: "Top Singers", value: "All", desc: "Music industry leaders" },
   { icon: Smile, label: "Top Comedians", value: "All", desc: "Viral entertainers" },

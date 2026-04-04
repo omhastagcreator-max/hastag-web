@@ -10,7 +10,7 @@ const LeadForm = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const whatsappNumber = "8059957479";
+    const whatsappNumber = "918059957479";
     const text = `New Audit Request!
 *Name:* ${form.name}
 *Email:* ${form.email}

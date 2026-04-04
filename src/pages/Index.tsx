@@ -13,6 +13,8 @@ import GoogleReviews from "@/components/GoogleReviews";
 import DashboardResultsSection from "@/components/DashboardResultsSection";
 import NetworkStats from "@/components/NetworkStats";
 import CaseStudySnapshot from "@/components/CaseStudySnapshot";
+import PerformanceMarketingGlimpse from "@/components/PerformanceMarketingGlimpse";
+import InfluencerMarketingGlimpse from "@/components/InfluencerMarketingGlimpse";
 import HowItWorks from "@/components/HowItWorks";
 import FounderSection from "@/components/FounderSection";
 import Testimonial from "@/components/Testimonial";
@@ -40,6 +42,8 @@ const Index = () => {
       <HeroSection />
       <TrustedBrands />
       <CaseStudySnapshot />
+      <PerformanceMarketingGlimpse />
+      <InfluencerMarketingGlimpse />
       <HowItWorks />
       
       {/* Dynamic Banner Section */}

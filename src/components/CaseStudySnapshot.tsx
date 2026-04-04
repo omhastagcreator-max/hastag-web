@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, Target, Activity, CheckCircle2, ChevronLeft, ChevronRight, X, Maximize2 } from "lucide-react";
+import { ArrowUpRight, Target, Activity, CheckCircle2, ChevronLeft, ChevronRight, X, Maximize2, Star } from "lucide-react";
 
 const metaImages = ["/meta-r1.jpg", "/meta-r2.jpg", "/meta-r3.jpg", "/meta-r4.jpg"];
 const shopifyImages = ["/shopify-r1.jpg", "/shopify-r2.jpg", "/shopify-r3.jpg", "/shopify-r4.jpg"];
@@ -198,26 +198,48 @@ const CaseStudySnapshot = () => {
               </motion.div>
             </motion.div>
             
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6 bg-white/40 backdrop-blur-xl border border-white/60 p-6 rounded-2xl shadow-sm mt-4">
-                <div className="flex items-start gap-4 flex-1">
-                    <CheckCircle2 className="text-primary w-6 h-6 flex-shrink-0 mt-0.5" />
-                    <div>
-                        <p className="text-sm md:text-base text-foreground leading-relaxed font-medium italic">
-                            "Scaling has finally become predictable. The HastagCreator team actually cares about our profit margin, not just their ad spend cut."
-                        </p>
-                        <p className="text-xs text-muted-foreground mt-2">— Founder, E-Commerce Brand</p>
-                    </div>
-                </div>
+            {/* Modern 2-Column Review Section */}
+            <div className="grid md:grid-cols-2 gap-8 items-center mt-8">
+              {/* Left Column: Review Marquee Card (40vw width equivalent max, 60vh equivalent height max) */}
+              <div className="relative w-full max-w-[400px] h-[350px] mx-auto md:mx-0 bg-white/20 backdrop-blur-2xl border border-white/50 rounded-[12px] shadow-2xl overflow-hidden flex flex-col justify-center">
+                {/* Fade overlays for smooth scrolling effect */}
+                <div className="absolute top-0 inset-x-0 h-16 bg-gradient-to-b from-[rgba(255,255,255,0.8)] dark:from-[rgba(0,0,0,0.8)] to-transparent z-10 pointer-events-none"></div>
+                <div className="absolute bottom-0 inset-x-0 h-16 bg-gradient-to-t from-[rgba(255,255,255,0.8)] dark:from-[rgba(0,0,0,0.8)] to-transparent z-10 pointer-events-none"></div>
                 
+                <div className="flex flex-col gap-4 animate-[vertical-marquee_20s_linear_infinite] px-6 py-4 relative z-0 hover:[animation-play-state:paused]">
+                  {[1, 2, 3, 4, 1, 2, 3, 4].map((item, idx) => (
+                    <div key={idx} className="bg-white/60 dark:bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/30 dark:border-white/10 shadow-sm flex flex-col gap-2 shrink-0">
+                      <div className="flex items-center gap-3">
+                         <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-xs">C</div>
+                         <div>
+                            <p className="font-bold text-sm text-foreground">Verified Client</p>
+                            <div className="flex text-yellow-400 gap-0.5">
+                               {[1,2,3,4,5].map(s => <Star key={s} className="w-3 h-3 fill-current" />)}
+                            </div>
+                         </div>
+                      </div>
+                      <p className="text-sm text-foreground/80 leading-snug italic">"Scaling has finally become predictable. The team actually cares about profit margins, not just their ad spend cut."</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Right Column: Fixed Call to Action */}
+              <div className="flex flex-col items-center md:items-start justify-center h-full gap-6">
+                <div className="text-center md:text-left">
+                  <h3 className="text-2xl md:text-3xl font-extrabold text-foreground mb-2">Ready for the same results?</h3>
+                  <p className="text-muted-foreground text-sm md:text-base">Stop bleeding budget on generic creatives and let us build your funnel.</p>
+                </div>
                 <a href="/#audit-form">
                     <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="w-full md:w-auto bg-primary hover:bg-primary-deep text-white px-8 py-3.5 rounded-full text-sm font-bold flex items-center justify-center gap-2 shadow-lg transition-all whitespace-nowrap"
+                        className="w-full md:w-auto bg-primary hover:bg-primary-deep text-white px-10 py-5 rounded-full text-lg font-bold flex items-center justify-center gap-3 shadow-[0_10px_40px_rgba(37,99,235,0.3)] hover:shadow-[0_15px_50px_rgba(37,99,235,0.4)] transition-all whitespace-nowrap"
                     >
-                        Schedule a Call <ArrowUpRight className="w-4 h-4" />
+                        Schedule a Call <ArrowUpRight className="w-5 h-5" />
                     </motion.button>
                 </a>
+              </div>
             </div>
 
         </div>

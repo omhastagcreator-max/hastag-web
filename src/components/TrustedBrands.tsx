@@ -20,7 +20,7 @@ const TrustedBrands = () => {
     <section className="py-12 bg-background border-b border-border/40 overflow-hidden" id="trusted-brands">
       <div className="container-main text-center mb-8">
         <p className="text-sm font-bold text-muted-foreground uppercase tracking-widest">
-          Trusted by 500+ D2C Brands & Industry Leaders
+          Trusted by 511+ D2C Brands & Industry Leaders
         </p>
       </div>
 
