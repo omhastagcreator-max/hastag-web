@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, Target, Activity, CheckCircle2, ChevronLeft, ChevronRight, X, Maximize2, Star } from "lucide-react";
+import { ArrowUpRight, Target, Activity, CheckCircle2, ChevronLeft, ChevronRight, X, Maximize2, Star, BadgeCheck } from "lucide-react";
 
 const metaImages = ["/meta-r1.jpg", "/meta-r2.jpg", "/meta-r3.jpg", "/meta-r4.jpg"];
 const shopifyImages = ["/shopify-r1.jpg", "/shopify-r2.jpg", "/shopify-r3.jpg", "/shopify-r4.jpg"];
@@ -199,112 +199,112 @@ const CaseStudySnapshot = () => {
             </motion.div>
             
             {/* Modern 2-Column Review Section */}
-            <div className="grid md:grid-cols-2 gap-8 items-center mt-12">
-              {/* Left Column: Horizontal Marquee of Promotional-Style Review Cards */}
-              <div className="relative w-full max-w-[450px] mx-auto md:mx-0 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+            <div className="flex flex-col md:flex-row gap-8 items-center mt-12 w-full">
+              {/* Left Column (70%): Horizontal Marquee of Realistic Review Cards */}
+              <div className="relative w-full md:w-[70%] overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
                 
-                <div className="flex gap-4 animate-marquee whitespace-nowrap py-4 w-max hover:[animation-play-state:paused]">
+                <div className="flex gap-6 animate-marquee whitespace-nowrap py-4 w-max hover:[animation-play-state:paused]">
                   {[
                     {
-                      bg: "bg-gradient-to-b from-purple-800 to-indigo-900",
-                      textTop: "3X ROI IN 30 DAYS",
-                      textBot: "\"Best performance agency we've ever worked with. Scaled our ads predictably.\"",
-                      brandBg: "bg-indigo-950",
-                      brandName: "COLGATE"
+                      name: "Om Upadhyay",
+                      role: "Founder, E-Commerce Brand",
+                      text: "Scaling has finally become predictable. The team actually cares about profit margins, not just their ad spend cut.",
+                      avatar: "O"
                     },
                     {
-                      bg: "bg-gradient-to-br from-yellow-400 to-orange-500",
-                      textTop: "UPTO 70% LOWER CAC",
-                      textBot: "\"They fixed our funnel and stacked our profit margins instantly.\"",
-                      brandBg: "bg-orange-600",
-                      brandName: "DOT&KEY"
+                      name: "Rohan Khanna",
+                      role: "Marketing Head",
+                      text: "Best performance agency we've ever worked with. They fixed our funnel and stacked our profit margins instantly.",
+                      avatar: "R"
                     },
                     {
-                      bg: "bg-gradient-to-b from-red-800 to-red-950",
-                      textTop: "10M+ REACH",
-                      textBot: "\"The authentic influencer campaigns drove massive high-intent traffic.\"",
-                      brandBg: "bg-red-900",
-                      brandName: "PALMONAS"
+                      name: "Sneha Patel",
+                      role: "D2C Brand Owner",
+                      text: "The authentic influencer campaigns drove massive high-intent traffic. Our CAC dropped by 70% in the first month.",
+                      avatar: "S"
                     },
                     {
-                      bg: "bg-gradient-to-b from-emerald-600 to-teal-800",
-                      textTop: "SCALED TO ₹2.4M+",
-                      textBot: "\"Their laser-focus on profit margins over vanity metrics is exactly what we needed.\"",
-                      brandBg: "bg-teal-950",
-                      brandName: "LUMINOUS"
+                      name: "Vikram Singh",
+                      role: "CEO, Tech Startup",
+                      text: "Their laser-focus on profit margins over vanity metrics is exactly what we needed to scale from $10k to $100k/mo.",
+                      avatar: "V"
                     }
-                  ].map((card, i) => (
-                      <div key={i} className="w-[180px] h-[260px] md:w-[220px] md:h-[320px] rounded-[12px] flex flex-col overflow-hidden shadow-xl shrink-0 group transform transition-transform hover:scale-105 border border-white/10 dark:border-white/5">
-                        {/* Upper part */}
-                        <div className={`flex-1 flex flex-col items-center justify-center p-5 text-center ${card.bg} relative overflow-hidden`}>
-                           <Star className="w-4 h-4 text-yellow-300 absolute top-3 right-3 opacity-50" />
-                           <Star className="w-2 h-2 text-yellow-300 absolute top-8 left-4 opacity-50" />
-                           <h4 className="text-white font-extrabold text-[15px] md:text-lg leading-tight whitespace-normal tracking-wide drop-shadow-md">{card.textTop}</h4>
-                           <p className="text-white/90 text-xs md:text-[13px] mt-4 font-medium whitespace-normal leading-snug drop-shadow-sm">{card.textBot}</p>
+                  ].map((review, i) => (
+                      <div key={i} className="w-[300px] md:w-[350px] p-6 rounded-[22px] bg-white/40 dark:bg-black/40 backdrop-blur-xl border border-white/60 dark:border-white/10 flex flex-col gap-4 shadow-sm shrink-0 whitespace-normal transition-transform hover:scale-[1.02]">
+                        <div className="flex items-center gap-4">
+                          <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-lg border border-primary/20 shrink-0">{review.avatar}</div>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-1.5">
+                              <h4 className="font-bold text-[15px] text-foreground truncate">{review.name}</h4>
+                              <BadgeCheck className="w-4 h-4 text-blue-500 shrink-0" />
+                            </div>
+                            <p className="text-xs text-muted-foreground truncate">{review.role}</p>
+                          </div>
                         </div>
-                        {/* Bottom brand part */}
-                        <div className={`${card.brandBg} h-14 md:h-16 flex items-center justify-center border-t border-white/10`}>
-                           <span className="text-white font-black tracking-widest text-sm md:text-base uppercase">{card.brandName}</span>
+                        <div className="flex text-yellow-500 gap-1">
+                          {[1,2,3,4,5].map(s => <Star key={s} className="w-3.5 h-3.5 fill-current" />)}
                         </div>
-                     </div>
+                        <p className="text-[15px] text-foreground/80 leading-relaxed italic">"{review.text}"</p>
+                      </div>
                   ))}
                   {/* Duplicate array for seamless infinite looping */}
                   {[
                     {
-                      bg: "bg-gradient-to-b from-purple-800 to-indigo-900",
-                      textTop: "3X ROI IN 30 DAYS",
-                      textBot: "\"Best performance agency we've ever worked with. Scaled our ads predictably.\"",
-                      brandBg: "bg-indigo-950",
-                      brandName: "COLGATE"
+                      name: "Om Upadhyay",
+                      role: "Founder, E-Commerce Brand",
+                      text: "Scaling has finally become predictable. The team actually cares about profit margins, not just their ad spend cut.",
+                      avatar: "O"
                     },
                     {
-                      bg: "bg-gradient-to-br from-yellow-400 to-orange-500",
-                      textTop: "UPTO 70% LOWER CAC",
-                      textBot: "\"They fixed our funnel and stacked our profit margins instantly.\"",
-                      brandBg: "bg-orange-600",
-                      brandName: "DOT&KEY"
+                      name: "Rohan Khanna",
+                      role: "Marketing Head",
+                      text: "Best performance agency we've ever worked with. They fixed our funnel and stacked our profit margins instantly.",
+                      avatar: "R"
                     },
                     {
-                      bg: "bg-gradient-to-b from-red-800 to-red-950",
-                      textTop: "10M+ REACH",
-                      textBot: "\"The authentic influencer campaigns drove massive high-intent traffic.\"",
-                      brandBg: "bg-red-900",
-                      brandName: "PALMONAS"
+                      name: "Sneha Patel",
+                      role: "D2C Brand Owner",
+                      text: "The authentic influencer campaigns drove massive high-intent traffic. Our CAC dropped by 70% in the first month.",
+                      avatar: "S"
                     },
                     {
-                      bg: "bg-gradient-to-b from-emerald-600 to-teal-800",
-                      textTop: "SCALED TO ₹2.4M+",
-                      textBot: "\"Their laser-focus on profit margins over vanity metrics is exactly what we needed.\"",
-                      brandBg: "bg-teal-950",
-                      brandName: "LUMINOUS"
+                      name: "Vikram Singh",
+                      role: "CEO, Tech Startup",
+                      text: "Their laser-focus on profit margins over vanity metrics is exactly what we needed to scale from $10k to $100k/mo.",
+                      avatar: "V"
                     }
-                  ].map((card, i) => (
-                      <div key={i + 4} className="w-[180px] h-[260px] md:w-[220px] md:h-[320px] rounded-[12px] flex flex-col overflow-hidden shadow-xl shrink-0 group transform transition-transform hover:scale-105 border border-white/10 dark:border-white/5">
-                        <div className={`flex-1 flex flex-col items-center justify-center p-5 text-center ${card.bg} relative overflow-hidden`}>
-                           <Star className="w-4 h-4 text-yellow-300 absolute top-3 right-3 opacity-50" />
-                           <Star className="w-2 h-2 text-yellow-300 absolute top-8 left-4 opacity-50" />
-                           <h4 className="text-white font-extrabold text-[15px] md:text-lg leading-tight whitespace-normal tracking-wide drop-shadow-md">{card.textTop}</h4>
-                           <p className="text-white/90 text-xs md:text-[13px] mt-4 font-medium whitespace-normal leading-snug drop-shadow-sm">{card.textBot}</p>
+                  ].map((review, i) => (
+                      <div key={i + 4} className="w-[300px] md:w-[350px] p-6 rounded-[22px] bg-white/40 dark:bg-black/40 backdrop-blur-xl border border-white/60 dark:border-white/10 flex flex-col gap-4 shadow-sm shrink-0 whitespace-normal transition-transform hover:scale-[1.02]">
+                        <div className="flex items-center gap-4">
+                          <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-lg border border-primary/20 shrink-0">{review.avatar}</div>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-1.5">
+                              <h4 className="font-bold text-[15px] text-foreground truncate">{review.name}</h4>
+                              <BadgeCheck className="w-4 h-4 text-blue-500 shrink-0" />
+                            </div>
+                            <p className="text-xs text-muted-foreground truncate">{review.role}</p>
+                          </div>
                         </div>
-                        <div className={`${card.brandBg} h-14 md:h-16 flex items-center justify-center border-t border-white/10`}>
-                           <span className="text-white font-black tracking-widest text-sm md:text-base uppercase">{card.brandName}</span>
+                        <div className="flex text-yellow-500 gap-1">
+                          {[1,2,3,4,5].map(s => <Star key={s} className="w-3.5 h-3.5 fill-current" />)}
                         </div>
-                     </div>
+                        <p className="text-[15px] text-foreground/80 leading-relaxed italic">"{review.text}"</p>
+                      </div>
                   ))}
                 </div>
               </div>
-
-              {/* Right Column: Fixed Call to Action */}
-              <div className="flex flex-col items-center md:items-start justify-center h-full gap-6">
+              
+              {/* Right Column (30%): Fixed Call to Action */}
+              <div className="w-full md:w-[30%] flex flex-col items-center md:items-start justify-center gap-6 px-4">
                 <div className="text-center md:text-left">
-                  <h3 className="text-2xl md:text-3xl font-extrabold text-foreground mb-2">Ready for the same results?</h3>
-                  <p className="text-muted-foreground text-sm md:text-base">Stop bleeding budget on generic creatives and let us build your funnel.</p>
+                  <h3 className="text-2xl md:text-3xl font-extrabold text-foreground mb-3">Ready for the same results?</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">Stop bleeding budget on generic creatives and let us build your funnel.</p>
                 </div>
-                <a href="/#audit-form">
+                <a href="/#audit-form" className="w-full md:w-auto">
                     <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="w-full md:w-auto bg-primary hover:bg-primary-deep text-white px-10 py-5 rounded-full text-lg font-bold flex items-center justify-center gap-3 shadow-[0_10px_40px_rgba(37,99,235,0.3)] hover:shadow-[0_15px_50px_rgba(37,99,235,0.4)] transition-all whitespace-nowrap"
+                        className="w-full bg-primary hover:bg-primary-deep text-white px-8 py-4 rounded-full text-base font-bold flex items-center justify-center gap-2 shadow-[0_10px_40px_rgba(37,99,235,0.3)] hover:shadow-[0_15px_50px_rgba(37,99,235,0.4)] transition-all whitespace-nowrap"
                     >
                         Schedule a Call <ArrowUpRight className="w-5 h-5" />
                     </motion.button>
