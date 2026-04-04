@@ -201,9 +201,9 @@ const CaseStudySnapshot = () => {
             {/* Modern 2-Column Review Section */}
             <div className="flex flex-col md:flex-row gap-8 items-center mt-12 w-full">
               {/* Left Column (70%): Horizontal Marquee of Realistic Review Cards */}
-              <div className="relative w-full md:w-[70%] overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+              <div className="relative w-full md:w-[70%] overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] group">
                 
-                <div className="flex gap-6 animate-marquee whitespace-nowrap py-4 w-max hover:[animation-play-state:paused]">
+                <div className="flex gap-6 animate-marquee whitespace-nowrap py-4 w-max group-hover:[animation-play-state:paused]">
                   {[
                     {
                       name: "Om Upadhyay",
@@ -230,7 +230,7 @@ const CaseStudySnapshot = () => {
                       avatar: "V"
                     }
                   ].map((review, i) => (
-                      <div key={i} className="w-[300px] md:w-[350px] p-6 rounded-[22px] bg-white/40 dark:bg-black/40 backdrop-blur-xl border border-white/60 dark:border-white/10 flex flex-col gap-4 shadow-sm shrink-0 whitespace-normal transition-transform hover:scale-[1.02]">
+                      <div key={i} className="w-[38vw] md:w-[350px] p-6 rounded-[22px] bg-white/40 dark:bg-black/40 backdrop-blur-xl border border-white/60 dark:border-white/10 flex flex-col gap-4 shadow-sm shrink-0 whitespace-normal transition-transform hover:scale-[1.02]">
                         <div className="flex items-center gap-4">
                           <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-lg border border-primary/20 shrink-0">{review.avatar}</div>
                           <div className="flex-1 min-w-0">
@@ -274,7 +274,7 @@ const CaseStudySnapshot = () => {
                       avatar: "V"
                     }
                   ].map((review, i) => (
-                      <div key={i + 4} className="w-[300px] md:w-[350px] p-6 rounded-[22px] bg-white/40 dark:bg-black/40 backdrop-blur-xl border border-white/60 dark:border-white/10 flex flex-col gap-4 shadow-sm shrink-0 whitespace-normal transition-transform hover:scale-[1.02]">
+                      <div key={i + 4} className="w-[38vw] md:w-[350px] p-6 rounded-[22px] bg-white/40 dark:bg-black/40 backdrop-blur-xl border border-white/60 dark:border-white/10 flex flex-col gap-4 shadow-sm shrink-0 whitespace-normal transition-transform hover:scale-[1.02]">
                         <div className="flex items-center gap-4">
                           <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-lg border border-primary/20 shrink-0">{review.avatar}</div>
                           <div className="flex-1 min-w-0">
