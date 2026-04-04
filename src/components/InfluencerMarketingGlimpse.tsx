@@ -18,53 +18,35 @@ const InfluencerMarketingGlimpse = () => {
             <div className="container-main relative z-10">
                 <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
                     
-                    {/* Video / Carousel Side (Left on Desktop) */}
+                    {/* Video Arch Carousel Side (Left on Desktop) */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
-                        className="order-2 lg:order-1 relative w-full aspect-[4/5] max-w-[400px] mx-auto"
+                        className="order-2 lg:order-1 relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] mt-8 lg:mt-0"
                     >
-                        {/* Glassmorphism Phone/Video frame */}
-                        <div className="w-full h-full bg-white/30 dark:bg-black/40 backdrop-blur-3xl border-4 border-white/60 dark:border-white/10 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] relative overflow-hidden group">
-                            
-                            {/* Inner Screen */}
-                            <div className="absolute inset-2 rounded-[2rem] bg-black overflow-hidden cursor-pointer" onClick={() => setIsVideoOpen(true)}>
-                                {/* Fallback image or video iframe */}
-                                <iframe 
-                                    src={sampleVideo}
-                                    title="Influencer Marketing Example"
-                                    className="w-full h-[120%] -mt-[10%] object-cover pointer-events-none opacity-80 group-hover:opacity-100 transition-opacity"
-                                    allow="accelerometer; autoplay; clipboar-write; encrypted-media; gyroscope; picture-in-picture"
-                                />
-                                
-                                {/* Overlay Gradient */}
-                                <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/80"></div>
-                                
-                                {/* Play Button Hint */}
-                                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-105">
-                                    <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/40">
-                                        <Play className="w-6 h-6 text-white ml-1" />
+                        <div className="flex gap-4 animate-[marquee_20s_linear_infinite] w-max hover:[animation-play-state:paused] py-4">
+                            {[1, 2, 3, 4, 1, 2, 3, 4].map((item, idx) => (
+                                <div key={idx} className="w-[180px] md:w-[220px] aspect-[9/16] rounded-t-full rounded-b-3xl bg-white/30 dark:bg-black/40 backdrop-blur-xl border border-white/60 dark:border-white/10 shadow-lg relative overflow-hidden group shrink-0 transform transition-transform hover:scale-105">
+                                    <div className="absolute inset-2 rounded-t-full rounded-b-2xl bg-black overflow-hidden cursor-pointer" onClick={() => setIsVideoOpen(true)}>
+                                        <iframe 
+                                            src={sampleVideo}
+                                            title="Influencer Marketing Example"
+                                            className="w-[150%] h-[150%] -top-[25%] -left-[25%] absolute object-cover pointer-events-none opacity-80 group-hover:opacity-100 transition-opacity"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/80"></div>
+                                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                                            <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/40">
+                                                <Play className="w-4 h-4 text-white ml-1" />
+                                            </div>
+                                        </div>
+                                        <div className="absolute bottom-4 left-0 right-0 text-center">
+                                            <p className="text-white font-bold text-sm">Viral UGC</p>
+                                        </div>
                                     </div>
                                 </div>
-                                
-                                {/* Bottom Info Overlay */}
-                                <div className="absolute bottom-6 left-6 right-6">
-                                    <h4 className="text-white font-bold text-lg leading-tight mb-1">Viral UGC Campaigns</h4>
-                                    <p className="text-white/70 text-sm flex items-center gap-2">
-                                        <TrendingUp className="w-4 h-4 text-green-400" /> 10M+ Reach
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Floating decorative tags */}
-                        <div className="absolute -right-8 top-12 bg-white/80 dark:bg-black/60 backdrop-blur-md border border-border/50 px-4 py-3 rounded-2xl shadow-xl transform rotate-3 flex items-center gap-3">
-                            <Video className="w-5 h-5 text-primary" />
-                            <div>
-                                <p className="text-xs font-bold text-foreground">Content Creation</p>
-                                <p className="text-[10px] text-muted-foreground uppercase">Top Rated</p>
-                            </div>
+                            ))}
                         </div>
                     </motion.div>
 
