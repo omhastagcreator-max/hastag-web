@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ArrowRight, ShieldCheck, Video, CalendarDays, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, ShieldCheck, Video, CalendarDays, CheckCircle2, TrendingUp, Users, Smartphone, Layout, AlertCircle } from "lucide-react";
 import { useRazorpay } from "react-razorpay";
 import { supabase } from "@/lib/supabase";
 
@@ -271,21 +271,28 @@ ${form.painPoint}
                           initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}
                           className="flex flex-col h-full space-y-3"
                         >
-                           {[
-                             { id: "PerformanceAds", label: "Scaling with Performance Ads" },
-                             { id: "InfluencerMarketing", label: "Leveraging Influencer Marketing" },
-                             { id: "UGCVideos", label: "Sourcing High-Converting UGC Videos" },
-                             { id: "WebDevCRO", label: "Website Development & Conversion (CRO)" }
-                           ].map(option => (
-                             <button
-                               key={option.id}
-                               onClick={() => setForm({...form, goal: option.id as Goal})}
-                               className={`w-full text-left px-5 py-4 rounded-xl border-2 transition-all flex items-center justify-between ${form.goal === option.id ? 'border-primary bg-primary/5' : 'border-border/50 bg-background hover:border-primary/30'}`}
-                             >
-                               <span className="font-bold text-foreground text-sm md:text-base">{option.label}</span>
-                               {form.goal === option.id && <CheckCircle2 className="w-5 h-5 text-primary" />}
-                             </button>
-                           ))}
+                           <div className="grid grid-cols-2 gap-3">
+                             {[
+                               { id: "PerformanceAds", label: "Performance Ads", icon: TrendingUp, color: "text-blue-500", bg: "bg-blue-500/10" },
+                               { id: "InfluencerMarketing", label: "Influencer Push", icon: Users, color: "text-purple-500", bg: "bg-purple-500/10" },
+                               { id: "UGCVideos", label: "UGC Videos", icon: Smartphone, color: "text-pink-500", bg: "bg-pink-500/10" },
+                               { id: "WebDevCRO", label: "Website / CRO", icon: Layout, color: "text-orange-500", bg: "bg-orange-500/10" }
+                             ].map(option => {
+                               const Icon = option.icon;
+                               return (
+                                 <button
+                                   key={option.id}
+                                   onClick={() => setForm({...form, goal: option.id as Goal})}
+                                   className={`flex flex-col items-center justify-center p-6 rounded-2xl border-2 transition-all gap-4 ${form.goal === option.id ? 'border-primary bg-primary/5 shadow-md shadow-primary/10 scale-[1.02]' : 'border-border/50 bg-background hover:border-primary/30 hover:bg-secondary/50'}`}
+                                 >
+                                   <div className={`w-14 h-14 rounded-full flex items-center justify-center ${option.bg}`}>
+                                     <Icon className={`w-7 h-7 ${option.color}`} />
+                                   </div>
+                                   <span className="font-extrabold text-foreground text-sm text-center">{option.label}</span>
+                                 </button>
+                               )
+                             })}
+                           </div>
                            
                            <div className="flex gap-3 pt-6 mt-auto">
                               <button onClick={handleBack} className="px-5 py-4 rounded-xl border border-border text-foreground hover:bg-secondary font-bold flex items-center gap-2">
@@ -305,16 +312,21 @@ ${form.painPoint}
                           initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}
                           className="flex flex-col h-full space-y-3"
                         >
-                           {form.goal && BOTTLENECKS[form.goal].map(pain => (
-                             <button
-                               key={pain}
-                               onClick={() => setForm({...form, painPoint: pain})}
-                               className={`w-full text-left px-5 py-4 rounded-xl border-2 transition-all flex items-center justify-between ${form.painPoint === pain ? 'border-primary bg-primary/5' : 'border-border/50 bg-background hover:border-primary/30'}`}
-                             >
-                               <span className="font-bold text-foreground text-sm md:text-base">{pain}</span>
-                               {form.painPoint === pain && <CheckCircle2 className="w-5 h-5 text-primary" />}
-                             </button>
-                           ))}
+                           <div className="space-y-3">
+                             {form.goal && BOTTLENECKS[form.goal].map((pain, idx) => (
+                               <button
+                                 key={pain}
+                                 onClick={() => setForm({...form, painPoint: pain})}
+                                 className={`w-full text-left p-4 rounded-xl border-2 transition-all flex items-center gap-4 ${form.painPoint === pain ? 'border-primary bg-primary/5 shadow-md shadow-primary/5 translate-x-1' : 'border-border/50 bg-background hover:border-primary/30 hover:bg-secondary/50'}`}
+                               >
+                                 <div className={`w-10 h-10 shrink-0 rounded-full flex items-center justify-center ${form.painPoint === pain ? 'bg-primary text-white' : 'bg-red-500/10 text-red-500'}`}>
+                                   <AlertCircle className="w-5 h-5" />
+                                 </div>
+                                 <span className="font-bold text-foreground text-sm md:text-base flex-1">{pain}</span>
+                                 {form.painPoint === pain && <CheckCircle2 className="w-6 h-6 text-primary shrink-0" />}
+                               </button>
+                             ))}
+                           </div>
                            
                            <div className="flex gap-3 pt-6 mt-auto">
                               <button onClick={handleBack} className="px-5 py-4 rounded-xl border border-border text-foreground hover:bg-secondary font-bold flex items-center gap-2">
