@@ -66,54 +66,13 @@ const WebDevelopmentGlimpse = () => {
             viewport={{ once: true }}
             className="relative lg:h-[600px] flex items-center justify-center p-4"
           >
-            <div className="w-full max-w-[500px] bg-card border border-border rounded-3xl shadow-2xl relative overflow-hidden z-10 flex flex-col pt-4">
-               {/* Browser Top Bar Mock */}
-               <div className="px-5 pb-4 border-b border-border flex items-center gap-3">
-                  <div className="flex gap-1.5 flex-shrink-0">
-                     <div className="w-3 h-3 rounded-full bg-[#FF5F56]"></div>
-                     <div className="w-3 h-3 rounded-full bg-[#FFBD2E]"></div>
-                     <div className="w-3 h-3 rounded-full bg-[#27C93F]"></div>
-                  </div>
-                  <div className="flex-1 bg-muted/50 rounded-md h-6 border border-border/50 flex flex-col justify-center px-4">
-                     <span className="text-[10px] text-muted-foreground truncate font-mono">https://your-brand-soaring.com</span>
-                  </div>
-               </div>
-               
-               {/* Body Abstract */}
-               <div className="p-6 flex flex-col gap-6 relative bg-gradient-to-b from-background to-muted/20">
-                  <div className="flex items-start justify-between">
-                     <div className="flex flex-col gap-2 w-1/2">
-                        <div className="h-4 bg-muted-foreground/20 rounded w-16"></div>
-                        <div className="h-10 bg-foreground/10 rounded-md w-full mt-2"></div>
-                        <div className="h-4 bg-muted-foreground/10 rounded w-3/4"></div>
-                     </div>
-                     <div className="w-20 h-20 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
-                        <Code2 className="w-8 h-8 text-blue-500/50" />
-                     </div>
-                  </div>
-
-                  <div className="h-px w-full bg-border/80"></div>
-
-                  <div className="space-y-3">
-                     <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded bg-green-500/10 flex items-center justify-center">
-                           <LineChart className="w-4 h-4 text-green-500" />
-                        </div>
-                        <div className="h-4 bg-foreground/20 rounded w-full"></div>
-                     </div>
-                     <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded bg-primary/10 flex items-center justify-center">
-                           <ShieldCheck className="w-4 h-4 text-primary" />
-                        </div>
-                        <div className="h-4 bg-foreground/20 rounded w-4/5"></div>
-                     </div>
-                  </div>
-                  
-                  {/* Floating Action Button */}
-                  <div className="absolute right-6 bottom-6 w-12 h-12 bg-blue-500 rounded-full shadow-xl flex items-center justify-center animate-bounce shadow-blue-500/30">
-                     <ArrowUpRight className="w-5 h-5 text-white" />
-                  </div>
-               </div>
+            <div className="w-full max-w-[500px] border-4 border-muted/50 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] relative overflow-hidden z-10 flex flex-col group">
+               <img 
+                 src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                 alt="Web Development Dashboard" 
+                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out" 
+               />
+               <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/20 to-transparent pointer-events-none mix-blend-overlay"></div>
             </div>
             
             {/* Background shapes */}
