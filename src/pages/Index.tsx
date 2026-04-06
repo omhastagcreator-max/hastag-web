@@ -13,6 +13,7 @@ import GoogleReviews from "@/components/GoogleReviews";
 import DashboardResultsSection from "@/components/DashboardResultsSection";
 import NetworkStats from "@/components/NetworkStats";
 import CaseStudySnapshot from "@/components/CaseStudySnapshot";
+import OfficialPartners from "@/components/OfficialPartners";
 import PerformanceMarketingGlimpse from "@/components/PerformanceMarketingGlimpse";
 import InfluencerMarketingGlimpse from "@/components/InfluencerMarketingGlimpse";
 import WebDevelopmentGlimpse from "@/components/WebDevelopmentGlimpse";
@@ -36,6 +37,7 @@ const Index = () => {
     <main>
       <HeroSection />
       <TrustedBrands />
+      <OfficialPartners />
       <CaseStudySnapshot />
       <PerformanceMarketingGlimpse />
       <InfluencerMarketingGlimpse />
