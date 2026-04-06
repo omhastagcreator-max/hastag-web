@@ -48,7 +48,7 @@ const ScarcityBanner = () => {
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
         exit={{ opacity: 0, x: 50 }}
-        className="fixed bottom-0 left-0 right-0 sm:bottom-auto sm:left-auto sm:top-1/4 sm:right-0 z-[49] p-2 sm:p-0 pointer-events-none"
+        className="fixed bottom-0 left-0 right-0 sm:bottom-auto sm:left-auto sm:top-[30%] sm:right-0 z-[49] p-2 sm:p-0 pointer-events-none hidden sm:block"
       >
         <div className="mx-auto sm:mx-0 pointer-events-auto w-full sm:w-[260px]">
           <div className="bg-background/95 backdrop-blur-xl border border-red-500/30 shadow-[0_0_40px_-10px_rgba(239,68,68,0.3)] rounded-2xl sm:rounded-l-2xl sm:rounded-r-none sm:border-r-0 p-3 sm:p-5 flex flex-row sm:flex-col items-center justify-between gap-2 sm:gap-4 relative overflow-hidden">

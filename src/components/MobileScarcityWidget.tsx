@@ -34,7 +34,7 @@ export default function MobileScarcityWidget({ onClick }: { onClick?: () => void
   }, []);
 
   return (
-    <div className="bg-red-500/5 border border-red-500/20 rounded-xl p-4 flex flex-col items-center text-center gap-3 relative overflow-hidden mb-4">
+    <div className="bg-background shadow-[0_10px_40px_-10px_rgba(239,68,68,0.3)] border-2 border-red-500/20 rounded-xl p-4 flex flex-col items-center text-center gap-3 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-bl from-red-500/0 via-red-500/5 to-red-500/0 animate-[shimmer_2s_infinite]"></div>
       
       <div className="flex items-center gap-2 relative z-10 w-full justify-center">

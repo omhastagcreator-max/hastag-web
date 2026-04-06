@@ -48,7 +48,7 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
         <WhatsAppButton />
-        <div className="fixed bottom-24 right-4 z-40 w-[240px] md:hidden pointer-events-auto">
+        <div className="fixed top-1/2 -translate-y-1/2 right-2 z-40 w-[200px] md:hidden pointer-events-auto shadow-2xl rounded-xl">
           <MobileScarcityWidget />
         </div>
         <MobileBottomNav />
