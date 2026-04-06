@@ -3,7 +3,7 @@ import { Timer, AlertCircle, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const ScarcityBanner = () => {
-  const [spotsLeft, setSpotsLeft] = useState(10);
+  const [spotsLeft, setSpotsLeft] = useState(5);
   const [timeLeft, setTimeLeft] = useState('');
   const [isVisible, setIsVisible] = useState(true);
 
@@ -12,12 +12,12 @@ const ScarcityBanner = () => {
       const now = new Date();
       const dayOfMonth = now.getDate();
       
-      // Starts at 10, decreases by 1 every 4 days.
-      // Day 1-4: decrease 0 -> 10 spots
-      // Day 5-8: decrease 1 -> 9 spots
+      // Starts at 5, decreases by 1 every 4 days.
+      // Day 1-4: decrease 0 -> 5 spots
+      // Day 5-8: decrease 1 -> 4 spots
       // ...
       const decrements = Math.floor((dayOfMonth - 1) / 4);
-      const calculatedSpots = Math.max(4, 10 - decrements);
+      const calculatedSpots = Math.max(1, 5 - decrements);
       
       setSpotsLeft(calculatedSpots);
     };
