@@ -77,7 +77,7 @@ const ScarcityBanner = () => {
                 <span className="text-[9px] text-muted-foreground uppercase tracking-widest font-bold mt-0.5">Time Left Today</span>
               </div>
               
-              <a href="https://calendly.com/domsco-tech/30min?month=2026-03" target="_blank" rel="noreferrer" className="hidden sm:block shrink-0">
+              <a href="/book-call" className="hidden sm:block shrink-0">
                 <button className="bg-red-500 hover:bg-red-600 text-white px-5 py-2.5 rounded-xl text-sm font-black uppercase tracking-wider shadow-lg shadow-red-500/20 transition-all hover:scale-105 active:scale-95 whitespace-nowrap">
                   Claim Spot
                 </button>
@@ -85,7 +85,7 @@ const ScarcityBanner = () => {
             </div>
             
             {/* Mobile CTA */}
-            <a href="https://calendly.com/domsco-tech/30min?month=2026-03" target="_blank" rel="noreferrer" className="w-full sm:hidden relative z-10 mt-1">
+            <a href="/book-call" className="w-full sm:hidden relative z-10 mt-1">
               <button className="w-full bg-red-500 hover:bg-red-600 text-white px-4 py-3 rounded-xl text-sm font-black uppercase tracking-wider shadow-lg shadow-red-500/20 transition-colors">
                 Claim Spot Now
               </button>

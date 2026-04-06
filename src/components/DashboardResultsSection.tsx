@@ -141,7 +141,7 @@ const DashboardResultsSection = () => {
           viewport={{ once: true }}
           className="mt-20 text-center"
         >
-          <a href="https://calendly.com/domsco-tech/30min?month=2026-03" target="_blank" rel="noreferrer" className="inline-block group perspective-1000">
+          <a href="/book-call" className="inline-block group perspective-1000">
             <button className="btn-synthetic">
               Schedule a Call 
               <span className="bg-white/20 p-1.5 rounded-full"><ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform"/></span>

@@ -39,7 +39,7 @@ export default function PerformanceMarketing() {
               </p>
 
               <div className="flex flex-col sm:flex-row justify-center gap-4">
-                 <a href="https://calendly.com/domsco-tech/30min?month=2026-03" target="_blank" rel="noreferrer">
+                 <a href="/book-call">
                    <button className="w-full sm:w-auto bg-foreground text-background px-8 py-5 rounded-full text-lg font-bold shadow-xl hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
                      Get a Free Ad Account Audit <ArrowRight className="w-5 h-5" />
                    </button>

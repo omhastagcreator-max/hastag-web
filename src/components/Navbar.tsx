@@ -126,7 +126,7 @@ const Navbar = () => {
             </div>
           ))}
           {/* Calendly CTA Hook */}
-          <a href="https://calendly.com/domsco-tech/30min?month=2026-03" target="_blank" rel="noreferrer" className="hidden lg:block ml-2">
+          <a href="/book-call" className="hidden lg:block ml-2">
             <motion.button
               whileHover={{ scale: 1.05, boxShadow: "0 10px 30px -10px rgba(0,0,0,0.5)" }}
               whileTap={{ scale: 0.95 }}
@@ -216,7 +216,7 @@ const Navbar = () => {
                 </div>
               ))}
               <div className="mt-8 pt-6 border-t border-border">
-                <a href="https://calendly.com/domsco-tech/30min?month=2026-03" target="_blank" rel="noreferrer" onClick={() => setOpen(false)} className="block">
+                <a href="/book-call" onClick={() => setOpen(false)} className="block">
                   <button className="w-full bg-foreground text-background px-6 py-4 rounded-full text-base font-bold shadow-xl active:scale-95 transition-transform">
                     Schedule a Call
                   </button>

@@ -133,7 +133,7 @@ const ServicesGrid = ({ filterKeyword, title, subtitle }: { filterKeyword?: stri
 
   const handleCheckout = async (p: any) => {
     if (p.price === 0) {
-      window.open("https://calendly.com/domsco-tech/30min?month=2026-03", "_blank");
+      window.location.href = "/book-call";
       return;
     }
 

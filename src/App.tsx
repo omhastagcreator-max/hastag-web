@@ -16,6 +16,7 @@ import InfluencerUGC from "./pages/InfluencerUGC.tsx";
 import WebDevelopment from "./pages/WebDevelopment.tsx";
 import PerformanceMarketing from "./pages/PerformanceMarketing.tsx";
 import Careers from "./pages/Careers.tsx";
+import BookCall from "./pages/BookCall.tsx";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import CustomCursor from "@/components/CustomCursor";
 
@@ -41,6 +42,7 @@ const App = () => (
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-and-conditions" element={<Terms />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/book-call" element={<BookCall />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <WhatsAppButton />

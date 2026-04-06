@@ -53,7 +53,7 @@ export default function ProductDetail() {
     if (!product) return;
     
     if (product.price === 0) {
-      window.open("https://calendly.com/domsco-tech/30min?month=2026-03", "_blank");
+      window.location.href = "/book-call";
       return;
     }
 
@@ -181,7 +181,7 @@ export default function ProductDetail() {
                     <button onClick={handleCheckout} className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground py-4 rounded-xl text-sm font-black shadow-xl shadow-primary/20 transition-all flex justify-center items-center gap-2 hover:-translate-y-1">
                        <ShoppingCart size={18} /> Purchase Direct
                     </button>
-                    <a href="https://calendly.com/domsco-tech/30min?month=2026-03" target="_blank" rel="noreferrer" className="flex-1">
+                    <a href="/book-call" className="flex-1">
                        <button className="w-full bg-foreground hover:bg-foreground/90 text-background py-4 rounded-xl text-sm font-black transition-all flex justify-center items-center gap-2 hover:-translate-y-1 border border-border shadow-lg">
                           <CalendarRange size={18} /> Schedule Consultation
                        </button>

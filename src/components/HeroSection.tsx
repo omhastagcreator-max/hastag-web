@@ -84,7 +84,7 @@ const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
             className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto"
           >
-            <a href="https://calendly.com/domsco-tech/30min?month=2026-03" target="_blank" rel="noreferrer" className="w-full sm:w-auto">
+            <a href="/book-call" className="w-full sm:w-auto">
               <button aria-label="Schedule a Call" className="btn-synthetic w-full sm:w-auto min-w-[48px] min-h-[48px]">
                 Schedule a Call
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

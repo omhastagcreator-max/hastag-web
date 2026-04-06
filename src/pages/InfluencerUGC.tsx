@@ -287,7 +287,7 @@ export default function InfluencerUGC() {
               <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
               <h2 className="text-3xl md:text-5xl font-black mb-6 relative z-10">Stop blending in.</h2>
               <p className="text-muted-foreground mb-10 text-lg relative z-10 max-w-xl mx-auto">Get custom, high-converting UGC engineered specifically for your brand's unique checkout funnel.</p>
-              <a href="https://calendly.com/domsco-tech/30min?month=2026-03" target="_blank" rel="noreferrer" className="relative z-10 inline-block bg-primary text-primary-foreground font-black px-10 py-5 rounded-full shadow-xl shadow-primary/20 hover:-translate-y-1 transition-all text-lg tracking-wide uppercase">
+              <a href="/book-call" className="relative z-10 inline-block bg-primary text-primary-foreground font-black px-10 py-5 rounded-full shadow-xl shadow-primary/20 hover:-translate-y-1 transition-all text-lg tracking-wide uppercase">
                 Commission Videos
               </a>
            </div>

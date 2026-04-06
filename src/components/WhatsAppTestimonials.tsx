@@ -34,7 +34,7 @@ const WhatsAppTestimonials = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 items-center justify-center lg:justify-start">
-              <a href="https://calendly.com/domsco-tech/30min?month=2026-03" target="_blank" rel="noreferrer">
+              <a href="/book-call">
                 <button className="bg-foreground text-background px-8 py-4 rounded-full text-sm font-bold shadow-lg hover:-translate-y-1 transition-transform">
                   Scale Your Revenue
                 </button>
