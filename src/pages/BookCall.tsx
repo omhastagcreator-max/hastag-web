@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ArrowRight, ShieldCheck, Video, CalendarDays, CheckCircle2, TrendingUp, Users, Smartphone, Layout, AlertCircle } from "lucide-react";
+import { ArrowLeft, ArrowRight, ShieldCheck, Video, CalendarDays, CheckCircle2, TrendingUp, Users, Smartphone, Layout, AlertCircle, Activity, Flame, Clock, TrendingDown, Map, Wrench, Search, Handshake } from "lucide-react";
 import { useRazorpay } from "react-razorpay";
 import { supabase } from "@/lib/supabase";
 
@@ -35,6 +35,20 @@ const BOTTLENECKS = {
   ]
 };
 
+const EXPERIENCES = [
+  { id: "internally", label: "Tried it internally, no results", icon: Activity, color: "text-blue-500", bg: "bg-blue-500/10" },
+  { id: "agency", label: "Worked with an agency, got burned", icon: Flame, color: "text-red-500", bg: "bg-red-500/10" },
+  { id: "notime", label: "No time/knowledge to do it right", icon: Clock, color: "text-orange-500", bg: "bg-orange-500/10" },
+  { id: "ceiling", label: "We have a team, but hit a ceiling", icon: TrendingDown, color: "text-purple-500", bg: "bg-purple-500/10" }
+];
+
+const EXPECTATIONS = [
+  { id: "roadmap", label: "A step-by-step scaling roadmap", icon: Map, color: "text-green-500", bg: "bg-green-500/10" },
+  { id: "audit", label: "Audit and fix our broken funnel", icon: Wrench, color: "text-yellow-500", bg: "bg-yellow-500/10" },
+  { id: "ready", label: "Find out if our brand is ready", icon: Search, color: "text-cyan-500", bg: "bg-cyan-500/10" },
+  { id: "partner", label: "Looking for an agency partner", icon: Handshake, color: "text-pink-500", bg: "bg-pink-500/10" }
+];
+
 export default function BookCall() {
   const [step, setStep] = useState(1);
   const [form, setForm] = useState({
@@ -43,6 +57,8 @@ export default function BookCall() {
     phone: "",
     goal: "" as Goal,
     painPoint: "",
+    pastExperience: "",
+    expectation: ""
   });
   
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -57,7 +73,9 @@ export default function BookCall() {
     if (e) e.preventDefault();
     if (step === 1 && !form.goal) return;
     if (step === 2 && !form.painPoint) return;
-    if (step === 3 && (!form.name || !form.email || !form.phone)) return;
+    if (step === 3 && !form.pastExperience) return;
+    if (step === 4 && !form.expectation) return;
+    if (step === 5 && (!form.name || !form.email || !form.phone)) return;
     setStep((prev) => prev + 1);
   };
 
@@ -77,22 +95,28 @@ export default function BookCall() {
           body: JSON.stringify({
             access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY,
             from_name: "HastagCreator Strategy Session",
-            subject: `🚀 New Strategy Booking: ${form.name}`,
+            subject: `🚀 Strategy Booking & Audit: ${form.name}`,
             name: form.name,
             email: form.email,
             phone: form.phone,
             message: `
-New Counseling Session Request
+New Strategy Session Request
 
 Name: ${form.name}
 Email: ${form.email}
 Phone: ${form.phone}
 
-Primary Goal Focus:
+[1] Primary Goal Focus:
 ${form.goal}
 
-Biggest Bottleneck (Pain Point):
+[2] Biggest Bottleneck:
 ${form.painPoint}
+
+[3] Why hasn't it been solved?:
+${form.pastExperience}
+
+[4] Expectation from Counseling:
+${form.expectation}
             `
           })
         });
@@ -205,23 +229,27 @@ ${form.painPoint}
                       <h2 className="text-2xl font-black text-foreground tracking-tight">
                          {step === 1 && "Step 1: Core Focus"}
                          {step === 2 && "Step 2: Biggest Hurdle"}
-                         {step === 3 && "Step 3: Details"}
-                         {step === 4 && "Final Step: Payment"}
+                         {step === 3 && "Step 3: Past Experience"}
+                         {step === 4 && "Step 4: Real Expectation"}
+                         {step === 5 && "Step 5: Your Details"}
+                         {step === 6 && "Final Step: Secure Slot"}
                       </h2>
                       <p className="text-muted-foreground text-sm font-medium mt-1">
                          {step === 1 && "What are you trying to achieve?"}
                          {step === 2 && "Where are you currently stuck?"}
-                         {step === 3 && "Basic information to reach you."}
-                         {step === 4 && "Confirm & securely reserve your slot."}
+                         {step === 3 && "Why haven't you solved this yet?"}
+                         {step === 4 && "What do you want out of this call?"}
+                         {step === 5 && "Basic information to reach you."}
+                         {step === 6 && "Confirm & securely reserve your slot."}
                       </p>
                     </div>
-                    <div className="text-2xl font-black text-muted-foreground/30">{step}/4</div>
+                    <div className="text-2xl font-black text-muted-foreground/30">{step}/6</div>
                  </div>
                  
                  <div className="flex-1 relative z-10">
                    <AnimatePresence mode="wait">
                       
-                      {/* STEP 1: Goal Options (Previously Step 2) */}
+                      {/* STEP 1: Goal Options */}
                       {step === 1 && (
                         <motion.div 
                           key="step1"
@@ -259,7 +287,7 @@ ${form.painPoint}
                         </motion.div>
                       )}
 
-                      {/* STEP 2: Dynamic Pain Points (Previously Step 3) */}
+                      {/* STEP 2: Dynamic Pain Points */}
                       {step === 2 && (
                         <motion.div 
                           key="step2"
@@ -293,10 +321,82 @@ ${form.painPoint}
                         </motion.div>
                       )}
 
-                      {/* STEP 3: Details (Previously Step 1) */}
+                      {/* STEP 3: Past Experience */}
                       {step === 3 && (
-                        <motion.form 
+                        <motion.div 
                           key="step3"
+                          initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}
+                          className="flex flex-col h-full space-y-3"
+                        >
+                           <div className="grid grid-cols-2 gap-3">
+                             {EXPERIENCES.map(option => {
+                               const Icon = option.icon;
+                               return (
+                                 <button
+                                   key={option.id}
+                                   onClick={() => setForm({...form, pastExperience: option.label})}
+                                   className={`flex flex-col items-center justify-center p-6 rounded-2xl border-2 transition-all gap-4 ${form.pastExperience === option.label ? 'border-primary bg-primary/5 shadow-md shadow-primary/10 scale-[1.02]' : 'border-border/50 bg-background hover:border-primary/30 hover:bg-secondary/50'}`}
+                                 >
+                                   <div className={`w-14 h-14 rounded-full flex items-center justify-center ${option.bg}`}>
+                                     <Icon className={`w-7 h-7 ${option.color}`} />
+                                   </div>
+                                   <span className="font-extrabold text-foreground text-sm text-center">{option.label}</span>
+                                 </button>
+                               )
+                             })}
+                           </div>
+                           
+                           <div className="flex gap-3 pt-6 mt-auto">
+                              <button onClick={handleBack} className="px-5 py-4 rounded-xl border border-border text-foreground hover:bg-secondary font-bold flex items-center gap-2">
+                                <ArrowLeft className="w-4 h-4" /> Back
+                              </button>
+                              <button onClick={() => handleNext()} disabled={!form.pastExperience} className="flex-1 bg-primary text-primary-foreground font-black py-4 rounded-xl flex items-center justify-center gap-2 disabled:opacity-50">
+                                Continue <ArrowRight className="w-4 h-4" />
+                              </button>
+                           </div>
+                        </motion.div>
+                      )}
+
+                      {/* STEP 4: Expectation */}
+                      {step === 4 && (
+                        <motion.div 
+                          key="step4"
+                          initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}
+                          className="flex flex-col h-full space-y-3"
+                        >
+                           <div className="grid grid-cols-2 gap-3">
+                             {EXPECTATIONS.map(option => {
+                               const Icon = option.icon;
+                               return (
+                                 <button
+                                   key={option.id}
+                                   onClick={() => setForm({...form, expectation: option.label})}
+                                   className={`flex flex-col items-center justify-center p-6 rounded-2xl border-2 transition-all gap-4 ${form.expectation === option.label ? 'border-primary bg-primary/5 shadow-md shadow-primary/10 scale-[1.02]' : 'border-border/50 bg-background hover:border-primary/30 hover:bg-secondary/50'}`}
+                                 >
+                                   <div className={`w-14 h-14 rounded-full flex items-center justify-center ${option.bg}`}>
+                                     <Icon className={`w-7 h-7 ${option.color}`} />
+                                   </div>
+                                   <span className="font-extrabold text-foreground text-sm text-center">{option.label}</span>
+                                 </button>
+                               )
+                             })}
+                           </div>
+                           
+                           <div className="flex gap-3 pt-6 mt-auto">
+                              <button onClick={handleBack} className="px-5 py-4 rounded-xl border border-border text-foreground hover:bg-secondary font-bold flex items-center gap-2">
+                                <ArrowLeft className="w-4 h-4" /> Back
+                              </button>
+                              <button onClick={() => handleNext()} disabled={!form.expectation} className="flex-1 bg-primary text-primary-foreground font-black py-4 rounded-xl flex items-center justify-center gap-2 disabled:opacity-50">
+                                Continue <ArrowRight className="w-4 h-4" />
+                              </button>
+                           </div>
+                        </motion.div>
+                      )}
+
+                      {/* STEP 5: Details */}
+                      {step === 5 && (
+                        <motion.form 
+                          key="step5"
                           initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}
                           onSubmit={handleNext}
                           className="space-y-5"
@@ -342,10 +442,10 @@ ${form.painPoint}
                         </motion.form>
                       )}
 
-                      {/* STEP 4: Final Summary & Payment */}
-                      {step === 4 && (
+                      {/* STEP 6: Final Summary & Payment */}
+                      {step === 6 && (
                         <motion.div 
-                          key="step4"
+                          key="step6"
                           initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}
                           className="flex flex-col h-full"
                         >
@@ -359,8 +459,12 @@ ${form.painPoint}
                                  <p className="text-sm font-semibold text-foreground">{form.goal}</p>
                               </div>
                               <div className="space-y-1">
-                                 <p className="text-xs text-muted-foreground uppercase tracking-widest font-bold">Identified Bottleneck</p>
+                                 <p className="text-xs text-muted-foreground uppercase tracking-widest font-bold">Core Bottleneck</p>
                                  <p className="text-sm font-semibold text-foreground">{form.painPoint}</p>
+                              </div>
+                              <div className="space-y-1">
+                                 <p className="text-xs text-muted-foreground uppercase tracking-widest font-bold">Call Expectation</p>
+                                 <p className="text-sm font-semibold text-foreground">{form.expectation}</p>
                               </div>
                            </div>
 
@@ -383,7 +487,7 @@ ${form.painPoint}
                    </AnimatePresence>
                  </div>
 
-                 {step === 4 && (
+                 {step === 6 && (
                     <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{delay:0.3}} className="mt-6 flex items-center justify-center gap-2 text-xs text-muted-foreground font-medium">
                         <ShieldCheck className="w-4 h-4 text-green-500" /> Secure Payments processed via Razorpay
                     </motion.div>

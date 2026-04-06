@@ -19,6 +19,7 @@ import Careers from "./pages/Careers.tsx";
 import BookCall from "./pages/BookCall.tsx";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import CustomCursor from "@/components/CustomCursor";
+import MobileBottomNav from "@/components/MobileBottomNav";
 
 const queryClient = new QueryClient();
 
@@ -46,6 +47,7 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
         <WhatsAppButton />
+        <MobileBottomNav />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
