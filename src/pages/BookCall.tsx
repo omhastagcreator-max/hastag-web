@@ -55,9 +55,9 @@ export default function BookCall() {
 
   const handleNext = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
-    if (step === 1 && (!form.name || !form.email || !form.phone)) return;
-    if (step === 2 && !form.goal) return;
-    if (step === 3 && !form.painPoint) return;
+    if (step === 1 && !form.goal) return;
+    if (step === 2 && !form.painPoint) return;
+    if (step === 3 && (!form.name || !form.email || !form.phone)) return;
     setStep((prev) => prev + 1);
   };
 
@@ -203,15 +203,15 @@ ${form.painPoint}
                  <div className="flex items-center justify-between mb-8 relative z-10">
                     <div className="flex flex-col">
                       <h2 className="text-2xl font-black text-foreground tracking-tight">
-                         {step === 1 && "Step 1: Details"}
-                         {step === 2 && "Step 2: Core Focus"}
-                         {step === 3 && "Step 3: Biggest Hurdle"}
+                         {step === 1 && "Step 1: Core Focus"}
+                         {step === 2 && "Step 2: Biggest Hurdle"}
+                         {step === 3 && "Step 3: Details"}
                          {step === 4 && "Final Step: Payment"}
                       </h2>
                       <p className="text-muted-foreground text-sm font-medium mt-1">
-                         {step === 1 && "Basic information to reach you."}
-                         {step === 2 && "What are you trying to achieve?"}
-                         {step === 3 && "Where are you currently stuck?"}
+                         {step === 1 && "What are you trying to achieve?"}
+                         {step === 2 && "Where are you currently stuck?"}
+                         {step === 3 && "Basic information to reach you."}
                          {step === 4 && "Confirm & securely reserve your slot."}
                       </p>
                     </div>
@@ -221,10 +221,82 @@ ${form.painPoint}
                  <div className="flex-1 relative z-10">
                    <AnimatePresence mode="wait">
                       
-                      {/* STEP 1: Details */}
+                      {/* STEP 1: Goal Options (Previously Step 2) */}
                       {step === 1 && (
-                        <motion.form 
+                        <motion.div 
                           key="step1"
+                          initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}
+                          className="flex flex-col h-full space-y-3"
+                        >
+                           <div className="grid grid-cols-2 gap-3">
+                             {[
+                               { id: "PerformanceAds", label: "Performance Ads", icon: TrendingUp, color: "text-blue-500", bg: "bg-blue-500/10" },
+                               { id: "InfluencerMarketing", label: "Influencer Push", icon: Users, color: "text-purple-500", bg: "bg-purple-500/10" },
+                               { id: "UGCVideos", label: "UGC Videos", icon: Smartphone, color: "text-pink-500", bg: "bg-pink-500/10" },
+                               { id: "WebDevCRO", label: "Website / CRO", icon: Layout, color: "text-orange-500", bg: "bg-orange-500/10" }
+                             ].map(option => {
+                               const Icon = option.icon;
+                               return (
+                                 <button
+                                   key={option.id}
+                                   onClick={() => setForm({...form, goal: option.id as Goal})}
+                                   className={`flex flex-col items-center justify-center p-6 rounded-2xl border-2 transition-all gap-4 ${form.goal === option.id ? 'border-primary bg-primary/5 shadow-md shadow-primary/10 scale-[1.02]' : 'border-border/50 bg-background hover:border-primary/30 hover:bg-secondary/50'}`}
+                                 >
+                                   <div className={`w-14 h-14 rounded-full flex items-center justify-center ${option.bg}`}>
+                                     <Icon className={`w-7 h-7 ${option.color}`} />
+                                   </div>
+                                   <span className="font-extrabold text-foreground text-sm text-center">{option.label}</span>
+                                 </button>
+                               )
+                             })}
+                           </div>
+                           
+                           <div className="flex gap-3 pt-6 mt-auto">
+                              <button onClick={() => handleNext()} disabled={!form.goal} className="w-full bg-primary text-primary-foreground font-black py-4 rounded-xl flex items-center justify-center gap-2 disabled:opacity-50">
+                                Next Step <ArrowRight className="w-4 h-4" />
+                              </button>
+                           </div>
+                        </motion.div>
+                      )}
+
+                      {/* STEP 2: Dynamic Pain Points (Previously Step 3) */}
+                      {step === 2 && (
+                        <motion.div 
+                          key="step2"
+                          initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}
+                          className="flex flex-col h-full space-y-3"
+                        >
+                           <div className="space-y-3">
+                             {form.goal && BOTTLENECKS[form.goal].map((pain, idx) => (
+                               <button
+                                 key={pain}
+                                 onClick={() => setForm({...form, painPoint: pain})}
+                                 className={`w-full text-left p-4 rounded-xl border-2 transition-all flex items-center gap-4 ${form.painPoint === pain ? 'border-primary bg-primary/5 shadow-md shadow-primary/5 translate-x-1' : 'border-border/50 bg-background hover:border-primary/30 hover:bg-secondary/50'}`}
+                               >
+                                 <div className={`w-10 h-10 shrink-0 rounded-full flex items-center justify-center ${form.painPoint === pain ? 'bg-primary text-white' : 'bg-red-500/10 text-red-500'}`}>
+                                   <AlertCircle className="w-5 h-5" />
+                                 </div>
+                                 <span className="font-bold text-foreground text-sm md:text-base flex-1">{pain}</span>
+                                 {form.painPoint === pain && <CheckCircle2 className="w-6 h-6 text-primary shrink-0" />}
+                               </button>
+                             ))}
+                           </div>
+                           
+                           <div className="flex gap-3 pt-6 mt-auto">
+                              <button onClick={handleBack} className="px-5 py-4 rounded-xl border border-border text-foreground hover:bg-secondary font-bold flex items-center gap-2">
+                                <ArrowLeft className="w-4 h-4" /> Back
+                              </button>
+                              <button onClick={() => handleNext()} disabled={!form.painPoint} className="flex-1 bg-primary text-primary-foreground font-black py-4 rounded-xl flex items-center justify-center gap-2 disabled:opacity-50">
+                                Continue <ArrowRight className="w-4 h-4" />
+                              </button>
+                           </div>
+                        </motion.div>
+                      )}
+
+                      {/* STEP 3: Details (Previously Step 1) */}
+                      {step === 3 && (
+                        <motion.form 
+                          key="step3"
                           initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}
                           onSubmit={handleNext}
                           className="space-y-5"
@@ -258,85 +330,16 @@ ${form.painPoint}
                                 />
                              </div>
                           </div>
-                          <button type="submit" className="w-full bg-primary text-primary-foreground font-black py-4 rounded-xl flex items-center justify-center gap-2 shadow-lg mt-4">
-                            Continue <ArrowRight className="w-4 h-4" />
-                          </button>
-                        </motion.form>
-                      )}
-
-                      {/* STEP 2: Goal Options */}
-                      {step === 2 && (
-                        <motion.div 
-                          key="step2"
-                          initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}
-                          className="flex flex-col h-full space-y-3"
-                        >
-                           <div className="grid grid-cols-2 gap-3">
-                             {[
-                               { id: "PerformanceAds", label: "Performance Ads", icon: TrendingUp, color: "text-blue-500", bg: "bg-blue-500/10" },
-                               { id: "InfluencerMarketing", label: "Influencer Push", icon: Users, color: "text-purple-500", bg: "bg-purple-500/10" },
-                               { id: "UGCVideos", label: "UGC Videos", icon: Smartphone, color: "text-pink-500", bg: "bg-pink-500/10" },
-                               { id: "WebDevCRO", label: "Website / CRO", icon: Layout, color: "text-orange-500", bg: "bg-orange-500/10" }
-                             ].map(option => {
-                               const Icon = option.icon;
-                               return (
-                                 <button
-                                   key={option.id}
-                                   onClick={() => setForm({...form, goal: option.id as Goal})}
-                                   className={`flex flex-col items-center justify-center p-6 rounded-2xl border-2 transition-all gap-4 ${form.goal === option.id ? 'border-primary bg-primary/5 shadow-md shadow-primary/10 scale-[1.02]' : 'border-border/50 bg-background hover:border-primary/30 hover:bg-secondary/50'}`}
-                                 >
-                                   <div className={`w-14 h-14 rounded-full flex items-center justify-center ${option.bg}`}>
-                                     <Icon className={`w-7 h-7 ${option.color}`} />
-                                   </div>
-                                   <span className="font-extrabold text-foreground text-sm text-center">{option.label}</span>
-                                 </button>
-                               )
-                             })}
-                           </div>
-                           
-                           <div className="flex gap-3 pt-6 mt-auto">
-                              <button onClick={handleBack} className="px-5 py-4 rounded-xl border border-border text-foreground hover:bg-secondary font-bold flex items-center gap-2">
+                          
+                          <div className="flex gap-3 pt-6 mt-auto">
+                              <button type="button" onClick={handleBack} className="px-5 py-4 rounded-xl border border-border text-foreground hover:bg-secondary font-bold flex items-center gap-2">
                                 <ArrowLeft className="w-4 h-4" /> Back
                               </button>
-                              <button onClick={() => handleNext()} disabled={!form.goal} className="flex-1 bg-primary text-primary-foreground font-black py-4 rounded-xl flex items-center justify-center gap-2 disabled:opacity-50">
-                                Next Step <ArrowRight className="w-4 h-4" />
-                              </button>
-                           </div>
-                        </motion.div>
-                      )}
-
-                      {/* STEP 3: Dynamic Pain Points */}
-                      {step === 3 && (
-                        <motion.div 
-                          key="step3"
-                          initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}
-                          className="flex flex-col h-full space-y-3"
-                        >
-                           <div className="space-y-3">
-                             {form.goal && BOTTLENECKS[form.goal].map((pain, idx) => (
-                               <button
-                                 key={pain}
-                                 onClick={() => setForm({...form, painPoint: pain})}
-                                 className={`w-full text-left p-4 rounded-xl border-2 transition-all flex items-center gap-4 ${form.painPoint === pain ? 'border-primary bg-primary/5 shadow-md shadow-primary/5 translate-x-1' : 'border-border/50 bg-background hover:border-primary/30 hover:bg-secondary/50'}`}
-                               >
-                                 <div className={`w-10 h-10 shrink-0 rounded-full flex items-center justify-center ${form.painPoint === pain ? 'bg-primary text-white' : 'bg-red-500/10 text-red-500'}`}>
-                                   <AlertCircle className="w-5 h-5" />
-                                 </div>
-                                 <span className="font-bold text-foreground text-sm md:text-base flex-1">{pain}</span>
-                                 {form.painPoint === pain && <CheckCircle2 className="w-6 h-6 text-primary shrink-0" />}
-                               </button>
-                             ))}
-                           </div>
-                           
-                           <div className="flex gap-3 pt-6 mt-auto">
-                              <button onClick={handleBack} className="px-5 py-4 rounded-xl border border-border text-foreground hover:bg-secondary font-bold flex items-center gap-2">
-                                <ArrowLeft className="w-4 h-4" /> Back
-                              </button>
-                              <button onClick={() => handleNext()} disabled={!form.painPoint} className="flex-1 bg-primary text-primary-foreground font-black py-4 rounded-xl flex items-center justify-center gap-2 disabled:opacity-50">
+                              <button type="submit" className="flex-1 bg-primary text-primary-foreground font-black py-4 rounded-xl flex items-center justify-center gap-2 shadow-lg disabled:opacity-50">
                                 View Summary <ArrowRight className="w-4 h-4" />
                               </button>
                            </div>
-                        </motion.div>
+                        </motion.form>
                       )}
 
                       {/* STEP 4: Final Summary & Payment */}
