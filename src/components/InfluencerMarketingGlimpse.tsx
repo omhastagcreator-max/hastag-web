@@ -28,7 +28,7 @@ const InfluencerMarketingGlimpse = () => {
     }, []);
 
     return (
-        <section className="py-24 bg-muted/20 relative overflow-hidden">
+        <section id="influencer" className="py-24 bg-muted/20 relative overflow-hidden">
             {/* Background elements */}
             <div className="absolute top-[20%] left-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
             <div className="absolute bottom-[20%] right-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[100px] pointer-events-none" />

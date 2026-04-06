@@ -27,7 +27,7 @@ const PerformanceMarketingGlimpse = () => {
 
   return (
     <>
-    <section className="py-24 bg-background relative overflow-hidden">
+    <section id="performance" className="py-24 bg-background relative overflow-hidden">
       {/* Decorative gradient patches */}
       <div className="absolute top-0 right-0 w-full md:w-1/2 h-[500px] bg-gradient-to-bl from-primary/10 to-transparent blur-3xl rounded-full pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-full md:w-1/2 h-[500px] bg-gradient-to-tr from-primary/10 to-transparent blur-3xl rounded-full pointer-events-none" />

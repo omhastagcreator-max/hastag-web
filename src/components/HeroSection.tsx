@@ -92,18 +92,18 @@ const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
             className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto"
           >
-            <a href="/book-call" className="w-full sm:w-auto">
-              <button aria-label="Schedule a Call" className="btn-synthetic w-full sm:w-auto min-w-[48px] min-h-[48px]">
-                Schedule a Call
+            <a href="#performance" className="w-full sm:w-auto">
+              <button aria-label="Go to Performance Marketing" className="btn-synthetic w-full sm:w-auto min-w-[48px] min-h-[48px]">
+                Performance Marketing
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
             </a>
 
-            <Link to="/portfolio" className="w-full sm:w-auto">
-              <button aria-label="Check our Portfolio" className="w-full sm:w-auto flex items-center justify-center gap-2 bg-background border-2 border-border hover:border-foreground text-foreground px-10 py-5 rounded-full text-lg font-bold shadow-sm hover:shadow-md transition-all duration-300 min-w-[48px] min-h-[48px]">
-                Check our Portfolio
+            <a href="#influencer" className="w-full sm:w-auto">
+              <button aria-label="Go to Influencer Marketing" className="w-full sm:w-auto flex items-center justify-center gap-2 bg-background border-2 border-border hover:border-foreground text-foreground px-8 py-5 rounded-full text-lg font-bold shadow-sm hover:shadow-md transition-all duration-300 min-w-[48px] min-h-[48px]">
+                Influencer Marketing
               </button>
-            </Link>
+            </a>
           </motion.div>
 
           {/* Social Proof Strip below CTA */}
