@@ -20,6 +20,7 @@ import BookCall from "./pages/BookCall.tsx";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import CustomCursor from "@/components/CustomCursor";
 import MobileBottomNav from "@/components/MobileBottomNav";
+import MobileScarcityWidget from "@/components/MobileScarcityWidget";
 
 const queryClient = new QueryClient();
 
@@ -47,6 +48,9 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
         <WhatsAppButton />
+        <div className="fixed bottom-24 right-4 z-40 w-[240px] md:hidden pointer-events-auto">
+          <MobileScarcityWidget />
+        </div>
         <MobileBottomNav />
       </BrowserRouter>
     </TooltipProvider>
