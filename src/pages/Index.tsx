@@ -15,29 +15,26 @@ import NetworkStats from "@/components/NetworkStats";
 import CaseStudySnapshot from "@/components/CaseStudySnapshot";
 import PerformanceMarketingGlimpse from "@/components/PerformanceMarketingGlimpse";
 import InfluencerMarketingGlimpse from "@/components/InfluencerMarketingGlimpse";
+import WebDevelopmentGlimpse from "@/components/WebDevelopmentGlimpse";
 import HowItWorks from "@/components/HowItWorks";
 import FounderSection from "@/components/FounderSection";
 import Testimonial from "@/components/Testimonial";
 import WhatsAppTestimonials from "@/components/WhatsAppTestimonials";
 import TrustedBrands from "@/components/TrustedBrands";
 import OfficialPartners from "@/components/OfficialPartners";
+import ScarcityBanner from "@/components/ScarcityBanner";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Index = () => {
-  const [bannerUrl, setBannerUrl] = useState("/banner.png");
-
   useEffect(() => {
-    const fetchBanner = async () => {
-      const { data } = await supabase.from('site_media').select('image_url').eq('component_key', 'hero_banner').single();
-      if (data?.image_url) setBannerUrl(data.image_url);
-    };
-    fetchBanner();
+    // Other effects if necessary, or empty out
   }, []);
 
   return (
     <>
       <Navbar />
+      <ScarcityBanner />
     <main>
       <HeroSection />
       <TrustedBrands />
@@ -46,21 +43,7 @@ const Index = () => {
       <InfluencerMarketingGlimpse />
       <HowItWorks />
       
-      {/* Dynamic Banner Section */}
-      <section className="py-12 bg-background border-y border-border/40">
-        <div className="container-main">
-          <img 
-            src={bannerUrl} 
-            alt="HashtagCreator Scale Banner" 
-            width="1200" 
-            height="600" 
-            loading="lazy" 
-            className="w-full h-auto rounded-3xl shadow-2xl border border-border/50 object-cover" 
-          />
-        </div>
-      </section>
-
-      <ServicesGrid />
+      <WebDevelopmentGlimpse />
       <DashboardResultsSection />
       <NetworkStats />
       <WhatsAppTestimonials />

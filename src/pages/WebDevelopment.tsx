@@ -124,39 +124,44 @@ export default function WebDevelopment() {
         <div className="py-24 bg-background">
            <div className="container-main px-4 max-w-5xl">
               <div className="text-center mb-16">
-                 <h2 className="text-3xl md:text-5xl font-black mb-4 tracking-tight">Standard vs HastagCreator</h2>
-                 <p className="text-muted-foreground text-lg">See how an optimized infrastructure directly impacts your bottom line.</p>
+                 <h2 className="text-3xl md:text-5xl font-black mb-4 tracking-tight">Other Agencies vs HastagCreator</h2>
+                 <p className="text-muted-foreground text-lg">See how an optimized infrastructure and CRO directly impacts your bottom line.</p>
               </div>
 
               <div className="overflow-x-auto">
-                 <table className="w-full text-left border-collapse">
+                 <table className="w-full text-left border-collapse min-w-[800px]">
                     <thead>
                        <tr>
-                          <th className="p-6 border-b border-border/50 text-muted-foreground font-bold w-1/3 text-xl">The Difference</th>
-                          <th className="p-6 border-b border-border/50 bg-red-500/5 text-red-500 font-black w-1/3 text-center rounded-tl-2xl">Standard Templates</th>
-                          <th className="p-6 border-b border-border/50 bg-primary/10 text-primary font-black w-1/3 text-center rounded-tr-2xl">HastagCreator System</th>
+                          <th className="p-6 border-b border-border/50 text-muted-foreground font-bold w-[30%] text-xl">The Difference</th>
+                          <th className="p-6 border-b border-border/50 bg-red-500/5 text-red-500 font-black w-[35%] text-center rounded-tl-2xl">What Other Agencies Do</th>
+                          <th className="p-6 border-b border-border/50 bg-primary/10 text-primary font-black w-[35%] text-center rounded-tr-2xl">What We Do (CRO Focus)</th>
                        </tr>
                     </thead>
                     <tbody className="font-medium">
                        <tr>
                           <td className="p-6 border-b border-border/50">Website Speed</td>
-                          <td className="p-6 border-b border-border/50 bg-red-500/5 text-center text-muted-foreground">Standard loading times. Occasional traffic bounce.</td>
-                          <td className="p-6 border-b border-border/50 bg-primary/5 text-center font-bold text-foreground">Lightning fast code. Opens seamlessly globally.</td>
+                          <td className="p-6 border-b border-border/50 bg-red-500/5 text-center text-muted-foreground">Standard loading times. Pages take 4-5 seconds to render.</td>
+                          <td className="p-6 border-b border-border/50 bg-primary/5 text-center font-bold text-foreground">Sub-second load times engineered to prevent traffic bounce.</td>
                        </tr>
                        <tr>
-                          <td className="p-6 border-b border-border/50">Design Logic</td>
-                          <td className="p-6 border-b border-border/50 bg-red-500/5 text-center text-muted-foreground">Purely aesthetic decisions based on basic themes.</td>
-                          <td className="p-6 border-b border-border/50 bg-primary/5 text-center font-bold text-foreground">Designed proactively using buyer psychology and heatmaps.</td>
+                          <td className="p-6 border-b border-border/50">User Navigation & Flow</td>
+                          <td className="p-6 border-b border-border/50 bg-red-500/5 text-center text-muted-foreground">Confusing layouts requiring multiple clicks to find products.</td>
+                          <td className="p-6 border-b border-border/50 bg-primary/5 text-center font-bold text-foreground">Frictionless, direct-to-checkout paths guided by heatmap data.</td>
                        </tr>
                        <tr>
-                          <td className="p-6 border-b border-border/50">Checkout Flow</td>
-                          <td className="p-6 border-b border-border/50 bg-red-500/5 text-center text-muted-foreground">Traditional 4-step forms. Higher drop-off risk.</td>
-                          <td className="p-6 border-b border-border/50 bg-primary/5 text-center font-bold text-foreground">Smooth, 1-page checkout so people pay easily and securely.</td>
+                          <td className="p-6 border-b border-border/50">Call To Action (CTA)</td>
+                          <td className="p-6 border-b border-border/50 bg-red-500/5 text-center text-muted-foreground">Generic "Buy Now" at the bottom of the page.</td>
+                          <td className="p-6 border-b border-border/50 bg-primary/5 text-center font-bold text-foreground">Sticky CTAs with micro-copy strategically placed to neutralize buying anxiety.</td>
                        </tr>
                        <tr>
-                          <td className="p-6 border-b border-border/50">Average Order Value (AOV)</td>
-                          <td className="p-6 border-b border-border/50 bg-red-500/5 text-center text-muted-foreground">Standard singular purchases.</td>
-                          <td className="p-6 border-b border-border/50 bg-primary/10 text-center font-black text-primary rounded-br-2xl text-[15px]">Automated 1-click upsells post-purchase. Maximum value per order.</td>
+                          <td className="p-6 border-b border-border/50">Trust & Psychology</td>
+                          <td className="p-6 border-b border-border/50 bg-red-500/5 text-center text-muted-foreground">Relying purely on aesthetics without trust markers.</td>
+                          <td className="p-6 border-b border-border/50 bg-primary/5 text-center font-bold text-foreground">Strategic placement of reviews, guarantees, and security badges directly at high-friction points.</td>
+                       </tr>
+                       <tr>
+                          <td className="p-6 border-b border-border/50">Checkout Friction</td>
+                          <td className="p-6 border-b border-border/50 bg-red-500/5 text-center text-muted-foreground">Long, multi-stage forms that cause cart abandonment.</td>
+                          <td className="p-6 border-b border-border/50 bg-primary/10 text-center font-black text-primary rounded-br-2xl text-[15px]">1-Page, guest-friendly checkout maximizing Average Order Value (AOV).</td>
                        </tr>
                     </tbody>
                  </table>
