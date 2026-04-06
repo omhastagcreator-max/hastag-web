@@ -22,6 +22,7 @@ import HowItWorks from "@/components/HowItWorks";
 import WhatsAppTestimonials from "@/components/WhatsAppTestimonials";
 import TrustedBrands from "@/components/TrustedBrands";
 import ScarcityBanner from "@/components/ScarcityBanner";
+import FounderSection from "@/components/FounderSection";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -45,11 +46,16 @@ const Index = () => {
       <HowItWorks />
       
       <WebDevelopmentGlimpse />
+      <ServicesGrid />
       <MarketingBreakdown />
       <DashboardResultsSection />
       <WhatsAppTestimonials />
       <WhyChooseUs />
       <GoogleReviews />
+
+      <Process />
+      <Pricing />
+      <FounderSection />
 
       <LeadForm />
       <FAQ />
