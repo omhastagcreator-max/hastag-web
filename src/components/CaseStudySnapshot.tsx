@@ -133,23 +133,7 @@ const CaseStudySnapshot = () => {
                 Anyone can make a nice website. We actually deliver results. Here is the exact breakdown of how we transformed a struggling ad account into a profit machine.
               </p>
               
-              <div className="grid md:grid-cols-2 gap-6 mb-10 text-left">
-                <div className="flex gap-4 p-5 rounded-2xl bg-white/40 backdrop-blur-xl border border-white/60 shadow-sm">
-                  <Target className="text-primary w-6 h-6 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <h4 className="font-bold text-lg mb-2 text-foreground">The Problem</h4>
-                    <p className="text-sm text-muted-foreground leading-relaxed">Bleeding budget on generic creatives and a landing page that wasn't converting traffic into buyers.</p>
-                  </div>
-                </div>
-                
-                <div className="flex gap-4 p-5 rounded-2xl bg-white/40 backdrop-blur-xl border border-white/60 shadow-sm">
-                  <Activity className="text-primary w-6 h-6 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <h4 className="font-bold text-lg mb-2 text-foreground">The Fix (Ads + Dev)</h4>
-                    <p className="text-sm text-muted-foreground leading-relaxed">We completely rebuilt the funnel. New ad creatives aimed at high-intent buyers, paired with a drastically faster, conversion-optimized landing page.</p>
-                  </div>
-                </div>
-              </div>
+
             </motion.div>
 
             {/* Bottom Stats Carousels (Side-by-side on desktop) */}
