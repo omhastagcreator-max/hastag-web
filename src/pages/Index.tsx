@@ -39,6 +39,7 @@ const Index = () => {
       <CaseStudySnapshot />
       <PerformanceMarketingGlimpse />
       <InfluencerMarketingGlimpse />
+      <NetworkStats />
       <HowItWorks />
       
       <WebDevelopmentGlimpse />
