@@ -67,15 +67,23 @@ const HeroSection = () => {
             Dhanda ROAS Pay Nahi, ROI Pay Chalta Hain
           </motion.h2>
 
-          {/* Subheading */}
-          <motion.p
+          {/* Subheading: Icon-driven benefits instead of a huge wall of text */}
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-            className="text-lg md:text-2xl text-muted-foreground font-medium max-w-3xl mb-12"
+            className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-6 max-w-3xl mb-12"
           >
-            We deploy precision-engineered Meta Ads, Google Ads, and world-class creator networks to scale your D2C brand with surgical exactness.
-          </motion.p>
+            <div className="flex items-center gap-2 bg-secondary/80 border border-border px-4 py-2.5 rounded-full shadow-sm text-sm md:text-base font-semibold text-foreground/90">
+               <TrendingUp className="w-4 h-4 md:w-5 md:h-5 text-primary" /> Precision Meta & Google Ads
+            </div>
+            <div className="flex items-center gap-2 bg-secondary/80 border border-border px-4 py-2.5 rounded-full shadow-sm text-sm md:text-base font-semibold text-foreground/90">
+               <Star className="w-4 h-4 md:w-5 md:h-5 text-yellow-500" /> World-Class Creator Networks
+            </div>
+            <div className="flex items-center gap-2 bg-secondary/80 border border-border px-4 py-2.5 rounded-full shadow-sm text-sm md:text-base font-semibold text-foreground/90">
+               <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-green-500" /> Surgical D2C Scaling
+            </div>
+          </motion.div>
 
           {/* CTA & Actions */}
           <motion.div

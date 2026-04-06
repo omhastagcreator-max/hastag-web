@@ -18,11 +18,8 @@ import InfluencerMarketingGlimpse from "@/components/InfluencerMarketingGlimpse"
 import WebDevelopmentGlimpse from "@/components/WebDevelopmentGlimpse";
 import MarketingBreakdown from "@/components/MarketingBreakdown";
 import HowItWorks from "@/components/HowItWorks";
-import FounderSection from "@/components/FounderSection";
-import Testimonial from "@/components/Testimonial";
 import WhatsAppTestimonials from "@/components/WhatsAppTestimonials";
 import TrustedBrands from "@/components/TrustedBrands";
-import OfficialPartners from "@/components/OfficialPartners";
 import ScarcityBanner from "@/components/ScarcityBanner";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -45,16 +42,14 @@ const Index = () => {
       <HowItWorks />
       
       <WebDevelopmentGlimpse />
+      <MarketingBreakdown />
       <DashboardResultsSection />
-      <NetworkStats />
       <WhatsAppTestimonials />
       <WhyChooseUs />
       <GoogleReviews />
-      <Testimonial />
 
       <LeadForm />
       <FAQ />
-      <OfficialPartners />
     </main>
       <Footer />
     </>

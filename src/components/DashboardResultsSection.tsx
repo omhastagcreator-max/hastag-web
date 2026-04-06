@@ -86,19 +86,19 @@ const DashboardResultsSection = () => {
         </motion.div>
 
         {/* Modern feature breakdown instead of specific screenshots */}
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="bg-card border border-border/50 hover:border-border p-8 rounded-3xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 group"
+            className="bg-card border border-border/50 hover:border-border p-5 md:p-8 rounded-2xl md:rounded-3xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 group"
           >
-            <div className="w-14 h-14 rounded-2xl bg-blue-500/10 flex items-center justify-center mb-6 group-hover:bg-blue-500/20 transition-colors">
-              <TrendingUp className="text-blue-500 w-8 h-8" />
+            <div className="w-10 h-10 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-blue-500/10 flex items-center justify-center mb-4 md:mb-6 group-hover:bg-blue-500/20 transition-colors">
+              <TrendingUp className="text-blue-500 w-5 h-5 md:w-8 md:h-8" />
             </div>
-            <h3 className="text-xl font-extrabold text-foreground mb-3">Hyper-Scale Growth</h3>
-            <p className="text-muted-foreground leading-relaxed">
-              We engineer funnels that drop CPAs dramatically while scaling spend vertically across Meta and Google ecosystems.
+            <h3 className="text-sm md:text-xl font-extrabold text-foreground mb-2 md:mb-3">Hyper-Scale Growth</h3>
+            <p className="text-[11px] md:text-base text-muted-foreground leading-relaxed">
+              We engineer funnels that drop CPAs dramatically while scaling spend vertically.
             </p>
           </motion.div>
 
@@ -107,30 +107,31 @@ const DashboardResultsSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="bg-card border border-border/50 hover:border-border p-8 rounded-3xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 group"
+            className="bg-card border border-border/50 hover:border-border p-5 md:p-8 rounded-2xl md:rounded-3xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 group"
           >
-            <div className="w-14 h-14 rounded-2xl bg-green-500/10 flex items-center justify-center mb-6 group-hover:bg-green-500/20 transition-colors">
-              <ShoppingBag className="text-green-500 w-8 h-8" />
+            <div className="w-10 h-10 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-green-500/10 flex items-center justify-center mb-4 md:mb-6 group-hover:bg-green-500/20 transition-colors">
+              <ShoppingBag className="text-green-500 w-5 h-5 md:w-8 md:h-8" />
             </div>
-            <h3 className="text-xl font-extrabold text-foreground mb-3">E-Commerce Mastery</h3>
-            <p className="text-muted-foreground leading-relaxed">
-              From CRO optimizations to AOV boosting strategies, your Shopify/WooCommerce store becomes a revenue-printing machine.
+            <h3 className="text-sm md:text-xl font-extrabold text-foreground mb-2 md:mb-3">E-Commerce Mastery</h3>
+            <p className="text-[11px] md:text-base text-muted-foreground leading-relaxed">
+              Your Shopify/WooCommerce store becomes a revenue-printing machine with high AOV.
             </p>
           </motion.div>
 
+          {/* Third block takes 2 columns on mobile to balance the grid, then 1 column on desktop */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="bg-card border border-border/50 hover:border-border p-8 rounded-3xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 group"
+            className="col-span-2 md:col-span-1 bg-card border border-border/50 hover:border-border p-5 md:p-8 rounded-2xl md:rounded-3xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 group"
           >
-            <div className="w-14 h-14 rounded-2xl bg-orange-500/10 flex items-center justify-center mb-6 group-hover:bg-orange-500/20 transition-colors">
-              <Target className="text-orange-500 w-8 h-8" />
+            <div className="w-10 h-10 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-orange-500/10 flex items-center justify-center mb-4 md:mb-6 group-hover:bg-orange-500/20 transition-colors">
+              <Target className="text-orange-500 w-5 h-5 md:w-8 md:h-8" />
             </div>
-            <h3 className="text-xl font-extrabold text-foreground mb-3">Laser Targeting</h3>
-            <p className="text-muted-foreground leading-relaxed">
-              Precision-driven audience creation utilizing predictive modeling and UGC content loops to acquire your dream buyers.
+            <h3 className="text-sm md:text-xl font-extrabold text-foreground mb-2 md:mb-3">Laser Targeting</h3>
+            <p className="text-[11px] md:text-base text-muted-foreground leading-relaxed">
+              Precision-driven audience creation utilizing predictive modeling and UGC content loops.
             </p>
           </motion.div>
         </div>
