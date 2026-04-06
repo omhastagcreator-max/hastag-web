@@ -6,32 +6,32 @@ import { ArrowLeft, ArrowRight, ShieldCheck, Video, CalendarDays, CheckCircle2 }
 import { useRazorpay } from "react-razorpay";
 import { supabase } from "@/lib/supabase";
 
-type Goal = "E-Commerce" | "LeadGen" | "Brand" | "CRO" | "";
+type Goal = "PerformanceAds" | "InfluencerMarketing" | "UGCVideos" | "WebDevCRO" | "";
 
 const BOTTLENECKS = {
-  "E-Commerce": [
-    "High Ad Costs (CAC) & Low ROAS",
-    "People Add to Cart but don't Buy",
-    "Running out of Good Ad Creatives",
-    "Unstable, unpredictable daily sales"
+  "PerformanceAds": [
+    "High Customer Acquisition Cost (CAC)",
+    "Low Return on Ad Spend (ROAS)",
+    "Ads perform well for a week, then die",
+    "Running out of Good Ad Creatives"
   ],
-  "LeadGen": [
-    "Getting lots of junk/unqualified leads",
-    "Cost Per Lead (CPL) is too high",
-    "Not enough lead volume to scale",
-    "No automated follow-up system"
+  "InfluencerMarketing": [
+    "Can't find reliable creators",
+    "Influencers charge too much, deliver no sales",
+    "Campaigns take too much time to manage",
+    "No tracking or ROI from influencers"
   ],
-  "Brand": [
-    "Competitors look bigger and better",
-    "Zero Social Proof or Influencer presence",
-    "Poor visual identity & messaging",
-    "Customers don't trust us enough yet"
+  "UGCVideos": [
+    "We don't have good content to run on Meta Ads",
+    "Our creatives get high CPMs and no clicks",
+    "Hard to get native-looking TikTok/Reels style videos",
+    "Creators ghost us or deliver poor quality"
   ],
-  "CRO": [
-    "Extremely slow website loading speed",
-    "High bounce rate on landing pages",
+  "WebDevCRO": [
+    "Website is extremely slow and losing traffic",
+    "High Add-to-Cart but low Purchases",
     "Confusing checkout or navigation",
-    "Traffic comes but nobody converts"
+    "Brand looks untrustworthy/cheap online"
   ]
 };
 
@@ -272,10 +272,10 @@ ${form.painPoint}
                           className="flex flex-col h-full space-y-3"
                         >
                            {[
-                             { id: "E-Commerce", label: "Scaling E-Commerce Sales" },
-                             { id: "LeadGen", label: "Lead Generation & B2B Growth" },
-                             { id: "Brand", label: "Enhancing Brand Authority & Trust" },
-                             { id: "CRO", label: "Fixing Website Conversion (CRO)" }
+                             { id: "PerformanceAds", label: "Scaling with Performance Ads" },
+                             { id: "InfluencerMarketing", label: "Leveraging Influencer Marketing" },
+                             { id: "UGCVideos", label: "Sourcing High-Converting UGC Videos" },
+                             { id: "WebDevCRO", label: "Website Development & Conversion (CRO)" }
                            ].map(option => (
                              <button
                                key={option.id}
