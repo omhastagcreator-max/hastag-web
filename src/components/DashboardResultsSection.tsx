@@ -1,9 +1,11 @@
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { TrendingUp, ShoppingBag, ArrowRight, Zap, Target, Search, X } from "lucide-react";
 import { useRef, useState } from "react";
+import { useBooking } from "./BookingProvider";
 
 const DashboardResultsSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const { openBooking } = useBooking();
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "center center"],
@@ -161,12 +163,13 @@ const DashboardResultsSection = () => {
           viewport={{ once: true }}
           className="mt-20 text-center"
         >
-          <a href="/book-call" className="inline-block group perspective-1000">
-            <button className="btn-synthetic">
-              Schedule a Call 
-              <span className="bg-white/20 p-1.5 rounded-full"><ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform"/></span>
-            </button>
-          </a>
+          <button 
+            onClick={openBooking}
+            className="inline-flex items-center gap-4 bg-primary text-primary-foreground px-10 py-5 rounded-full text-lg font-black uppercase tracking-widest shadow-2xl shadow-primary/20 hover:-translate-y-1 transition-all group"
+          >
+            Schedule a Strategy Call 
+            <span className="bg-white/20 p-1.5 rounded-full"><ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform"/></span>
+          </button>
         </motion.div>
 
       </div>

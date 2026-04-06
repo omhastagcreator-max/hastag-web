@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { Timer, AlertCircle, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useBooking } from "./BookingProvider";
 
 export default function MobileScarcityWidget({ onClick }: { onClick?: () => void }) {
+  const { openBooking } = useBooking();
   const [spotsLeft, setSpotsLeft] = useState(5);
   const [timeLeft, setTimeLeft] = useState("");
   const [isVisible, setIsVisible] = useState(true);
@@ -68,18 +70,17 @@ export default function MobileScarcityWidget({ onClick }: { onClick?: () => void
             </div>
           </div>
           
-          <a 
-            href="/book-call" 
+          <button 
             onClick={(e) => {
+              e.preventDefault();
               if (onClick) onClick();
               setIsVisible(false);
+              openBooking();
             }} 
-            className="w-full relative z-10 mt-1"
+            className="w-full relative z-10 mt-1 bg-red-500 hover:bg-red-600 text-white px-3 py-2.5 rounded-lg text-xs font-black uppercase tracking-wider shadow-lg shadow-red-500/20 transition-all hover:scale-105 active:scale-95"
           >
-            <button className="w-full bg-red-500 hover:bg-red-600 text-white px-3 py-2.5 rounded-lg text-xs font-black uppercase tracking-wider shadow-lg shadow-red-500/20 transition-all hover:scale-105 active:scale-95">
-              Claim Spot Now
-            </button>
-          </a>
+            Claim Spot Now
+          </button>
         </motion.div>
       )}
     </AnimatePresence>

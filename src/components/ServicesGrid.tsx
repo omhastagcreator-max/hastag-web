@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 import { Layers, MousePointerClick, Zap, MessageSquare, Video, Mic, LayoutGrid } from "lucide-react";
 
 import { Link } from "react-router-dom";
-
 import { supabase } from "@/lib/supabase";
+import { useBooking } from "./BookingProvider";
 
 const fallbackServices = [
   {
@@ -79,6 +79,7 @@ type ServiceItem = {
 
 const ServicesGrid = ({ filterKeyword, title, subtitle }: { filterKeyword?: string, title?: string, subtitle?: string }) => {
   const [products, setProducts] = useState<ServiceItem[]>(fallbackServices);
+  const { openBooking } = useBooking();
 
   useEffect(() => {
     fetchProducts();
@@ -133,7 +134,7 @@ const ServicesGrid = ({ filterKeyword, title, subtitle }: { filterKeyword?: stri
 
   const handleCheckout = async (p: any) => {
     if (p.price === 0) {
-      window.location.href = "/book-call";
+      openBooking();
       return;
     }
 

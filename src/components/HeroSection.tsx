@@ -1,10 +1,12 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { ArrowRight, Star, TrendingUp, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Star, TrendingUp, CheckCircle2, Calendar } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useBooking } from "./BookingProvider";
 
 const HeroSection = () => {
   const containerRef = useRef<HTMLElement>(null);
+  const { openBooking } = useBooking();
 
   return (
     <section ref={containerRef} className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden bg-background">
@@ -82,16 +84,19 @@ const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
             className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto"
           >
-            <a href="#performance" className="w-full sm:w-auto">
-              <button aria-label="Go to Performance Marketing" className="btn-synthetic w-full sm:w-auto min-w-[48px] min-h-[48px]">
-                Performance Marketing
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </button>
-            </a>
+            <motion.button 
+              onClick={openBooking}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="w-full sm:w-auto bg-primary text-primary-foreground px-10 py-5 rounded-full text-lg font-black uppercase tracking-widest shadow-2xl shadow-primary/30 flex items-center justify-center gap-3 group"
+            >
+              <Calendar className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+              Book Strategy Session
+            </motion.button>
 
-            <a href="#influencer" className="w-full sm:w-auto">
-              <button aria-label="Go to Influencer Marketing" className="w-full sm:w-auto flex items-center justify-center gap-2 bg-background border-2 border-border hover:border-foreground text-foreground px-8 py-5 rounded-full text-lg font-bold shadow-sm hover:shadow-md transition-all duration-300 min-w-[48px] min-h-[48px]">
-                Influencer Marketing
+            <a href="#performance" className="w-full sm:w-auto">
+              <button aria-label="Go to Performance Marketing" className="w-full sm:w-auto flex items-center justify-center gap-2 bg-background border-2 border-border hover:border-foreground text-foreground px-8 py-5 rounded-full text-lg font-bold shadow-sm hover:shadow-md transition-all duration-300 min-w-[48px] min-h-[48px]">
+                Explore Services
               </button>
             </a>
           </motion.div>

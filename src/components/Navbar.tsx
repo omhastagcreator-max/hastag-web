@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useBooking } from "./BookingProvider";
 
 type NavLink = {
   label: string;
@@ -34,6 +35,7 @@ const Navbar = () => {
   const [activeDesktopDropdown, setActiveDesktopDropdown] = useState<string | null>(null);
   const [activeMobileDropdown, setActiveMobileDropdown] = useState<string | null>(null);
   const location = useLocation();
+  const { openBooking } = useBooking();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -126,15 +128,14 @@ const Navbar = () => {
             </div>
           ))}
           {/* Calendly CTA Hook */}
-          <a href="/book-call" className="hidden lg:block ml-2">
-            <motion.button
-              whileHover={{ scale: 1.05, boxShadow: "0 10px 30px -10px rgba(0,0,0,0.5)" }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-foreground text-background px-7 py-3 rounded-full text-xs uppercase tracking-widest font-extrabold"
-            >
-              Schedule a Call
-            </motion.button>
-          </a>
+          <motion.button
+            whileHover={{ scale: 1.05, boxShadow: "0 10px 30px -10px rgba(0,0,0,0.5)" }}
+            whileTap={{ scale: 0.95 }}
+            onClick={openBooking}
+            className="bg-foreground text-background px-7 py-3 rounded-full text-xs uppercase tracking-widest font-extrabold ml-2"
+          >
+            Schedule a Call
+          </motion.button>
         </div>
 
         {/* Mobile toggle */}
@@ -216,11 +217,12 @@ const Navbar = () => {
                 </div>
               ))}
               <div className="mt-8 pt-6 border-t border-border">
-                <a href="/book-call" onClick={() => setOpen(false)} className="block">
-                  <button className="w-full bg-foreground text-background px-6 py-4 rounded-full text-base font-bold shadow-xl active:scale-95 transition-transform">
-                    Schedule a Call
-                  </button>
-                </a>
+                <button 
+                  onClick={() => { setOpen(false); openBooking(); }}
+                  className="w-full bg-foreground text-background px-6 py-4 rounded-full text-base font-bold shadow-xl active:scale-95 transition-transform"
+                >
+                  Schedule a Call
+                </button>
               </div>
             </div>
           </motion.div>

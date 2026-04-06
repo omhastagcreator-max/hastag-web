@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle } from "lucide-react";
+import { useBooking } from "./BookingProvider";
 
 const screenshots = Array.from({ length: 13 }, (_, i) => `/whatsappss/whatsapp-${i + 1}.png`);
 
 const WhatsAppTestimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const { openBooking } = useBooking();
 
   // Auto-scrolling logic
   useEffect(() => {
@@ -34,11 +36,12 @@ const WhatsAppTestimonials = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 items-center justify-center lg:justify-start">
-              <a href="/book-call">
-                <button className="bg-foreground text-background px-8 py-4 rounded-full text-sm font-bold shadow-lg hover:-translate-y-1 transition-transform">
-                  Scale Your Revenue
-                </button>
-              </a>
+              <button 
+                onClick={openBooking}
+                className="bg-foreground text-background px-8 py-4 rounded-full text-sm font-bold shadow-lg hover:-translate-y-1 transition-transform"
+              >
+                Scale Your Revenue
+              </button>
             </div>
           </div>
 

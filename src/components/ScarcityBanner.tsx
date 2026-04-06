@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Timer, AlertCircle, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useBooking } from './BookingProvider';
 
 const ScarcityBanner = () => {
+  const { openBooking } = useBooking();
   const [spotsLeft, setSpotsLeft] = useState(5);
   const [timeLeft, setTimeLeft] = useState('');
   const [isVisible, setIsVisible] = useState(true);
@@ -77,19 +79,21 @@ const ScarcityBanner = () => {
                 <span className="text-[8px] sm:text-[9px] text-muted-foreground uppercase tracking-widest font-bold mt-0.5">Time Left</span>
               </div>
               
-              <a href="/book-call" className="w-full hidden sm:block">
-                <button className="w-full bg-red-500 hover:bg-red-600 text-white px-5 py-3 rounded-xl text-sm font-black uppercase tracking-wider shadow-lg shadow-red-500/20 transition-all hover:scale-105 active:scale-95 whitespace-nowrap">
-                  Claim Spot
-                </button>
-              </a>
+              <button 
+                onClick={openBooking}
+                className="w-full hidden sm:block bg-red-500 hover:bg-red-600 text-white px-5 py-3 rounded-xl text-sm font-black uppercase tracking-wider shadow-lg shadow-red-500/20 transition-all hover:scale-105 active:scale-95 whitespace-nowrap"
+              >
+                Claim Spot
+              </button>
             </div>
             
             {/* Mobile CTA */}
-            <a href="/book-call" className="sm:hidden relative z-10 shrink-0 mr-4">
-              <button className="bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-lg text-[10px] font-black uppercase tracking-wider shadow-lg shadow-red-500/20 transition-colors">
-                Claim Spot
-              </button>
-            </a>
+            <button 
+              onClick={openBooking}
+              className="sm:hidden relative z-10 shrink-0 mr-4 bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-lg text-[10px] font-black uppercase tracking-wider shadow-lg shadow-red-500/20 transition-colors"
+            >
+              Claim Spot
+            </button>
 
             <button 
               onClick={() => setIsVisible(false)}

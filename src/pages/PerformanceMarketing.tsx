@@ -4,8 +4,10 @@ import ServicesGrid from "@/components/ServicesGrid";
 import { useEffect } from "react";
 import { ArrowRight, Target, Activity, Zap } from "lucide-react";
 import { motion } from "framer-motion";
+import { useBooking } from "@/components/BookingProvider";
 
 export default function PerformanceMarketing() {
+  const { openBooking } = useBooking();
   useEffect(() => {
     window.scrollTo(0, 0);
     document.title = "Performance Marketing & ROAS Scaling | HastagCreator";

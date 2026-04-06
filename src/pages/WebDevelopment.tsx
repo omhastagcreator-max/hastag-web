@@ -4,8 +4,10 @@ import ServicesGrid from "@/components/ServicesGrid";
 import { useEffect } from "react";
 import { ArrowRight, Code2, LineChart, ShieldCheck } from "lucide-react";
 import { motion } from "framer-motion";
+import { useBooking } from "@/components/BookingProvider";
 
 export default function WebDevelopment() {
+  const { openBooking } = useBooking();
   useEffect(() => {
     window.scrollTo(0, 0);
     document.title = "CRO-Optimized Website Development | HastagCreator";
@@ -40,11 +42,12 @@ export default function WebDevelopment() {
               </p>
 
               <div className="flex flex-col sm:flex-row justify-center gap-4">
-                 <a href="/book-call">
-                   <button className="w-full sm:w-auto bg-foreground text-background px-8 py-5 rounded-full text-lg font-bold shadow-xl hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
-                     Get a Free UX Audit <ArrowRight className="w-5 h-5" />
-                   </button>
-                 </a>
+                  <button 
+                    onClick={openBooking}
+                    className="w-full sm:w-auto bg-foreground text-background px-8 py-5 rounded-full text-lg font-bold shadow-xl hover:-translate-y-1 transition-all flex items-center justify-center gap-2"
+                  >
+                    Get a Free UX Audit <ArrowRight className="w-5 h-5" />
+                  </button>
               </div>
            </div>
         </div>

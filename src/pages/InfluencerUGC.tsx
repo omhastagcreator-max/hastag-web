@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { Play } from "lucide-react";
 import { supabase } from "@/lib/supabase";
+import { useBooking } from "@/components/BookingProvider";
 
 const fallbackVideos = [
   { id: 901, title: "Checkout Drop-off Hook", views: "1.2M", duration: "0:15", category: "sales", video_url: "https://videos.pexels.com/video-files/5305118/5305118-hd_720_1366_25fps.mp4" },
@@ -111,6 +112,7 @@ const VideoCard = ({ video }: { video: any }) => {
 
 export default function InfluencerUGC() {
   const [videos, setVideos] = useState<any[]>([]);
+  const { openBooking } = useBooking();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -287,9 +289,12 @@ export default function InfluencerUGC() {
               <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
               <h2 className="text-3xl md:text-5xl font-black mb-6 relative z-10">Stop blending in.</h2>
               <p className="text-muted-foreground mb-10 text-lg relative z-10 max-w-xl mx-auto">Get custom, high-converting UGC engineered specifically for your brand's unique checkout funnel.</p>
-              <a href="/book-call" className="relative z-10 inline-block bg-primary text-primary-foreground font-black px-10 py-5 rounded-full shadow-xl shadow-primary/20 hover:-translate-y-1 transition-all text-lg tracking-wide uppercase">
+              <button 
+                onClick={openBooking}
+                className="relative z-10 inline-block bg-primary text-primary-foreground font-black px-10 py-5 rounded-full shadow-xl shadow-primary/20 hover:-translate-y-1 transition-all text-lg tracking-wide uppercase"
+              >
                 Commission Videos
-              </a>
+              </button>
            </div>
         </div>
 
