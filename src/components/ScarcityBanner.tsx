@@ -62,11 +62,12 @@ const ScarcityBanner = () => {
               <div className="bg-red-500/10 p-2 sm:p-2.5 rounded-full hidden sm:flex animate-pulse">
                 <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 text-red-500" />
               </div>
+              <p>Important Update</P>
               <div className="text-left sm:text-center pr-4 sm:pr-0">
                 <p className="text-foreground font-semibold text-xs sm:text-sm leading-tight">
-                  We Can Not Onboard more than <br className="hidden sm:block" /><span className="text-red-500 font-black tracking-tight text-sm sm:text-xl drop-shadow-sm">{spotsLeft}</span><br className="hidden sm:block" /> more people This Month.
+                  We Can Not Onboard more than <br className="hidden sm:block" /><span className="text-red-500 font-black tracking-tight text-sm sm:text-xl drop-shadow-sm">{spotsLeft}</span><br className="hidden sm:block" /> more brands This Month.
                 </p>
-                <p className="text-[9px] sm:text-[10px] text-muted-foreground mt-0.5 sm:mt-2 font-medium tracking-wide uppercase">High demand. Secure your spot now.</p>
+                {/* <p className="text-[9px] sm:text-[10px] text-muted-foreground mt-0.5 sm:mt-2 font-medium tracking-wide uppercase">High demand. Secure your spot now.</p> */}
               </div>
             </div>
 
