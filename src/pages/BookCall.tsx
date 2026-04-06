@@ -1,18 +1,48 @@
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { motion } from "framer-motion";
-import { ArrowRight, ShieldCheck, Video, CalendarDays } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowLeft, ArrowRight, ShieldCheck, Video, CalendarDays, CheckCircle2 } from "lucide-react";
 import { useRazorpay } from "react-razorpay";
 import { supabase } from "@/lib/supabase";
 
+type Goal = "E-Commerce" | "LeadGen" | "Brand" | "CRO" | "";
+
+const BOTTLENECKS = {
+  "E-Commerce": [
+    "High Ad Costs (CAC) & Low ROAS",
+    "People Add to Cart but don't Buy",
+    "Running out of Good Ad Creatives",
+    "Unstable, unpredictable daily sales"
+  ],
+  "LeadGen": [
+    "Getting lots of junk/unqualified leads",
+    "Cost Per Lead (CPL) is too high",
+    "Not enough lead volume to scale",
+    "No automated follow-up system"
+  ],
+  "Brand": [
+    "Competitors look bigger and better",
+    "Zero Social Proof or Influencer presence",
+    "Poor visual identity & messaging",
+    "Customers don't trust us enough yet"
+  ],
+  "CRO": [
+    "Extremely slow website loading speed",
+    "High bounce rate on landing pages",
+    "Confusing checkout or navigation",
+    "Traffic comes but nobody converts"
+  ]
+};
+
 export default function BookCall() {
+  const [step, setStep] = useState(1);
   const [form, setForm] = useState({
     name: "",
     email: "",
     phone: "",
+    goal: "" as Goal,
     painPoint: "",
-    goal: "",
   });
   
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -23,8 +53,19 @@ export default function BookCall() {
     document.title = "Book a Counseling Session | HastagCreator";
   }, []);
 
-  const handlePaymentAndSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleNext = (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    if (step === 1 && (!form.name || !form.email || !form.phone)) return;
+    if (step === 2 && !form.goal) return;
+    if (step === 3 && !form.painPoint) return;
+    setStep((prev) => prev + 1);
+  };
+
+  const handleBack = () => {
+    setStep((prev) => Math.max(1, prev - 1));
+  };
+
+  const handlePaymentAndSubmit = async () => {
     setIsSubmitting(true);
 
     try {
@@ -36,7 +77,7 @@ export default function BookCall() {
           body: JSON.stringify({
             access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY,
             from_name: "HastagCreator Strategy Session",
-            subject: `🚀 New Strategy Session Booking: ${form.name}`,
+            subject: `🚀 New Strategy Booking: ${form.name}`,
             name: form.name,
             email: form.email,
             phone: form.phone,
@@ -47,11 +88,11 @@ Name: ${form.name}
 Email: ${form.email}
 Phone: ${form.phone}
 
-Main Pain Point:
-${form.painPoint}
-
-What they want to achieve:
+Primary Goal Focus:
 ${form.goal}
+
+Biggest Bottleneck (Pain Point):
+${form.painPoint}
             `
           })
         });
@@ -65,7 +106,6 @@ ${form.goal}
         name: "HastagCreator",
         description: "Strategy & Counseling Session",
         handler: async function (response: any) {
-           // Optionally log order to supabase
            try {
               await supabase.from('orders').insert({
                  product_name: "Counseling Session",
@@ -76,7 +116,7 @@ ${form.goal}
              console.error("Order logging failed", e);
            }
            
-           // Redirect to calendly finally
+           // Exactly redirect to calendly upon success
            window.location.href = "https://calendly.com/domsco-tech/30min?month=2026-03";
         },
         prefill: {
@@ -84,7 +124,7 @@ ${form.goal}
           email: form.email,
           contact: form.phone,
         },
-        theme: { color: "#2563EB" }, // Primary blue
+        theme: { color: "#2563EB" }, 
       };
 
       const rzpInstance = new Razorpay(config as any);
@@ -100,7 +140,6 @@ ${form.goal}
       console.error("Submission error:", error);
       alert("Something went wrong while processing your request. Please try again.");
     } finally {
-      // Don't set submitting to false immediately if the razorpay window is opening
       setTimeout(() => setIsSubmitting(false), 2000); 
     }
   };
@@ -152,95 +191,188 @@ ${form.goal}
               </div>
            </motion.div>
 
-           {/* Right side: Questionnaire & Payment */}
+           {/* Right side: Multi-step Questionnaire & Payment */}
            <motion.div 
              initial={{ opacity: 0, x: 30 }}
              animate={{ opacity: 1, x: 0 }}
-             className="w-full lg:w-1/2"
+             className="w-full lg:w-1/2 relative min-h-[500px]"
            >
-              <div className="bg-card border border-border/50 rounded-[2rem] p-8 md:p-10 shadow-2xl relative overflow-hidden">
+              <div className="bg-card border border-border/50 rounded-[2rem] p-8 md:p-10 shadow-2xl relative overflow-hidden h-full flex flex-col">
                  <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl"></div>
                  
-                 <h2 className="text-2xl font-black mb-2 text-foreground tracking-tight">Step 1: Application</h2>
-                 <p className="text-muted-foreground text-sm font-medium mb-8">Tell us about your brand so we come prepared.</p>
-                 
-                 <form onSubmit={handlePaymentAndSubmit} className="space-y-5 relative z-10">
-                    <div className="grid grid-cols-2 gap-4">
-                       <div className="space-y-2">
-                          <label className="text-xs font-bold text-foreground uppercase tracking-wider">Name</label>
-                          <input 
-                            required
-                            type="text"
-                            value={form.name}
-                            onChange={e => setForm({...form, name: e.target.value})}
-                            className="w-full bg-background border border-input rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/50 outline-none"
-                            placeholder="John Doe"
-                          />
-                       </div>
-                       <div className="space-y-2">
-                          <label className="text-xs font-bold text-foreground uppercase tracking-wider">Phone</label>
-                          <input 
-                            required
-                            type="tel"
-                            value={form.phone}
-                            onChange={e => setForm({...form, phone: e.target.value})}
-                            className="w-full bg-background border border-input rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/50 outline-none"
-                            placeholder="+91 9999999999"
-                          />
-                       </div>
+                 <div className="flex items-center justify-between mb-8 relative z-10">
+                    <div className="flex flex-col">
+                      <h2 className="text-2xl font-black text-foreground tracking-tight">
+                         {step === 1 && "Step 1: Details"}
+                         {step === 2 && "Step 2: Core Focus"}
+                         {step === 3 && "Step 3: Biggest Hurdle"}
+                         {step === 4 && "Final Step: Payment"}
+                      </h2>
+                      <p className="text-muted-foreground text-sm font-medium mt-1">
+                         {step === 1 && "Basic information to reach you."}
+                         {step === 2 && "What are you trying to achieve?"}
+                         {step === 3 && "Where are you currently stuck?"}
+                         {step === 4 && "Confirm & securely reserve your slot."}
+                      </p>
                     </div>
-                    
-                    <div className="space-y-2">
-                       <label className="text-xs font-bold text-foreground uppercase tracking-wider">Email Address</label>
-                       <input 
-                         required
-                         type="email"
-                         value={form.email}
-                         onChange={e => setForm({...form, email: e.target.value})}
-                         className="w-full bg-background border border-input rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/50 outline-none"
-                         placeholder="founder@brand.com"
-                       />
-                    </div>
-
-                    <div className="space-y-2">
-                       <label className="text-xs font-bold text-foreground uppercase tracking-wider flex justify-between">
-                          What is your main pain point?
-                       </label>
-                       <textarea 
-                         required
-                         value={form.painPoint}
-                         onChange={e => setForm({...form, painPoint: e.target.value})}
-                         className="w-full bg-background border border-input rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/50 outline-none resize-none h-24"
-                         placeholder="E.g. Ads are not converting, CAC is too high, scaling issues..."
-                       />
-                    </div>
-
-                    <div className="space-y-2">
-                       <label className="text-xs font-bold text-foreground uppercase tracking-wider">What do you want to achieve with us?</label>
-                       <textarea 
-                         required
-                         value={form.goal}
-                         onChange={e => setForm({...form, goal: e.target.value})}
-                         className="w-full bg-background border border-input rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/50 outline-none resize-none h-24"
-                         placeholder="E.g. I want to build a better checkout flow, hit 5x ROAS..."
-                       />
-                    </div>
-                    
-                    <div className="pt-2">
-                       <button 
-                         type="submit" 
-                         disabled={isSubmitting}
-                         className="w-full bg-foreground text-background hover:bg-foreground/90 transition-all font-black text-sm md:text-base py-4 rounded-xl flex items-center justify-center gap-2 shadow-xl hover:-translate-y-1"
-                       >
-                         {isSubmitting ? "Processing..." : "Continue to Pay ₹99 & Book Slot"}
-                         {!isSubmitting && <ArrowRight className="w-5 h-5" />}
-                       </button>
-                    </div>
-                 </form>
-
-                 <div className="mt-6 flex items-center justify-center gap-2 text-xs text-muted-foreground font-medium">
-                    <ShieldCheck className="w-4 h-4 text-green-500" /> Secure Payments processed via Razorpay
+                    <div className="text-2xl font-black text-muted-foreground/30">{step}/4</div>
                  </div>
+                 
+                 <div className="flex-1 relative z-10">
+                   <AnimatePresence mode="wait">
+                      
+                      {/* STEP 1: Details */}
+                      {step === 1 && (
+                        <motion.form 
+                          key="step1"
+                          initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}
+                          onSubmit={handleNext}
+                          className="space-y-5"
+                        >
+                          <div className="space-y-4">
+                             <div className="space-y-1.5">
+                                <label className="text-xs font-bold text-foreground uppercase tracking-wider">Name</label>
+                                <input 
+                                  required type="text"
+                                  value={form.name} onChange={e => setForm({...form, name: e.target.value})}
+                                  className="w-full bg-background border border-input rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/50 outline-none"
+                                  placeholder="John Doe"
+                                />
+                             </div>
+                             <div className="space-y-1.5">
+                                <label className="text-xs font-bold text-foreground uppercase tracking-wider">Phone</label>
+                                <input 
+                                  required type="tel"
+                                  value={form.phone} onChange={e => setForm({...form, phone: e.target.value})}
+                                  className="w-full bg-background border border-input rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/50 outline-none"
+                                  placeholder="+91 9999999999"
+                                />
+                             </div>
+                             <div className="space-y-1.5">
+                                <label className="text-xs font-bold text-foreground uppercase tracking-wider">Email Address</label>
+                                <input 
+                                  required type="email"
+                                  value={form.email} onChange={e => setForm({...form, email: e.target.value})}
+                                  className="w-full bg-background border border-input rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/50 outline-none"
+                                  placeholder="founder@brand.com"
+                                />
+                             </div>
+                          </div>
+                          <button type="submit" className="w-full bg-primary text-primary-foreground font-black py-4 rounded-xl flex items-center justify-center gap-2 shadow-lg mt-4">
+                            Continue <ArrowRight className="w-4 h-4" />
+                          </button>
+                        </motion.form>
+                      )}
+
+                      {/* STEP 2: Goal Options */}
+                      {step === 2 && (
+                        <motion.div 
+                          key="step2"
+                          initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}
+                          className="flex flex-col h-full space-y-3"
+                        >
+                           {[
+                             { id: "E-Commerce", label: "Scaling E-Commerce Sales" },
+                             { id: "LeadGen", label: "Lead Generation & B2B Growth" },
+                             { id: "Brand", label: "Enhancing Brand Authority & Trust" },
+                             { id: "CRO", label: "Fixing Website Conversion (CRO)" }
+                           ].map(option => (
+                             <button
+                               key={option.id}
+                               onClick={() => setForm({...form, goal: option.id as Goal})}
+                               className={`w-full text-left px-5 py-4 rounded-xl border-2 transition-all flex items-center justify-between ${form.goal === option.id ? 'border-primary bg-primary/5' : 'border-border/50 bg-background hover:border-primary/30'}`}
+                             >
+                               <span className="font-bold text-foreground text-sm md:text-base">{option.label}</span>
+                               {form.goal === option.id && <CheckCircle2 className="w-5 h-5 text-primary" />}
+                             </button>
+                           ))}
+                           
+                           <div className="flex gap-3 pt-6 mt-auto">
+                              <button onClick={handleBack} className="px-5 py-4 rounded-xl border border-border text-foreground hover:bg-secondary font-bold flex items-center gap-2">
+                                <ArrowLeft className="w-4 h-4" /> Back
+                              </button>
+                              <button onClick={() => handleNext()} disabled={!form.goal} className="flex-1 bg-primary text-primary-foreground font-black py-4 rounded-xl flex items-center justify-center gap-2 disabled:opacity-50">
+                                Next Step <ArrowRight className="w-4 h-4" />
+                              </button>
+                           </div>
+                        </motion.div>
+                      )}
+
+                      {/* STEP 3: Dynamic Pain Points */}
+                      {step === 3 && (
+                        <motion.div 
+                          key="step3"
+                          initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}
+                          className="flex flex-col h-full space-y-3"
+                        >
+                           {form.goal && BOTTLENECKS[form.goal].map(pain => (
+                             <button
+                               key={pain}
+                               onClick={() => setForm({...form, painPoint: pain})}
+                               className={`w-full text-left px-5 py-4 rounded-xl border-2 transition-all flex items-center justify-between ${form.painPoint === pain ? 'border-primary bg-primary/5' : 'border-border/50 bg-background hover:border-primary/30'}`}
+                             >
+                               <span className="font-bold text-foreground text-sm md:text-base">{pain}</span>
+                               {form.painPoint === pain && <CheckCircle2 className="w-5 h-5 text-primary" />}
+                             </button>
+                           ))}
+                           
+                           <div className="flex gap-3 pt-6 mt-auto">
+                              <button onClick={handleBack} className="px-5 py-4 rounded-xl border border-border text-foreground hover:bg-secondary font-bold flex items-center gap-2">
+                                <ArrowLeft className="w-4 h-4" /> Back
+                              </button>
+                              <button onClick={() => handleNext()} disabled={!form.painPoint} className="flex-1 bg-primary text-primary-foreground font-black py-4 rounded-xl flex items-center justify-center gap-2 disabled:opacity-50">
+                                View Summary <ArrowRight className="w-4 h-4" />
+                              </button>
+                           </div>
+                        </motion.div>
+                      )}
+
+                      {/* STEP 4: Final Summary & Payment */}
+                      {step === 4 && (
+                        <motion.div 
+                          key="step4"
+                          initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}
+                          className="flex flex-col h-full"
+                        >
+                           <div className="bg-muted/30 border border-border rounded-2xl p-5 space-y-4 mb-6">
+                              <div className="flex justify-between items-center border-b border-border/50 pb-3">
+                                 <span className="text-muted-foreground text-sm font-bold">Consultation Fee</span>
+                                 <span className="text-xl font-black text-foreground">₹99</span>
+                              </div>
+                              <div className="space-y-1">
+                                 <p className="text-xs text-muted-foreground uppercase tracking-widest font-bold">Your Goal Focus</p>
+                                 <p className="text-sm font-semibold text-foreground">{form.goal}</p>
+                              </div>
+                              <div className="space-y-1">
+                                 <p className="text-xs text-muted-foreground uppercase tracking-widest font-bold">Identified Bottleneck</p>
+                                 <p className="text-sm font-semibold text-foreground">{form.painPoint}</p>
+                              </div>
+                           </div>
+
+                           <div className="flex gap-3 mt-auto">
+                              <button onClick={handleBack} className="px-5 py-4 rounded-xl border border-border text-foreground hover:bg-secondary font-bold flex items-center gap-2">
+                                <ArrowLeft className="w-4 h-4" /> Edit
+                              </button>
+                              <button 
+                                onClick={handlePaymentAndSubmit}
+                                disabled={isSubmitting}
+                                className="flex-1 bg-foreground text-background hover:bg-foreground/90 transition-all font-black py-4 rounded-xl flex items-center justify-center gap-2 shadow-xl hover:-translate-y-1"
+                              >
+                                {isSubmitting ? "Processing..." : "Pay ₹99 & Book Calendar"}
+                                {!isSubmitting && <ArrowRight className="w-5 h-5" />}
+                              </button>
+                           </div>
+                        </motion.div>
+                      )}
+
+                   </AnimatePresence>
+                 </div>
+
+                 {step === 4 && (
+                    <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{delay:0.3}} className="mt-6 flex items-center justify-center gap-2 text-xs text-muted-foreground font-medium">
+                        <ShieldCheck className="w-4 h-4 text-green-500" /> Secure Payments processed via Razorpay
+                    </motion.div>
+                 )}
               </div>
            </motion.div>
         </div>
