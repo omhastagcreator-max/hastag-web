@@ -1,6 +1,6 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { TrendingUp, ShoppingBag, ArrowRight, Zap, Target } from "lucide-react";
-import { useRef } from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { TrendingUp, ShoppingBag, ArrowRight, Zap, Target, Search, X } from "lucide-react";
+import { useRef, useState } from "react";
 
 const DashboardResultsSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -10,6 +10,7 @@ const DashboardResultsSection = () => {
   });
 
   const lidRotateX = useTransform(scrollYProgress, [0, 0.8], [-90, 0]);
+  const [isZoomed, setIsZoomed] = useState(false);
 
   return (
     <section id="dashboard-results" className="section-padding overflow-hidden bg-background relative">
@@ -61,9 +62,27 @@ const DashboardResultsSection = () => {
                 <div className="w-1.5 h-1.5 bg-blue-900/60 rounded-full"></div>
              </div>
              {/* Screen Content */}
-             <div className="relative aspect-video bg-[#0a0a0a] rounded-t-xl overflow-hidden group">
+             <div 
+               className={`relative bg-[#0a0a0a] overflow-hidden group transition-all duration-300 z-50 ${isZoomed ? "fixed inset-4 md:inset-10 z-[100] md:rounded-2xl rounded-xl shadow-[0_0_100px_rgba(0,0,0,0.8)] flex items-center justify-center bg-black/95 backdrop-blur-2xl border border-white/20" : "aspect-video rounded-t-xl cursor-pointer"}`}
+               onClick={() => !isZoomed && setIsZoomed(true)}
+             >
+               {isZoomed && (
+                 <button 
+                   onClick={(e) => { e.stopPropagation(); setIsZoomed(false); }}
+                   className="absolute top-4 right-4 z-[110] bg-white/10 hover:bg-white/20 p-2.5 rounded-full backdrop-blur-md text-white transition-colors"
+                 >
+                   <X className="w-6 h-6" />
+                 </button>
+               )}
+               {!isZoomed && (
+                 <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10 md:hidden pointer-events-none">
+                   <div className="bg-black/60 backdrop-blur-md px-4 py-2.5 rounded-full flex items-center gap-2 text-white text-sm font-bold border border-white/20 shadow-xl">
+                     <Search className="w-4 h-4" /> Tap to Zoom Video
+                   </div>
+                 </div>
+               )}
                <video 
-                 className="w-full h-full object-cover"
+                 className={`object-cover ${isZoomed ? "w-auto h-auto max-h-[85vh] max-w-[95vw] rounded-lg shadow-2xl" : "w-full h-full"}`}
                  autoPlay 
                  loop 
                  muted 
@@ -73,7 +92,7 @@ const DashboardResultsSection = () => {
                </video>
              </div>
              {/* Macbook logo text (subtle) */}
-             <div className="absolute bottom-0 inset-x-0 h-[12px] flex justify-center items-center text-[7px] font-bold text-white/20 tracking-widest hidden md:flex uppercase">
+             <div className="absolute bottom-0 inset-x-0 h-[12px] flex justify-center items-center text-[7px] font-bold text-white/20 tracking-widest hidden md:flex uppercase pointer-events-none">
                  MacBook Pro
              </div>
           </motion.div>

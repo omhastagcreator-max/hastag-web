@@ -7,7 +7,7 @@ export default function MobileBottomNav() {
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden pb-safe">
       {/* Glossy pill background */}
-      <div className="mx-4 mb-4 rounded-full bg-white/80 dark:bg-black/80 backdrop-blur-xl border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.12)] flex items-center justify-around p-2">
+      <div className="mx-4 mb-4 rounded-full bg-white/10 dark:bg-black/10 backdrop-blur-2xl border border-white/20 shadow-[0_8px_30px_rgb(0,0,0,0.12)] flex items-center justify-around p-2">
         <Link 
           to="/"
           className={`flex flex-col items-center justify-center w-16 h-12 rounded-full transition-all ${location.pathname === "/" ? "text-primary scale-110" : "text-muted-foreground hover:text-foreground"}`}

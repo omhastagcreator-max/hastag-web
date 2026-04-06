@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import MobileScarcityWidget from "./MobileScarcityWidget";
 
 type NavLink = {
   label: string;
@@ -216,6 +217,7 @@ const Navbar = () => {
                 </div>
               ))}
               <div className="mt-8 pt-6 border-t border-border">
+                <MobileScarcityWidget onClick={() => setOpen(false)} />
                 <a href="/book-call" onClick={() => setOpen(false)} className="block">
                   <button className="w-full bg-foreground text-background px-6 py-4 rounded-full text-base font-bold shadow-xl active:scale-95 transition-transform">
                     Schedule a Call
