@@ -16,6 +16,7 @@ import CaseStudySnapshot from "@/components/CaseStudySnapshot";
 import PerformanceMarketingGlimpse from "@/components/PerformanceMarketingGlimpse";
 import InfluencerMarketingGlimpse from "@/components/InfluencerMarketingGlimpse";
 import WebDevelopmentGlimpse from "@/components/WebDevelopmentGlimpse";
+import MarketingBreakdown from "@/components/MarketingBreakdown";
 import HowItWorks from "@/components/HowItWorks";
 import FounderSection from "@/components/FounderSection";
 import Testimonial from "@/components/Testimonial";
