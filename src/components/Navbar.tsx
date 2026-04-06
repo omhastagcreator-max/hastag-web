@@ -48,10 +48,10 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
         scrolled
-          ? "bg-background/90 shadow-card backdrop-blur-xl border-b border-border"
-          : "bg-background/50 backdrop-blur-md border-b border-border/20"
+          ? "bg-white/10 dark:bg-black/20 shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-2xl border-b border-white/20"
+          : "bg-white/5 dark:bg-black/10 backdrop-blur-xl border-b border-white/10"
       }`}
     >
       {/* Trust badge bar */}
@@ -155,9 +155,12 @@ const Navbar = () => {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="lg:hidden overflow-hidden bg-background/95 backdrop-blur-xl border-b border-border/50 shadow-2xl absolute w-full"
+            className="lg:hidden overflow-hidden bg-white/10 dark:bg-black/40 backdrop-blur-2xl border-b border-white/20 shadow-2xl absolute w-full top-full"
           >
             <div className="flex flex-col p-6 space-y-2 h-[80vh] overflow-y-auto pb-32">
+              <div className="mb-6">
+                <MobileScarcityWidget onClick={() => setOpen(false)} />
+              </div>
               {navLinks.map((link) => (
                 <div key={link.label} className="border-b border-border/30 last:border-0">
                   {link.dropdown ? (
@@ -216,8 +219,7 @@ const Navbar = () => {
                   )}
                 </div>
               ))}
-              <div className="mt-8 pt-6 border-t border-border">
-                <MobileScarcityWidget onClick={() => setOpen(false)} />
+              <div className="mt-8 pt-6 border-t border-white/20">
                 <a href="/book-call" onClick={() => setOpen(false)} className="block">
                   <button className="w-full bg-foreground text-background px-6 py-4 rounded-full text-base font-bold shadow-xl active:scale-95 transition-transform">
                     Schedule a Call
