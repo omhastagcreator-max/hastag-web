@@ -5,14 +5,12 @@ import { supabase } from "@/lib/supabase";
 import HeroSection from "@/components/HeroSection";
 import ServicesGrid from "@/components/ServicesGrid";
 import WhyChooseUs from "@/components/WhyChooseUs";
-import Process from "@/components/Process";
 import Pricing from "@/components/Pricing";
 import LeadForm from "@/components/LeadForm";
 import FAQ from "@/components/FAQ";
 import GoogleReviews from "@/components/GoogleReviews";
 import DashboardResultsSection from "@/components/DashboardResultsSection";
 import NetworkStats from "@/components/NetworkStats";
-import CaseStudySnapshot from "@/components/CaseStudySnapshot";
 import OfficialPartners from "@/components/OfficialPartners";
 import PerformanceMarketingGlimpse from "@/components/PerformanceMarketingGlimpse";
 import InfluencerMarketingGlimpse from "@/components/InfluencerMarketingGlimpse";
@@ -37,7 +35,6 @@ const Index = () => {
     <main>
       <HeroSection />
       <TrustedBrands />
-      <CaseStudySnapshot />
       <PerformanceMarketingGlimpse />
       <InfluencerMarketingGlimpse />
       <NetworkStats />
@@ -50,7 +47,6 @@ const Index = () => {
       <WhyChooseUs />
       <GoogleReviews />
 
-      <Process />
       <Pricing />
       <OfficialPartners />
 
