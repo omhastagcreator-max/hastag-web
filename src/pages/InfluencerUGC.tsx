@@ -177,7 +177,7 @@ export default function InfluencerUGC() {
                  Content That Sells
               </span>
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight mb-6 max-w-4xl mx-auto leading-tight">
-                Stop Dancing. <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-500">Start Selling.</span>
+                Stop Blending In. <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-500">Start Converting.</span>
               </h1>
               <p className="text-muted-foreground font-medium text-lg max-w-2xl mx-auto">
                  We script and produce short-form video ads specifically engineered for Meta & Google conversions.

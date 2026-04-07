@@ -513,7 +513,9 @@ export default function Admin() {
                 <div>
                   <select value={vidCategory} onChange={e => setVidCategory(e.target.value)} className="w-full bg-background border border-border p-3.5 rounded-xl text-sm font-medium outline-none focus:border-primary cursor-pointer transition-colors">
                     <option value="sales">Sales Focused</option>
+                    <option value="influencer">Influencer Sales Focused</option>
                     <option value="brand">Brand Awareness</option>
+                    <option value="tvc">TVC Ad Video</option>
                   </select>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
