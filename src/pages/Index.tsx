@@ -34,11 +34,9 @@ const Index = () => {
   return (
     <>
       <Navbar />
-      <ScarcityBanner />
     <main>
       <HeroSection />
       <TrustedBrands />
-      <OfficialPartners />
       <CaseStudySnapshot />
       <PerformanceMarketingGlimpse />
       <InfluencerMarketingGlimpse />
@@ -46,7 +44,6 @@ const Index = () => {
       <HowItWorks />
       
       <WebDevelopmentGlimpse />
-      <ServicesGrid />
       <MarketingBreakdown />
       <DashboardResultsSection />
       <WhatsAppTestimonials />
@@ -55,7 +52,7 @@ const Index = () => {
 
       <Process />
       <Pricing />
-      <FounderSection />
+      <OfficialPartners />
 
       <LeadForm />
       <FAQ />

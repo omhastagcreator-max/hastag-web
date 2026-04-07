@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useBooking } from "./BookingProvider";
+import ScarcityBanner from "./ScarcityBanner";
 
 type NavLink = {
   label: string;
@@ -55,11 +56,23 @@ const Navbar = () => {
           : "bg-background/50 backdrop-blur-md border-b border-border/20"
       }`}
     >
-      {/* Trust badge bar */}
-      <div className="bg-primary text-primary-foreground text-[10px] sm:text-xs py-1.5 text-center font-bold tracking-widest uppercase shadow-sm">
-        <span className="hidden sm:inline">HastagCreator · 11 Years of Experience · India's Largest Marketing Agency</span>
-        <span className="sm:hidden">#Creator · 11 Yrs of Experience</span>
-      </div>
+      <AnimatePresence>
+        {!scrolled && (
+          <motion.div
+            initial={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0, overflow: "hidden" }}
+            transition={{ duration: 0.3 }}
+          >
+            {/* Trust badge bar */}
+            <div className="bg-primary text-primary-foreground text-[10px] sm:text-xs py-1.5 text-center font-bold tracking-widest uppercase shadow-sm">
+              <span className="hidden sm:inline">HastagCreator · 11 Years of Experience · India's Largest Marketing Agency</span>
+              <span className="sm:hidden">#Creator · 11 Yrs of Experience</span>
+            </div>
+            {/* Scarcity Banner */}
+            <ScarcityBanner inNavbar={true} />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <div className="container-main flex items-center justify-between h-20 px-4 sm:px-6 lg:px-8">
         {/* Logo */}

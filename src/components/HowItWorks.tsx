@@ -1,116 +1,109 @@
-import { motion, useScroll } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import { Search, PenTool, Rocket, PhoneCall } from "lucide-react";
+import { useBooking } from "./BookingProvider";
 
 const steps = [
   {
     icon: PhoneCall,
-    title: "0. 45-Min Growth Counseling",
-    desc: "Before onboarding, we mandate a rigorous session discussing exactly 'How, When & Whom to sell' to validate if we can actually scale you.",
+    title: "0. Strategy Counseling",
+    desc: "Rigorous 45-min session to validate scaling potential.",
   },
   {
     icon: Search,
     title: "1. The Forensic Audit",
-    desc: "We analyze your past ad accounts, competitor footprint, and website checkout drops to find immediate revenue leaks.",
+    desc: "Find immediate revenue leaks in ads & website.",
   },
   {
     icon: PenTool,
-    title: "2. Creation & Funnel Fixing",
-    desc: "Before we spend a single rupee on ads, we deploy high-converting landing pages and craft UGC content explicitly designed to sell.",
+    title: "2. Creation & Funnel",
+    desc: "Deploy high-converting UGC and CRO landing pages.",
   },
   {
     icon: Rocket,
     title: "3. Precision Scaling",
-    desc: "We launch, test aggressively, and scale winning campaigns across Meta, Google, and Influencer networks using machine learning.",
+    desc: "Launch & aggressively scale winning campaigns.",
   },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 1, // 1-second delay between each card
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { 
+    opacity: 1, y: 0,
+    transition: {
+      duration: 0.5
+    }
+  },
+};
+
 const HowItWorks = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start center", "end center"],
-  });
+  const { openBooking } = useBooking();
 
   return (
-    <section className="py-24 bg-background relative" id="process">
-      <div className="container-main max-w-4xl">
+    <section className="py-24 bg-background relative overflow-hidden" id="process">
+      {/* Background glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 blur-[120px] rounded-full pointer-events-none"></div>
+
+      <div className="container-main max-w-7xl relative z-10">
         <div className="text-center mb-16">
-          <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">Execution</span>
-          <h2 className="text-4xl md:text-5xl font-black text-foreground mb-6 tracking-tight">
+          <span className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-xs font-black tracking-widest uppercase mb-4 border border-primary/20">
+             Execution
+          </span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-foreground mb-6 tracking-tight">
             How We Actually Work
           </h2>
-          <p className="text-lg text-muted-foreground font-medium max-w-2xl mx-auto">
-            A totally transparent, 3-step process designed to stop the guesswork and start scaling your revenue immediately.
+          <p className="text-lg md:text-xl text-muted-foreground font-medium max-w-2xl mx-auto">
+            A transparent, 3-step process to end guesswork and build your conversion machinery.
           </p>
         </div>
 
-        <div className="relative" ref={containerRef}>
-          {/* Vertical Line Background */}
-          <div className="absolute left-[39px] md:left-[calc(50%-2px)] top-0 bottom-0 w-1 bg-border/50 rounded-full hidden md:block" />
-          
-          {/* Animated Scroll Fill Line */}
-          <motion.div 
-            style={{ scaleY: scrollYProgress, originY: 0 }}
-            className="absolute left-[39px] md:left-[calc(50%-2px)] top-0 bottom-0 w-1 bg-primary rounded-full hidden md:block z-0" 
-          />
-
-          <div className="space-y-12 md:space-y-24 perspective-1000">
-            {steps.map((step, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6 }}
-                className={`flex flex-col md:flex-row items-start md:items-center justify-between gap-8 md:gap-16 relative transform-style-3d ${
-                  index % 2 === 1 ? "md:flex-row-reverse" : ""
-                }`}
-              >
-                {/* Center Node (Desktop) */}
-                <motion.div 
-                  initial={{ scale: 0 }}
-                  whileInView={{ scale: 1 }}
-                  transition={{ delay: 0.2, type: "spring" }}
-                  viewport={{ once: true }}
-                  className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-20 h-20 bg-background border-4 border-primary rounded-full items-center justify-center z-10 shadow-[0_0_20px_rgba(216,0,166,0.3)]" 
-                  style={{ top: "calc(50% - 40px)"}}
-                >
-                  <step.icon className="w-8 h-8 text-primary" />
-                </motion.div>
-
-                {/* Content Card */}
-                <motion.div 
-                   whileHover={{ rotateY: index % 2 === 1 ? -5 : 5, scale: 1.02, z: 20 }}
-                   className={`w-full md:w-[45%] bg-card border border-border p-8 rounded-3xl shadow-sm hover:shadow-card-hover transition-shadow relative z-0`}
-                >
-                  <div className="md:hidden w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-6">
-                    <step.icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <h3 className="text-2xl font-black text-foreground mb-4">{step.title}</h3>
-                  <p className="text-muted-foreground text-[15px] leading-relaxed">
-                    {step.desc}
-                  </p>
-                </motion.div>
-                
-                {/* Empty Space for layout */}
-                <div className="hidden md:block w-[45%]" />
-              </motion.div>
-            ))}
-          </div>
-        </div>
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-4"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          {steps.map((step, index) => (
+            <motion.div
+              key={index}
+              variants={cardVariants}
+              whileHover={{ scale: 1.05, y: -10 }}
+              className="bg-card border border-border/50 hover:border-primary/50 p-8 rounded-3xl shadow-sm hover:shadow-2xl transition-all flex flex-col items-center text-center group relative overflow-hidden"
+            >
+              <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+              
+              <div className="w-20 h-20 bg-primary/10 group-hover:bg-primary border border-primary/20 group-hover:border-primary rounded-2xl flex items-center justify-center mb-8 transition-colors duration-300">
+                <step.icon className="w-10 h-10 text-primary group-hover:text-white transition-colors duration-300" />
+              </div>
+              
+              <h3 className="text-xl font-black text-foreground mb-4">{step.title}</h3>
+              <p className="text-muted-foreground text-sm font-medium leading-relaxed">
+                {step.desc}
+              </p>
+            </motion.div>
+          ))}
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ delay: 0.5 }}
           className="text-center mt-20"
         >
-          <a href="/#audit-form">
-            <button className="btn-synthetic mx-auto">
-              Get Started Now
-            </button>
-          </a>
+          <button onClick={openBooking} className="bg-foreground text-background px-10 py-5 rounded-full text-lg font-bold shadow-xl hover:-translate-y-1 transition-all mx-auto uppercase tracking-widest">
+            Get Started Now
+          </button>
         </motion.div>
       </div>
     </section>
