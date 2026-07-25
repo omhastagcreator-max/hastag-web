@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Users, Star, Trophy, Mic, Smile, Radio, Globe, Search, MapPin } from "lucide-react";
+import { Users, Star, Trophy, Mic, Smile, Radio, Globe } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const networkData = [
@@ -29,27 +29,27 @@ const NetworkStats = () => {
             viewport={{ once: true }}
             className="w-full max-w-sm lg:max-w-none mx-auto"
           >
-            <div className="bg-white text-foreground rounded-3xl shadow-2xl p-6 md:p-7">
-              <div className="flex items-center gap-2 text-[11px] font-bold text-muted-foreground uppercase tracking-wider mb-3">
-                <Search className="w-3.5 h-3.5" /> Google &middot; "Influencer Marketing Agency in Mumbai"
-              </div>
-              <h3 className="text-lg font-black text-foreground mb-1">Hastag Creator #Creator</h3>
-              <p className="text-sm text-muted-foreground mb-3 leading-snug">
-                India's Largest Influencer Marketing Agency, Best Digital Marketing Agency in Mumbai, IND
-              </p>
-              <div className="flex items-center gap-1.5 mb-3 text-sm">
-                <span className="font-bold text-foreground">5.0</span>
-                <div className="flex text-yellow-400">
-                  {[1, 2, 3, 4, 5].map((s) => <Star key={s} className="w-3.5 h-3.5 fill-current" />)}
+            <div className="bg-white rounded-2xl overflow-hidden shadow-2xl border border-white/20">
+              <div className="bg-secondary/80 border-b border-border px-4 py-2.5 flex items-center gap-2">
+                <div className="flex gap-1.5 flex-shrink-0">
+                  <div className="w-2.5 h-2.5 rounded-full bg-red-400"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-green-400"></div>
                 </div>
-                <span className="text-muted-foreground">(36) &middot; Marketing agency</span>
+                <span className="text-[10px] text-muted-foreground font-medium truncate">google.com/search?q=influencer+marketing+agency+in+mumbai</span>
               </div>
-              <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-4">
-                <MapPin className="w-3.5 h-3.5" /> Mumbai, Maharashtra &middot; Open 24 hours
+              <img
+                src="/google-ranking-mumbai.jpg"
+                alt="Hastag Creator ranked #1 on Google for 'influencer marketing agency in Mumbai'"
+                className="w-full h-auto object-cover"
+              />
+              <div className="flex items-center gap-1.5 px-4 py-2.5 border-t border-border bg-white text-foreground">
+                <div className="flex text-yellow-400">
+                  {[1, 2, 3, 4, 5].map((s) => <Star key={s} className="w-3 h-3 fill-current" />)}
+                </div>
+                <span className="text-xs font-bold">5.0 (36)</span>
+                <span className="text-xs text-muted-foreground">&middot; #1 in Mumbai</span>
               </div>
-              <span className="inline-flex items-center gap-1.5 bg-green-50 text-green-700 text-xs font-bold px-3 py-1.5 rounded-full border border-green-200">
-                #1 Result in Mumbai
-              </span>
             </div>
           </motion.div>
 
