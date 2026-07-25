@@ -15,6 +15,16 @@ const brandLogos = [
   "/trustbybrands/12.png",
 ];
 
+const FeaturedPartnerBox = () => (
+  <div className="w-[300px] shrink-0 bg-primary/5 border border-primary/20 rounded-2xl p-4 flex flex-col items-center justify-center mx-6">
+    <span className="text-[10px] font-black text-primary uppercase tracking-wider mb-2">Featured Mega-Scale Partner</span>
+    <div className="flex items-center gap-4">
+      <img src="/Official Partners/zeetv.png" alt="ZeeTV" className="h-8 object-contain" />
+      <img src="/Official Partners/ideabaaz.png" alt="Ideabaaz" className="h-8 object-contain" />
+    </div>
+  </div>
+);
+
 const TrustedBrands = () => {
   return (
     <section className="py-12 bg-background border-b border-border/40 overflow-hidden" id="trusted-brands">
@@ -31,23 +41,21 @@ const TrustedBrands = () => {
         <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background to-transparent z-10"></div>
 
         <div className="flex animate-marquee items-center gap-12 whitespace-nowrap min-w-full z-0">
-          
-          {/* Repeat array twice for smooth infinite scroll */}
-          {[...brandLogos, ...brandLogos].map((src, index) => (
-            <div key={index} className="w-[120px] md:w-[150px] shrink-0 flex items-center justify-center">
-              <img src={src} alt="Trusted Brand" className="w-full h-auto object-contain" />
-            </div>
-          ))}
 
-          {/* Highlighted ZeeTV/Ideabaaz Box */}
-          <div className="w-[300px] shrink-0 bg-primary/5 border border-primary/20 rounded-2xl p-4 flex flex-col items-center justify-center mx-12">
-            <span className="text-[10px] font-black text-primary uppercase tracking-wider mb-2">Featured Mega-Scale Partner</span>
-            <div className="flex items-center gap-4">
-              <img src="/Official Partners/zeetv.png" alt="ZeeTV" className="h-8 object-contain" />
-              <img src="/Official Partners/ideabaaz.png" alt="Ideabaaz" className="h-8 object-contain" />
-            </div>
-          </div>
-          
+          {/* Repeat array twice for smooth infinite scroll. A known-name partner box is
+              interspersed every 4 logos so a recognizable name surfaces often, not just once. */}
+          {[...brandLogos, ...brandLogos].flatMap((src, index) => {
+            const nodes = [
+              <div key={index} className="w-[120px] md:w-[150px] shrink-0 flex items-center justify-center">
+                <img src={src} alt="Trusted Brand" className="w-full h-auto object-contain" />
+              </div>,
+            ];
+            if ((index + 1) % 4 === 0) {
+              nodes.push(<FeaturedPartnerBox key={`featured-${index}`} />);
+            }
+            return nodes;
+          })}
+
         </div>
       </div>
     </section>
