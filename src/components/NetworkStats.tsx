@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Users, Star, Trophy, Mic, Smile, Radio, Globe } from "lucide-react";
+import { Users, Star, Trophy, Mic, Smile, Radio, Globe, Search, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const networkData = [
@@ -21,11 +21,44 @@ const NetworkStats = () => {
       </div>
 
       <div className="container-main relative z-10">
-        <div className="text-center mb-16 max-w-4xl mx-auto">
+        <div className="grid lg:grid-cols-[minmax(0,380px)_1fr] gap-10 lg:gap-16 items-center mb-16">
+          {/* Left: real Google ranking proof */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="w-full max-w-sm lg:max-w-none mx-auto"
+          >
+            <div className="bg-white text-foreground rounded-3xl shadow-2xl p-6 md:p-7">
+              <div className="flex items-center gap-2 text-[11px] font-bold text-muted-foreground uppercase tracking-wider mb-3">
+                <Search className="w-3.5 h-3.5" /> Google &middot; "Influencer Marketing Agency in Mumbai"
+              </div>
+              <h3 className="text-lg font-black text-foreground mb-1">Hastag Creator #Creator</h3>
+              <p className="text-sm text-muted-foreground mb-3 leading-snug">
+                India's Largest Influencer Marketing Agency, Best Digital Marketing Agency in Mumbai, IND
+              </p>
+              <div className="flex items-center gap-1.5 mb-3 text-sm">
+                <span className="font-bold text-foreground">5.0</span>
+                <div className="flex text-yellow-400">
+                  {[1, 2, 3, 4, 5].map((s) => <Star key={s} className="w-3.5 h-3.5 fill-current" />)}
+                </div>
+                <span className="text-muted-foreground">(36) &middot; Marketing agency</span>
+              </div>
+              <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-4">
+                <MapPin className="w-3.5 h-3.5" /> Mumbai, Maharashtra &middot; Open 24 hours
+              </div>
+              <span className="inline-flex items-center gap-1.5 bg-green-50 text-green-700 text-xs font-bold px-3 py-1.5 rounded-full border border-green-200">
+                #1 Result in Mumbai
+              </span>
+            </div>
+          </motion.div>
+
+          {/* Right: heading content */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            className="text-center lg:text-left max-w-4xl"
           >
             <span className="inline-block bg-white/20 text-white text-xs font-bold px-4 py-1.5 rounded-full mb-6 uppercase tracking-widest backdrop-blur-sm shadow-sm border border-white/10">
               Get Started With #Creator Now
