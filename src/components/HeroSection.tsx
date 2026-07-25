@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { ArrowRight, Star, TrendingUp, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Star, TrendingUp, CheckCircle2, Linkedin } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const HeroSection = () => {
@@ -139,6 +139,18 @@ const HeroSection = () => {
               <div className="text-left flex flex-col">
                 <span className="text-xl font-black text-foreground">511+</span>
                 <span className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Brands Scaled</span>
+              </div>
+            </div>
+
+            <div className="w-px h-10 bg-border hidden lg:block"></div>
+
+            <div className="flex items-center gap-3">
+              <div className="bg-primary/10 text-primary p-2.5 rounded-full">
+                <Linkedin className="w-5 h-5" />
+              </div>
+              <div className="text-left flex flex-col">
+                <span className="text-xl font-black text-foreground">2,366+</span>
+                <span className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">LinkedIn Recommendations</span>
               </div>
             </div>
           </motion.div>
