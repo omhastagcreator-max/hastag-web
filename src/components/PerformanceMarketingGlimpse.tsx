@@ -67,6 +67,33 @@ const PerformanceMarketingGlimpse = () => {
               ))}
             </div>
 
+            {/* Pricing Philosophy Callout */}
+            <div className="bg-card border border-primary/20 rounded-3xl p-6 md:p-8 shadow-sm mt-2">
+              <p className="text-xl md:text-2xl font-black text-foreground italic mb-3">
+                "We don't make money until you make millions."
+              </p>
+              <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-6">
+                Most agencies charge you a heavy fixed retainer just to test things — leaving you to take all the financial risk while they get paid regardless. We do the exact opposite.
+              </p>
+              <div className="space-y-4 mb-6">
+                <div className="border-l-4 border-primary/40 pl-4">
+                  <span className="text-xs font-black uppercase tracking-widest text-primary">Months 1–3 · The Growth Phase</span>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    Zero fixed fees. We only charge 18% of your ad spend to keep our media buyers fed and focused entirely on your ROAS. <em>(Truth? This barely covers our costs.)</em>
+                  </p>
+                </div>
+                <div className="border-l-4 border-primary pl-4">
+                  <span className="text-xs font-black uppercase tracking-widest text-primary">Post-Break-Even · The Scale Phase</span>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    This is where we actually win. Once your brand hits break-even and starts printing profits, we take a 12% revenue share.
+                  </p>
+                </div>
+              </div>
+              <p className="font-bold text-foreground">
+                If you don't win, we don't eat. Ready to align incentives? Let's talk.
+              </p>
+            </div>
+
             <Link to="/services/performance-marketing" className="mt-8 w-fit">
               <motion.button
                 whileHover={{ scale: 1.05 }}
