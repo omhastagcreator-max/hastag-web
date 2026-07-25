@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, TrendingUp, Presentation, Users, Target, ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react";
+import { ArrowUpRight, TrendingUp, Presentation, Target, ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const metaImages = ["/meta-r1.jpg", "/meta-r2.jpg", "/meta-r3.jpg", "/meta-r4.jpg"];
@@ -8,7 +8,6 @@ const metaImages = ["/meta-r1.jpg", "/meta-r2.jpg", "/meta-r3.jpg", "/meta-r4.jp
 const features = [
   { icon: Target, label: "Laser-focused Audience Targeting" },
   { icon: TrendingUp, label: "Data-Driven Scaling Strategies" },
-  { icon: Users, label: "High-Converting Creatives" },
   { icon: Presentation, label: "Advanced Funnel Optimization" },
 ];
 
@@ -54,7 +53,12 @@ const PerformanceMarketingGlimpse = () => {
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
               {features.map((feature, idx) => (
-                <div key={idx} className="flex items-center gap-3 bg-white/50 dark:bg-black/20 backdrop-blur-md border border-border/50 p-3 rounded-xl shadow-sm">
+                <div
+                  key={idx}
+                  className={`flex items-center gap-3 bg-white/50 dark:bg-black/20 backdrop-blur-md border border-border/50 p-3 rounded-xl shadow-sm ${
+                    idx === features.length - 1 && features.length % 2 === 1 ? "sm:col-span-2" : ""
+                  }`}
+                >
                   <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                     <feature.icon className="w-5 h-5 text-primary" />
                   </div>
