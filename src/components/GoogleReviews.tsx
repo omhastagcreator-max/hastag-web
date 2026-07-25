@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { Star, ArrowUpRight, BadgeCheck } from "lucide-react";
+import { Star, ArrowUpRight, BadgeCheck, Linkedin } from "lucide-react";
+import { useBooking } from "./BookingProvider";
 
 const reviews = [
   {
@@ -50,10 +51,11 @@ const reviews = [
 ];
 
 const GoogleReviews = () => {
+  const { openBooking } = useBooking();
   return (
     <section className="py-24 bg-background relative overflow-hidden" id="reviews">
       <div className="absolute inset-0 bg-primary/5"></div>
-      
+
       <div className="container-main relative z-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 px-4">
           <motion.div
@@ -63,32 +65,29 @@ const GoogleReviews = () => {
             className="max-w-2xl"
           >
             <div className="flex items-center gap-2 mb-4">
-              <img src="/google-g.svg" alt="Google" className="w-8 h-8 drop-shadow-sm bg-white rounded-full p-1" onError={(e) => (e.currentTarget.style.display = 'none')} />
-              <div className="flex items-center text-yellow-400">
-                {[1, 2, 3, 4, 5].map((s) => <Star key={s} className="w-5 h-5 fill-current" />)}
+              <div className="bg-[#0A66C2] rounded-full p-1.5 flex items-center justify-center shadow-sm">
+                <Linkedin className="w-5 h-5 text-white fill-white" />
               </div>
-              <span className="text-foreground font-bold ml-2">5.0 Rating</span>
+              <span className="text-foreground font-black text-2xl">2,366+</span>
+              <span className="text-foreground font-bold">LinkedIn Recommendations</span>
             </div>
             <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-4 text-foreground">
               What Top Brands Say
             </h2>
             <p className="text-muted-foreground text-lg">
-              Authentic reviews from D2C founders who scaled with us. 
-              <span className="block mt-2 text-sm text-primary/80 italic">*Live API integration pending keys*</span>
+              Authentic recommendations from D2C founders and marketing leaders who scaled with us.
             </p>
           </motion.div>
 
-          <motion.a
+          <motion.button
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            href="https://search.google.com/local/reviews?placeid=ChIJ2Xr7wra35zsR3hmKhuBBHtE"
-            target="_blank"
-            rel="noreferrer"
+            onClick={openBooking}
             className="inline-flex items-center gap-2 bg-card border border-border/50 hover:border-primary/50 text-foreground px-6 py-3 rounded-full font-bold shadow-sm transition-all hover:shadow-card-hover group"
           >
-            View on Google Maps <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </motion.a>
+            Get These Results <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </motion.button>
         </div>
 
         {/* Carousel Container */}
