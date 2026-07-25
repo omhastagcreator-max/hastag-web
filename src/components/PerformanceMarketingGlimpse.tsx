@@ -1,9 +1,22 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, TrendingUp, Presentation, Target, ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react";
+import { ArrowUpRight, TrendingUp, Presentation, Target, Maximize2, X } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const metaImages = ["/meta-r1.jpg", "/meta-r2.jpg", "/meta-r3.jpg", "/meta-r4.jpg"];
+const proofImages = [
+  { src: "/meta-r1.jpg", label: "Meta Ads Manager" },
+  { src: "/meta-r2.jpg", label: "Meta Ads Manager" },
+  { src: "/meta-r3.jpg", label: "Meta Ads Manager" },
+  { src: "/meta-r4.jpg", label: "Meta Ads Manager" },
+  { src: "/whatsappss/whatsapp-1.png", label: "Client WhatsApp" },
+  { src: "/whatsappss/whatsapp-2.png", label: "Client WhatsApp" },
+  { src: "/whatsappss/whatsapp-3.png", label: "Client WhatsApp" },
+  { src: "/whatsappss/whatsapp-4.png", label: "Client WhatsApp" },
+  { src: "/shopify-r1.jpg", label: "Shopify Prepaid Orders" },
+  { src: "/shopify-r2.jpg", label: "Shopify Prepaid Orders" },
+  { src: "/shopify-r3.jpg", label: "Shopify Prepaid Orders" },
+  { src: "/shopify-r4.jpg", label: "Shopify Prepaid Orders" },
+];
 
 const features = [
   { icon: Target, label: "Laser-focused Audience Targeting" },
@@ -12,17 +25,7 @@ const features = [
 ];
 
 const PerformanceMarketingGlimpse = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
-
-  const next = (e?: React.MouseEvent) => {
-      e?.stopPropagation();
-      setCurrentIndex((prev) => (prev + 1) % metaImages.length);
-  }
-  const prev = (e?: React.MouseEvent) => {
-      e?.stopPropagation();
-      setCurrentIndex((prev) => (prev - 1 + metaImages.length) % metaImages.length);
-  }
 
   return (
     <>
@@ -110,76 +113,44 @@ const PerformanceMarketingGlimpse = () => {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="relative lg:h-[600px] flex items-center justify-center p-4"
+            className="relative flex items-center justify-center p-4 overflow-hidden"
           >
-            {/* Real Meta Screenshots Carousel */}
-            <div className="w-full max-w-[500px] bg-white/20 dark:bg-white/5 backdrop-blur-3xl border border-white/50 dark:border-white/10 rounded-[2rem] shadow-2xl relative overflow-hidden z-10 transition-transform duration-500 hover:scale-[1.02] group">
-                <div className="bg-white/50 border-b border-white px-4 py-3 flex items-center justify-between gap-2">
-                    <div className="flex items-center gap-3 overflow-hidden">
-                        <div className="flex gap-1.5 flex-shrink-0">
-                            <div className="w-2.5 h-2.5 rounded-full bg-red-400"></div>
-                            <div className="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
-                            <div className="w-2.5 h-2.5 rounded-full bg-green-400"></div>
+            {/* Auto-scrolling proof strip: Meta results -> WhatsApp appreciations -> Shopify prepaid results, looped 3x */}
+            <div className="relative w-full max-w-[560px] overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+              <div className="flex animate-marquee items-stretch gap-5 whitespace-nowrap">
+                {[...proofImages, ...proofImages, ...proofImages].map((item, index) => (
+                  <div
+                    key={index}
+                    onClick={() => setLightboxImage(item.src)}
+                    className="shrink-0 h-[300px] md:h-[360px] bg-white/20 dark:bg-white/5 backdrop-blur-3xl border border-white/50 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden cursor-pointer group flex flex-col"
+                  >
+                    <div className="bg-white/50 border-b border-white px-4 py-2.5 flex items-center justify-between gap-2 shrink-0">
+                      <div className="flex gap-1 flex-shrink-0">
+                        <div className="w-2 h-2 rounded-full bg-red-400"></div>
+                        <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
+                        <div className="w-2 h-2 rounded-full bg-green-400"></div>
+                      </div>
+                      <span className="text-[9px] md:text-[10px] font-bold text-primary px-2.5 py-1 bg-primary/10 rounded-full whitespace-nowrap">
+                        {item.label}
+                      </span>
+                    </div>
+                    <div className="relative flex-1 bg-muted/20 flex items-center justify-center">
+                      <img
+                        src={item.src}
+                        alt={item.label}
+                        className="h-full w-auto object-contain"
+                      />
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                        <div className="bg-black/50 backdrop-blur-sm text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                          <Maximize2 className="w-4 h-4" />
                         </div>
-                        <span className="text-[10px] md:text-xs text-muted-foreground font-medium truncate">adsmanager.facebook.com</span>
+                      </div>
                     </div>
-                    <span className="text-[9px] md:text-[10px] font-bold text-primary px-2.5 py-1 bg-primary/10 rounded-full whitespace-nowrap">
-                        Live Meta Ads
-                    </span>
-                </div>
-                
-                <div 
-                    className="relative aspect-[1/1] sm:aspect-[4/5] w-full bg-muted/20 overflow-hidden flex items-center justify-center cursor-pointer group/image"
-                    onClick={() => setLightboxImage(metaImages[currentIndex])}
-                >
-                    <AnimatePresence mode="wait">
-                        <motion.img 
-                            key={currentIndex}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.2 }}
-                            src={metaImages[currentIndex]}
-                            alt={`Real Meta Ads Result ${currentIndex + 1}`}
-                            className="absolute inset-0 w-full h-full object-cover"
-                        />
-                    </AnimatePresence>
-                    
-                    <div className="absolute inset-0 bg-black/0 group-hover/image:bg-black/10 transition-colors flex items-center justify-center">
-                        <div className="bg-black/50 backdrop-blur-sm text-white p-2 rounded-full opacity-0 group-hover/image:opacity-100 transition-opacity transform translate-y-4 group-hover/image:translate-y-0">
-                            <Maximize2 className="w-5 h-5" />
-                        </div>
-                    </div>
-                    
-                    {/* Arrows */}
-                    <div className="absolute inset-y-0 left-0 flex items-center pl-2 opacity-0 group-hover:opacity-100 transition-opacity z-20">
-                        <button onClick={prev} className="w-10 h-10 rounded-full bg-black/60 text-white flex items-center justify-center backdrop-blur-sm border border-white/20 hover:bg-black/80 transition-colors"><ChevronLeft className="w-5 h-5" /></button>
-                    </div>
-                    <div className="absolute inset-y-0 right-0 flex items-center pr-2 opacity-0 group-hover:opacity-100 transition-opacity z-20">
-                        <button onClick={next} className="w-10 h-10 rounded-full bg-black/60 text-white flex items-center justify-center backdrop-blur-sm border border-white/20 hover:bg-black/80 transition-colors"><ChevronRight className="w-5 h-5" /></button>
-                    </div>
-                    {/* Mobile sticky arrows */}
-                    <div className="absolute inset-y-0 left-0 w-12 flex items-center justify-center md:hidden z-20" onClick={prev}>
-                        <div className="w-8 h-8 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center border border-white/20"><ChevronLeft className="w-4 h-4 text-white" /></div>
-                    </div>
-                    <div className="absolute inset-y-0 right-0 w-12 flex items-center justify-center md:hidden z-20" onClick={next}>
-                        <div className="w-8 h-8 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center border border-white/20"><ChevronRight className="w-4 h-4 text-white" /></div>
-                    </div>
-                </div>
-                
-                {/* Dots */}
-                <div className="py-4 bg-secondary/30 flex items-center justify-center gap-2 border-t border-border">
-                    {metaImages.map((_, index) => (
-                        <div
-                            key={index}
-                            className={`h-2 rounded-full transition-all ${
-                                currentIndex === index ? "w-6 bg-primary" : "w-2 bg-border hover:bg-muted-foreground/50"
-                            }`}
-                        />
-                    ))}
-                </div>
+                  </div>
+                ))}
+              </div>
             </div>
-            
+
             {/* Decorative background shapes for depth */}
             <div className="absolute top-[10%] -left-[10%] w-64 h-64 bg-blue-500/20 rounded-full blur-3xl z-0"></div>
             <div className="absolute bottom-[10%] -right-[10%] w-64 h-64 bg-purple-500/20 rounded-full blur-3xl z-0"></div>
