@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, TrendingUp, Presentation, Target, Maximize2, X } from "lucide-react";
+import { ArrowUpRight, Maximize2, X } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const proofImages = [
@@ -16,12 +16,6 @@ const proofImages = [
   { src: "/shopify-r2.jpg", label: "Shopify Prepaid Orders" },
   { src: "/shopify-r3.jpg", label: "Shopify Prepaid Orders" },
   { src: "/shopify-r4.jpg", label: "Shopify Prepaid Orders" },
-];
-
-const features = [
-  { icon: Target, label: "Laser-focused Audience Targeting" },
-  { icon: TrendingUp, label: "Data-Driven Scaling Strategies" },
-  { icon: Presentation, label: "Advanced Funnel Optimization" },
 ];
 
 const PerformanceMarketingGlimpse = () => {
@@ -54,24 +48,8 @@ const PerformanceMarketingGlimpse = () => {
               Stop bleeding money on generic campaigns that don't convert. We engineer complete marketing funnels designed for pure ROAS and aggressive scaling. We build the exact system that multi-million dollar brands use to dominate their markets.
             </p>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
-              {features.map((feature, idx) => (
-                <div
-                  key={idx}
-                  className={`flex items-center gap-3 bg-white/50 dark:bg-black/20 backdrop-blur-md border border-border/50 p-3 rounded-xl shadow-sm ${
-                    idx === features.length - 1 && features.length % 2 === 1 ? "sm:col-span-2" : ""
-                  }`}
-                >
-                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                    <feature.icon className="w-5 h-5 text-primary" />
-                  </div>
-                  <span className="font-bold text-sm text-foreground">{feature.label}</span>
-                </div>
-              ))}
-            </div>
-
-            {/* Pricing Philosophy Callout */}
-            <div className="bg-card border border-primary/20 rounded-3xl p-6 md:p-8 shadow-sm mt-2">
+            {/* Pricing Philosophy (replaces the old feature-box grid) */}
+            <div className="bg-card border border-primary/20 rounded-3xl p-6 md:p-8 shadow-sm mt-4">
               <p className="text-xl md:text-2xl font-black text-foreground italic mb-3">
                 "We don't make money until you make millions."
               </p>
