@@ -27,7 +27,7 @@ const NetworkStats = () => {
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="w-full max-w-sm lg:max-w-none mx-auto"
+            className="w-full max-w-sm lg:max-w-none mx-auto lg:sticky lg:top-28 lg:self-start"
           >
             <div className="bg-white rounded-2xl overflow-hidden shadow-2xl border border-white/20">
               <div className="bg-secondary/80 border-b border-border px-4 py-2.5 flex items-center gap-2">
