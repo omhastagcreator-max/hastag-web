@@ -21,16 +21,16 @@ const NetworkStats = () => {
       </div>
 
       <div className="container-main relative z-10">
-        <div className="grid lg:grid-cols-[3fr_7fr] gap-10 lg:gap-16 items-stretch mb-16">
-          {/* Left: real Google ranking proof - stretched to match the height of the right column so there's no dead space */}
+        <div className="grid lg:grid-cols-[3fr_7fr] gap-10 lg:gap-16 items-center mb-16">
+          {/* Left: real Google ranking proof - kept at its natural aspect ratio so no text in the screenshot gets cropped away */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="w-full max-w-sm lg:max-w-none mx-auto h-full"
+            className="w-full max-w-sm lg:max-w-none mx-auto"
           >
-            <div className="bg-white rounded-2xl overflow-hidden shadow-2xl border border-white/20 h-full flex flex-col min-h-[320px]">
-              <div className="bg-secondary/80 border-b border-border px-4 py-2.5 flex items-center gap-2 shrink-0">
+            <div className="bg-white rounded-2xl overflow-hidden shadow-2xl border border-white/20">
+              <div className="bg-secondary/80 border-b border-border px-4 py-2.5 flex items-center gap-2">
                 <div className="flex gap-1.5 flex-shrink-0">
                   <div className="w-2.5 h-2.5 rounded-full bg-red-400"></div>
                   <div className="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
@@ -38,14 +38,12 @@ const NetworkStats = () => {
                 </div>
                 <span className="text-[10px] text-muted-foreground font-medium truncate">google.com/search?q=influencer+marketing+agency+in+mumbai</span>
               </div>
-              <div className="flex-1 min-h-0 overflow-hidden">
-                <img
-                  src="/google-ranking-mumbai.jpg"
-                  alt="Hastag Creator ranked #1 on Google for 'influencer marketing agency in Mumbai'"
-                  className="w-full h-full object-cover object-top"
-                />
-              </div>
-              <div className="flex items-center gap-1.5 px-4 py-2.5 border-t border-border bg-white text-foreground shrink-0">
+              <img
+                src="/google-ranking-mumbai.jpg"
+                alt="Hastag Creator ranked #1 on Google for 'influencer marketing agency in Mumbai'"
+                className="w-full h-auto object-cover"
+              />
+              <div className="flex items-center gap-1.5 px-4 py-2.5 border-t border-border bg-white text-foreground">
                 <div className="flex text-yellow-400">
                   {[1, 2, 3, 4, 5].map((s) => <Star key={s} className="w-3 h-3 fill-current" />)}
                 </div>
@@ -75,12 +73,12 @@ const NetworkStats = () => {
             </div>
 
             {/* Highlight Banner for Meme Pages - now part of the right column instead of a full-width block below */}
-            <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 md:p-12 text-center shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] flex flex-col items-center justify-center gap-4">
-              <Globe className="w-12 h-12 text-white/80 mb-2" />
-              <h3 className="text-3xl md:text-5xl font-black tracking-tight leading-tight">
+            <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-6 md:p-8 text-center shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] flex flex-col items-center justify-center gap-3">
+              <Globe className="w-10 h-10 text-white/80 mb-1" />
+              <h3 className="text-2xl md:text-4xl font-black tracking-tight leading-tight">
                 25 Crore Followers
               </h3>
-              <p className="text-lg md:text-xl text-white/80 font-medium">
+              <p className="text-base md:text-lg text-white/80 font-medium">
                 Across our vast social, MEME, and fan page network spanning <strong className="text-white">240+ elite pages</strong>.
               </p>
             </div>
