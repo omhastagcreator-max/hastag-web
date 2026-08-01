@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight, Sparkles } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const InfluencerMarketingGlimpse = () => {
@@ -19,22 +19,20 @@ const InfluencerMarketingGlimpse = () => {
                         viewport={{ once: true }}
                         className="order-2 lg:order-1 w-full flex items-center justify-center"
                     >
-                        <div className="w-full max-w-md bg-white dark:bg-black/40 border border-border/50 rounded-3xl shadow-2xl p-6 md:p-8">
-                            <div className="flex items-center gap-2 mb-4">
-                                <Sparkles className="w-5 h-5 text-blue-500 shrink-0" />
-                                <span className="font-bold text-foreground text-sm">AI Overview</span>
-                                <span className="text-[11px] text-muted-foreground ml-auto italic truncate">"meta ads new update as per andromeda"</span>
+                        <div className="w-full max-w-md bg-white rounded-2xl overflow-hidden shadow-2xl border border-border/50">
+                            <div className="bg-secondary/80 border-b border-border px-4 py-2.5 flex items-center gap-2">
+                                <div className="flex gap-1.5 flex-shrink-0">
+                                    <div className="w-2.5 h-2.5 rounded-full bg-red-400"></div>
+                                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
+                                    <div className="w-2.5 h-2.5 rounded-full bg-green-400"></div>
+                                </div>
+                                <span className="text-[10px] text-muted-foreground font-medium truncate">google.com/search?q=meta+ads+new+update+as+per+andromeda</span>
                             </div>
-                            <p className="text-sm text-foreground/90 leading-relaxed mb-4">
-                                The Meta Andromeda update <mark className="bg-blue-100 dark:bg-blue-500/30 text-foreground px-0.5 rounded-sm">completely shifts ad delivery from audience-based targeting to creative-based targeting</mark>. Meta's AI now evaluates the creative to predict audience matches.
-                            </p>
-                            <div className="bg-muted/50 rounded-xl p-4 border border-border/40">
-                                <p className="text-[11px] font-black uppercase tracking-wider text-primary mb-1.5">Key Change</p>
-                                <p className="text-sm text-foreground/80 leading-relaxed">
-                                    <mark className="bg-blue-100 dark:bg-blue-500/30 text-foreground px-0.5 rounded-sm">Creative is the new targeting</mark> — the algorithm reads your ad images, videos, and copy to find users whose behavioral signals match your messaging. Interests and lookalikes take a back seat.
-                                </p>
-                            </div>
-                            <p className="text-[10px] text-muted-foreground mt-3 text-right">Real Google AI Overview result, quoted.</p>
+                            <img
+                                src="/google-search-meta-andromeda.jpg"
+                                alt="Real Google AI Overview search result for 'meta ads new update as per andromeda' explaining the Meta Andromeda creative-based targeting shift"
+                                className="w-full h-auto object-cover"
+                            />
                         </div>
                     </motion.div>
 
