@@ -41,14 +41,15 @@ const PerformanceMarketingGlimpse = () => {
               Performance Marketing
             </span>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-foreground leading-tight tracking-tight">
-              We don't make money until you make<br/>
-              We <span className="text-primary">millions.</span>
+              We don't make money until<br/>
+              you make <span className="text-primary">millions.</span>
             </h2>
-            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-              Most agencies charge you a heavy fixed retainer just to test things — leaving you to take all the financial risk while they get paid regardless. We do the exact opposite.
 
- </p>
-             <div className="space-y-4 mb-6">
+            <div className="bg-card border border-primary/20 rounded-3xl p-6 md:p-8 shadow-sm mt-4">
+              <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-6">
+                Most agencies charge you a heavy fixed retainer just to test things — leaving you to take all the financial risk while they get paid regardless. We do the exact opposite.
+              </p>
+              <div className="space-y-4 mb-6">
                 <div className="border-l-4 border-primary/40 pl-4">
                   <span className="text-xs font-black uppercase tracking-widest text-primary">Months 1–3 · The Growth Phase</span>
                   <p className="text-sm text-muted-foreground mt-1">
@@ -66,11 +67,6 @@ const PerformanceMarketingGlimpse = () => {
                 If you don't win, we don't eat. Ready to align incentives? Let's talk.
               </p>
             </div>
-            
-            {/* Pricing Philosophy (replaces the old feature-box grid) */}
-          
-              
-             
 
             <Link to="/services/performance-marketing" className="mt-8 w-fit">
               <motion.button
