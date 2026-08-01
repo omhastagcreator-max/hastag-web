@@ -104,17 +104,12 @@ const HeroSection = () => {
             className="mt-16 flex flex-wrap items-center justify-center gap-x-10 gap-y-6 pt-10 border-t border-border/60 w-full"
           >
             <div className="flex items-center gap-3">
-              <div className="flex -space-x-3">
-                <img src="https://api.dicebear.com/7.x/initials/svg?seed=A" className="w-10 h-10 rounded-full border-2 border-background shadow-sm" alt="User 1" width="40" height="40" loading="eager" />
-                <img src="https://api.dicebear.com/7.x/initials/svg?seed=B" className="w-10 h-10 rounded-full border-2 border-background shadow-sm" alt="User 2" width="40" height="40" loading="eager" />
-                <img src="https://api.dicebear.com/7.x/initials/svg?seed=C" className="w-10 h-10 rounded-full border-2 border-background shadow-sm" alt="User 3" width="40" height="40" loading="eager" />
-                <div className="w-10 h-10 rounded-full border-2 border-background bg-muted flex items-center justify-center text-xs font-bold text-muted-foreground shadow-sm">+2k</div>
+              <div className="bg-[#0A66C2]/10 text-[#0A66C2] p-2.5 rounded-full">
+                <Linkedin className="w-5 h-5" />
               </div>
               <div className="text-left flex flex-col">
-                <div className="flex text-yellow-400">
-                  {[1, 2, 3, 4, 5].map((s) => <Star key={s} className="w-4 h-4 fill-current" />)}
-                </div>
-                <span className="text-sm font-semibold text-foreground">1,782+ Reviews</span>
+                <span className="text-xl font-black text-foreground">2,366+</span>
+                <span className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">LinkedIn Recommendations</span>
               </div>
             </div>
 
@@ -139,18 +134,6 @@ const HeroSection = () => {
               <div className="text-left flex flex-col">
                 <span className="text-xl font-black text-foreground">511+</span>
                 <span className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Brands Scaled</span>
-              </div>
-            </div>
-
-            <div className="w-px h-10 bg-border hidden lg:block"></div>
-
-            <div className="flex items-center gap-3">
-              <div className="bg-primary/10 text-primary p-2.5 rounded-full">
-                <Linkedin className="w-5 h-5" />
-              </div>
-              <div className="text-left flex flex-col">
-                <span className="text-xl font-black text-foreground">2,366+</span>
-                <span className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">LinkedIn Recommendations</span>
               </div>
             </div>
           </motion.div>
