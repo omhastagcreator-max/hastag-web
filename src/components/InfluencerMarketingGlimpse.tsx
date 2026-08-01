@@ -10,7 +10,7 @@ const InfluencerMarketingGlimpse = () => {
             <div className="absolute bottom-[20%] right-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[100px] pointer-events-none" />
 
             <div className="container-main relative z-10">
-                <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+                <div className="grid lg:grid-cols-[3fr_7fr] gap-12 lg:gap-16 items-center">
 
                     {/* Real Google AI Overview proof (Left on Desktop) */}
                     <motion.div
