@@ -21,7 +21,7 @@ const NetworkStats = () => {
       </div>
 
       <div className="container-main relative z-10">
-        <div className="grid lg:grid-cols-[3fr_7fr] gap-10 lg:gap-16 items-center mb-16">
+        <div className="grid lg:grid-cols-[3fr_7fr] gap-10 lg:gap-16 items-start mb-16">
           {/* Left: real Google ranking proof */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -53,41 +53,37 @@ const NetworkStats = () => {
             </div>
           </motion.div>
 
-          {/* Right: heading content */}
+          {/* Right: heading content + follower banner, stacked in the same 70% column */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center lg:text-left max-w-4xl"
+            className="flex flex-col gap-10"
           >
-            <span className="inline-block bg-white/20 text-white text-xs font-bold px-4 py-1.5 rounded-full mb-6 uppercase tracking-widest backdrop-blur-sm shadow-sm border border-white/10">
-              Get Started With #Creator Now
-            </span>
-            <h2 className="text-4xl md:text-5xl lg:text-7xl font-extrabold mb-6 tracking-tight drop-shadow-md">
-              11 Years of Experience
-            </h2>
-            <p className="text-xl md:text-2xl text-white/90 font-medium italic mb-2">
-              Our Existing entire network is:
-            </p>
+            <div className="text-center lg:text-left max-w-4xl">
+              <span className="inline-block bg-white/20 text-white text-xs font-bold px-4 py-1.5 rounded-full mb-6 uppercase tracking-widest backdrop-blur-sm shadow-sm border border-white/10">
+                Get Started With #Creator Now
+              </span>
+              <h2 className="text-4xl md:text-5xl lg:text-7xl font-extrabold mb-6 tracking-tight drop-shadow-md">
+                11 Years of Experience
+              </h2>
+              <p className="text-xl md:text-2xl text-white/90 font-medium italic mb-2">
+                Our Existing entire network is:
+              </p>
+            </div>
+
+            {/* Highlight Banner for Meme Pages - now part of the right column instead of a full-width block below */}
+            <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 md:p-12 text-center shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] flex flex-col items-center justify-center gap-4">
+              <Globe className="w-12 h-12 text-white/80 mb-2" />
+              <h3 className="text-3xl md:text-5xl font-black tracking-tight leading-tight">
+                25 Crore Followers
+              </h3>
+              <p className="text-lg md:text-xl text-white/80 font-medium">
+                Across our vast social, MEME, and fan page network spanning <strong className="text-white">240+ elite pages</strong>.
+              </p>
+            </div>
           </motion.div>
         </div>
-
-        {/* Highlight Banner for Meme Pages */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 md:p-12 text-center mb-12 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] max-w-5xl mx-auto flex flex-col items-center justify-center gap-4"
-        >
-          <Globe className="w-12 h-12 text-white/80 mb-2" />
-          <h3 className="text-3xl md:text-5xl font-black tracking-tight leading-tight">
-            25 Crore Followers
-          </h3>
-          <p className="text-lg md:text-xl text-white/80 font-medium">
-            Across our vast social, MEME, and fan page network spanning <strong className="text-white">240+ elite pages</strong>.
-          </p>
-        </motion.div>
 
         {/* Grid for other Stats */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 max-w-6xl mx-auto mb-16">
