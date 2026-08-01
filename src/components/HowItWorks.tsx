@@ -5,22 +5,26 @@ import { useBooking } from "./BookingProvider";
 const steps = [
   {
     icon: PhoneCall,
-    title: "0. Strategy Counseling",
-    desc: "Rigorous 45-min session to validate scaling potential.",
+    title: "1. Detailed Brand Counselling Session",
+    desc: [
+      "A ruthless breakdown of your current funnel gaps.",
+      "Ready-to-execute operational SOPs.",
+      "Hard numbers and estimated targets for your next 90 days.",
+    ],
   },
   {
     icon: Search,
-    title: "1. The Forensic Audit",
-    desc: "Find immediate revenue leaks in ads & website.",
+    title: "2. Auditing Old Data & Sorting",
+    desc: null,
   },
   {
     icon: PenTool,
-    title: "2. Creation & Funnel",
+    title: "3. Creation & Funnel",
     desc: "Deploy high-converting UGC and CRO landing pages.",
   },
   {
     icon: Rocket,
-    title: "3. Precision Scaling",
+    title: "4. Precision Scaling",
     desc: "Launch & aggressively scale winning campaigns.",
   },
 ];
@@ -87,9 +91,20 @@ const HowItWorks = () => {
               </div>
               
               <h3 className="text-xl font-black text-foreground mb-4">{step.title}</h3>
-              <p className="text-muted-foreground text-sm font-medium leading-relaxed">
-                {step.desc}
-              </p>
+              {Array.isArray(step.desc) ? (
+                <ul className="text-muted-foreground text-sm font-medium leading-relaxed text-left space-y-2 w-full">
+                  {step.desc.map((point, i) => (
+                    <li key={i} className="flex gap-2">
+                      <span className="text-primary font-bold shrink-0">&bull;</span>
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : step.desc ? (
+                <p className="text-muted-foreground text-sm font-medium leading-relaxed">
+                  {step.desc}
+                </p>
+              ) : null}
             </motion.div>
           ))}
         </motion.div>
