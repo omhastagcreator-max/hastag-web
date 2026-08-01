@@ -21,16 +21,16 @@ const NetworkStats = () => {
       </div>
 
       <div className="container-main relative z-10">
-        <div className="grid lg:grid-cols-[3fr_7fr] gap-10 lg:gap-16 items-start mb-16">
-          {/* Left: real Google ranking proof */}
+        <div className="grid lg:grid-cols-[3fr_7fr] gap-10 lg:gap-16 items-stretch mb-16">
+          {/* Left: real Google ranking proof - stretched to match the height of the right column so there's no dead space */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="w-full max-w-sm lg:max-w-none mx-auto lg:sticky lg:top-28 lg:self-start"
+            className="w-full max-w-sm lg:max-w-none mx-auto h-full"
           >
-            <div className="bg-white rounded-2xl overflow-hidden shadow-2xl border border-white/20">
-              <div className="bg-secondary/80 border-b border-border px-4 py-2.5 flex items-center gap-2">
+            <div className="bg-white rounded-2xl overflow-hidden shadow-2xl border border-white/20 h-full flex flex-col min-h-[320px]">
+              <div className="bg-secondary/80 border-b border-border px-4 py-2.5 flex items-center gap-2 shrink-0">
                 <div className="flex gap-1.5 flex-shrink-0">
                   <div className="w-2.5 h-2.5 rounded-full bg-red-400"></div>
                   <div className="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
@@ -38,12 +38,14 @@ const NetworkStats = () => {
                 </div>
                 <span className="text-[10px] text-muted-foreground font-medium truncate">google.com/search?q=influencer+marketing+agency+in+mumbai</span>
               </div>
-              <img
-                src="/google-ranking-mumbai.jpg"
-                alt="Hastag Creator ranked #1 on Google for 'influencer marketing agency in Mumbai'"
-                className="w-full h-auto object-cover"
-              />
-              <div className="flex items-center gap-1.5 px-4 py-2.5 border-t border-border bg-white text-foreground">
+              <div className="flex-1 min-h-0 overflow-hidden">
+                <img
+                  src="/google-ranking-mumbai.jpg"
+                  alt="Hastag Creator ranked #1 on Google for 'influencer marketing agency in Mumbai'"
+                  className="w-full h-full object-cover object-top"
+                />
+              </div>
+              <div className="flex items-center gap-1.5 px-4 py-2.5 border-t border-border bg-white text-foreground shrink-0">
                 <div className="flex text-yellow-400">
                   {[1, 2, 3, 4, 5].map((s) => <Star key={s} className="w-3 h-3 fill-current" />)}
                 </div>
