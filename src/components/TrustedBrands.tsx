@@ -25,9 +25,24 @@ const FeaturedPartnerBox = () => (
   </div>
 );
 
+const GrowthPartnersBox = () => (
+  <div className="w-[300px] shrink-0 bg-primary/5 border border-primary/20 rounded-2xl p-4 flex flex-col items-center justify-center mx-6">
+    <span className="text-[10px] font-black text-primary uppercase tracking-wider mb-2">Official Growth Partners</span>
+    <div className="flex items-center justify-center gap-3 flex-wrap max-w-[260px]">
+      <img src="/Official Partners/meta.png" alt="Meta" className="h-6 object-contain" />
+      <img src="/Official Partners/google.png" alt="Google" className="h-6 object-contain" />
+      <img src="/Official Partners/amazon.png" alt="Amazon" className="h-6 object-contain" />
+      <img src="/Official Partners/apple.png" alt="Apple" className="h-6 object-contain" />
+      <img src="/Official Partners/razorpay.png" alt="Razorpay" className="h-6 object-contain" />
+      <img src="/Official Partners/sony.png" alt="Sony" className="h-6 object-contain" />
+      <img src="/Official Partners/gokwik.png" alt="Gokwik" className="h-6 object-contain" />
+    </div>
+  </div>
+);
+
 const TrustedBrands = () => {
   return (
-    <section className="py-12 bg-background border-b border-border/40 overflow-hidden" id="trusted-brands">
+    <section className="pt-6 pb-12 bg-background border-b border-border/40 overflow-hidden" id="trusted-brands">
       <div className="container-main text-center mb-8">
         <p className="text-sm font-bold text-muted-foreground uppercase tracking-widest">
           Trusted by 511+ D2C Brands & Industry Leaders
@@ -43,7 +58,10 @@ const TrustedBrands = () => {
         <div className="flex animate-marquee items-center gap-12 whitespace-nowrap min-w-full z-0">
 
           {/* Repeat array twice for smooth infinite scroll. A known-name partner box is
-              interspersed every 4 logos so a recognizable name surfaces often, not just once. */}
+              interspersed every 4 logos so a recognizable name surfaces often, not just once.
+              The two featured boxes alternate so both the mega-scale partner and the
+              official growth/ad-platform logos (Meta, Google, etc.) show up beside the
+              regular brand logos. */}
           {[...brandLogos, ...brandLogos].flatMap((src, index) => {
             const nodes = [
               <div key={index} className="w-[120px] md:w-[150px] shrink-0 flex items-center justify-center">
@@ -51,7 +69,14 @@ const TrustedBrands = () => {
               </div>,
             ];
             if ((index + 1) % 4 === 0) {
-              nodes.push(<FeaturedPartnerBox key={`featured-${index}`} />);
+              const isEven = Math.floor(index / 4) % 2 === 0;
+              nodes.push(
+                isEven ? (
+                  <FeaturedPartnerBox key={`featured-${index}`} />
+                ) : (
+                  <GrowthPartnersBox key={`growth-${index}`} />
+                )
+              );
             }
             return nodes;
           })}

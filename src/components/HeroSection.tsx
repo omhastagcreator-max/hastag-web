@@ -7,7 +7,7 @@ const HeroSection = () => {
   const containerRef = useRef<HTMLElement>(null);
 
   return (
-    <section ref={containerRef} className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden bg-background">
+    <section ref={containerRef} className="relative pt-32 pb-10 md:pt-48 md:pb-16 overflow-hidden bg-background">
       {/* Background Graphic Architecture - Parallax Linked */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         {/* Soft Radial Center Glow */}
