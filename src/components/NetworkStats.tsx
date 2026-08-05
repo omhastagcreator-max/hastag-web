@@ -21,7 +21,7 @@ const NetworkStats = () => {
       </div>
 
       <div className="container-main relative z-10">
-        <div className="grid lg:grid-cols-[3fr_7fr] gap-10 lg:gap-16 items-center mb-16">
+        <div className="grid lg:grid-cols-[3fr_7fr] gap-10 lg:gap-16 items-start mb-16">
           {/* Left: real Google ranking proof - kept at its natural aspect ratio so no text in the screenshot gets cropped away */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
