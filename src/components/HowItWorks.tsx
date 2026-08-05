@@ -15,17 +15,29 @@ const steps = [
   {
     icon: Search,
     title: "2. Auditing Old Data & Sorting",
-    desc: null,
+    desc: [
+      "Deep-dive audit of your past campaigns, creatives, and audience data.",
+      "Separate what's actually working from what's just burning budget.",
+      "Sort winning angles so every new rupee spent is backed by proof.",
+    ],
   },
   {
     icon: PenTool,
     title: "3. Creation & Funnel",
-    desc: "Deploy high-converting UGC and CRO landing pages.",
+    desc: [
+      "High-converting UGC ad creatives built around your winning angles.",
+      "CRO-optimized landing pages engineered to convert, not just look good.",
+      "Every asset built to plug straight into your funnel and drive sales.",
+    ],
   },
   {
     icon: Rocket,
     title: "4. Precision Scaling",
-    desc: "Launch & aggressively scale winning campaigns.",
+    desc: [
+      "Launch on tight budgets, then double down only on what proves itself.",
+      "Aggressively scale winners while cutting underperformers fast.",
+      "Continuous optimization to keep your CAC low as ad spend grows.",
+    ],
   },
 ];
 
