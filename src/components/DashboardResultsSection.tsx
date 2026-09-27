@@ -1,11 +1,10 @@
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { TrendingUp, ShoppingBag, ArrowRight, Zap, Target, Search, X } from "lucide-react";
 import { useRef, useState } from "react";
-import { useBooking } from "./BookingProvider";
+import AuditCTA from "./AuditCTA";
 
 const DashboardResultsSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { openBooking } = useBooking();
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "center center"],
@@ -15,7 +14,7 @@ const DashboardResultsSection = () => {
   const [isZoomed, setIsZoomed] = useState(false);
 
   return (
-    <section id="dashboard-results" className="section-padding overflow-hidden bg-background relative">
+    <section id="results" className="scroll-mt-24 section-padding overflow-hidden bg-background relative">
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
       
       <div className="container-main relative z-10">
@@ -27,9 +26,9 @@ const DashboardResultsSection = () => {
         >
           <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 text-primary text-xs font-bold px-4 py-2 rounded-full mb-6 uppercase tracking-widest backdrop-blur-sm">
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-            Real Time Results
+            Results
           </div>
-          <h2 className="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight leading-tight">
+          <h2 className="text-[2rem] md:text-6xl font-extrabold mb-6 tracking-tight leading-tight">
             See What Scaling <br className="hidden md:block" /> Looks Like
           </h2>
           <p className="text-muted-foreground text-lg md:text-xl leading-relaxed">
@@ -44,7 +43,7 @@ const DashboardResultsSection = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="relative max-w-5xl mx-auto mb-24"
+          className="relative max-w-5xl mx-auto mb-14 md:mb-24"
           style={{ perspective: "1500px" }}
         >
           {/* Glassmorphism Glow Behind */}
@@ -84,6 +83,7 @@ const DashboardResultsSection = () => {
                  </div>
                )}
                <video 
+                 preload="metadata"
                  className={`object-cover ${isZoomed ? "w-auto h-auto max-h-[85vh] max-w-[95vw] rounded-lg shadow-2xl" : "w-full h-full"}`}
                  autoPlay 
                  loop 
@@ -161,15 +161,11 @@ const DashboardResultsSection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-20 text-center"
+          className="mt-12 md:mt-20 text-center"
         >
-          <button 
-            onClick={openBooking}
-            className="inline-flex items-center gap-4 bg-primary text-primary-foreground px-10 py-5 rounded-full text-lg font-black uppercase tracking-widest shadow-2xl shadow-primary/20 hover:-translate-y-1 transition-all group"
-          >
-            Schedule a Strategy Call 
-            <span className="bg-white/20 p-1.5 rounded-full"><ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform"/></span>
-          </button>
+          <div className="flex justify-center">
+            <AuditCTA source="results" />
+          </div>
         </motion.div>
 
       </div>

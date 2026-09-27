@@ -1,63 +1,69 @@
 import { motion } from "framer-motion";
-import { Star, ArrowUpRight, BadgeCheck, Linkedin } from "lucide-react";
-import { useBooking } from "./BookingProvider";
+import { Star, BadgeCheck, Linkedin, AlertCircle, TrendingUp } from "lucide-react";
+import AuditCTA from "./AuditCTA";
 
+// Existing testimonials – names, roles and quotes unchanged.
+// "Problem" and "Result" are taken only from what each quote already says.
 const reviews = [
   {
     name: "Om Upadhyay",
-    role: "Founder, TrendVibe",
+    role: "Founder",
+    brand: "TrendVibe",
+    problem: "Needed to scale daily orders",
+    result: "Daily orders from 50 to 800+ in 45 days",
     text: "HashtagCreator scaled our daily orders from 50 to 800+ in just 45 days. Their Meta ads strategy and landing page hacks are unmatched in India.",
     rating: 5,
-    date: "1 month ago",
     image: "https://api.dicebear.com/7.x/initials/svg?seed=OU&backgroundColor=2563EB",
-    logo: "/Official Partners/amazon.png"
   },
   {
     name: "Rohan Khanna",
     role: "Marketing Head",
+    brand: "",
+    problem: "Burning cash on ads",
+    result: "5 checkout leaks found & fixed",
     text: "We were burning cash before HastagCreator. Their team revealed 5 leaks in our checkout. Fixing them instantly paid for the service.",
     rating: 5,
-    date: "2 months ago",
     image: "https://api.dicebear.com/7.x/initials/svg?seed=RK&backgroundColor=2563EB",
-    logo: "/Official Partners/meta.png"
   },
   {
     name: "Sneha Patel",
-    role: "CEO, GlowBeauty",
+    role: "CEO",
+    brand: "GlowBeauty",
+    problem: "Needed reach through influencers",
+    result: "10M+ reach in the first campaign",
     text: "The sheer volume of high-quality influencers they connected us with was mind-boggling. Over 10M+ reach in our first campaign.",
     rating: 5,
-    date: "3 weeks ago",
     image: "https://api.dicebear.com/7.x/initials/svg?seed=SP&backgroundColor=2563EB",
-    logo: "/Official Partners/sony.png"
   },
   {
     name: "Vikram Singh",
     role: "D2C Brand Owner",
+    brand: "",
+    problem: "Optimising for clicks, not ROAS",
+    result: "Focus shifted to ROAS",
     text: "Their razor-sharp focus on ROAS instead of just clicks changed our trajectory. Highly recommend for serious brands only.",
     rating: 5,
-    date: "2 months ago",
     image: "https://api.dicebear.com/7.x/initials/svg?seed=VS&backgroundColor=2563EB",
-    logo: "/Official Partners/apple.png"
   },
   {
     name: "Anjali Gupta",
     role: "E-com Director",
+    brand: "",
+    problem: "",
+    result: "Ad budget treated like their own",
     text: "Best performance marketing agency in Mumbai, hands down. They treat your ad budget like their own.",
     rating: 5,
-    date: "1 week ago",
     image: "https://api.dicebear.com/7.x/initials/svg?seed=AG&backgroundColor=2563EB",
-    logo: "/Official Partners/google.png"
-  }
+  },
 ];
 
 const GoogleReviews = () => {
-  const { openBooking } = useBooking();
   return (
-    <section className="py-24 bg-background relative overflow-hidden" id="reviews">
+    <section className="py-16 md:py-24 bg-background relative overflow-hidden" id="reviews">
       <div className="absolute inset-0 bg-primary/5"></div>
 
       <div className="container-main relative z-10">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 px-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 md:mb-16">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -71,23 +77,17 @@ const GoogleReviews = () => {
               <span className="text-foreground font-black text-2xl">2,366+</span>
               <span className="text-foreground font-bold">LinkedIn Recommendations</span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-4 text-foreground">
-              What Top Brands Say
+            <h2 className="text-[2rem] leading-[1.1] md:text-5xl font-black tracking-tight mb-4 text-foreground">
+              What D2C Brands Say About Working With Us
             </h2>
-            <p className="text-muted-foreground text-lg">
-              Authentic recommendations from D2C founders and marketing leaders who scaled with us.
+            <p className="text-muted-foreground text-base md:text-lg">
+              From D2C founders and marketing leaders who scaled with us.
             </p>
           </motion.div>
 
-          <motion.button
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            onClick={openBooking}
-            className="inline-flex items-center gap-2 bg-card border border-border/50 hover:border-primary/50 text-foreground px-6 py-3 rounded-full font-bold shadow-sm transition-all hover:shadow-card-hover group"
-          >
-            Get These Results <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </motion.button>
+          <div className="hidden md:block shrink-0">
+            <AuditCTA source="testimonials" variant="dark" />
+          </div>
         </div>
 
         {/* Carousel Container */}
@@ -96,40 +96,49 @@ const GoogleReviews = () => {
             {[...reviews, ...reviews].map((review, idx) => (
               <div
                 key={idx}
-                className="w-[350px] md:w-[420px] shrink-0 bg-card border border-border/50 rounded-3xl p-8 shadow-card hover:shadow-card-hover transition-all duration-300 relative overflow-hidden group/card"
+                className="w-[300px] sm:w-[350px] md:w-[420px] shrink-0 bg-card border border-border/50 rounded-3xl p-6 md:p-8 shadow-card hover:shadow-card-hover transition-all duration-300 relative overflow-hidden group/card"
               >
                 {/* Glow effect on hover */}
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity"></div>
                 
-                <div className="flex items-start justify-between mb-6 relative z-10">
-                  <div className="flex items-center gap-4">
-                    <img
-                      src={review.image}
-                      alt={review.name}
-                      className="w-14 h-14 rounded-full border-2 border-primary/20"
-                    />
-                    <div>
-                      <h4 className="font-bold text-foreground flex items-center gap-1.5 text-lg">
-                        {review.name}
-                      </h4>
-                      <div className="flex items-center gap-2 text-xs text-muted-foreground mt-0.5">
-                        <span className="flex items-center gap-1 text-green-600 bg-green-50 px-1.5 py-0.5 rounded-sm font-bold border border-green-200">
-                          <BadgeCheck className="w-3 h-3" /> Verified Client
-                        </span>
-                        <span>•</span>
-                        <span>{review.date}</span>
-                      </div>
-                    </div>
+                <div className="flex items-center gap-4 mb-5 relative z-10">
+                  <img
+                    src={review.image}
+                    alt=""
+                    loading="lazy"
+                    className="w-12 h-12 rounded-full border-2 border-primary/20 shrink-0"
+                  />
+                  <div className="min-w-0">
+                    <h4 className="font-bold text-foreground text-lg leading-tight">{review.name}</h4>
+                    <p className="text-sm text-muted-foreground truncate">
+                      {review.role}
+                      {review.brand && <>, <span className="font-bold text-foreground">{review.brand}</span></>}
+                    </p>
                   </div>
-                  <img src={review.logo} alt="Brand" className="w-10 h-10 object-contain" />
+                  <span className="ml-auto flex items-center gap-1 text-[10px] text-green-600 bg-green-50 px-1.5 py-0.5 rounded-sm font-bold border border-green-200 shrink-0">
+                    <BadgeCheck className="w-3 h-3" /> Client
+                  </span>
                 </div>
-                
-                <div className="flex text-yellow-500 mb-4 relative z-10">
+
+                <div className="space-y-2 mb-4 relative z-10 whitespace-normal">
+                  {review.problem && (
+                    <div className="flex items-start gap-2 text-sm">
+                      <AlertCircle className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
+                      <span><span className="font-bold text-foreground">Problem:</span> <span className="text-muted-foreground">{review.problem}</span></span>
+                    </div>
+                  )}
+                  <div className="flex items-start gap-2 text-sm">
+                    <TrendingUp className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
+                    <span><span className="font-bold text-foreground">Result:</span> <span className="text-muted-foreground">{review.result}</span></span>
+                  </div>
+                </div>
+
+                <div className="flex text-yellow-500 mb-3 relative z-10">
                   {[...Array(review.rating)].map((_, i) => (
                     <Star key={i} className="w-4 h-4 fill-current drop-shadow-sm" />
                   ))}
                 </div>
-                
+
                 <p className="text-muted-foreground leading-relaxed text-[15px] whitespace-normal relative z-10 line-clamp-4">
                   "{review.text}"
                 </p>
@@ -138,6 +147,9 @@ const GoogleReviews = () => {
           </div>
         </div>
 
+        <div className="md:hidden mt-4">
+          <AuditCTA source="testimonials" />
+        </div>
       </div>
     </section>
   );

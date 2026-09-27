@@ -16,11 +16,9 @@ import InfluencerUGC from "./pages/InfluencerUGC.tsx";
 import WebDevelopment from "./pages/WebDevelopment.tsx";
 import PerformanceMarketing from "./pages/PerformanceMarketing.tsx";
 import Careers from "./pages/Careers.tsx";
-import BookCall from "./pages/BookCall.tsx";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import CustomCursor from "@/components/CustomCursor";
-import MobileBottomNav from "@/components/MobileBottomNav";
-import MobileScarcityWidget from "@/components/MobileScarcityWidget";
+import MobileStickyCTA from "@/components/MobileStickyCTA";
 import { BookingProvider } from "@/components/BookingProvider";
 import BookingModal from "@/components/BookingModal";
 
@@ -51,10 +49,7 @@ const App = () => (
           </Routes>
           <BookingModal />
           <WhatsAppButton />
-          <div className="fixed top-1/2 -translate-y-1/2 right-2 z-40 w-[200px] md:hidden pointer-events-auto shadow-2xl rounded-xl">
-            <MobileScarcityWidget />
-          </div>
-          <MobileBottomNav />
+          <MobileStickyCTA />
         </BrowserRouter>
       </BookingProvider>
     </TooltipProvider>

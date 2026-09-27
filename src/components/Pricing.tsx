@@ -1,11 +1,12 @@
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
-import { Link } from "react-router-dom";
+import AuditCTA from "./AuditCTA";
 import { useState } from "react";
 
 const plans = [
   {
     name: "Landing Page",
+    stage: "Build",
     priceUSD: "$100",
     priceINR: "₹8,000",
     period: " onwards",
@@ -18,10 +19,10 @@ const plans = [
     ],
     bestFor: "Focused lead generation",
     popular: false,
-    cta: "Schedule a Call",
   },
   {
     name: "Full E-com Store",
+    stage: "Build",
     priceUSD: "$190",
     priceINR: "₹15,000",
     period: " onwards",
@@ -34,10 +35,10 @@ const plans = [
     ],
     bestFor: "New retail brands",
     popular: false,
-    cta: "Schedule a Call",
   },
   {
     name: "Meta Ads + Web",
+    stage: "Grow · Monthly",
     priceUSD: "$250",
     priceINR: "₹20,000",
     period: "/mo",
@@ -51,10 +52,10 @@ const plans = [
     ],
     bestFor: "Growing local & D2C brands",
     popular: true,
-    cta: "Schedule a Call",
   },
   {
     name: "Omnichannel",
+    stage: "Scale · Monthly",
     priceUSD: "$300",
     priceINR: "₹25,000",
     period: "/mo",
@@ -68,15 +69,14 @@ const plans = [
     ],
     bestFor: "Aggressive scaling",
     popular: false,
-    cta: "Schedule a Call",
   },
 ];
 
 const Pricing = () => {
-  const [currency, setCurrency] = useState<"USD" | "INR">("USD");
+  const [currency, setCurrency] = useState<"USD" | "INR">("INR");
 
   return (
-    <section className="section-padding">
+    <section id="pricing" className="section-padding">
       <div className="container-main">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -84,23 +84,13 @@ const Pricing = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl mb-3">Transparent, Scalable Pricing</h2>
-          <p className="text-muted-foreground text-sm max-w-xl mx-auto mb-5">
-            No hidden fees. Your ad budget goes to ads. We charge a fixed monthly retainer based on service scope.
+          <h2 className="text-[2rem] leading-[1.1] md:text-5xl font-black tracking-tight mb-3">Flexible Plans Built Around Your Growth Stage</h2>
+          <p className="text-muted-foreground text-sm md:text-base max-w-xl mx-auto mb-5">
+            No hidden fees. Your ad budget goes to ads — our fee is based on service scope.
           </p>
 
           {/* Currency Toggle */}
           <div className="inline-flex items-center bg-secondary rounded-full p-1 border border-border">
-            <button
-              onClick={() => setCurrency("USD")}
-              className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-colors ${
-                currency === "USD"
-                  ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              USD ($)
-            </button>
             <button
               onClick={() => setCurrency("INR")}
               className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-colors ${
@@ -110,6 +100,16 @@ const Pricing = () => {
               }`}
             >
               INR (₹)
+            </button>
+            <button
+              onClick={() => setCurrency("USD")}
+              className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-colors ${
+                currency === "USD"
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              USD ($)
             </button>
           </div>
         </motion.div>
@@ -133,6 +133,9 @@ const Pricing = () => {
                   Most Popular
                 </span>
               )}
+              <span className={`inline-block text-[10px] font-black uppercase tracking-widest mb-2 ${p.popular ? "text-primary-foreground/70" : "text-primary"}`}>
+                {p.stage}
+              </span>
               <h3 className={`text-lg font-bold ${p.popular ? "text-charcoal-foreground" : ""}`}>{p.name}</h3>
               <p className={`text-xs mt-1 mb-4 ${p.popular ? "text-charcoal-foreground/60" : "text-muted-foreground"}`}>
                 {p.desc}
@@ -150,6 +153,7 @@ const Pricing = () => {
                   {p.period}
                 </span>
               </div>
+              <p className={`text-[11px] font-bold uppercase tracking-wider mb-2 ${p.popular ? "text-charcoal-foreground/60" : "text-foreground/60"}`}>What's included</p>
               <ul className="space-y-2.5 mb-5">
                 {p.features.map((f, j) => (
                   <li
@@ -163,24 +167,20 @@ const Pricing = () => {
                   </li>
                 ))}
               </ul>
-              <p className={`text-[10px] uppercase tracking-wider mb-4 ${p.popular ? "text-charcoal-foreground/40" : "text-muted-foreground/60"}`}>
+              <p className={`text-[10px] uppercase tracking-wider ${p.popular ? "text-charcoal-foreground/40" : "text-muted-foreground/60"}`}>
                 Best for: {p.bestFor}
               </p>
-              <a href="/#audit-form">
-                <motion.button
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  className={`w-full py-3 rounded-full text-sm font-semibold transition-colors ${
-                    p.popular
-                      ? "bg-gradient-to-r from-primary to-primary-deep text-primary-foreground"
-                      : "border border-border hover:border-primary hover:text-primary"
-                  }`}
-                >
-                  {p.cta}
-                </motion.button>
-              </a>
             </motion.div>
           ))}
+        </div>
+
+        <div className="text-center mt-10 md:mt-12">
+          <p className="text-sm text-muted-foreground mb-5 max-w-lg mx-auto">
+            Not sure which plan fits? We'll recommend one after reviewing your ads, website and funnel.
+          </p>
+          <div className="flex justify-center">
+            <AuditCTA source="pricing" label="Get a Custom Growth Plan" />
+          </div>
         </div>
       </div>
     </section>

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { track } from "@/lib/track";
 
 const Footer = () => (
   <>
@@ -13,6 +14,7 @@ const Footer = () => (
           href="https://wa.me/918059957479?text=Hi%20HastagCreator,%20I%20need%20support!"
           target="_blank"
           rel="noreferrer"
+          onClick={() => track("WhatsApp_Click", { cta_location: "footer_support" })}
           className="bg-[#25D366] text-white font-bold px-8 py-4 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all flex items-center gap-2"
         >
           <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
@@ -60,7 +62,7 @@ const Footer = () => (
               <li><Link to="/" className="hover:text-primary transition-colors">Home</Link></li>
               <li><Link to="/portfolio" className="hover:text-primary transition-colors">Portfolio</Link></li>
               <li><Link to="/privacy-policy" className="hover:text-primary transition-colors">Privacy Policy</Link></li>
-              <li><Link to="/terms" className="hover:text-primary transition-colors">Terms & Conditions</Link></li>
+              <li><Link to="/terms-and-conditions" className="hover:text-primary transition-colors">Terms & Conditions</Link></li>
             </ul>
           </div>
 

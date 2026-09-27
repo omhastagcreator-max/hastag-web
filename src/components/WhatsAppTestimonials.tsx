@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle } from "lucide-react";
-import { useBooking } from "./BookingProvider";
+import AuditCTA from "./AuditCTA";
 
 const screenshots = Array.from({ length: 13 }, (_, i) => `/whatsappss/whatsapp-${i + 1}.png`);
 
 const WhatsAppTestimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const { openBooking } = useBooking();
 
   // Auto-scrolling logic
   useEffect(() => {
@@ -18,36 +17,30 @@ const WhatsAppTestimonials = () => {
   }, []);
 
   return (
-    <section className="py-24 bg-background border-y border-border/40 relative overflow-hidden" id="raw-proof">
+    <section className="py-16 md:py-24 bg-background border-y border-border/40 relative overflow-hidden" id="raw-proof">
       <div className="container-main">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center [&>*]:min-w-0">
           
           {/* Left Column: Text & Context */}
-          <div className="order-2 lg:order-1 text-center lg:text-left">
+          <div className="order-1 text-center lg:text-left">
             <div className="w-14 h-14 bg-green-500/10 rounded-2xl flex items-center justify-center mb-6 mx-auto lg:mx-0">
               <MessageCircle className="w-7 h-7 text-green-500" />
             </div>
-            <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight text-foreground leading-tight">
-              Raw WhatsApp Proof. <br className="hidden lg:block"/> No Editing.
+            <h2 className="text-[2rem] leading-[1.1] md:text-5xl font-black mb-6 tracking-tight text-foreground leading-tight">
+              Real WhatsApp Proof. <br className="hidden lg:block"/> No Editing.
             </h2>
-            <p className="text-lg text-muted-foreground font-medium mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0">
-              We don't rely purely on staged text reviews. Here are raw screenshots directly from D2C founders 
-              reacting to our ROAS mapping and their explosive sales growth in real-time.
+            <p className="text-base md:text-lg text-muted-foreground font-medium mb-2 lg:mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0">
+              Don't take our word for it. See what clients actually say.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 items-center justify-center lg:justify-start">
-              <button 
-                onClick={openBooking}
-                className="bg-foreground text-background px-8 py-4 rounded-full text-sm font-bold shadow-lg hover:-translate-y-1 transition-transform"
-              >
-                Scale Your Revenue
-              </button>
+            <div className="hidden lg:flex flex-col sm:flex-row gap-4 items-center justify-center lg:justify-start">
+              <AuditCTA source="whatsapp_proof" label="Get My Free Growth Audit" />
             </div>
           </div>
 
           {/* Right Column: Screenshot Slider */}
-          <div className="order-1 lg:order-2 flex flex-col items-center">
-            <div className="relative w-full max-w-[400px] aspect-[9/16] bg-black rounded-3xl border-8 border-card shadow-2xl overflow-hidden mb-8">
+          <div className="order-2 flex flex-col items-center">
+            <div className="relative w-full max-w-[300px] md:max-w-[400px] aspect-[9/16] bg-black rounded-3xl border-8 border-card shadow-2xl overflow-hidden mb-8">
               <AnimatePresence mode="wait">
                 <motion.img
                   key={currentIndex}
@@ -76,6 +69,9 @@ const WhatsAppTestimonials = () => {
                   aria-label={`Go to slide ${idx + 1}`}
                 />
               ))}
+            </div>
+            <div className="lg:hidden w-full mt-8">
+              <AuditCTA source="whatsapp_proof" label="Get My Free Growth Audit" />
             </div>
           </div>
 

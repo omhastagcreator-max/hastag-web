@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useBooking } from "./BookingProvider";
-import ScarcityBanner from "./ScarcityBanner";
+import { useAuditCTA } from "./AuditCTA";
 
 type NavLink = {
   label: string;
@@ -36,7 +35,7 @@ const Navbar = () => {
   const [activeDesktopDropdown, setActiveDesktopDropdown] = useState<string | null>(null);
   const [activeMobileDropdown, setActiveMobileDropdown] = useState<string | null>(null);
   const location = useLocation();
-  const { openBooking } = useBooking();
+  const goToAudit = useAuditCTA();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -65,11 +64,9 @@ const Navbar = () => {
           >
             {/* Trust badge bar */}
             <div className="bg-primary text-primary-foreground text-[10px] sm:text-xs py-1.5 text-center font-bold tracking-widest uppercase shadow-sm">
-              <span className="hidden sm:inline">HastagCreator · 11 Years of Experience · India's Largest Marketing Agency</span>
-              <span className="sm:hidden">#Creator · 11 Yrs of Experience</span>
+              <span className="hidden sm:inline">HastagCreator · D2C Growth Partner · 11+ Years of Combined Growth Experience</span>
+              <span className="sm:hidden">#Creator · D2C Growth Partner</span>
             </div>
-            {/* Scarcity Banner */}
-            <ScarcityBanner inNavbar={true} />
           </motion.div>
         )}
       </AnimatePresence>
@@ -140,14 +137,14 @@ const Navbar = () => {
               )}
             </div>
           ))}
-          {/* Calendly CTA Hook */}
+          {/* Primary CTA – same lead action as the rest of the site */}
           <motion.button
             whileHover={{ scale: 1.05, boxShadow: "0 10px 30px -10px rgba(0,0,0,0.5)" }}
             whileTap={{ scale: 0.95 }}
-            onClick={openBooking}
-            className="bg-foreground text-background px-7 py-3 rounded-full text-xs uppercase tracking-widest font-extrabold ml-2"
+            onClick={() => goToAudit("navbar")}
+            className="bg-primary text-primary-foreground px-7 py-3 rounded-full text-xs uppercase tracking-widest font-extrabold ml-2"
           >
-            Schedule a Call
+            Get Free Audit →
           </motion.button>
         </div>
 
@@ -231,10 +228,10 @@ const Navbar = () => {
               ))}
               <div className="mt-8 pt-6 border-t border-border">
                 <button 
-                  onClick={() => { setOpen(false); openBooking(); }}
-                  className="w-full bg-foreground text-background px-6 py-4 rounded-full text-base font-bold shadow-xl active:scale-95 transition-transform"
+                  onClick={() => { setOpen(false); goToAudit("navbar_mobile_menu"); }}
+                  className="w-full bg-primary text-primary-foreground px-6 py-4 rounded-full text-base font-bold uppercase tracking-wide shadow-xl active:scale-95 transition-transform"
                 >
-                  Schedule a Call
+                  Get My Free D2C Growth Audit →
                 </button>
               </div>
             </div>

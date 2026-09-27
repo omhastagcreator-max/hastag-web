@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+import { track, whatsappUrl as buildWhatsappUrl } from "@/lib/track";
 
 const WhatsAppButton = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -10,9 +11,8 @@ const WhatsAppButton = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const whatsappNumber = "918059957479";
-  const text = "Hi HastagCreator, I would like to know more about your services!";
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
+  // Desktop only – on mobile the sticky bottom bar (MobileStickyCTA) carries WhatsApp.
+  const whatsappUrl = buildWhatsappUrl("Hi HastagCreator, I'd like a free D2C growth audit for my brand.");
 
   return (
     <AnimatePresence>
@@ -21,11 +21,12 @@ const WhatsAppButton = () => {
           href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => track("WhatsApp_Click", { cta_location: "floating_button" })}
           initial={{ opacity: 0, scale: 0.5, x: -20 }}
           animate={{ opacity: 1, scale: 1, x: 0 }}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 bg-[#25D366] text-white rounded-full shadow-lg hover:shadow-xl transition-shadow group"
+          className="fixed bottom-6 right-6 z-40 hidden md:flex items-center justify-center w-14 h-14 bg-[#25D366] text-white rounded-full shadow-lg hover:shadow-xl transition-shadow group"
           aria-label="Chat on WhatsApp"
         >
           {/* WhatsApp SVG Icon */}

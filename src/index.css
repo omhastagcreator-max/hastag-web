@@ -151,3 +151,15 @@
 }
 
 
+
+/* Lead-form landing highlight (set briefly by scrollToAuditForm) */
+[data-highlight="true"] {
+  box-shadow: 0 0 0 4px hsl(var(--primary) / 0.35), 0 20px 60px -20px hsl(var(--primary) / 0.45);
+}
+
+/* Reserve space for the mobile sticky audit/WhatsApp bar so it never covers content */
+@media (max-width: 767px) {
+  body {
+    padding-bottom: calc(76px + env(safe-area-inset-bottom));
+  }
+}

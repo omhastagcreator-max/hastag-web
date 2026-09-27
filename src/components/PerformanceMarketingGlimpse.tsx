@@ -1,7 +1,15 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, Maximize2, X } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Maximize2, X, Clapperboard, Megaphone, LayoutTemplate, MousePointerClick, Repeat } from "lucide-react";
+import AuditCTA from "./AuditCTA";
+
+const growthSystem = [
+  { icon: Clapperboard, label: "Creative" },
+  { icon: Megaphone, label: "Ads" },
+  { icon: LayoutTemplate, label: "Landing Page" },
+  { icon: MousePointerClick, label: "Conversion" },
+  { icon: Repeat, label: "Retention" },
+];
 
 const proofImages = [
   { src: "/meta-r1.jpg", label: "Meta Ads Manager" },
@@ -23,61 +31,52 @@ const PerformanceMarketingGlimpse = () => {
 
   return (
     <>
-    <section id="performance" className="py-24 bg-background relative overflow-hidden">
+    <section id="performance" className="py-16 md:py-24 bg-background relative overflow-hidden">
       {/* Decorative gradient patches */}
       <div className="absolute top-0 right-0 w-full md:w-1/2 h-[500px] bg-gradient-to-bl from-primary/10 to-transparent blur-3xl rounded-full pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-full md:w-1/2 h-[500px] bg-gradient-to-tr from-primary/10 to-transparent blur-3xl rounded-full pointer-events-none" />
       
       <div className="container-main relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center [&>*]:min-w-0">
           
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="flex flex-col gap-6"
+            className="flex flex-col gap-5 md:gap-6"
           >
             <span className="inline-block bg-primary/10 text-primary px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest w-max">
-              Performance Marketing
+              The Real Problem
             </span>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-foreground leading-tight tracking-tight">
-              We don't make money until<br/>
-              you make <span className="text-primary">millions.</span>
+            <h2 className="text-[2rem] leading-[1.1] md:text-5xl lg:text-6xl font-black text-foreground md:leading-tight tracking-tight">
+              More Ad Spend Won't Fix a <span className="text-primary">Broken Funnel.</span>
             </h2>
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+              If your offer, creatives, landing page or conversion system isn't working, increasing your ad budget only increases the amount you lose.
+            </p>
 
-            <div className="bg-card border border-primary/20 rounded-3xl p-6 md:p-8 shadow-sm mt-4">
-              <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-6">
-                Most agencies charge you a heavy fixed retainer just to test things — leaving you to take all the financial risk while they get paid regardless. We do the exact opposite.
+            <div className="bg-card border border-primary/20 rounded-3xl p-5 md:p-8 shadow-sm mt-2">
+              <p className="font-black text-foreground text-lg md:text-xl mb-5">
+                We fix the entire growth system — not just the Ads Manager.
               </p>
-              <div className="space-y-4 mb-6">
-                <div className="border-l-4 border-primary/40 pl-4">
-                  <span className="text-xs font-black uppercase tracking-widest text-primary">Months 1–3 · The Growth Phase</span>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    Zero fixed fees. We only charge 18% of your ad spend to keep our media buyers fed and focused entirely on your ROAS. <em>(Truth? This barely covers our costs.)</em>
-                  </p>
-                </div>
-                <div className="border-l-4 border-primary pl-4">
-                  <span className="text-xs font-black uppercase tracking-widest text-primary">Post-Break-Even · The Scale Phase</span>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    This is where we actually win. Once your brand hits break-even and starts printing profits, we take a 12% revenue share.
-                  </p>
-                </div>
-              </div>
-              <p className="font-bold text-foreground">
-                If you don't win, we don't eat. Ready to align incentives? Let's talk.
-              </p>
+              <ol className="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
+                {growthSystem.map((item, i) => (
+                  <li
+                    key={item.label}
+                    className={`flex sm:flex-col items-center gap-2 sm:gap-2 bg-primary/5 border border-primary/15 rounded-2xl px-3 sm:px-1.5 py-3 sm:py-4 text-left sm:text-center ${i === growthSystem.length - 1 ? "col-span-2 sm:col-span-1" : ""}`}
+                  >
+                    <span className="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+                      <item.icon className="w-5 h-5 text-primary" />
+                    </span>
+                    <span className="text-sm sm:text-xs xl:text-sm font-bold text-foreground leading-tight">{item.label}</span>
+                  </li>
+                ))}
+              </ol>
             </div>
 
-            <Link to="/services/performance-marketing" className="mt-8 w-fit">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-foreground text-background px-8 py-4 rounded-full font-bold shadow-xl hover:shadow-2xl transition-all flex items-center gap-2 group border border-border/50"
-              >
-                Know the secret in detail
-                <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-              </motion.button>
-            </Link>
+            <div className="mt-2">
+              <AuditCTA source="broken_funnel" label="Get My Free Growth Audit" />
+            </div>
           </motion.div>
 
           <motion.div
@@ -93,7 +92,7 @@ const PerformanceMarketingGlimpse = () => {
                   <div
                     key={index}
                     onClick={() => setLightboxImage(item.src)}
-                    className="shrink-0 h-[300px] md:h-[360px] bg-white/20 dark:bg-white/5 backdrop-blur-3xl border border-white/50 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden cursor-pointer group flex flex-col"
+                    className="shrink-0 h-[280px] md:h-[360px] bg-white/20 dark:bg-white/5 backdrop-blur-3xl border border-white/50 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden cursor-pointer group flex flex-col"
                   >
                     <div className="bg-white/50 border-b border-white px-4 py-2.5 flex items-center justify-between gap-2 shrink-0">
                       <div className="flex gap-1 flex-shrink-0">
@@ -109,6 +108,7 @@ const PerformanceMarketingGlimpse = () => {
                       <img
                         src={item.src}
                         alt={item.label}
+                        loading="lazy"
                         className="h-full w-auto object-contain"
                       />
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
