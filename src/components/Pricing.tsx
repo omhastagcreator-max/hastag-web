@@ -84,7 +84,7 @@ const Pricing = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-[2rem] leading-[1.1] md:text-5xl font-black tracking-tight mb-3">Flexible Plans Built Around Your Growth Stage</h2>
+          <h2 className="section-title mb-3">Flexible Plans Built Around Your Growth Stage</h2>
           <p className="text-muted-foreground text-sm md:text-base max-w-xl mx-auto mb-5">
             No hidden fees. Your ad budget goes to ads — our fee is based on service scope.
           </p>

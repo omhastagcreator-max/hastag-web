@@ -23,11 +23,11 @@ const WebDevelopmentGlimpse = () => {
             <span className="inline-block bg-blue-500/10 text-blue-500 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest w-max">
               Website Development
             </span>
-            <h2 className="text-[2rem] leading-[1.1] md:text-5xl lg:text-6xl font-black text-foreground md:leading-tight tracking-tight">
+            <h2 className="section-title text-foreground">
               Anyone Can Build a Website.<br className="hidden sm:block" />{" "}
               We Build <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-500">Websites That Sell.</span>
             </h2>
-            <p className="text-base md:text-xl text-muted-foreground leading-relaxed">
+            <p className="section-lead">
               Your website isn't decoration. It is where your paid traffic becomes revenue.
             </p>
 

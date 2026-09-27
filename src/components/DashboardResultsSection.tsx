@@ -28,7 +28,7 @@ const DashboardResultsSection = () => {
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
             Results
           </div>
-          <h2 className="text-[2rem] md:text-6xl font-extrabold mb-6 tracking-tight leading-tight">
+          <h2 className="section-title mb-5">
             See What Scaling <br className="hidden md:block" /> Looks Like
           </h2>
           <p className="text-muted-foreground text-lg md:text-xl leading-relaxed">

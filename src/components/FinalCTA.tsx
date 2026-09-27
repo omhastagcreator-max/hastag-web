@@ -15,7 +15,7 @@ const FinalCTA = () => (
         viewport={{ once: true }}
         className="text-center mb-8 md:mb-10"
       >
-        <h2 className="text-[2rem] leading-[1.1] md:text-5xl font-black tracking-tight text-foreground mb-4">
+        <h2 className="section-title text-foreground mb-4">
           Ready to Find What's Blocking Your Growth?
         </h2>
         <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto mb-7">

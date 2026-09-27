@@ -40,7 +40,7 @@ const WhyChooseUs = () => {
           <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block flex items-center justify-center gap-2">
             <Zap className="w-4 h-4" /> The Advantage
           </span>
-          <h2 className="text-3xl md:text-5xl font-black text-foreground tracking-tight mb-4">
+          <h2 className="section-title text-foreground mb-4">
             Why #Creator is Different
           </h2>
           <p className="text-base md:text-lg text-muted-foreground font-medium">

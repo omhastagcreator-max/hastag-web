@@ -26,7 +26,7 @@ const WhatsAppTestimonials = () => {
             <div className="w-14 h-14 bg-green-500/10 rounded-2xl flex items-center justify-center mb-6 mx-auto lg:mx-0">
               <MessageCircle className="w-7 h-7 text-green-500" />
             </div>
-            <h2 className="text-[2rem] leading-[1.1] md:text-5xl font-black mb-6 tracking-tight text-foreground leading-tight">
+            <h2 className="section-title text-foreground mb-5">
               Real WhatsApp Proof. <br className="hidden lg:block"/> No Editing.
             </h2>
             <p className="text-base md:text-lg text-muted-foreground font-medium mb-2 lg:mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0">

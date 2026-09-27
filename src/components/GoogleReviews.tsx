@@ -77,7 +77,7 @@ const GoogleReviews = () => {
               <span className="text-foreground font-black text-2xl">2,366+</span>
               <span className="text-foreground font-bold">LinkedIn Recommendations</span>
             </div>
-            <h2 className="text-[2rem] leading-[1.1] md:text-5xl font-black tracking-tight mb-4 text-foreground">
+            <h2 className="section-title text-foreground mb-4">
               What D2C Brands Say About Working With Us
             </h2>
             <p className="text-muted-foreground text-base md:text-lg">

@@ -163,3 +163,18 @@
     padding-bottom: calc(76px + env(safe-area-inset-bottom));
   }
 }
+
+/* Consistent section typography (homepage funnel) */
+@layer components {
+  .section-title {
+    @apply text-[1.9rem] leading-[1.1] sm:text-4xl lg:text-[3.1rem] lg:leading-[1.08] font-black tracking-tight;
+    text-wrap: balance;
+  }
+  .section-eyebrow {
+    @apply inline-flex items-center gap-2 bg-primary/10 text-primary px-3.5 py-1.5 rounded-full text-[11px] font-black uppercase tracking-[0.14em] border border-primary/15;
+  }
+  .section-lead {
+    @apply text-base md:text-lg text-muted-foreground leading-relaxed;
+    text-wrap: pretty;
+  }
+}

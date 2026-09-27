@@ -38,10 +38,10 @@ const MarketingBreakdown = () => {
     <section id="scaling" className="py-16 md:py-24 bg-background overflow-hidden relative">
       <div className="container-main max-w-[1400px]">
         <div className="text-center mb-10 md:mb-16 max-w-3xl mx-auto">
-          <span className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-xs font-black tracking-widest uppercase mb-4 border border-primary/20">
+          <span className="section-eyebrow mb-4">
             The Truth About Scaling
           </span>
-          <h2 className="text-[2rem] leading-[1.1] md:text-5xl font-black text-foreground mb-4 tracking-tight">
+          <h2 className="section-title text-foreground mb-4">
             Scaling Isn't About Spending More.
           </h2>
           <p className="text-base md:text-lg text-muted-foreground font-medium">

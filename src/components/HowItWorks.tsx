@@ -38,10 +38,10 @@ const HowItWorks = () => {
 
       <div className="container-main max-w-7xl relative z-10">
         <div className="text-center mb-10 md:mb-16">
-          <span className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-xs font-black tracking-widest uppercase mb-4 border border-primary/20">
+          <span className="section-eyebrow mb-4">
              Execution
           </span>
-          <h2 className="text-[2rem] md:text-5xl lg:text-6xl font-black text-foreground mb-4 md:mb-6 tracking-tight">
+          <h2 className="section-title text-foreground mb-4">
             How We Actually Work
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground font-medium max-w-2xl mx-auto">
