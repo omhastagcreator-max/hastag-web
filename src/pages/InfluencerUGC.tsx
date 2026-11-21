@@ -210,7 +210,7 @@ export default function InfluencerUGC() {
             <div className="container-main px-4 mb-8 flex justify-between items-end">
               <div>
                 <h2 className="text-2xl md:text-4xl font-black tracking-tight flex items-center gap-3">
-                  <TrendingUp className="text-primary" /> Sales Focused Video
+                  <TrendingUp className="text-primary" /> Home Style Shoot
                 </h2>
               </div>
             </div>
@@ -233,7 +233,7 @@ export default function InfluencerUGC() {
             <div className="container-main px-4 mb-8 flex justify-between items-end">
               <div>
                 <h2 className="text-2xl md:text-4xl font-black tracking-tight flex items-center gap-3">
-                  <Users className="text-purple-500" /> Influencer Sales Focused Video
+                  <Users className="text-purple-500" /> Influencer Video
                 </h2>
               </div>
             </div>
@@ -256,7 +256,7 @@ export default function InfluencerUGC() {
             <div className="container-main px-4 mb-8 flex justify-between items-end">
               <div>
                 <h2 className="text-2xl md:text-4xl font-black tracking-tight flex items-center gap-3">
-                  <Presentation className="text-blue-500" /> Brand Awareness
+                  <Presentation className="text-blue-500" /> Studio Shoot
                 </h2>
               </div>
             </div>
