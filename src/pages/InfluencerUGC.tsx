@@ -6,7 +6,7 @@ import { Play, TrendingUp, Presentation, MonitorPlay, Users } from "lucide-react
 import { supabase } from "@/lib/supabase";
 import { useBooking } from "@/components/BookingProvider";
 
-const fallbackVideos = [
+export const fallbackVideos = [
   // Category 1: Sales Focused Video (sales)
   { id: 901, title: "Checkout Drop-off Hook", views: "1.2M", duration: "0:15", category: "sales", video_url: "https://videos.pexels.com/video-files/5305118/5305118-hd_720_1366_25fps.mp4" },
   { id: 902, title: "Pain-Point Agitator", views: "850K", duration: "0:22", category: "sales", video_url: "https://videos.pexels.com/video-files/5305118/5305118-hd_720_1366_25fps.mp4" },

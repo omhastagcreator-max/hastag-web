@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuditCTA } from "./AuditCTA";
+import { useChromeSuppressed } from "@/cms/ChromeContext";
 
 type NavLink = {
   label: string;
@@ -10,7 +11,7 @@ type NavLink = {
   dropdown?: { label: string; to: string }[];
 };
 
-const navLinks: NavLink[] = [
+export const defaultNavLinks: NavLink[] = [
   { 
     label: "Website Development", 
     to: "/web-development"
@@ -29,19 +30,63 @@ const navLinks: NavLink[] = [
   }
 ];
 
-const Navbar = () => {
+export interface NavbarProps {
+  links?: NavLink[];
+  logo?: string;
+  logoAlt?: string;
+  logoHeight?: number;
+  topBarEnabled?: boolean;
+  topBarText?: string;
+  topBarMobileText?: string;
+  ctaEnabled?: boolean;
+  ctaLabel?: string;
+  mobileCtaLabel?: string;
+  /** Empty = scroll to the audit form (default behaviour) */
+  ctaLink?: string;
+}
+
+export const navbarDefaults: Required<Omit<NavbarProps, "links">> & { links: NavLink[] } = {
+  links: defaultNavLinks,
+  logo: "/logo.png",
+  logoAlt: "HastagCreator Logo",
+  logoHeight: 40,
+  topBarEnabled: true,
+  topBarText: "HastagCreator · D2C Growth Partner · 11+ Years of Combined Growth Experience",
+  topBarMobileText: "#Creator · D2C Growth Partner",
+  ctaEnabled: true,
+  ctaLabel: "Get Free Audit →",
+  mobileCtaLabel: "Get My Free D2C Growth Audit →",
+  ctaLink: "",
+};
+
+const isExternal = (to: string) => /^(https?:|mailto:|tel:|#)/.test(to) || to.startsWith("/#");
+
+const NavbarInner = (props: NavbarProps) => {
+  const p = { ...navbarDefaults, ...Object.fromEntries(Object.entries(props).filter(([, v]) => v !== undefined)) };
+  const navLinks = (p.links || []).map((l) => ({ ...l, dropdown: l.dropdown && l.dropdown.length ? l.dropdown : undefined }));
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeDesktopDropdown, setActiveDesktopDropdown] = useState<string | null>(null);
   const [activeMobileDropdown, setActiveMobileDropdown] = useState<string | null>(null);
   const location = useLocation();
   const goToAudit = useAuditCTA();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const onCta = (src: string) => {
+    if (p.ctaLink) {
+      if (/^https?:/.test(p.ctaLink)) window.open(p.ctaLink, "_blank", "noopener");
+      else if (p.ctaLink.startsWith("/") && !p.ctaLink.includes("#")) navigate(p.ctaLink);
+      else window.location.assign(p.ctaLink);
+      return;
+    }
+    goToAudit(src);
+  };
 
   const toggleMobileDropdown = (label: string) => {
     setActiveMobileDropdown(activeMobileDropdown === label ? null : label);
@@ -56,7 +101,7 @@ const Navbar = () => {
       }`}
     >
       <AnimatePresence>
-        {!scrolled && (
+        {!scrolled && p.topBarEnabled && (
           <motion.div
             initial={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0, overflow: "hidden" }}
@@ -64,8 +109,8 @@ const Navbar = () => {
           >
             {/* Trust badge bar */}
             <div className="bg-primary text-primary-foreground text-[10px] sm:text-xs py-1.5 text-center font-bold tracking-widest uppercase shadow-sm">
-              <span className="hidden sm:inline">HastagCreator · D2C Growth Partner · 11+ Years of Combined Growth Experience</span>
-              <span className="sm:hidden">#Creator · D2C Growth Partner</span>
+              <span className="hidden sm:inline">{p.topBarText}</span>
+              <span className="sm:hidden">{p.topBarMobileText || p.topBarText}</span>
             </div>
           </motion.div>
         )}
@@ -74,7 +119,7 @@ const Navbar = () => {
       <div className="container-main flex items-center justify-between h-20 px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <Link to="/" className="flex items-center min-h-[48px] min-w-[48px]">
-          <img src="/logo.png" alt="HastagCreator Logo" width="160" height="40" className="h-10 w-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.1)] transition-transform hover:scale-105" />
+          <img src={p.logo} alt={p.logoAlt} width="160" height={p.logoHeight} style={p.logoHeight !== 40 ? { height: p.logoHeight } : undefined} className="h-10 w-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.1)] transition-transform hover:scale-105" />
         </Link>
 
         {/* Desktop Nav */}
@@ -86,7 +131,7 @@ const Navbar = () => {
               onMouseEnter={() => link.dropdown && setActiveDesktopDropdown(link.label)}
               onMouseLeave={() => link.dropdown && setActiveDesktopDropdown(null)}
             >
-              {link.to.startsWith("/#") || link.to === "#" ? (
+              {isExternal(link.to) || link.to === "#" ? (
                 <a
                   href={link.to === "#" ? undefined : link.to}
                   className="text-[13px] font-bold tracking-wide uppercase transition-colors hover:text-primary flex items-center gap-1 text-foreground/80"
@@ -138,14 +183,14 @@ const Navbar = () => {
             </div>
           ))}
           {/* Primary CTA – same lead action as the rest of the site */}
-          <motion.button
+          {p.ctaEnabled && <motion.button
             whileHover={{ scale: 1.05, boxShadow: "0 10px 30px -10px rgba(0,0,0,0.5)" }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => goToAudit("navbar")}
+            onClick={() => onCta("navbar")}
             className="bg-primary text-primary-foreground px-7 py-3 rounded-full text-xs uppercase tracking-widest font-extrabold ml-2"
           >
-            Get Free Audit →
-          </motion.button>
+            {p.ctaLabel}
+          </motion.button>}
         </div>
 
         {/* Mobile toggle */}
@@ -205,7 +250,7 @@ const Navbar = () => {
                         )}
                       </AnimatePresence>
                     </>
-                  ) : link.to.startsWith("/#") ? (
+                  ) : isExternal(link.to) ? (
                     <a
                       href={link.to}
                       onClick={() => setOpen(false)}
@@ -226,20 +271,27 @@ const Navbar = () => {
                   )}
                 </div>
               ))}
-              <div className="mt-8 pt-6 border-t border-border">
+              {p.ctaEnabled && <div className="mt-8 pt-6 border-t border-border">
                 <button 
-                  onClick={() => { setOpen(false); goToAudit("navbar_mobile_menu"); }}
+                  onClick={() => { setOpen(false); onCta("navbar_mobile_menu"); }}
                   className="w-full bg-primary text-primary-foreground px-6 py-4 rounded-full text-base font-bold uppercase tracking-wide shadow-xl active:scale-95 transition-transform"
                 >
-                  Get My Free D2C Growth Audit →
+                  {p.mobileCtaLabel || p.ctaLabel}
                 </button>
-              </div>
+              </div>}
             </div>
           </motion.div>
         )}
       </AnimatePresence>
     </nav>
   );
+};
+
+/** Rendered by legacy pages; hidden when the CMS header group renders the navbar instead. */
+const Navbar = (props: NavbarProps) => {
+  const suppressed = useChromeSuppressed();
+  if (suppressed) return null;
+  return <NavbarInner {...props} />;
 };
 
 export default Navbar;

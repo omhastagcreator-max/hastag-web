@@ -29,8 +29,10 @@ export const CustomCursor = () => {
 
     window.addEventListener("mousemove", updateMousePosition);
     window.addEventListener("mouseover", handleMouseOver);
+    document.documentElement.classList.add("has-custom-cursor");
 
     return () => {
+      document.documentElement.classList.remove("has-custom-cursor");
       window.removeEventListener("mousemove", updateMousePosition);
       window.removeEventListener("mouseover", handleMouseOver);
     };

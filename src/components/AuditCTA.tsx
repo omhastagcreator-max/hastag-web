@@ -68,7 +68,8 @@ export function useAuditCTA() {
   return useCallback(
     (source: string, targetId: string = AUDIT_FORM_ID) => {
       track("CTA_Click", { cta_location: source, page_path: location.pathname });
-      if (location.pathname === "/" && scrollToAuditForm(targetId)) return;
+      // Scroll to the form if this page has one (home page or any editor-built landing page)
+      if (scrollToAuditForm(targetId)) return;
       navigate(`/#${AUDIT_FORM_ID}`);
     },
     [location.pathname, navigate]

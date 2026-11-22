@@ -68,6 +68,9 @@
 @layer base {
   * {
     @apply border-border;
+  }
+  /* The native cursor is hidden only while the custom cursor is active (see CustomCursor.tsx) */
+  html.has-custom-cursor * {
     cursor: none !important;
   }
   html {

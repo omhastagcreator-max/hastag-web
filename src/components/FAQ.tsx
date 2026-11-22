@@ -4,7 +4,7 @@ import { useState } from "react";
 
 // Answers are based only on what the site already states (services, pricing cards,
 // timelines, markets). No guarantees are made.
-const faqs = [
+export const defaultFaqs = [
   {
     q: "Who do you work with?",
     a: "D2C and e-commerce brands that are already selling online and want to grow revenue profitably — improve ROAS, scale Meta Ads, lift conversion rate or fix their funnel. If you're earlier than that, we can also build your landing page or e-com store first.",
@@ -43,8 +43,14 @@ const faqs = [
   },
 ];
 
-const FAQ = () => {
+export interface FAQProps {
+  heading?: string;
+  items?: { q: string; a: string }[];
+}
+
+const FAQ = ({ heading = "Frequently Asked Questions", items }: FAQProps = {}) => {
   const [open, setOpen] = useState<number | null>(null);
+  const faqs = items || defaultFaqs;
 
   return (
     <section id="faq" className="section-padding bg-secondary">
@@ -55,7 +61,7 @@ const FAQ = () => {
           viewport={{ once: true }}
           className="text-3xl md:text-4xl text-center mb-10"
         >
-          Frequently Asked Questions
+          {heading}
         </motion.h2>
         <div className="space-y-2.5">
           {faqs.map((faq, i) => (

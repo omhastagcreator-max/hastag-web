@@ -23,6 +23,17 @@ export default function ProductDetail() {
     setLoading(true);
     // 1. Try Supabase Postgres first
     try {
+      // Inside the website editor there is no product in the URL: preview the newest product instead.
+      if (!id) {
+        const { data: first } = await supabase.from('products').select('*').neq('icon_name', 'InfluencerVideo').order('created_at', { ascending: false }).limit(1);
+        if (first && first[0]) {
+          const d = first[0];
+          setProduct({ id: d.id, title: d.title, description: (d.description || "").replace(/\\n/g, " ").replace(/\n/g, " "), price: d.price || 0, image: d.image_url || null, gallery: [d.image_url, ...(d.image_gallery || [])].filter(Boolean) });
+          if (d.image_url) setActiveImage(d.image_url);
+          setLoading(false);
+          return;
+        }
+      }
       if (id?.includes("-")) { // Usually Supabase UUIDs contain dashes
         const { data, error } = await supabase.from('products').select('*').eq('id', id).single();
         if (data && !error) {

@@ -32,6 +32,10 @@ interface LeadFormProps {
   /** Show the form's own heading. Turn off when a parent section already has one. */
   showHeading?: boolean;
   className?: string;
+  /** Editable copy (website editor). Defaults keep the original text. */
+  heading?: string;
+  subheading?: string;
+  buttonLabel?: string;
 }
 
 const inputClass =
@@ -39,7 +43,15 @@ const inputClass =
 
 const labelClass = "block text-xs font-bold uppercase tracking-wider text-foreground/70 mb-1.5";
 
-const LeadForm = ({ id = "audit-form", location = "after_hero", showHeading = true, className = "" }: LeadFormProps) => {
+const LeadForm = ({
+  id = "audit-form",
+  location = "after_hero",
+  showHeading = true,
+  className = "",
+  heading = "Find What's Blocking Your Growth",
+  subheading = "Get a free review of your Ads, Website, Offer & Conversion Funnel.",
+  buttonLabel = "Get My Free Growth Audit",
+}: LeadFormProps) => {
   const [form, setForm] = useState<FormState>(EMPTY);
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -173,10 +185,10 @@ const LeadForm = ({ id = "audit-form", location = "after_hero", showHeading = tr
         {showHeading && (
           <div className="text-center mb-6">
             <h2 className="text-2xl md:text-4xl font-black tracking-tight text-foreground mb-2">
-              Find What's Blocking Your Growth
+              {heading}
             </h2>
             <p className="text-sm md:text-base text-muted-foreground">
-              Get a free review of your Ads, Website, Offer &amp; Conversion Funnel.
+              {subheading}
             </p>
           </div>
         )}
@@ -269,7 +281,7 @@ const LeadForm = ({ id = "audit-form", location = "after_hero", showHeading = tr
           disabled={isSubmitting}
           className="btn-synthetic w-full mt-6 min-h-[56px] uppercase tracking-wide disabled:opacity-70"
         >
-          {isSubmitting ? <span className="animate-pulse">Sending…</span> : <>Get My Free Growth Audit <ArrowRight className="w-5 h-5" /></>}
+          {isSubmitting ? <span className="animate-pulse">Sending…</span> : <>{buttonLabel} <ArrowRight className="w-5 h-5" /></>}
         </button>
 
         <p className="flex items-center justify-center gap-1.5 text-xs text-muted-foreground mt-4 text-center">
