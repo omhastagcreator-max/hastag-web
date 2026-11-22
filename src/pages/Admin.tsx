@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
+import { VIDEO_GROUPS, videoGroup, videoGroupLabel, salesResult } from "@/lib/videoCategories";
 import { Plus, Trash, LogOut, Upload, Loader2, Image as ImageIcon, ShoppingCart, LayoutTemplate, Package, CheckCircle, Clock, Video } from "lucide-react";
 
 export default function Admin() {
@@ -32,8 +33,8 @@ export default function Admin() {
   // New Video Form
   const [editingVideoId, setEditingVideoId] = useState<string | null>(null);
   const [vidTitle, setVidTitle] = useState("");
-  const [vidCategory, setVidCategory] = useState("sales");
-  const [vidViews, setVidViews] = useState("1M");
+  const [vidCategory, setVidCategory] = useState("ugc");
+  const [vidViews, setVidViews] = useState(""); // now: sales result (e.g. "3.8x ROAS · 240 orders")
   const [vidDuration, setVidDuration] = useState("0:15");
   const [vidUrl, setVidUrl] = useState("");
   const [vidFile, setVidFile] = useState<File | null>(null);
@@ -86,12 +87,12 @@ export default function Admin() {
       const { data } = await supabase.from('products').select('*').eq('icon_name', 'InfluencerVideo').order('created_at', { ascending: false });
       if (data) {
          const parsed = data.map((v: any) => {
-            const [cat, vws, dur] = v.description ? v.description.split('||') : ['sales', '1M', '0:15'];
+            const [cat, vws, dur] = v.description ? v.description.split('||') : ['ugc', '', '0:15'];
             return {
                id: v.id,
                title: v.title,
                category: cat || 'sales',
-               views: vws || '1M',
+               views: vws || '',
                duration: dur || '0:15',
                video_url: v.image_url
             };
@@ -222,7 +223,7 @@ export default function Admin() {
       }
       
       setEditingVideoId(null);
-      setVidTitle(""); setVidViews("1M"); setVidDuration("0:15"); setVidUrl(""); setVidFile(null);
+      setVidTitle(""); setVidViews(""); setVidDuration("0:15"); setVidUrl(""); setVidFile(null);
       fetchVideos();
       alert(editingVideoId ? "Video updated!" : "Video published!");
     } catch (error: any) {
@@ -512,14 +513,13 @@ export default function Admin() {
                 </div>
                 <div>
                   <select value={vidCategory} onChange={e => setVidCategory(e.target.value)} className="w-full bg-background border border-border p-3.5 rounded-xl text-sm font-medium outline-none focus:border-primary cursor-pointer transition-colors">
-                    <option value="sales">Sales Focused</option>
-                    <option value="influencer">Influencer Sales Focused</option>
-                    <option value="brand">Brand Awareness</option>
-                    <option value="tvc">TVC Ad Video</option>
+                    {VIDEO_GROUPS.map((g) => (
+                      <option key={g.key} value={g.key}>{g.label}</option>
+                    ))}
                   </select>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
-                  <input type="text" value={vidViews} onChange={e => setVidViews(e.target.value)} required className="w-full bg-background border border-border p-3.5 rounded-xl text-sm font-medium outline-none focus:border-primary transition-colors" placeholder="Views (e.g. 1.2M)" />
+                  <input type="text" value={vidViews} onChange={e => setVidViews(e.target.value)} className="w-full bg-background border border-border p-3.5 rounded-xl text-sm font-medium outline-none focus:border-primary transition-colors" placeholder="Sales result (e.g. 3.8x ROAS · 240 orders)" />
                   <input type="text" value={vidDuration} onChange={e => setVidDuration(e.target.value)} required className="w-full bg-background border border-border p-3.5 rounded-xl text-sm font-medium outline-none focus:border-primary transition-colors" placeholder="Duration (e.g. 0:15)" />
                 </div>
                 <div className="flex flex-col pt-2 bg-muted/20 border border-border p-4 rounded-xl">
@@ -541,7 +541,7 @@ export default function Admin() {
                 </div>
                 <div className="flex gap-2 mt-6">
                   {editingVideoId && (
-                    <button type="button" onClick={() => { setEditingVideoId(null); setVidTitle(""); setVidViews("1M"); setVidDuration("0:15"); setVidUrl(""); setVidFile(null); }} className="w-1/3 bg-muted text-foreground font-black tracking-widest uppercase text-xs p-4 rounded-xl hover:-translate-y-1 transition-all shadow-xl flex items-center justify-center gap-2">
+                    <button type="button" onClick={() => { setEditingVideoId(null); setVidTitle(""); setVidViews(""); setVidDuration("0:15"); setVidUrl(""); setVidFile(null); }} className="w-1/3 bg-muted text-foreground font-black tracking-widest uppercase text-xs p-4 rounded-xl hover:-translate-y-1 transition-all shadow-xl flex items-center justify-center gap-2">
                       Cancel
                     </button>
                   )}
@@ -574,7 +574,7 @@ export default function Admin() {
                       <p className="text-muted-foreground text-xs line-clamp-1 mt-1 mb-3">Category: <span className="uppercase font-bold">{v.category}</span></p>
                       <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
                          <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider">
-                            {v.views} Views
+                            {videoGroupLabel(v.category)}{salesResult(v.views) ? ` · ${salesResult(v.views)}` : ""}
                          </span>
                          <span className="bg-secondary text-muted-foreground border border-border px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider">
                             {v.duration}
@@ -582,7 +582,7 @@ export default function Admin() {
                       </div>
                     </div>
                     <div className="flex flex-col gap-2 shrink-0 h-full justify-center mt-4 sm:mt-0">
-                       <button onClick={() => { setEditingVideoId(v.id); setVidTitle(v.title); setVidCategory(v.category || 'sales'); setVidViews(v.views); setVidDuration(v.duration); setVidUrl(v.video_url || ""); setVidFile(null); window.scrollTo({ top: 0, behavior: "smooth" }); }} className="w-full sm:w-16 h-10 bg-blue-500/10 text-blue-500 rounded-xl hover:bg-blue-500 hover:text-white transition-all flex justify-center items-center font-bold text-xs uppercase tracking-wider">
+                       <button onClick={() => { setEditingVideoId(v.id); setVidTitle(v.title); setVidCategory(videoGroup(v.category)); setVidViews(salesResult(v.views)); setVidDuration(v.duration); setVidUrl(v.video_url || ""); setVidFile(null); window.scrollTo({ top: 0, behavior: "smooth" }); }} className="w-full sm:w-16 h-10 bg-blue-500/10 text-blue-500 rounded-xl hover:bg-blue-500 hover:text-white transition-all flex justify-center items-center font-bold text-xs uppercase tracking-wider">
                          Edit
                        </button>
                        <button onClick={() => handleDeleteVideo(v.id)} className="w-full sm:w-16 h-10 bg-destructive/10 text-destructive rounded-xl hover:bg-destructive hover:text-white transition-all flex justify-center items-center">

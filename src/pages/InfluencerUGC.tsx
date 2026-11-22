@@ -4,9 +4,10 @@ import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { Play, TrendingUp, Presentation, MonitorPlay, Users } from "lucide-react";
 import { supabase } from "@/lib/supabase";
+import { VIDEO_GROUPS, videoGroup, salesResult } from "@/lib/videoCategories";
 import { useBooking } from "@/components/BookingProvider";
 
-const fallbackVideos = [
+export const fallbackVideos = [
   // Category 1: Sales Focused Video (sales)
   { id: 901, title: "Checkout Drop-off Hook", views: "1.2M", duration: "0:15", category: "sales", video_url: "https://videos.pexels.com/video-files/5305118/5305118-hd_720_1366_25fps.mp4" },
   { id: 902, title: "Pain-Point Agitator", views: "850K", duration: "0:22", category: "sales", video_url: "https://videos.pexels.com/video-files/5305118/5305118-hd_720_1366_25fps.mp4" },
@@ -113,7 +114,9 @@ const VideoCard = ({ video }: { video: any }) => {
           {video.duration}
         </span>
         <h3 className="text-white font-black text-sm md:text-base leading-tight mb-1">{video.title}</h3>
-        <p className="text-white/60 text-[11px] md:text-xs font-semibold">{video.views} Views</p>
+        {salesResult(video.views) && (
+          <p className="inline-flex items-center gap-1 bg-emerald-500/90 text-white text-[11px] md:text-xs font-bold px-2 py-0.5 rounded">{salesResult(video.views)}</p>
+        )}
       </div>
     </div>
   );
@@ -152,10 +155,6 @@ export default function InfluencerUGC() {
     fetchVideos();
   }, []);
 
-  const salesVideosList = videos.filter(v => v.category === 'sales');
-  const influencerVideosList = videos.filter(v => v.category === 'influencer');
-  const brandVideosList = videos.filter(v => v.category === 'brand');
-  const tvcVideosList = videos.filter(v => v.category === 'tvc');
 
   const getRepeatedArray = (arr: any[]) => {
     if (arr.length === 0) return [];
@@ -205,97 +204,35 @@ export default function InfluencerUGC() {
 
         <div className="py-16 md:py-24 space-y-20 bg-secondary/10 border-t border-border/50">
           
-          {/* Category 1: Sales Focused Video */}
-          <section>
-            <div className="container-main px-4 mb-8 flex justify-between items-end">
-              <div>
-                <h2 className="text-2xl md:text-4xl font-black tracking-tight flex items-center gap-3">
-                  <TrendingUp className="text-primary" /> Home Style Shoot
-                </h2>
-              </div>
-            </div>
-            <div className="w-full relative overflow-hidden flex" style={{ maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)" }}>
-              <motion.div 
-                className="flex gap-4 md:gap-5 w-max"
-                animate={{ x: ["0%", "-50%"] }}
-                transition={{ ease: "linear", duration: 30, repeat: Infinity }}
-                style={{ willChange: "transform", transform: "translateZ(0)" }}
-              >
-                {getRepeatedArray(salesVideosList).map((video: any, idx) => (
-                  <VideoCard key={`sales-${idx}`} video={video} />
-                ))}
-              </motion.div>
-            </div>
-          </section>
-
-          {/* Category 2: Influencer Sales Focused Video */}
-          <section>
-            <div className="container-main px-4 mb-8 flex justify-between items-end">
-              <div>
-                <h2 className="text-2xl md:text-4xl font-black tracking-tight flex items-center gap-3">
-                  <Users className="text-purple-500" /> Influencer Video
-                </h2>
-              </div>
-            </div>
-            <div className="w-full relative overflow-hidden flex" style={{ maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)" }}>
-              <motion.div 
-                className="flex gap-4 md:gap-5 w-max"
-                animate={{ x: ["-50%", "0%"] }}
-                transition={{ ease: "linear", duration: 35, repeat: Infinity }}
-                style={{ willChange: "transform", transform: "translateZ(0)" }}
-              >
-                {getRepeatedArray(influencerVideosList).map((video: any, idx) => (
-                  <VideoCard key={`influencer-${idx}`} video={video} />
-                ))}
-              </motion.div>
-            </div>
-          </section>
-
-          {/* Category 3: Brand Awareness */}
-          <section>
-            <div className="container-main px-4 mb-8 flex justify-between items-end">
-              <div>
-                <h2 className="text-2xl md:text-4xl font-black tracking-tight flex items-center gap-3">
-                  <Presentation className="text-blue-500" /> Studio Shoot
-                </h2>
-              </div>
-            </div>
-            <div className="w-full relative overflow-hidden flex" style={{ maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)" }}>
-              <motion.div 
-                className="flex gap-4 md:gap-5 w-max"
-                animate={{ x: ["0%", "-50%"] }}
-                transition={{ ease: "linear", duration: 40, repeat: Infinity }}
-                style={{ willChange: "transform", transform: "translateZ(0)" }}
-              >
-                {getRepeatedArray(brandVideosList).map((video: any, idx) => (
-                  <VideoCard key={`brand-${idx}`} video={video} />
-                ))}
-              </motion.div>
-            </div>
-          </section>
-
-          {/* Category 4: TVC Ad Video */}
-          <section>
-            <div className="container-main px-4 mb-8 flex justify-between items-end">
-              <div>
-                <h2 className="text-2xl md:text-4xl font-black tracking-tight flex items-center gap-3">
-                  <MonitorPlay className="text-orange-500" /> TVC Ad Video
-                </h2>
-              </div>
-            </div>
-            <div className="w-full relative overflow-hidden flex" style={{ maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)" }}>
-              <motion.div 
-                className="flex gap-4 md:gap-5 w-max"
-                animate={{ x: ["-50%", "0%"] }}
-                transition={{ ease: "linear", duration: 45, repeat: Infinity }}
-                style={{ willChange: "transform", transform: "translateZ(0)" }}
-              >
-                {getRepeatedArray(tvcVideosList).map((video: any, idx) => (
-                  <VideoCard key={`tvc-${idx}`} video={video} />
-                ))}
-              </motion.div>
-            </div>
-          </section>
+          {VIDEO_GROUPS.map((group, gi) => {
+            const Icon = [Play, Presentation, Users][gi] || Play;
+            const list = videos.filter((v) => videoGroup(v.category) === group.key);
+            if (!list.length) return null;
+            return (
+              <section key={group.key}>
+                <div className="container-main px-4 mb-8 flex justify-between items-end">
+                  <div>
+                    <h2 className="text-2xl md:text-4xl font-black tracking-tight flex items-center gap-3">
+                      <Icon className={["text-primary", "text-orange-500", "text-purple-500"][gi]} /> {group.label}
+                    </h2>
+                    <p className="text-muted-foreground mt-2 max-w-2xl">{group.description}</p>
+                  </div>
+                </div>
+                <div className="w-full relative overflow-hidden flex" style={{ maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)" }}>
+                  <motion.div
+                    className="flex gap-4 md:gap-5 w-max"
+                    animate={{ x: gi % 2 ? ["-50%", "0%"] : ["0%", "-50%"] }}
+                    transition={{ ease: "linear", duration: 30 + gi * 5, repeat: Infinity }}
+                    style={{ willChange: "transform", transform: "translateZ(0)" }}
+                  >
+                    {getRepeatedArray(list).map((video: any, idx) => (
+                      <VideoCard key={`${group.key}-${idx}`} video={video} />
+                    ))}
+                  </motion.div>
+                </div>
+              </section>
+            );
+          })}
           
         </div>
         

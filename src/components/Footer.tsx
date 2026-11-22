@@ -1,27 +1,114 @@
 import { Link } from "react-router-dom";
+import { track } from "@/lib/track";
+import { useChromeSuppressed } from "@/cms/ChromeContext";
 
-const Footer = () => (
+type FooterLink = { label: string; to: string };
+type FooterColumn = { title: string; links: FooterLink[] };
+
+export interface FooterProps {
+  supportEnabled?: boolean;
+  supportHeading?: string;
+  supportText?: string;
+  supportButtonLabel?: string;
+  supportButtonLink?: string;
+  logo?: string;
+  logoAlt?: string;
+  about?: string;
+  badges?: { image: string; alt: string }[];
+  columns?: FooterColumn[];
+  contactTitle?: string;
+  address?: string;
+  email?: string;
+  phoneLabel?: string;
+  phone?: string;
+  socials?: { label: string; url: string }[];
+  copyright?: string;
+}
+
+export const footerDefaults: Required<FooterProps> = {
+  supportEnabled: true,
+  supportHeading: "Need Instant Support?",
+  supportText:
+    "Have questions about our plans, pricing, or need help with a campaign? Our team is available on WhatsApp to assist you immediately.",
+  supportButtonLabel: "Chat with Support",
+  supportButtonLink: "https://wa.me/918059957479?text=Hi%20HastagCreator,%20I%20need%20support!",
+  logo: "/logo.png",
+  logoAlt: "HastagCreator Logo",
+  about:
+    "Leading India-based performance marketing agency. We deliver high ROI through Meta Ads, Google Ads, eCommerce store development, and CRO for global brands.",
+  badges: [
+    { image: "/msme-logo.png", alt: "MSME Registered" },
+    { image: "/digital-india-logo.png", alt: "Digital India" },
+  ],
+  columns: [
+    {
+      title: "Services",
+      links: [
+        { label: "Meta Ads Management", to: "/services" },
+        { label: "Google Ads Management", to: "/services" },
+        { label: "Conversion Rate Optimization", to: "/services" },
+        { label: "Landing Page Design", to: "/services" },
+        { label: "Shopify & Ecommerce", to: "/services" },
+        { label: "WordPress Development", to: "/services" },
+      ],
+    },
+    {
+      title: "Company",
+      links: [
+        { label: "Home", to: "/" },
+        { label: "Portfolio", to: "/portfolio" },
+        { label: "Privacy Policy", to: "/privacy-policy" },
+        { label: "Terms & Conditions", to: "/terms-and-conditions" },
+      ],
+    },
+  ],
+  contactTitle: "Contact Us",
+  address: "India",
+  email: "contact@hastagcreator.com",
+  phoneLabel: "Phone No.:",
+  phone: "+91 80599 57479",
+  socials: [],
+  copyright: "© Copyright 2026 Hastag Creator All rights reserved.",
+};
+
+const FLink = ({ to, className, children }: { to: string; className: string; children: React.ReactNode }) =>
+  /^(https?:|mailto:|tel:|#)/.test(to) ? (
+    <a href={to} className={className} target={/^https?:/.test(to) ? "_blank" : undefined} rel="noreferrer">
+      {children}
+    </a>
+  ) : (
+    <Link to={to} className={className}>
+      {children}
+    </Link>
+  );
+
+const FooterInner = (props: FooterProps) => {
+  const p = { ...footerDefaults, ...Object.fromEntries(Object.entries(props).filter(([, v]) => v !== undefined)) } as Required<FooterProps>;
+  return (
   <>
     {/* SUPPORT CTA SECTION */}
+    {p.supportEnabled && (
     <section className="bg-gradient-to-r from-primary/10 to-primary/5 py-12 sm:py-16 text-center border-t border-primary/10">
       <div className="container-main flex flex-col items-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">Need Instant Support?</h2>
+        <h2 className="text-3xl md:text-4xl font-bold mb-4">{p.supportHeading}</h2>
         <p className="text-muted-foreground mb-8 max-w-lg mx-auto">
-          Have questions about our plans, pricing, or need help with a campaign? Our team is available on WhatsApp to assist you immediately.
+          {p.supportText}
         </p>
         <a
-          href="https://wa.me/918059957479?text=Hi%20HastagCreator,%20I%20need%20support!"
+          href={p.supportButtonLink}
           target="_blank"
           rel="noreferrer"
+          onClick={() => track("WhatsApp_Click", { cta_location: "footer_support" })}
           className="bg-[#25D366] text-white font-bold px-8 py-4 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all flex items-center gap-2"
         >
           <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.82 9.82 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.88 11.88 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.82 11.82 0 0 0-3.48-8.413Z" />
           </svg>
-          Chat with Support
+          {p.supportButtonLabel}
         </a>
       </div>
     </section>
+    )}
 
     <footer className="bg-charcoal text-charcoal-foreground">
       <div className="container-main section-padding">
@@ -29,65 +116,78 @@ const Footer = () => (
           {/* Brand */}
           <div>
             <Link to="/" className="flex items-center min-h-[48px] min-w-[48px]">
-          <img src="/logo.png" alt="HastagCreator Logo" width="160" height="40" className="h-10 w-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.1)] transition-transform hover:scale-105" />
+          <img src={p.logo} alt={p.logoAlt} width="160" height="40" className="h-10 w-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.1)] transition-transform hover:scale-105" />
         </Link>
             <p className="text-sm text-charcoal-foreground/60 leading-relaxed">
-              Leading India-based performance marketing agency. We deliver high ROI through Meta Ads, Google Ads, eCommerce store development, and CRO for global brands.
+              {p.about}
             </p>
+            {p.badges.length > 0 && (
             <div className="mt-6 flex items-center gap-4">
-              <img src="/msme-logo.png" alt="MSME Registered" className="h-10 w-auto bg-white rounded p-1 object-contain" />
-              <img src="/digital-india-logo.png" alt="Digital India" className="h-10 w-auto bg-white rounded p-1 object-contain" />
+              {p.badges.map((b, i) => (
+                <img key={i} src={b.image} alt={b.alt} className="h-10 w-auto bg-white rounded p-1 object-contain" />
+              ))}
             </div>
+            )}
+            {p.socials.length > 0 && (
+              <div className="mt-6 flex flex-wrap items-center gap-3 text-sm">
+                {p.socials.map((s, i) => (
+                  <a key={i} href={s.url} target="_blank" rel="noreferrer" className="px-3 py-1.5 rounded-full border border-charcoal-foreground/20 text-charcoal-foreground/70 hover:text-primary hover:border-primary transition-colors">
+                    {s.label}
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
 
-          {/* Services */}
-          <div>
-            <h4 className="font-display text-sm font-bold mb-4 uppercase tracking-wider text-charcoal-foreground/80">Services</h4>
+          {p.columns.map((col, ci) => (
+          <div key={ci}>
+            <h4 className="font-display text-sm font-bold mb-4 uppercase tracking-wider text-charcoal-foreground/80">{col.title}</h4>
             <ul className="space-y-2 text-sm text-charcoal-foreground/60">
-              <li><Link to="/services" className="hover:text-primary transition-colors">Meta Ads Management</Link></li>
-              <li><Link to="/services" className="hover:text-primary transition-colors">Google Ads Management</Link></li>
-              <li><Link to="/services" className="hover:text-primary transition-colors">Conversion Rate Optimization</Link></li>
-              <li><Link to="/services" className="hover:text-primary transition-colors">Landing Page Design</Link></li>
-              <li><Link to="/services" className="hover:text-primary transition-colors">Shopify & Ecommerce</Link></li>
-              <li><Link to="/services" className="hover:text-primary transition-colors">WordPress Development</Link></li>
+              {(col.links || []).map((l, li) => (
+                <li key={li}><FLink to={l.to} className="hover:text-primary transition-colors">{l.label}</FLink></li>
+              ))}
             </ul>
           </div>
-
-          {/* Company */}
-          <div>
-            <h4 className="font-display text-sm font-bold mb-4 uppercase tracking-wider text-charcoal-foreground/80">Company</h4>
-            <ul className="space-y-2 text-sm text-charcoal-foreground/60">
-              <li><Link to="/" className="hover:text-primary transition-colors">Home</Link></li>
-              <li><Link to="/portfolio" className="hover:text-primary transition-colors">Portfolio</Link></li>
-              <li><Link to="/privacy-policy" className="hover:text-primary transition-colors">Privacy Policy</Link></li>
-              <li><Link to="/terms" className="hover:text-primary transition-colors">Terms & Conditions</Link></li>
-            </ul>
-          </div>
+          ))}
 
           {/* Contact & Legal */}
           <div>
-            <h4 className="font-display text-sm font-bold mb-4 uppercase tracking-wider text-charcoal-foreground/80">Contact Us</h4>
+            <h4 className="font-display text-sm font-bold mb-4 uppercase tracking-wider text-charcoal-foreground/80">{p.contactTitle}</h4>
             <ul className="space-y-2.5 text-sm text-charcoal-foreground/60">
+              {p.address && (
               <li className="flex items-start gap-2">
-                <span>India</span>
+                <span>{p.address}</span>
               </li>
+              )}
+              {p.email && (
               <li className="flex items-start gap-2">
-                <a href="mailto:contact@hastagcreator.com" className="hover:text-primary transition-colors word-break-all">contact@hastagcreator.com</a>
+                <a href={`mailto:${p.email}`} className="hover:text-primary transition-colors word-break-all">{p.email}</a>
               </li>
+              )}
+              {p.phone && (
               <li className="flex items-start gap-2">
-                <span className="font-semibold flex-shrink-0">Phone No.:</span>
-                <a href="tel:+918059957479" className="hover:text-primary transition-colors">+91 80599 57479</a>
+                <span className="font-semibold flex-shrink-0">{p.phoneLabel}</span>
+                <a href={`tel:${p.phone.replace(/[^+\d]/g, "")}`} className="hover:text-primary transition-colors">{p.phone}</a>
               </li>
+              )}
             </ul>
           </div>
         </div>
 
         <div className="mt-12 pt-8 border-t border-charcoal-foreground/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-charcoal-foreground/40">
-          <span>© Copyright 2026 Hastag Creator All rights reserved.</span>
+          <span>{p.copyright}</span>
         </div>
       </div>
     </footer>
   </>
-);
+  );
+};
+
+/** Rendered by legacy pages; hidden when the CMS footer group renders the footer instead. */
+const Footer = (props: FooterProps) => {
+  const suppressed = useChromeSuppressed();
+  if (suppressed) return null;
+  return <FooterInner {...props} />;
+};
 
 export default Footer;

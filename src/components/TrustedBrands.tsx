@@ -42,10 +42,13 @@ const GrowthPartnersBox = () => (
 
 const TrustedBrands = () => {
   return (
-    <section className="pt-6 pb-12 bg-background border-b border-border/40 overflow-hidden" id="trusted-brands">
+    <section className="pt-12 pb-12 md:pt-16 bg-background border-b border-border/40 overflow-hidden" id="trusted-brands">
       <div className="container-main text-center mb-8">
-        <p className="text-sm font-bold text-muted-foreground uppercase tracking-widest">
-          Trusted by 511+ D2C Brands & Industry Leaders
+        <h2 className="text-2xl md:text-4xl font-black text-foreground tracking-tight mb-2">
+          Brands We've Helped Grow
+        </h2>
+        <p className="text-xs md:text-sm font-bold text-muted-foreground uppercase tracking-widest">
+          Trusted by 511+ D2C Brands &amp; Industry Leaders
         </p>
       </div>
 

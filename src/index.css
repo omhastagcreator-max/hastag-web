@@ -68,6 +68,9 @@
 @layer base {
   * {
     @apply border-border;
+  }
+  /* The native cursor is hidden only while the custom cursor is active (see CustomCursor.tsx) */
+  html.has-custom-cursor * {
     cursor: none !important;
   }
   html {
@@ -151,3 +154,30 @@
 }
 
 
+
+/* Lead-form landing highlight (set briefly by scrollToAuditForm) */
+[data-highlight="true"] {
+  box-shadow: 0 0 0 4px hsl(var(--primary) / 0.35), 0 20px 60px -20px hsl(var(--primary) / 0.45);
+}
+
+/* Reserve space for the mobile sticky audit/WhatsApp bar so it never covers content */
+@media (max-width: 767px) {
+  body {
+    padding-bottom: calc(76px + env(safe-area-inset-bottom));
+  }
+}
+
+/* Consistent section typography (homepage funnel) */
+@layer components {
+  .section-title {
+    @apply text-[1.9rem] leading-[1.1] sm:text-4xl lg:text-[3.1rem] lg:leading-[1.08] font-black tracking-tight;
+    text-wrap: balance;
+  }
+  .section-eyebrow {
+    @apply inline-flex items-center gap-2 bg-primary/10 text-primary px-3.5 py-1.5 rounded-full text-[11px] font-black uppercase tracking-[0.14em] border border-primary/15;
+  }
+  .section-lead {
+    @apply text-base md:text-lg text-muted-foreground leading-relaxed;
+    text-wrap: pretty;
+  }
+}
