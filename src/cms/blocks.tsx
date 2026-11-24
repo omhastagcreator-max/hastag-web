@@ -14,6 +14,7 @@ import LeadForm from "@/components/LeadForm";
 import { supabase } from "@/lib/supabase";
 import { fallbackVideos } from "@/pages/InfluencerUGC";
 import { VIDEO_GROUPS, videoGroup, salesResult } from "@/lib/videoCategories";
+import { localHeroVideo } from "./heroReels";
 import { useIsPreview } from "./ChromeContext";
 
 type BlockProps = { settings: Record<string, any> };
@@ -975,7 +976,7 @@ function embedFor(url: string): { kind: "yt" | "ig" | "file"; src: string } {
 
 /** A vertical 9:16 reel that plays muted in view; click to unmute (uploaded/MP4 videos). */
 export function ReelPlayer({ reel, className = "", showMeta = true }: { reel: Reel; className?: string; showMeta?: boolean }) {
-  const e = embedFor(reel.url || "");
+  const e = embedFor(localHeroVideo(reel.url || ""));
   const vidRef = useState<HTMLVideoElement | null>(null);
   const [vid, setVid] = vidRef;
   const [muted, setMuted] = useState(true);
@@ -992,6 +993,7 @@ export function ReelPlayer({ reel, className = "", showMeta = true }: { reel: Re
           ref={setVid}
           src={e.src}
           poster={reel.poster}
+          autoPlay
           muted={muted}
           loop
           playsInline

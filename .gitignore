@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Private editor credentials and local CMS content
+.env.local
+.env.*.local
+.cms-data/
+.vercel/

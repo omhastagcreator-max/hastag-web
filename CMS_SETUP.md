@@ -1,3 +1,32 @@
+# Password editor access (no Supabase account needed)
+
+Open **/editor** (or **/admin/editor**). Set **EDITOR_PASSWORD** as a server environment variable. The password is checked by the API and is never included in the browser build. Sessions use an HttpOnly cookie, expire after eight hours, and are invalidated when you rotate the password.
+
+## Local access
+
+1. `npm ci`
+2. Put `EDITOR_PASSWORD=<your password>` in `.env.local` (a generated password is already present on this computer).
+3. `npm run dev -- --host 127.0.0.1`
+4. Open `http://localhost:8080/editor` and enter the password.
+
+Drafts, published pages, revisions and uploaded media persist in the ignored `.cms-data/` directory. Back up this directory. Existing Supabase public content is loaded when available; content published through password access overrides it. The original Supabase records are not modified.
+
+## Deploy on Vercel
+
+1. Open the Vercel project that owns `hastag-web-livid.vercel.app`.
+2. In Storage, create/connect a **private Vercel Blob store**. This supplies `BLOB_READ_WRITE_TOKEN` to the project.
+3. Add `EDITOR_PASSWORD` under Settings → Environment Variables. Keep both values server-only, without a `VITE_` prefix. Do not commit them.
+4. Deploy this repository's changes, including `api/cms.js` and `backend/cms.js`.
+5. Open **https://hastag-web-livid.vercel.app/editor** and use your editor password.
+
+Vercel requires Blob storage because its function filesystem is temporary. The API refuses to save without persistent storage there. Configure a Vercel Firewall rate limit on `/api/cms?action=login` for distributed brute-force protection; the API also has a per-instance attempt limit. Share this password only with trusted editors: the editor can publish custom HTML and JavaScript.
+
+The independent backend supports website pages, theme, header/footer, drafts, publishing, version history and small media uploads (under 2.9 MB). Paste a hosted URL for larger files. Products, orders, portfolio administration and existing form submissions still belong to the original Supabase system and require its account. Existing public forms continue to use Supabase.
+
+## Homepage hero reels
+
+The three requested Instagram reels are saved under `public/hero-reels/` and configured on the built-in home hero. They autoplay **muted**, **loop**, and play inline on mobile; playback pauses when out of view. The speaker button enables sound. Browser autoplay restrictions can still apply. A homepage that already has published CMS overrides keeps those settings: select the hero in the editor, choose manual videos and use the three `/hero-reels/<reel-id>.mp4` paths, then Publish.
+
 # Website editor (CMS) – setup & how to use
 
 Your site now has a Shopify-style visual editor at **/admin/editor**.

@@ -28,6 +28,7 @@ const App = () => (
                 Built-in pages keep their original content until you change them in /admin/editor. */}
             <Route path="/product/:id" element={<CmsPage slug={PRODUCT_SLUG} />} />
             <Route path="/admin" element={<Admin />} />
+            <Route path="/editor" element={<Editor />} />
             <Route path="/admin/editor" element={<Editor />} />
             <Route path="*" element={<CmsRoute />} />
           </Routes>

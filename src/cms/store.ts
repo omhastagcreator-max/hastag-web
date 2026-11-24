@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import type { CmsDoc } from "./types";
+import { editorRequest, usesPasswordEditor } from "./editorAccess";
 
 /**
  * Supabase persistence.
@@ -35,7 +36,7 @@ function writeCache(d: DocMap) {
   }
 }
 
-async function fetchPublished(): Promise<DocMap> {
+async function fetchSupabasePublished(): Promise<DocMap> {
   const query = supabase.from("cms_documents").select("slug,data").eq("status", "published");
   const timeout = new Promise<{ data: null; error: Error }>((resolve) =>
     setTimeout(() => resolve({ data: null, error: new Error("timeout") }), PUBLIC_TIMEOUT_MS),
@@ -45,6 +46,17 @@ async function fetchPublished(): Promise<DocMap> {
   const map: DocMap = {};
   for (const row of data) map[row.slug] = row.data;
   return map;
+}
+
+async function fetchPublished(): Promise<DocMap> {
+  const [original, password] = await Promise.allSettled([
+    fetchSupabasePublished(),
+    editorRequest<{ enabled: boolean; documents?: DocMap }>("published", undefined, 3000),
+  ]);
+  const base = original.status === "fulfilled" ? original.value : readCache() || {};
+  if (password.status === "fulfilled" && password.value.enabled) return { ...base, ...password.value.documents };
+  if (original.status === "rejected") throw original.reason;
+  return base;
 }
 
 export function loadPublished(): Promise<DocMap> {
@@ -100,6 +112,15 @@ export interface EditorData {
 }
 
 export async function loadEditorData(): Promise<EditorData> {
+  if (usesPasswordEditor()) {
+    try {
+      const data = await editorRequest<EditorData>("documents");
+      const original = await fetchSupabasePublished().catch(() => ({}));
+      return { ...data, published: { ...original, ...data.published } };
+    } catch (error) {
+      return { drafts: {}, published: {}, updatedAt: {}, setupError: error instanceof Error ? error.message : "Storage unavailable" };
+    }
+  }
   const { data, error } = await supabase.from("cms_documents").select("slug,status,data,updated_at");
   if (error) {
     return { drafts: {}, published: {}, updatedAt: {}, setupError: error.message };
@@ -125,10 +146,16 @@ async function upsert(slug: string, status: "draft" | "published", doc: CmsDoc) 
 }
 
 export async function saveDrafts(docs: CmsDoc[]) {
+  if (usesPasswordEditor()) return editorRequest("save", { docs });
   for (const d of docs) await upsert(d.slug, "draft", d);
 }
 
 export async function publishDocs(docs: CmsDoc[]) {
+  if (usesPasswordEditor()) {
+    await editorRequest("publish", { docs });
+    invalidatePublished();
+    return;
+  }
   const { data: u } = await supabase.auth.getUser();
   for (const d of docs) {
     await upsert(d.slug, "draft", d);
@@ -144,12 +171,24 @@ export async function publishDocs(docs: CmsDoc[]) {
   }
 }
 
+function invalidatePublished() {
+  published = null;
+  loadPromise = null;
+  try { localStorage.removeItem(CACHE_KEY); } catch { /* storage blocked */ }
+}
+
 export async function deleteDocs(slug: string) {
+  if (usesPasswordEditor()) {
+    await editorRequest("delete", { slug });
+    invalidatePublished();
+    return;
+  }
   const { error } = await supabase.from("cms_documents").delete().eq("slug", slug);
   if (error) throw error;
 }
 
 export async function listRevisions(slug: string) {
+  if (usesPasswordEditor()) return editorRequest<{ id: string; slug: string; data: CmsDoc; created_at: string; created_by: string | null }[]>("revisions&slug=" + encodeURIComponent(slug));
   const { data, error } = await supabase
     .from("cms_revisions")
     .select("id,slug,data,created_at,created_by")
@@ -161,6 +200,16 @@ export async function listRevisions(slug: string) {
 }
 
 export async function uploadMedia(file: File): Promise<string> {
+  if (usesPasswordEditor()) {
+    if (file.size > 2_900_000) throw new Error("Upload files under 2.9 MB, or paste a hosted video/image URL.");
+    const base64 = await new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(String(reader.result).split(",")[1]);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+    return (await editorRequest<{ url: string }>("upload", { type: file.type, base64 })).url;
+  }
   const ext = (file.name.split(".").pop() || "bin").toLowerCase();
   const base = file.name.replace(/\.[^.]+$/, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").slice(0, 40) || "file";
   const name = `${Date.now()}-${base}.${ext}`;
@@ -170,6 +219,7 @@ export async function uploadMedia(file: File): Promise<string> {
 }
 
 export async function listMedia(): Promise<{ name: string; url: string; created_at?: string }[]> {
+  if (usesPasswordEditor()) return editorRequest<{ name: string; url: string; created_at?: string }[]>("media");
   const { data, error } = await supabase.storage
     .from(MEDIA_BUCKET)
     .list("", { limit: 500, sortBy: { column: "created_at", order: "desc" } });
@@ -189,6 +239,7 @@ export async function submitForm(form: string, payload: Record<string, any>) {
 }
 
 export async function listSubmissions() {
+  if (usesPasswordEditor()) throw new Error("Existing form submissions require the original Supabase admin account. Password access covers website content and media.");
   const { data, error } = await supabase
     .from("cms_submissions")
     .select("id,form,data,page,created_at")

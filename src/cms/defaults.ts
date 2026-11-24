@@ -1,3 +1,4 @@
+import { HERO_REELS } from "./heroReels";
 import { createSection } from "./registry";
 import type { CmsDoc, PageDoc, SectionInstance, ThemeDoc } from "./types";
 import { FOOTER_SLUG, HEADER_SLUG, PRODUCT_SLUG, THEME_SLUG } from "./types";
@@ -25,7 +26,7 @@ export const BUILTIN_PAGES: Record<string, PageDoc> = {
     "home",
     "Home",
     [
-      s("home-video-hero", "video-hero"),
+      s("home-video-hero", "video-hero", { settings: { source: "manual", videos: HERO_REELS } }),
       s("home-trusted-brands", "trusted-brands"),
       s("home-video-showcase", "video-showcase", { advanced: { anchorId: "work" } }),
       s("home-video-formats", "features", {
@@ -258,4 +259,4 @@ export const pathToSlug = (path: string) => {
 };
 export const slugToPath = (slug: string) => (slug === "home" ? "/" : slug === PRODUCT_SLUG ? "/product/…" : `/${slug}`);
 
-export const RESERVED_SLUGS = ["admin", "__cms", "product", "api", "assets"];
+export const RESERVED_SLUGS = ["admin", "editor", "__cms", "product", "api", "assets"];

@@ -5,6 +5,7 @@ import {
   Image as ImageIcon, ArrowUp, ArrowDown, RotateCcw, Layers, Lock,
 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
+import { editorRequest, setPasswordEditor, usesPasswordEditor } from "../editorAccess";
 import type { CmsDoc, Device, PageDoc, SectionInstance, ThemeDoc } from "../types";
 import { FOOTER_SLUG, HEADER_SLUG, PRODUCT_SLUG, THEME_SLUG } from "../types";
 import { BUILTIN_PAGES, BUILTIN_FOOTER, BUILTIN_HEADER, BUILTIN_THEME, RESERVED_SLUGS, builtinDoc, isBuiltinPage, pathToSlug, slugToPath } from "../defaults";
@@ -55,11 +56,34 @@ export default function EditorGate() {
   const [err, setErr] = useState("");
   const [busy, setBusy] = useState(false);
 
+  const [passwordMode, setPasswordMode] = useState(false);
+  const [accessError, setAccessError] = useState("");
   useEffect(() => {
     document.title = "Website editor";
-    supabase.auth.getSession().then(({ data }) => setSession(data.session));
-    const { data } = supabase.auth.onAuthStateChange((_e, s) => setSession(s));
-    return () => data.subscription.unsubscribe();
+    let active = true;
+    let unsubscribe: (() => void) | undefined;
+    editorRequest<{ enabled: boolean; authenticated: boolean }>("session")
+      .then(async (access) => {
+        if (!active) return;
+        setPasswordEditor(access.enabled);
+        setPasswordMode(access.enabled);
+        if (access.enabled) {
+          setSession(access.authenticated ? { user: { email: "Password editor" } } : null);
+        } else if (window.location.pathname === "/editor") {
+          setAccessError("Set EDITOR_PASSWORD on the server to enable password access.");
+          setSession(null);
+        } else {
+          const { data: { session } } = await supabase.auth.getSession();
+          if (!active) return;
+          setSession(session);
+          const { data } = supabase.auth.onAuthStateChange((_e, session) => { if (active) setSession(session); });
+          unsubscribe = () => data.subscription.unsubscribe();
+        }
+      })
+      .catch(() => {
+        if (active) { setAccessError("Editor backend is unavailable. Start the development server or check the deployment."); setSession(null); }
+      });
+    return () => { active = false; unsubscribe?.(); };
   }, []);
 
   if (session === undefined)
@@ -78,20 +102,29 @@ export default function EditorGate() {
             e.preventDefault();
             setBusy(true);
             setErr("");
-            const { error } = await supabase.auth.signInWithPassword({ email, password });
-            if (error) setErr(error.message);
-            setBusy(false);
+            try {
+              if (passwordMode) {
+                await editorRequest("login", { password });
+                setPassword("");
+                setSession({ user: { email: "Password editor" } });
+              } else {
+                const { error } = await supabase.auth.signInWithPassword({ email, password });
+                if (error) throw error;
+              }
+            } catch (error) { setErr(error instanceof Error ? error.message : "Login failed"); }
+            finally { setBusy(false); }
           }}
         >
           <div className="flex items-center gap-2">
             <LayoutTemplate className="text-blue-600" />
             <h1 className="text-xl font-bold text-slate-900">Website editor</h1>
           </div>
-          <p className="text-sm text-slate-500">Log in with your admin account.</p>
-          <input className={inputCls} type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-          <input className={inputCls} type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+          <p className="text-sm text-slate-500">{passwordMode ? "Enter your website editor password." : "Log in with your admin account."}</p>
+          {accessError && <p role="alert" className="text-sm text-red-600">{accessError}</p>}
+          {!passwordMode && <input className={inputCls} type="email" autoComplete="username" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />}
+          <input className={inputCls} type="password" autoComplete="current-password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
           {err && <p className="text-sm text-red-600">{err}</p>}
-          <button disabled={busy} className="w-full h-10 rounded-md bg-blue-600 text-white font-semibold flex items-center justify-center gap-2">
+          <button disabled={busy || !!accessError} className="w-full h-10 rounded-md bg-blue-600 text-white font-semibold flex items-center justify-center gap-2">
             {busy && <Loader2 size={16} className="animate-spin" />} Log in
           </button>
           <a href="/admin" className="block text-center text-sm text-slate-500 hover:underline">
@@ -337,7 +370,7 @@ function EditorMain({ email }: { email: string }) {
   const save = useCallback(async () => {
     const list = Object.keys(docsRef.current).filter((s) => !same(docsRef.current[s], saved[s]));
     if (!list.length) return notify("Everything is saved");
-    if (setupError) return notify("Can't save yet – run supabase/cms.sql first (see the banner).", "err");
+    if (setupError) return notify("Can't save yet – check the storage setup message.", "err");
     setBusy("save");
     try {
       await saveDrafts(list.map((s) => docsRef.current[s]));
@@ -354,7 +387,7 @@ function EditorMain({ email }: { email: string }) {
   const publish = useCallback(async () => {
     const list = unpublishedSlugs;
     if (!list.length) return notify("Nothing new to publish");
-    if (setupError) return notify("Can't publish yet – run supabase/cms.sql first (see the banner).", "err");
+    if (setupError) return notify("Can't publish yet – check the storage setup message.", "err");
     const names = list.map((s) => (docsRef.current[s] as any)?.title || s).join(", ");
     if (!confirm(`Publish these changes to the live website?\n\n${names}`)) return;
     setBusy("publish");
@@ -672,7 +705,10 @@ function EditorMain({ email }: { email: string }) {
               <MenuItem
                 icon={LogOut}
                 onClick={async () => {
-                  await supabase.auth.signOut();
+                  if (usesPasswordEditor()) {
+                    await editorRequest("logout", {});
+                    window.location.assign("/editor");
+                  } else await supabase.auth.signOut();
                 }}
               >
                 Log out
@@ -693,7 +729,7 @@ function EditorMain({ email }: { email: string }) {
         <div className="shrink-0 bg-amber-50 border-b border-amber-200 text-amber-900 text-[12px] px-4 py-2 flex items-center gap-2">
           <AlertTriangle size={14} />
           <span>
-            <b>Editor database not set up yet</b> ({setupError}). Run <code className="bg-amber-100 px-1 rounded">supabase/cms.sql</code> in Supabase → SQL editor (add your email to it). Until then you can try the editor, but saving and publishing are off. Your work is kept in this browser.
+            <b>Editor storage needs setup</b> ({setupError}). {usesPasswordEditor() ? "Connect a private Vercel Blob store, then redeploy." : "Run supabase/cms.sql in the Supabase SQL editor and add your email."} Until then, saving and publishing are unavailable. Your work is kept in this browser.
           </span>
         </div>
       )}
